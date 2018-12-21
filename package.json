@@ -1,0 +1,21 @@
+{
+  "name": "sdruckerhome-app",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "deploy": "parcel build ./src/index.html --out-dir ../../docs/app/ --public-url ./ --no-minify && node ./scripts/deploy.js",
+    "build": "tsc -p .",
+    "start": "parcel serve ./src/index.html --open"
+  },
+  "devDependencies": {
+    "@types/react": "16.4.7",
+    "@types/react-dom": "16.0.6",
+    "node-sass": "^4.11.0",
+    "typescript": "^3.2.2"
+  },
+  "alias": {
+    "react": "./alias/react-external.js",
+    "react-dom": "./alias/react-dom-external.js"
+  },
+  "dependencies": {}
+}
