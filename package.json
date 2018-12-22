@@ -17,5 +17,13 @@
     "react": "./alias/react-external.js",
     "react-dom": "./alias/react-dom-external.js"
   },
-  "dependencies": {}
+  "dependencies": {
+    "css-loader": "^2.0.2",
+    "react": "^16.7.0",
+    "react-bootstrap": "^0.32.4",
+    "react-dom": "^16.7.0",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "styles": "^0.2.1"
+  }
 }
