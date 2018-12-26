@@ -20,7 +20,7 @@ export class MyNav extends React.Component<any, any> {
               <Nav bsStyle="pills">  
                     <NavItem eventKey={1} href="/about"> Bio </NavItem>
                     <NavItem eventKey={2} href="/Featured"> Featured </NavItem>
-                    <NavItem eventKey={3} href="/two"> Research </NavItem>              
+                    <NavItem eventKey={3} href="/Research"> Research </NavItem>              
                     <NavItem eventKey={4} href="/CV"> CV </NavItem>
               </Nav>
             </Navbar.Collapse>
