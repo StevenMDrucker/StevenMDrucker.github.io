@@ -1,6 +1,9 @@
 
 import * as React from 'react';
 import { Image,  Row, Col } from 'react-bootstrap';
+
+const headShot = require("../../images/justheadmed.jpg");
+
 export class About extends React.Component<any, any> {
     render() {
         return(
@@ -11,7 +14,7 @@ export class About extends React.Component<any, any> {
              <div className="bio">
                <Row>
                    <Col lg={3} md={4} sm={5}>
-                       <Image src="../../images/justheadmed.jpg" responsive></Image>
+                       <Image src={headShot} responsive></Image>
                    </Col>
                    <Col lg={7} md={6} sm={5}>
                        <div>
