@@ -3,7 +3,8 @@ import {Row, Col, Button, SplitButton, MenuItem} from 'react-bootstrap';
 
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import * as ImageAssets from "../../researchImages/**";
+import ReactHtmlParser from 'react-html-parser';
+//import * as ImageAssets from "../../researchImages/**";
 
 
 export class CardComponent extends React.Component<any, any> { 
@@ -58,7 +59,8 @@ export class CardComponent extends React.Component<any, any> {
                         </Row>
                         </Col>
                         <Col lg={10} sm={10} md={10}>
-                        <div className="DCaption"> {val.caption} </div>                        
+                        <div className="DCaption"> {val.caption} </div>
+                        <div className="DReference"> {ReactHtmlParser(val.bibEntry)}</div>                        
                         <div className="DAbstract"> {val.abstract}</div>
                         </Col>
                     </Row>
@@ -71,7 +73,7 @@ export class CardComponent extends React.Component<any, any> {
                 key={"i"+val.id}>
                 <Row> 
                 <Col lg={12} sm={12} md={12}>
-                    <span style={{display: "block", float:"left", marginRight:"5px"}}> <a href={val.pdf}> PDF: </a> </span> <span className="DReference"> </span>
+                    <span style={{display: "block", float:"left", marginRight:"5px"}}> <a href={val.pdf}> PDF </a> </span> <span className="DReference"> {ReactHtmlParser(val.bibEntry)}</span>
                 </Col>
                 </Row>
             </div>;

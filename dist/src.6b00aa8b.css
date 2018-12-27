@@ -362,7 +362,8 @@ section:last-child {
 
 .gridItem {
   list-style: none;
-  font-size: 0.75rem;
+  font-size: 2rem;
+  text-align: center;
   padding: 5px 5px;
   background-color: #444;
   border-radius: 3px;
@@ -376,7 +377,7 @@ section:last-child {
 
 .detailItem {
   list-style: none;
-  font-size: 0.75rem;
+  font-size: 2rem;
   padding: 5px 5px;
   background-color: #222;
   border-radius: 3px;
@@ -390,7 +391,7 @@ section:last-child {
 
 .publicationItem {
   list-style: none;
-  font-size: 0.75rem;
+  font-size: 2rem;
   padding: 5px 5px;
   background-color: #222;
   border-radius: 3px;
@@ -404,7 +405,8 @@ section:last-child {
   text-align: left; }
 
 .researchItem {
-  background-color: #000; }
+  background-color: #000;
+  color: white; }
 
 .selected {
   background-color: #ee6666; }
@@ -441,7 +443,8 @@ section:last-child {
 .DReference {
   text-align: left;
   font-weight: bold;
-  font-size: 12; }
+  font-size: .75em;
+  color: white; }
 
 .DAbstract {
   text-align: left; }

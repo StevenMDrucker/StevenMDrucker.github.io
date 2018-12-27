@@ -197,6 +197,10 @@ export class Research extends React.Component<any, any> {
                     //         </FacetPanel>
                     //   </Tab>);
                     return (
+                    //     <Tab eventKey={i} title={tag}>
+                    //         <FacetPanel items={values} filterSpec={this.state.filterSpec} itemTitle={tag} selected = {this.state.itemHovered} brush = {this.handleBrush} filter = {this.handleFilter} clearFilter= {this.handleExit}>
+                    //         </FacetPanel>
+                    //   </Tab>);
                         <Panel key={i} eventKey={i} header={tag} className="filterPanel" style={{ "cursor": "pointer" }}>
                             <FacetPanel key={"P" + i} items={values} filterSpec={this.state.filterSpec} itemTitle={tag} selected={this.state.itemHovered} brush={this.handleBrush} filter={this.handleFilter} clearFilter={this.handleExit}>
                             </FacetPanel>
@@ -228,11 +232,11 @@ export class Research extends React.Component<any, any> {
                                         <Col lg={6} sm={6} md={6}>
                                             <ButtonToolbar style={{ float: "left" }}>
                                                 {/* Provides extra visual weight and identifies the primary action in a set of buttons */}
-                                                <Button key="Tiles" style={{ background: "brown" }} bsSize="small" onClick={self.tileMode}>Tile</Button>
-                                                <Button key="Details" bsSize="small" bsStyle="primary" onClick={self.detailMode}>Detail</Button>
-                                                <Button key="Publications" bsSize="small" bsStyle="success" onClick={self.publicationMode}>Publication</Button>
-                                                <Button key="TimelineVis" bsSize="small" bsStyle="info" onClick={self.timelineMode}>TimelineVis</Button>
-                                                <Button key="KeywordVis" bsSize="small" bsStyle="warning" onClick={self.keywordMode}>KeywordVis</Button>
+                                                <Button key="Tiles" style={{ background: "brown" }} bsSize="small" onClick={e=>this.tileMode()}>Tile</Button>
+                                                <Button key="Details" bsSize="small" bsStyle="primary" onClick={e=>this.detailMode()}>Detail</Button>
+                                                <Button key="Publications" bsSize="small" bsStyle="success" onClick={e=>this.publicationMode()}>Publication</Button>
+                                                <Button key="TimelineVis" bsSize="small" bsStyle="info" onClick={e=>this.timelineMode()}>TimelineVis</Button>
+                                                <Button key="KeywordVis" bsSize="small" bsStyle="warning" onClick={e=>this.keywordMode()}>KeywordVis</Button>
                                                 <DropdownButton style={{ float: "right" }} bsSize="small" title={"Sort By: " + self.state.sortedBy + " " + ((self.state.reverse) ? String.fromCharCode(8595) : String.fromCharCode(8593))} pullRight id="split-button-pull-right">
                                                     {sortByItems}
                                                 </DropdownButton>
@@ -263,7 +267,7 @@ export class Research extends React.Component<any, any> {
 
                                     </Row>
 
-                                    <PanelGroup defaultActiveKey={1} id="uncontrolled-tab-example" accordion>
+                                    <PanelGroup accordion defaultActiveKey={1} id="accordion-uncontrolled-example" >
                                         {tabList}
                                     </PanelGroup>
                                 </Col>

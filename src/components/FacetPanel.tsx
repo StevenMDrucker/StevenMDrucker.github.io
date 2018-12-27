@@ -77,7 +77,9 @@ export class FacetPanel extends React.Component<any, any> {
           </tr>);
       });
 
-    return(<Table bordered condensed hover className="myFacet">
+    return(
+        <Panel className="filterPanel">
+    <Table bordered condensed hover className="myFacet">
         <thead>
         <tr>
             <th>   </th>
@@ -88,7 +90,8 @@ export class FacetPanel extends React.Component<any, any> {
         <tbody>
         {dataList}
         </tbody>
-        </Table>) 
+        </Table> 
+        </Panel>)
   }    
 }
 
