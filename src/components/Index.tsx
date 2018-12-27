@@ -40,6 +40,7 @@ export class Index extends React.Component<any, any> {
   generateCard(val,i) {
     var overItem = this.state.over;
     var highlighted = _.includes(this.props.currentProjects,val.caption);
+
     if (this.props.mode == "tile") {
       var theClass = highlighted ? "researchItem gridItem selected" : "researchItem gridItem ";
       theClass = (val == overItem) ? "researchItem gridItem  myOver" : theClass;
@@ -51,8 +52,8 @@ export class Index extends React.Component<any, any> {
       theClass = (val == overItem) ? "researchItem publicationItem  myOver" : theClass;
     }
     return(<div className={theClass} key={"k"+val.id}>
-            <Card theItem={val} mode={this.props.mode} handleOver={this.handleOver} 
-            handleOut={this.handleOut} handleClick={this.localHandleClick} />
+            <Card theItem={val} mode={this.props.mode} handleOver={e=>this.handleOver(e)} 
+            handleOut={e=>this.handleOut(e)} handleClick={e=>this.localHandleClick(e)} />
           </div>
     );
   }

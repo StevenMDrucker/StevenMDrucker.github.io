@@ -49,7 +49,7 @@ export class CardComponent extends React.Component<any, any> {
                     <Row>
                         <Col lg={2} sm={2} md={2}>
                         <Row>
-                        <img src={"client/" + val.img}  className="detailsImage"></img>
+                        <img className="detailsImage" src={"http://www.steven-drucker.com/client/"+val.img} width="180" height="120" />                        
                         </Row>
                         <Row  style={{textAlign: "left", margin: 5}}>
                             <Button bsStyle="primary" href={val.pdf}>Paper</Button>

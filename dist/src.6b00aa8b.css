@@ -51,6 +51,16 @@ b {
   font-size: 16px;
   color: #222; }
 
+.featureTitle {
+  text-align: center;
+  font-family: 'Lato', helvetica, arial, sans-serif, bold;
+  font-size: 32px;
+  color: #222; }
+
+.featureImage {
+  float: left;
+  margin: 0px 25px 0px 50px; }
+
 #name h1 {
   font-size: 2.0em;
   font-weight: 700;
@@ -341,3 +351,106 @@ section:last-child {
   -webkit-animation-delay: 0, 2.5s;
   -moz-animation-delay: 0, 2.5s;
   animation-delay: 0, 2.5s; }
+
+.myFacet {
+  cursor: pointer; }
+
+.grid {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto; }
+
+.gridItem {
+  list-style: none;
+  font-size: 0.75rem;
+  padding: 5px 5px;
+  background-color: #444;
+  border-radius: 3px;
+  border: 2px solid #aaa;
+  overflow: hidden;
+  width: 200px;
+  height: 160px;
+  font-size: 14;
+  color: white;
+  margin-bottom: 20px; }
+
+.detailItem {
+  list-style: none;
+  font-size: 0.75rem;
+  padding: 5px 5px;
+  background-color: #222;
+  border-radius: 3px;
+  border: 1px solid #aaa;
+  overflow: hidden;
+  width: 100%;
+  overflow: hidden;
+  font-size: 14;
+  color: white;
+  margin-bottom: 10px; }
+
+.publicationItem {
+  list-style: none;
+  font-size: 0.75rem;
+  padding: 5px 5px;
+  background-color: #222;
+  border-radius: 3px;
+  border: none;
+  overflow: hidden;
+  width: 100%;
+  overflow: hidden;
+  font-size: 14;
+  color: white;
+  margin-bottom: 1px;
+  text-align: left; }
+
+.researchItem {
+  background-color: #000; }
+
+.selected {
+  background-color: #ee6666; }
+
+.myOver {
+  background-color: #3344ff; }
+
+.indexClass {
+  width: 100%;
+  cursor: pointer; }
+
+.detailsImage {
+  float: left;
+  padding: 5px;
+  width: 150px;
+  height: 100px;
+  margin: 0 0 0 10; }
+
+.grid-item p {
+  text-align: left;
+  margin: 0.5em 0; }
+
+.grid-item *:first-child {
+  margin-top: 0; }
+
+.grid-item *:last-child {
+  margin-bottom: 0; }
+
+.DCaption {
+  text-align: left;
+  font-size: 18;
+  font-weight: bold; }
+
+.DReference {
+  text-align: left;
+  font-weight: bold;
+  font-size: 12; }
+
+.DAbstract {
+  text-align: left; }
+
+.filterPanel {
+  max-height: 400;
+  font-size: 8px;
+  overflow-y: scroll;
+  cursor: pointer; }
+
+.filterPanel.panel-heading {
+  background: red; }
