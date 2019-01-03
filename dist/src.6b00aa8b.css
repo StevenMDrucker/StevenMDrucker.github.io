@@ -5,8 +5,8 @@ html {
   box-sizing: inherit; }
 
 body {
-  background-color: #eee;
-  color: #333;
+  background-color: black;
+  color: #aaa;
   font-family: sans-serif;
   padding: 0.5em 1em;
   overflow-y: scroll;
@@ -29,7 +29,7 @@ p {
   font-size: 1em;
   line-height: 1.4em;
   margin-bottom: 20px;
-  color: #444; }
+  color: #aaa; }
 
 i {
   font-style: italic; }
@@ -60,6 +60,9 @@ b {
 .featureImage {
   float: left;
   margin: 0px 25px 0px 50px; }
+
+.featureText {
+  color: #ccc; }
 
 #name h1 {
   font-size: 2.0em;
@@ -150,6 +153,9 @@ b {
   -o-transition: all .3s ease-in;
   -ms-transition: all .3s ease-in;
   transition: all .3s ease-in; }
+
+.modalBody {
+  color: #fff; }
 
 .csl-left-margin {
   float: left;
@@ -362,22 +368,21 @@ section:last-child {
 
 .gridItem {
   list-style: none;
-  font-size: 2rem;
+  font-size: 1em;
   text-align: center;
-  padding: 5px 5px;
+  padding: 5px;
   background-color: #444;
   border-radius: 3px;
   border: 2px solid #aaa;
   overflow: hidden;
   width: 200px;
   height: 160px;
-  font-size: 14;
   color: white;
-  margin-bottom: 20px; }
+  margin-bottom: 10px; }
 
 .detailItem {
   list-style: none;
-  font-size: 2rem;
+  font-size: 1em;
   padding: 5px 5px;
   background-color: #222;
   border-radius: 3px;
@@ -388,6 +393,9 @@ section:last-child {
   font-size: 14;
   color: white;
   margin-bottom: 10px; }
+
+.center {
+  text-align: center; }
 
 .publicationItem {
   list-style: none;
@@ -450,10 +458,16 @@ section:last-child {
   text-align: left; }
 
 .filterPanel {
-  max-height: 400;
   font-size: 8px;
-  overflow-y: scroll;
-  cursor: pointer; }
+  cursor: pointer;
+  overflow: hidden; }
+
+.panel-collapse {
+  height: 400px;
+  overflow-y: scroll; }
 
 .filterPanel.panel-heading {
   background: red; }
+
+#app {
+  background: black; }

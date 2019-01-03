@@ -28,9 +28,12 @@ export class MyPopup extends React.Component<any, any> {
                 <img src={"http://www.steven-drucker.com/client/" + this.state.item.img} width="400" height="300"></img>
             </div>
             <br />
+            
             <div className="center">
-                <RB.Button bsStyle="primary" href={this.state.item.pdf}>Paper</RB.Button>                
-                {this.state.item.video != '' ? <RB.Button bsStyle="primary" href={this.state.item.video}>Video</RB.Button> : null}
+
+                <RB.Button  bsSize="small" bsStyle="primary" href={this.state.item.pdf} >Paper</RB.Button>                
+                {this.state.item.video != '' ? <RB.Button  bsSize="small" bsStyle="primary" href={this.state.item.video} >Video</RB.Button> : null}
+
             </div>
             <RB.Modal.Body>  
                 <h6 style={{textAlign:"left"}} >Reference: {ReactHtmlParser(this.state.item.bibEntry)} </h6>
