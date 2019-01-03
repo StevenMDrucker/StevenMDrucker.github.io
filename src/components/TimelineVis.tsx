@@ -21,8 +21,8 @@ export class TimelineVis extends React.Component<any, any> {
 
     calcHighlight(aproject) {
         if (this.props.currentProjects.indexOf(aproject)>=0)
-          return("highlighted");
-        else return("normal")
+          return("titleClass highlighted");
+        else return("titleClass normal")
     }
 
     localHandleClick(val) {
@@ -110,7 +110,7 @@ export class TimelineVis extends React.Component<any, any> {
             var groupElements = _.map(sortedGroup, (d,i)=>{
                 return(
                     <g key={"g"+ groupName + i}>
-                        <text className = {self.calcHighlight(d.caption)}  onClick=  {(e)=>self.localHandleClick(d.caption)} key={"t"+i} x={x_scale(d.tags.year)+5} y={y_scale(baseCount+i)-2} cursor="pointer"> {d.caption} </text>
+                        <text className = {self.calcHighlight(d.caption)}  onClick=  {(e)=>self.localHandleClick(d.caption)} key={"t"+i} x={x_scale(d.tags.year)+5} y={y_scale(baseCount+i)-2} cursor="pointer" > {d.caption} </text>
                         <circle className = {self.calcHighlight(d.caption)}  onClick=  {(e)=>self.localHandleClick(d.caption)} cx={x_scale(d.tags.year)-2} cy={y_scale(baseCount+i)-5} r={3}> </circle>
                        <text key={"title"+i} x={3} y={y_scale(baseCount+sortedGroup.length/2)+5} className="titleClass">{groupName}</text>
                     </g>

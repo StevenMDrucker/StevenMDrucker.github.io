@@ -18,14 +18,14 @@ export class FacetPanel extends React.Component<any, any> {
       this.props.filter(title, val);
   };
   handleOver(title, val) {
-      debugger;
+    //  debugger;
       this.props.brush(title, val);
       this.setState({"over":val});
   };
 
   handleBrushOut() {
- 
- //     this.props.clearFilter();
+    //debugger;
+      this.props.clearFilter();
       this.setState({"over":null});
   };
   setOrderBy(val) {
@@ -68,7 +68,7 @@ export class FacetPanel extends React.Component<any, any> {
             if (_.indexOf(filterSpec[panelSubject], itemName) > -1) filtered = "x";
         }  
         var handleForBrush =   e=>this.props.brush(panelSubject,itemName);
-        var handleBrushOut = e=>this.props.clearFilter;
+        var handleBrushOut =   e=>this.props.clearFilter();
      
           return(<tr  className={theClass} key={"i"+i} onMouseOut= {handleBrushOut}  onMouseOver=  {handleForBrush}  onClick={e => this.handleClick(panelSubject,itemName)}>
           <td> {filtered} </td> 

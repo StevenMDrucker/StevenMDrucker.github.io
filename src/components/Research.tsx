@@ -22,6 +22,7 @@ export class Research extends React.Component<any, any> {
         this.handleBrushReset = this.handleBrushReset.bind(this);
         this.openModal = this.openModal.bind(this);
         this.searchUpdated = this.searchUpdated.bind(this);
+        this.handleExit = this.handleExit.bind(this);
         this.state = {
             researchData: [],
             currentProjects: [],
@@ -190,6 +191,7 @@ export class Research extends React.Component<any, any> {
     handleExit() {
         this.setState({ 'highlight': '' });
         this.setState({ "currentProjects": [] });
+        this.setState({"over":null});
     }
 
 
@@ -247,7 +249,7 @@ export class Research extends React.Component<any, any> {
             resultsDisplay = <div> 
                 <ContainerDimensions>
                     { ({width, height}) =>
-                    <KeywordVis items={this.state.researchData} currentProjects={this.state.currentProjects} highlight={this.state.highlight} handleClick={this.openModal} width={width} height={height}>
+                    <KeywordVis items={this.state.researchData} currentProjects={this.state.currentProjects} highlight={this.state.highlight} handleClick={this.openModal} width={width} height={960}>
                     </KeywordVis> 
                     }
                 </ContainerDimensions>                    
@@ -297,7 +299,7 @@ export class Research extends React.Component<any, any> {
                             </ButtonToolbar>
                         </Col>
                         <Col lg={4} sm={4} md={4} lgOffset={1} smOffset={1} mdOffset={1}>
-                              <div style={{padding:"0 20 0 0", display:"table-cell", verticalAlignment:"middle"}}> {itemsDisplayedString}  </div>
+                              <div style={{padding:"0 20px 0 0", display:"table-cell", verticalAlignment:"middle"}}> {itemsDisplayedString}  </div>
                                 <Form  inline style={{padding:"0 0 5 0", display:"table-cell", verticalAlignment:"middle"}}>
                                     <FormControl
                                         bsSize="small"
@@ -310,15 +312,15 @@ export class Research extends React.Component<any, any> {
                                 </Form>
                         </ Col>
                         </Row>
-                        <Row>
+                        <Row className="resultsDisplay">
                             {resultsDisplay}
                         </Row>
                     </Col>
                     <Col lg={2} sm={2} md={2}>
                         <Row>
-                        <ButtonToolbar>
+
                             <Button style={divStyle} bsSize="small" bsStyle="default" onClick={e=>this.resetData()} >Reset Filter</Button>
-                        </ButtonToolbar>
+
                             <MyPopup ref="myPopup"> </MyPopup>                                      
                         </Row>
             

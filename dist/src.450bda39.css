@@ -29,7 +29,7 @@ p {
   font-size: 1em;
   line-height: 1.4em;
   margin-bottom: 20px;
-  color: #444; }
+  color: #aaa; }
 
 i {
   font-style: italic; }
@@ -153,6 +153,9 @@ b {
   -o-transition: all .3s ease-in;
   -ms-transition: all .3s ease-in;
   transition: all .3s ease-in; }
+
+.modalBody {
+  color: #fff; }
 
 .csl-left-margin {
   float: left;
@@ -390,6 +393,9 @@ section:last-child {
   font-size: 14;
   color: white;
   margin-bottom: 10px; }
+
+.center {
+  text-align: center; }
 
 .publicationItem {
   list-style: none;

@@ -80,7 +80,6 @@ export class KeywordVis extends React.Component<any, any> {
     const {  items } = this.props;
     var width = this.props.width;
     var height = Math.max(this.props.height, 960);
-    
     var keywords = _.orderBy(_.uniq(_.flatten(_.map(items, function (d) { return d.tags["subject"] }))));
     var projects = _.map(items, function (d) { return d.caption });
     var marginx = 150;
