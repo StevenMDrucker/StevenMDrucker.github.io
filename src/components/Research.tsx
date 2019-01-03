@@ -291,7 +291,7 @@ export class Research extends React.Component<any, any> {
                                 <Button key="Publications" bsSize="small" bsStyle="success" onClick={e => this.publicationMode()}>Publication</Button>
                                 <Button key="TimelineVis" bsSize="small" bsStyle="info" onClick={e => this.timelineMode()}>TimelineVis</Button>
                                 <Button key="KeywordVis" bsSize="small" bsStyle="warning" onClick={e => this.keywordMode()}>KeywordVis</Button>
-                                <DropdownButton style={{float:"right"}} bsSize="small" title={"Sort By: " + self.state.sortedBy + " " + ((self.state.reverse) ? String.fromCharCode( 8595 ) : String.fromCharCode( "8593" ))} pullRight id="split-button-pull-right">
+                                <DropdownButton style={{float:"right"}} bsSize="small" title={"Sort By: " + self.state.sortedBy + " " + ((self.state.reverse) ? String.fromCharCode( 8595 ) : String.fromCharCode(8593))} pullRight id="split-button-pull-right">
                                  {sortByItems}
                                 </DropdownButton>                          
                             </ButtonToolbar>
@@ -330,4 +330,5 @@ export class Research extends React.Component<any, any> {
             </Grid>
         </div>);
       }
-    });
+    };
+}
