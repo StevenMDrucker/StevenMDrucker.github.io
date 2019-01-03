@@ -4,7 +4,10 @@ import * as _ from "lodash";
 import { Form, FormControl, Button, ButtonToolbar, DropdownButton, SplitButton, MenuItem, Grid, Row, Col, Tabs, Tab, PanelGroup, Panel } from 'react-bootstrap';
 import { Index } from "../components/Index";
 import { FacetPanel } from "../components/FacetPanel";
-
+import { MyPopup } from './MyPopup';
+import {KeywordVis} from '../components/KeywordVis';
+import {TimelineVis} from '../components/TimelineVis';
+import ContainerDimensions from 'react-container-dimensions'
 
 export class Research extends React.Component<any, any> {
     globalData = [];
@@ -17,7 +20,19 @@ export class Research extends React.Component<any, any> {
         this.handleBrush = this.handleBrush.bind(this);
         this.handleFilter = this.handleFilter.bind(this);
         this.handleBrushReset = this.handleBrushReset.bind(this);
-        this.state = {};
+        this.openModal = this.openModal.bind(this);
+        this.searchUpdated = this.searchUpdated.bind(this);
+        this.state = {
+            researchData: [],
+            currentProjects: [],
+            highlight: [],
+            itemHovered: '',
+            sortedBy: 'year',
+            reverse: false,
+            mode: "tile",
+            searchTerm: "",
+            filterSpec: {}
+        };
     }
 
     componentDidMount() {
@@ -85,17 +100,20 @@ export class Research extends React.Component<any, any> {
         this.setState({ "reverse": false });
         this.setState({ "researchData": this.globalData });
     }
-    
-    openModal(myval:any) {
-        if (typeof(myval)=="string") {
-            var myIndex = _.findIndex(this.globalData, (a)=>a.caption==myval);
-            if (myIndex >=0) {
-            //this.refs.myPopup.setState( {showModal: true, item: this.globalData[myIndex]});
+
+    openModal(myval: any) {
+
+        if (typeof (myval) == "string") {
+            var myIndex = _.findIndex(this.globalData, (a) => a.caption == myval);
+            if (myIndex >= 0) {
+                this.refs.myPopup.setState({ showModal: true, item: this.globalData[myIndex] });
             }
         } else {
-        //this.refs.myPopup.setState({ showModal: true, item: myval });
-        }  
+            this.refs.myPopup.setState({ showModal: true, item: myval });
+        }
     }
+
+
 
     calculateLocalData() {
         if (this.globalData != null) {
@@ -133,29 +151,29 @@ export class Research extends React.Component<any, any> {
         this.setState({ 'mode': "publication" })
     }
 
-    handleBrush(title:any,val:any) {
-        var projList = _.map(_.filter(this.state.researchData, (proj)=> (_.includes(proj.tags[title], val))), (aProj)=>aProj.caption);
-        this.setState({"currentProjects": projList});
-        this.setState({"highlight":[title,val]});
+    handleBrush(title: any, val: any) {
+        var projList = _.map(_.filter(this.state.researchData, (proj) => (_.includes(proj.tags[title], val))), (aProj) => aProj.caption);
+        this.setState({ "currentProjects": projList });
+        this.setState({ "highlight": [title, val] });
     }
 
     handleBrushOut(val) {
-          this.setState({'itemHovered':val});
-          this.setState({"currentProjects":[]});
-          this.setState({"highlight":[]});
+        this.setState({ 'itemHovered': val });
+        this.setState({ "currentProjects": [] });
+        this.setState({ "highlight": [] });
     }
-    
+
     handleBrushReset() {
-        this.setState({'itemHovered':''});
-        this.setState({"currentProjects":[]});
-        this.setState({"highlight":[]});
+        this.setState({ 'itemHovered': '' });
+        this.setState({ "currentProjects": [] });
+        this.setState({ "highlight": [] });
     }
-    
-    handleFilter(title:any,val:any) {
+
+    handleFilter(title: any, val: any) {
         var localFilterSpec = this.state.filterSpec;
         if (title in localFilterSpec) {
             if (localFilterSpec[title].indexOf(val) >= 0) {
-                localFilterSpec[title] = _.filter(localFilterSpec[title],(a)=>(a!=val));
+                localFilterSpec[title] = _.filter(localFilterSpec[title], (a) => (a != val));
                 if (_.isEmpty(localFilterSpec[title])) {
                     delete localFilterSpec[title];
                 }
@@ -163,30 +181,27 @@ export class Research extends React.Component<any, any> {
                 localFilterSpec[title].push(val);
             }
         } else {
-            localFilterSpec[title]=[val];
+            localFilterSpec[title] = [val];
         }
-        this.setState({"filterSpec":localFilterSpec});
-        this.setState({"researchData": this.calculateResults(localFilterSpec, this.state.orderBy, this.state.reverse, this.state.searchTerm)});   
+        this.setState({ "filterSpec": localFilterSpec });
+        this.setState({ "researchData": this.calculateResults(localFilterSpec, this.state.orderBy, this.state.reverse, this.state.searchTerm) });
     }
 
-    handleExit(){
-        this.setState({'highlight':''});
-        this.setState({"currentProjects":[]});
+    handleExit() {
+        this.setState({ 'highlight': '' });
+        this.setState({ "currentProjects": [] });
     }
+
 
     render() {
-        const divStyle = {
-            margin: '0 20 2 20'
-        };
-
+        var self = this;
         var subjects = [];
         var years = [];
         var collaborators = [];
         var tabList = [];
-        var resultsDisplay: any;
         if (this.state != null) {
             if (!_.isEmpty(this.state.researchData)) {
-                this.calculateLocalData();               
+                this.calculateLocalData();
                 var self = this;
                 var i = 0;
                 tabList = _.map(this.facetPanels, (filteredVals, tag) => {
@@ -197,88 +212,122 @@ export class Research extends React.Component<any, any> {
                     //         </FacetPanel>
                     //   </Tab>);
                     return (
-                    //     <Tab eventKey={i} title={tag}>
-                    //         <FacetPanel items={values} filterSpec={this.state.filterSpec} itemTitle={tag} selected = {this.state.itemHovered} brush = {this.handleBrush} filter = {this.handleFilter} clearFilter= {this.handleExit}>
-                    //         </FacetPanel>
-                    //   </Tab>);
+                        //     <Tab eventKey={i} title={tag}>
+                        //         <FacetPanel items={values} filterSpec={this.state.filterSpec} itemTitle={tag} selected = {this.state.itemHovered} brush = {this.handleBrush} filter = {this.handleFilter} clearFilter= {this.handleExit}>
+                        //         </FacetPanel>
+                        //   </Tab>);
                         <Panel key={i} eventKey={i} header={tag} className="filterPanel" style={{ "cursor": "pointer" }}>
-                            <FacetPanel key={"P" + i} items={values} filterSpec={this.state.filterSpec} itemTitle={tag} selected={this.state.itemHovered} brush={this.handleBrush} filter={this.handleFilter} clearFilter={this.handleExit}>
-                            </FacetPanel>
+                            <Panel.Heading>
+                                <Panel.Title componentClass="h3" toggle>{tag}
+                                </Panel.Title>
+                            </Panel.Heading>
+                            <Panel.Body collapsible>
+                                <FacetPanel key={"P" + i} items={values} filterSpec={this.state.filterSpec} itemTitle={tag} selected={this.state.itemHovered} brush={this.handleBrush} filter={this.handleFilter} clearFilter={this.handleExit}>
+                                </FacetPanel>
+                            </Panel.Body>
                         </Panel>);
                 });
             }
-            if (!_.isEmpty(this.state.researchData)) {
-                if (this.state.researchData.length > 0) {
-                    var facets = _.keys(this.state.researchData[0].tags);
-                    var sortByItems = facets.map((afacet, i) => <MenuItem key={i} eventKey={i} onSelect={(e) => this.onSortBy(afacet)}> {afacet} </MenuItem>);
-                    var rowStyle = {
-                        margin: "0 0 0 25",
-                    }
-                    var buttonBarStyle = {
-                        margin: "0 0 10 0",
-                    }
-                    //                            <SearchInput className="search-input" onChange={this.searchUpdated} />
-                    var itemsDisplayedString = this.state.researchData.length == 1 ?
-                        this.state.researchData.length + " item displayed" :
-                        this.state.researchData.length + " items displayed";
-                    if (this.state.mode == "tile" || this.state.mode == "details" || this.state.mode == "publication") {
-                            resultsDisplay = <Index mode={this.state.mode} items={this.state.researchData} currentProjects={this.state.currentProjects} handleClick={self.openModal} brushOut={e=>this.handleBrushOut(e)} brushReset={e=>this.handleBrushReset()} />
-                    }
-                    return (<div>
-                        <Grid className="show-grid" fluid={true} style={rowStyle}>
-                            <Row>
-                                <Col lg={10} sm={10} md={10}>
-                                    <Row>
-                                        <Col lg={6} sm={6} md={6}>
-                                            <ButtonToolbar style={{ float: "left" }}>
-                                                {/* Provides extra visual weight and identifies the primary action in a set of buttons */}
-                                                <Button key="Tiles" style={{ background: "brown" }} bsSize="small" onClick={e=>this.tileMode()}>Tile</Button>
-                                                <Button key="Details" bsSize="small" bsStyle="primary" onClick={e=>this.detailMode()}>Detail</Button>
-                                                <Button key="Publications" bsSize="small" bsStyle="success" onClick={e=>this.publicationMode()}>Publication</Button>
-                                                <Button key="TimelineVis" bsSize="small" bsStyle="info" onClick={e=>this.timelineMode()}>TimelineVis</Button>
-                                                <Button key="KeywordVis" bsSize="small" bsStyle="warning" onClick={e=>this.keywordMode()}>KeywordVis</Button>
-                                                <DropdownButton style={{ float: "right" }} bsSize="small" title={"Sort By: " + self.state.sortedBy + " " + ((self.state.reverse) ? String.fromCharCode(8595) : String.fromCharCode(8593))} pullRight id="split-button-pull-right">
-                                                    {sortByItems}
-                                                </DropdownButton>
-                                            </ButtonToolbar>
-                                        </Col>
-                                        <Col lg={4} sm={4} md={4} lgOffset={1} smOffset={1} mdOffset={1}>
-                                            <div style={{ padding: "0 20 0 0", display: "table-cell", verticalAlignment: "middle" }}> {itemsDisplayedString}  </div>
-                                            <Form inline style={{ padding: "0 0 5 0", display: "table-cell", verticalAlignment: "middle" }}>
-                                                <FormControl
-                                                    bsSize="small"
-                                                    type="text"
-                                                    value={this.state.searchTerm}
-                                                    placeholder="Search"
-                                                    onChange={this.searchUpdated}
-                                                />
-                                            </Form>
-                                        </ Col>
-                                    </Row>
-                                    <Row style={{ height: "800px", overflow: "auto", marginTtop: "10px", paddingTop: "10px" }}>
-                                        {resultsDisplay}
-                                    </Row>
-                                </Col>
-                                <Col lg={2} sm={2} md={2}>
-                                    <Row>
-                                        <ButtonToolbar>
-                                            <Button style={divStyle} bsSize="small" bsStyle="default" onClick={e=>this.resetData()} >Reset Filter</Button>
-                                        </ButtonToolbar>
-
-                                    </Row>
-
-                                    <PanelGroup accordion defaultActiveKey={1} id="accordion-uncontrolled-example" >
-                                        {tabList}
-                                    </PanelGroup>
-                                </Col>
-                            </Row>
-                        </Grid>
-                    </div>);
-                }
-            }
+        if (!_.isEmpty(this.state.researchData) && this.state.researchData.length > 0) {
+            var facets = _.keys(this.state.researchData[0].tags);
+            var sortByItems = facets.map((afacet,i)=> <MenuItem key={i} eventKey={i} onSelect={(e)=>this.onSortBy(afacet)}> {afacet} </MenuItem>  );
+        } else {
+            sortByItems = '';
         }
-        return (
-            <div> </div >
-        )
-    }
-}
+                 // <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+                    //     {tabList}
+                    // </Tabs>
+        const divStyle = {
+        margin: '0 20 2 20'
+        };
+        var resultsDisplay:any = '';
+        if (this.state.mode == "tile" || this.state.mode == "details" || this.state.mode == "publication") {
+            resultsDisplay = <Index mode={this.state.mode} items={this.state.researchData} currentProjects={this.state.currentProjects} handleClick={this.openModal} brushOut={e => this.handleBrushOut(e)} brushReset={e => this.handleBrushReset()} />            
+        } else if (this.state.mode == "keyword") {
+            resultsDisplay = <div> 
+                <ContainerDimensions>
+                    { ({width, height}) =>
+                    <KeywordVis items={this.state.researchData} currentProjects={this.state.currentProjects} highlight={this.state.highlight} handleClick={this.openModal} width={width} height={height}>
+                    </KeywordVis> 
+                    }
+                </ContainerDimensions>                    
+              </div>
+              
+        } else if (this.state.mode == "timeline") {
+            resultsDisplay = <div>
+                <ContainerDimensions> 
+                   { ({ width, height }) => 
+                    <TimelineVis items={this.state.researchData} currentProjects={this.state.currentProjects} handleClick={this.openModal} width={width} height={height}>
+                    </TimelineVis> 
+                    
+                    }
+                 </ContainerDimensions>
+              </div>
+              
+        } else  resultsDisplay = <div>No View</div>
+        var rowStyle = {
+            margin: "0 0 0 25",
+        }
+        var buttonBarStyle = {
+            margin: "0 0 10 0",
+        }
+    //                            <SearchInput className="search-input" onChange={this.searchUpdated} />
+        var itemsDisplayedString = '';    
+        if (!_.isEmpty(this.state.researchData)) {
+             itemsDisplayedString = this.state.researchData.length == 1 ? 
+            this.state.researchData.length + " item displayed" :
+            this.state.researchData.length + " items displayed";
+        }
+        return(<div> 
+            <Grid className="show-grid" fluid={true} style={rowStyle}>           
+                <Row>          
+                    <Col lg={10} sm={10} md={10}>
+                        <Row>
+                        <Col lg={6} sm={6} md={6}>
+                              <ButtonToolbar style={{float:"left"}}>                         
+                                {/* Provides extra visual weight and identifies the primary action in a set of buttons */}
+                                <Button key="Tiles" style={{ background: "brown" }} bsSize="small" onClick={e => this.tileMode()}>Tile</Button>
+                                <Button key="Details" bsSize="small" bsStyle="primary" onClick={e => this.detailMode()}>Detail</Button>
+                                <Button key="Publications" bsSize="small" bsStyle="success" onClick={e => this.publicationMode()}>Publication</Button>
+                                <Button key="TimelineVis" bsSize="small" bsStyle="info" onClick={e => this.timelineMode()}>TimelineVis</Button>
+                                <Button key="KeywordVis" bsSize="small" bsStyle="warning" onClick={e => this.keywordMode()}>KeywordVis</Button>
+                                <DropdownButton style={{float:"right"}} bsSize="small" title={"Sort By: " + self.state.sortedBy + " " + ((self.state.reverse) ? String.fromCharCode( 8595 ) : String.fromCharCode( "8593" ))} pullRight id="split-button-pull-right">
+                                 {sortByItems}
+                                </DropdownButton>                          
+                            </ButtonToolbar>
+                        </Col>
+                        <Col lg={4} sm={4} md={4} lgOffset={1} smOffset={1} mdOffset={1}>
+                              <div style={{padding:"0 20 0 0", display:"table-cell", verticalAlignment:"middle"}}> {itemsDisplayedString}  </div>
+                                <Form  inline style={{padding:"0 0 5 0", display:"table-cell", verticalAlignment:"middle"}}>
+                                    <FormControl
+                                        bsSize="small"
+                                        type="text"
+                                        value={this.state.searchTerm}
+                                        placeholder="Search"
+                                        onChange={this.searchUpdated}
+                                        
+                                    />
+                                </Form>
+                        </ Col>
+                        </Row>
+                        <Row>
+                            {resultsDisplay}
+                        </Row>
+                    </Col>
+                    <Col lg={2} sm={2} md={2}>
+                        <Row>
+                        <ButtonToolbar>
+                            <Button style={divStyle} bsSize="small" bsStyle="default" onClick={e=>this.resetData()} >Reset Filter</Button>
+                        </ButtonToolbar>
+                            <MyPopup ref="myPopup"> </MyPopup>                                      
+                        </Row>
+            
+                        <PanelGroup defaultActiveKey={1} id="uncontrolled-tab-example" accordion>
+                            {tabList}
+                        </PanelGroup>
+                    </Col>                   
+                </Row>
+            </Grid>
+        </div>);
+      }
+    });

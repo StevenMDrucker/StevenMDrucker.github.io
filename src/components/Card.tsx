@@ -3,7 +3,7 @@ import {Row, Col, Button, SplitButton, MenuItem} from 'react-bootstrap';
 
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import ReactHtmlParser from 'react-html-parser';
+import ReactHtmlParser from  'react-html-parser';
 //import * as ImageAssets from "../../researchImages/**";
 
 

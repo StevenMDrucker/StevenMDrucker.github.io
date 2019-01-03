@@ -8,25 +8,6 @@ import {CV} from './components/CV';
 import {Feature} from './components/Feature';
 import {Research} from './components/Research';
   
-class One extends React.Component<any, any> {
-    render() {
-      return (
-        <div>
-          <div>ONE</div>
-        </div>
-      );
-    }
-}
-  
-class Two extends React.Component<any, any> {
-    render() {
-      return (
-        <div>
-          <div>TWO</div>          
-        </div>
-      ); 
-    }
-}
 
 class Root extends React.Component<any, any> {
     render() {
@@ -47,17 +28,3 @@ ReactDOM.render(
     <Root />
 
 , document.getElementById('app')); 
-
-/*
-   <ul>
-                    <li> 
-                        <Link to="/about">About</Link>
-                    </li>
-                    <li>
-                        <Link to="/one">One</Link>
-                    </li>
-                    <li>
-                        <Link to="/two">Two</Link>
-                    </li>
-                    </ul>
-                    */

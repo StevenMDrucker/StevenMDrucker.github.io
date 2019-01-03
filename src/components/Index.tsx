@@ -5,6 +5,7 @@ import Card from '../components/Card';
 //import FacetPanel from 'components/FacetPanel/FacetPanel';
 //import { CSSGrid, SpringGrid, measureItems, makeResponsive,enterExitStyle } from 'react-stonecutter';
 import Masonry from 'react-masonry-component';
+
 var masonryOptions = {
   transitionDuration: 500,  
   itemSelector: ".researchItem",

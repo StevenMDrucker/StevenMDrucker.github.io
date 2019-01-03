@@ -11,8 +11,8 @@
   }
   
   body {
-    background-color: #eee;
-    color: #333;
+    background-color:black;
+    color: #aaa;
     font-family: sans-serif;
     padding: 0.5em 1em;
     overflow-y: scroll;
@@ -67,6 +67,9 @@
         margin: 0px 25px 0px 50px;
     }
     
+    .featureText {
+        color: #ccc;
+    }
     #name h1 {
         font-size: 2.0em;
         font-weight: 700;
@@ -463,22 +466,21 @@
   
   .gridItem {
     list-style: none;
-    font-size: 2rem;
-    text-align: center;
-    padding: 5px 5px;
+    font-size: 1em;
+    text-align: center;    
+    padding: 5px;
     background-color: #444;
     border-radius: 3px;
     border: 2px solid #aaa;
     overflow: hidden;
     width: 200px;
     height: 160px;    
-    font-size:14;    
     color: white;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   .detailItem {
     list-style: none;
-    font-size: 2rem;
+    font-size: 1em;
     padding: 5px 5px;
     background-color: #222;
     border-radius: 3px;
@@ -566,12 +568,19 @@
   }
   
   .filterPanel {
-    max-height:400;
-    font-size: 8px;
-    overflow-y: scroll;
+    font-size: 8px;    
     cursor: pointer;
+    overflow:hidden;
   }
+.panel-collapse {
+    height: 400px;
+    overflow-y: scroll;
+}
   
   .filterPanel.panel-heading {
     background: red;
+  }
+
+  #app {
+      background: black;
   }
