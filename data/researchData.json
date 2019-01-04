@@ -4262,29 +4262,31 @@
         "thumb": "thumbnail/timeslice.png"
     },
     {
-        "booktitle": "IUI",        
+        "booktitle": "TIIS",        
         "organization": "ACM",
-        "pdf": "papers/anchorviz.pdf",
-        "reference": "Chen, N.-C., Suh, J., Verwey, J., Ramos, G., Drucker, S., & Simard, P. (2018). AnchorViz: Facilitating Classifier Error Discovery Through Interactive Semantic Data Exploration. In 23rd International Conference on Intelligent User Interfaces (pp. 269–280). New York, NY, USA: ACM. https://doi.org/10.1145/3172944.3172950",
+        "pdf": "papers/anchorvizextended.pdf",
+        "reference": "Suh, J., Ghorashi, S, Ramos, G., Chen, N., Drucker, S., Verwey, J. & Simard, P. (2018). AnchorViz: Facilitating Semantic Data Exploration andConcept Discovery for Interactive Machine Learning. In <i> Transactions on Interactive Intelligent Systems </i>. ACM. https://doi.org/10.1145/3172944.3172950",
         "img": "researchImages/anchorviz.png",
-        "bibEntry": "<div class=\"csl-entry\">Chen, N.-C., Suh, J., Verwey, J., Ramos, G., Drucker, S., &amp; Simard, P. (2018). AnchorViz: Facilitating Classifier Error Discovery Through Interactive Semantic Data Exploration. In <i>23rd International Conference on Intelligent User Interfaces</i> (pp. 269–280). New York, NY, USA: ACM. https://doi.org/10.1145/3172944.3172950</div>",
-        "text": "anchorvis.txt",
+        "bibEntry": "<div class=\"csl-entry\">Suh, J., Ghorashi, S, Ramos, G., Chen, N., Drucker, S., Verwey, J. & Simard, P. (2018). AnchorViz: Facilitating Semantic Data Exploration andConcept Discovery for Interactive Machine Learning. In <i>Transactions on Interactive Intelligent Systems</i> ACM. https://doi.org/10.1145/3172944.3172950</div>",
+        "text": "anchorviz.txt",
         "title": "AnchorViz: Facilitating Classifier Error Discovery Through Interactive Semantic Data Exploration",
         "author": [
-            "Chen, Nan-Chen",
             "Suh, Jina",
-            "Verwey, Johan",
+            "Ghorashi, Soroush",
             "Ramos, Gonzalo",
+            "Chen, Nan-Chen",        
             "Drucker, Steven M",
+            "Verwey, Johan",
             "Simard, Patrice"
         ],
         "primary": "Visualization",
         "tags": {
             "collaborators": [
-                "Chen",
                 "Suh",
-                "Verwey",
+                "Ghorashi",                
                 "Ramos",
+                "Chen",
+                "Verwey",
                 "Simard"
             ],
             "subject": [
@@ -4294,19 +4296,19 @@
                 "ML"
             ],
             "year": [
-                "2018"
+                "2019"
             ],
             "publication": [
-                "IUI"
+                "TIIS"
             ]
         },
-        "year": "2018",
-        "ENTRYTYPE": "inproceedings",
-        "ID": "chen_anchorviz_2018",
-        "caption": "AnchorViz",
-        "pages": "269--280",
-        "abstract": "When building a classifier in interactive machine learning, human knowledge about the target class can be a powerful reference to make the classifier robust to unseen items. The main challenge lies in finding unlabeled items that can either help discover or refine concepts for which the current classifier has no corresponding features (i.e., it has feature blindness). Yet it is unrealistic to ask humans to come up with an exhaustive list of items, especially for rare concepts that are hard to recall. This paper presents AnchorViz, an interactive visualization that facilitates error discovery through semantic data exploration. By creating example-based anchors, users create a topology to spread data based on their similarity to the anchors and examine the inconsistencies between data points that are semantically related. The results from our user study show that AnchorViz helps users discover more prediction errors than stratified random and uncertainty sampling methods.",
-        "thumb": "thumbnail/anchorvis.png"
+        "year": "2019",
+        "ENTRYTYPE": "injournal",
+        "ID": "suh_anchorviz_2018",
+        "caption": "Semantic AnchorViz",
+        "pages": "",
+        "abstract": "When building a classifier in interactive machine learning (iML), human knowledge about the target class can be a powerful reference to make the classifier robust to unseen items.         The main challenge lies in finding unlabeled items that can either help discover or refine concepts for which the current classifier has no corresponding features (i.e., it has feature blindness).  Yet it is unrealistic to ask humans to come up with an exhaustive list of items, especially for rare concepts that are hard to recall. This article presents \textit{AnchorViz}, an interactive visualization that facilitates the discovery of prediction errors and previously unseen concepts through human-driven semantic data exploration.         By creating example-based or dictionary-based anchors representing concepts, users create a topology that (a) spreads data based on their similarity to the concepts, and (b) surfaces the prediction and label inconsistencies between data points that are semantically related.         Once such inconsistencies and errors are discovered, users can encode the new information as labels or features and interact with the retrained classifier to validate their actions in an iterative loop.        We evaluated AnchorViz through two user studies.         Our results show that AnchorViz helps users discover more prediction errors than stratified random and uncertainty sampling methods.         Furthermore, during the beginning stages of a training task, an iML tool with AnchorViz can help users build classifiers comparable to the ones built with the same tool with uncertainty sampling and keyword search, but with fewer labels and more generalizable features.         We discuss exploration strategies observed during the two studies and how AnchorViz supports discovering, labeling, and refining of concepts through a sensemaking loop.",
+        "thumb": "thumbnail/anchorvizextended.png"
     },
     {
         "booktitle": "TVCG",        
@@ -4484,7 +4486,7 @@
         "organization": "IEEE",
         "pdf": "papers/Voder.pdf",
         "reference": "Srinivasan, A., Brehmer, M., Lee, B., & Drucker, S. M. (2018). What’s the Difference?: Evaluating Variations of Multi-Series Bar Charts for Visual Comparison Tasks. In Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems (p. 304:1–304:12). New York, NY, USA: ACM. https://doi.org/10.1145/3173574.3173878",
-        "img": "researchImages/Voder.png",
+        "img": "researchImages/voder.png",
         "bibEntry": "<div class=\"csl-entry\">Srinivasan, A., Drucker, S. M., Endert, A., &amp; Stasko, J. (2019). Augmenting Visualizations with Interactive Data Facts to Facilitate Interpretation and Communication. <i>IEEE Transactions on Visualization and Computer Graphics</i>, <i>25</i>(1), 672–681. https://doi.org/10.1109/TVCG.2018.2865145</div>",        
         "text": "Voder.txt",
         "title": "Augmenting visualizations with interactive data facts to facilitate interpretation and communication",
@@ -4519,14 +4521,14 @@
         "caption": "Voder",
         "pages": "672--681",
         "abstract": "Recently, an increasing number of visualization systems have begun to incorporate natural language generation (NLG) capabilities into their interfaces. NLG-based visualization systems typically leverage a suite of statistical functions to automatically extract key facts about the underlying data and surface them as natural language sentences alongside visualizations. With current systems, users are typically required to read the system-generated sentences and mentally map them back to the accompanying visualization. However, depending on the features of the visualization (e.g., visualization type, data density) and the complexity of the data fact, mentally mapping facts to visualizations can be a challenging task. Furthermore, more than one visualization could be used to illustrate a single data fact. Unfortunately, current tools provide little or no support for users to explore such alternatives. In this paper, we explore how system-generated data facts can be treated as interactive widgets to help users interpret visualizations and communicate their findings. We presentVoder, a system that lets users interact with automatically-generated data facts to explore both alternative visualizations to convey a data fact as well as a set of embellishments to highlight a fact within a visualization. Leveraging data facts as interactive widgets, Voder also facilitates data fact-based visualization search. To assess Voder's design and features, we conducted a preliminary user study with 12 participants having varying levels of experience with visualization tools. Participant feedback suggested that interactive data facts aided them in interpreting visualizations. Participants also stated that the suggestions surfaced through the facts helped them explore alternative visualizations and embellishments to communicate individual data facts.",
-        "thumb": "thumbnail/Voder.png"
+        "thumb": "thumbnail/voder.png"
     },
     {
         "booktitle": "Immersive Visual Analytics",        
         "organization": "Springer Verlag",
         "pdf": "papers/immersivehuman.pdf",
         "reference": "Stuerzlinger, W., Dwyer, T., Drucker, S., Gorg, C., North, C., & Scheuermann, G. (2019). Immersive human-centered computational analytics. In Immersive Analytics (pp. 139–163).",
-        "img": "researchImages/ImmersiveHuman.png",
+        "img": "researchImages/immersivehuman.png",
         "bibEntry": "<div class=\"csl-entry\">Stuerzlinger, W., Dwyer, T., Drucker, S., Gorg, C., North, C., &amp; Scheuermann, G. (2019). Immersive human-centered computational analytics. In <i>Immersive Analytics</i> (pp. 139–163).</div>",        
         "text": "ImmersiveHuman.txt",
         "title": "Immersive human-centered computational analytics",
@@ -4566,7 +4568,7 @@
         "caption": "Immersive VAST",
         "pages": "139-163",
         "abstract": "In this chapter we seek to elevate the role of the human in human-machine cooperative analysis through a careful consideration of immersive design principles. We consider both strategic immersion through more accessible systems as well as enhanced understanding and control through immersive interfaces that enable rapid workflows. We extend the classic sensemaking loop from visual analytics to incorporate multiple views, scenarios, people, and computational agents. We consider both sides of machine/human collaboration: allowing the human to more fluidly control the machine process; and also allowing the human to understand the results, derive insights and continue the analytic cycle. We also consider system and algorithmic implications of enabling real-time control and feedback in immersive human-centered computational analytics.",
-        "thumb": "thumbnail/ImmersiveHuman.png"
+        "thumb": "thumbnail/immersivehuman.png"
     },
     {
         "booktitle": "Data Driven Storytelling",        
@@ -4627,10 +4629,10 @@
         "organization": "CRC PRess",
         "pdf": "papers/dataaudience.pdf",
         "reference": "Drucker, S., Huron, S., Kosara, R., Schwabish, J., Diakopolous, N. (2018) Communicating Data to an Audience, <i>Data-Driven Storytelling</i>, 229-250. https://doi.org/10.1201/9781315281575-5</div>",
-        "img": "researchImages/narrativepatterns.png",
+        "img": "researchImages/dataaudience.png",
         "bibEntry": "<div class=\"csl-entry\">Drucker, S., Huron, S., Kosara, R., Schwabish, J., Diakopolous, N. (2018). Communicating Data to an Audience. <i>Data-Driven Storytelling</i>, 229-250. https://doi.org/10.1201/9781315281575-5</div>",        
-        "text": "NarrativePatterns.txt",
-        "title": "Narrative Design Patterns for Data-Driven Storytelling",
+        "text": "dataaudience.txt",
+        "title": "Communicating Data to an Audience",
         "author": [
             "Drucker, Steven",                        
             "Huron, Samuel",
