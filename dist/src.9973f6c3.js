@@ -32483,7 +32483,7 @@ module.exports = [
         "organization": "IEEE",
         "pdf": "papers/fiberclay.pdf",
         "reference": "Hurter, C., Riche, N. H., Drucker, S. M., Cordeil, M., Alligier, R., & Vuillemot, R. (2019). FiberClay: Sculpting Three Dimensional Trajectories to Reveal Structural Insights. IEEE Transactions on Visualization and Computer Graphics, 25(1), 704–714. https://doi.org/10.1109/TVCG.2018.2865191",
-        "img": "researchImages/FibreClay.png",
+        "img": "researchImages/fiberclay.png",
         "bibEntry": " <div class=\"csl-entry\">Hurter, C., Riche, N. H., Drucker, S. M., Cordeil, M., Alligier, R., &amp; Vuillemot, R. (2019). FiberClay: Sculpting Three Dimensional Trajectories to Reveal Structural Insights. <i>IEEE Transactions on Visualization and Computer Graphics</i>, <i>25</i>(1), 704–714. https://doi.org/10.1109/TVCG.2018.2865191</div>",        
         "text": "fiberclay.txt",
         "title": "FiberClay: Sculpting three dimensional trajectories to reveal structural insights",
@@ -32492,7 +32492,7 @@ module.exports = [
             "Riche, Nahalie",
             "Drucker, Steven",
             "Cordell, Maxim",
-            "Alligier, R",
+            "Alligier, Richard",
             "Vuillemot, Romain"
         ],
         "primary": "Visualization",
@@ -32523,7 +32523,7 @@ module.exports = [
         "caption": "FiberClay",
         "pages": "704--714",
         "abstract": "Visualizing 3D trajectories to extract insights about their similarities and spatial configuration is a critical task in several domains. Air traffic controllers for example deal with large quantities of aircrafts routes to optimize safety in airspace and neuroscientists attempt to understand neuronal pathways in the human brain by visualizing bundles of fibers from DTI images. Extracting insights from masses of 3D trajectories is challenging as the multiple three dimensional lines have complex geometries, may overlap, cross or even merge with each other, making it impossible to follow individual ones in dense areas. As trajectories are inherently spatial and three dimensional, we propose FiberClay: a system to display and interact with 3D trajectories in immersive environments. FiberClay renders a large quantity of trajectories in real time using GP-GPU techniques. FiberClay also introduces a new set of interactive techniques for composing complex queries in 3D space leveraging immersive environment controllers and user position. These techniques enable an analyst to select and compare sets of trajectories with specific geometries and data properties. We conclude by discussing insights found using FiberClay with domain experts in air traffic control and neurology.",
-        "thumb": "thumbnail/FiberClay.png"
+        "thumb": "thumbnail/fiberclay.png"
     },
     {
         "booktitle": "TVCG",        
