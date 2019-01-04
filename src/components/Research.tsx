@@ -1,5 +1,6 @@
 import * as React from 'react';
-import JSON from "../../data/researchData.json"
+//import JSON from "../../data/researchData.json"
+//import JSON from "https://gist.githubusercontent.com/StevenMDrucker/ff65d612c7ff3a611b571f2a95ed8ab6/raw/c3d4226e390060f51f771199c9c8872f39eed68e/researchData.json"
 import * as _ from "lodash";
 import { Form, FormControl, Button, ButtonToolbar, DropdownButton, SplitButton, MenuItem, Grid, Row, Col, Tabs, Tab, PanelGroup, Panel } from 'react-bootstrap';
 import { Index } from "../components/Index";
@@ -8,6 +9,8 @@ import { MyPopup } from './MyPopup';
 import {KeywordVis} from '../components/KeywordVis';
 import {TimelineVis} from '../components/TimelineVis';
 import ContainerDimensions from 'react-container-dimensions'
+import * as D3 from "d3";
+
 
 export class Research extends React.Component<any, any> {
     globalData = [];
@@ -37,7 +40,6 @@ export class Research extends React.Component<any, any> {
     }
 
     componentDidMount() {
-        this.globalData = JSON;
         this.state = {
             researchData: [],
             currentProjects: [],
@@ -49,9 +51,25 @@ export class Research extends React.Component<any, any> {
             searchTerm: "",
             filterSpec: {}
         };
-        this.globalData = this.calculateResults({}, "year", true, "");
-        this.resetData();
-        this.tileMode();
+        
+        fetch(`https://gist.githubusercontent.com/StevenMDrucker/ff65d612c7ff3a611b571f2a95ed8ab6/raw/researchData.json`)        
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed with HTTP code " + response.status);
+            }
+            return(response.json())
+        }).then(data=> {            
+            this.globalData = data;            
+            this.globalData = this.calculateResults({}, "year", true, "");
+            this.setState({"researchData":data}); 
+            this.resetData();
+            this.tileMode();
+        });
+    
+        
+        //this.globalData = JSON;
+        
+
     }
 
     calculateResults(localFilterSpec, localOrderBy, localReverse, localSearchTerm) {
