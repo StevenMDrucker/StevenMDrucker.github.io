@@ -73,3 +73,7 @@ package-lock.json
 # local jekyll site
 _site
 .sass-cache
+
+#app and distribution folders
+app
+dist

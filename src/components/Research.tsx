@@ -62,7 +62,7 @@ export class Research extends React.Component<any, any> {
                 });
                 return result
             }, this.globalData)
-        var afacet = localOrderBy;
+        var afacet = localOrderBy;        
         var finalresults = (localReverse) ? _.reverse(_.sortBy(results, (a) => a.tags[afacet])) : _.sortBy(results, (a) => a.tags[afacet]);
 
         var searchResearchData = localSearchTerm.length == 0 ? finalresults : finalresults.filter((a) => _.startsWith(_.toLower(a.caption), _.toLower(localSearchTerm)));
