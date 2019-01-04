@@ -65,6 +65,7 @@ export class Index extends React.Component<any, any> {
         <p ref="empty">Index is empty. </p>        
       );
     }
+    
     var dataList =  this.props.items.map( (val,i) => {
       var aCard = this.generateCard(val,i);
       return(aCard);  

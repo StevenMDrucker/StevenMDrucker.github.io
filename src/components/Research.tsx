@@ -37,41 +37,23 @@ export class Research extends React.Component<any, any> {
             searchTerm: "",
             filterSpec: {}
         };
-    }
-
-    componentDidMount() {
-        this.state = {
-            researchData: [],
-            currentProjects: [],
-            highlight: [],
-            itemHovered: '',
-            sortedBy: 'year',
-            reverse: false,
-            mode: "tile",
-            searchTerm: "",
-            filterSpec: {}
-        };
-        
         fetch(`https://gist.githubusercontent.com/StevenMDrucker/ff65d612c7ff3a611b571f2a95ed8ab6/raw/researchData.json`)        
         .then(response => {
             if (!response.ok) {
                 throw new Error("Failed with HTTP code " + response.status);
             }
             return(response.json())
-        }).then(data=> {            
-            this.globalData = data;            
+        }).then(data=> {
+            var finalresults =  _.reverse(_.sortBy(data, (a) => a.tags["year"]));
+            this.globalData = finalresults;            
             this.globalData = this.calculateResults({}, "year", true, "");
-            this.setState({"researchData":data}); 
+            this.onSortBy("year");
+            this.setState({"researchData": this.globalData}); 
             this.resetData();
             this.tileMode();
         });
-    
-        
-        //this.globalData = JSON;
-        
-
     }
-
+    
     calculateResults(localFilterSpec, localOrderBy, localReverse, localSearchTerm) {
         var results =
             _.reduce(localFilterSpec, (result, value, key) => {
@@ -79,7 +61,7 @@ export class Research extends React.Component<any, any> {
                     return !_.isEmpty(_.intersection(value, o.tags[key]))
                 });
                 return result
-            }, this.globalData)
+            }, this.globalData)        
         var afacet = localOrderBy;        
         var finalresults = (localReverse) ? _.reverse(_.sortBy(results, (a) => a.tags[afacet])) : _.sortBy(results, (a) => a.tags[afacet]);
 
