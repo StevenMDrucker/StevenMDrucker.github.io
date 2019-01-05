@@ -21,4 +21,6 @@ Then copy contents of app directory to toplevel of steven-drucker.com
 ## Update
 * Update data in researchData.json in gist
 * Add image to steven-drucker.com/client/researchImages
+* To add feature, Bio or CV need to edit corresponding component and redeploy
+
 
