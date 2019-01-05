@@ -92,11 +92,18 @@ export class TimelineVis extends React.Component<any, any> {
         });
 
         
+        var years = d3.range(1984,2020,2);
+        var legend = years.map((d,i)=> {
+            return(<text key={"title"+i} x={x_scale(d)} y={height-5} className="titleClass">{d}</text>);
+        });
+
+        
         return (
         
             <svg cursor="pointer" width={width} height={height} className='chart'>
                 {rects}
                 {groups}
+                {legend}
             </svg>
         );
  

@@ -89623,7 +89623,11 @@ var TimelineVis = function (_React$Component) {
             var rects = this.primaryList.map(function (d, i) {
                 return React.createElement("rect", { key: "r" + i, x: 0, y: y_scale(runsum[i]), width: width, height: height_scale(counts[i]), fill: colorScale(_.indexOf(foo, d)), fillOpacity: 0.3 });
             });
-            return React.createElement("svg", { cursor: "pointer", width: width, height: height, className: 'chart' }, rects, groups);
+            var years = d3.range(1984, 2020, 2);
+            var legend = years.map(function (d, i) {
+                return React.createElement("text", { key: "title" + i, x: x_scale(d), y: height - 5, className: "titleClass" }, d);
+            });
+            return React.createElement("svg", { cursor: "pointer", width: width, height: height, className: 'chart' }, rects, groups, legend);
             function layoutGroup(groupArray, groupName, primaryList) {
                 var baseIndex = _.indexOf(primaryList, groupName);
                 var baseCount = baseIndex == 0 ? 0 : runsum[baseIndex - 1];
