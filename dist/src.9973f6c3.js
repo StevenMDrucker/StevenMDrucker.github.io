@@ -27987,6 +27987,8 @@ exports.default = _slider2.default;
 module.exports="/SandDancePublic.c3fedc9b.jpg";
 },{}],22:[function(require,module,exports) {
 module.exports="/touchvis.ddea7938.png";
+},{}],1103:[function(require,module,exports) {
+module.exports="/atom.67485faf.png";
 },{}],13:[function(require,module,exports) {
 "use strict";
 
@@ -28014,6 +28016,7 @@ var React = __importStar(require("react"));
 var react_slick_1 = __importDefault(require("react-slick"));
 var SandDanceImg = require("../../researchImages/SandDancePublic.jpg");
 var TouchVisImg = require("../../researchImages/touchvis.png");
+var AtomImg = require("../../researchImages/atom.png");
 
 var Feature = function (_React$Component) {
     _inherits(Feature, _React$Component);
@@ -28033,9 +28036,10 @@ var Feature = function (_React$Component) {
                 adaptiveHeight: false,
                 speed: 500,
                 slidesToShow: 1,
-                slidesToScroll: 1
+                slidesToScroll: 1,
+                centerMode: true
             };
-            return React.createElement(react_slick_1.default, Object.assign({}, settings), React.createElement("div", { style: { height: 800 } }, React.createElement("h2", { className: "featureTitle" }, "SandDance"), React.createElement("img", { className: "featureImage", src: SandDanceImg }), React.createElement("p", { className: "featureText" }, "SandDance is a browser based information visualization system prototype created at Microsoft SandDance lets you see both the individual records, and their overall structure. SandDance focusses on natural user interaction techniques. Touch interaction is a first class citizen, allowing the entire experience to be easily operated through a touch screen. The system also understand speech commands for searching, selecting, focusing and filtering the data. A kinect system can be used to sense gestures for moving between views of the data. Collaboration is supported by allowing multiple sets of people to interact with the same dataset. Selections and filters in one system are automatically replicated to other systems viewing the data.")), React.createElement("div", { style: { height: 500 } }, React.createElement("h2", { className: "featureTitle" }, "TouchVis"), React.createElement("img", { className: "featureImage", src: TouchVisImg }), React.createElement("p", { className: "featureText" }, "As more applications move from the desktop to touch devices like tablets, designers must wrestle with the costs of porting a design with as little revision of the UI as possible from one device to the other, or of optimizing the interaction per device. We consider the tradeoffs between two versions of a UI for working with data on a touch tablet. One interface is based on using the conventional desktop metaphor (WIMP) with a control panel, push buttons, and checkboxes where the mouse click is effectively replaced by a finger tap. The other interface (which we call FLUID) eliminates the control panel and focuses touch actions on the data visualization itself. We describe our design process and evaluation of each interface. We discuss the significantly better task performance and preference for the FLUID interface, in particular how touch design may challenge certain assumptions about the performance benefits of WIMP interfaces that do not hold on touch devices, such as the superiority of gestural vs. control panel based interaction.")));
+            return React.createElement(react_slick_1.default, Object.assign({}, settings), React.createElement("div", null, React.createElement("h2", { className: "featureTitle" }, "SandDance"), React.createElement("img", { className: "featureImage", src: SandDanceImg }), React.createElement("p", { className: "featureText" }, "SandDance is a browser based information visualization system prototype created at Microsoft SandDance lets you see both the individual records, and their overall structure. SandDance focusses on natural user interaction techniques. Touch interaction is a first class citizen, allowing the entire experience to be easily operated through a touch screen. The system also understand speech commands for searching, selecting, focusing and filtering the data. A kinect system can be used to sense gestures for moving between views of the data. Collaboration is supported by allowing multiple sets of people to interact with the same dataset. Selections and filters in one system are automatically replicated to other systems viewing the data.")), React.createElement("div", null, React.createElement("h2", { className: "featureTitle" }, "TouchVis"), React.createElement("img", { className: "featureImage", src: TouchVisImg }), React.createElement("p", { className: "featureText" }, "As more applications move from the desktop to touch devices like tablets, designers must wrestle with the costs of porting a design with as little revision of the UI as possible from one device to the other, or of optimizing the interaction per device. We consider the tradeoffs between two versions of a UI for working with data on a touch tablet. One interface is based on using the conventional desktop metaphor (WIMP) with a control panel, push buttons, and checkboxes where the mouse click is effectively replaced by a finger tap. The other interface (which we call FLUID) eliminates the control panel and focuses touch actions on the data visualization itself. We describe our design process and evaluation of each interface. We discuss the significantly better task performance and preference for the FLUID interface, in particular how touch design may challenge certain assumptions about the performance benefits of WIMP interfaces that do not hold on touch devices, such as the superiority of gestural vs. control panel based interaction.")), React.createElement("div", null, React.createElement("h2", { className: "featureTitle" }, "Atom"), React.createElement("img", { className: "featureImage", src: AtomImg }), React.createElement("p", { className: "featureText" }, "A Grammar for Unit Visualizations: Unit visualizations are a family of visualizations where every data item is represented by a unique visual mark-a visual unit-during visual encoding. For certain datasets and tasks, unit visualizations can provide more information, better match the user's mental model, and enable novel interactions compared to traditional aggregated visualizations. Current visualization grammars cannot fully describe the unit visualization family. In this paper, we characterize the design space of unit visualizations to derive a grammar that can express them. The resulting grammar is called Atom, and is based on passing data through a series of layout operations that divide the output of previous operations recursively until the size and position of every data point can be determined. We evaluate the expressive power of the grammar by both using it to describe existing unit visualizations, as well as to suggest new unit visualizations.")));
         }
     }]);
 
@@ -28043,7 +28047,7 @@ var Feature = function (_React$Component) {
 }(React.Component);
 
 exports.Feature = Feature;
-},{"react":7,"react-slick":163,"../../researchImages/SandDancePublic.jpg":21,"../../researchImages/touchvis.png":22}],1088:[function(require,module,exports) {
+},{"react":7,"react-slick":163,"../../researchImages/SandDancePublic.jpg":21,"../../researchImages/touchvis.png":22,"../../researchImages/atom.png":1103}],1088:[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -90185,7 +90189,7 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('app'))
                     </li>
                     </ul>
                     */
-},{"react":7,"react-dom":8,"react-router-dom":15,"./components/About":10,"./components/MyNav":11,"./components/CV":12,"./components/Feature":13,"./components/Research":14}],1101:[function(require,module,exports) {
+},{"react":7,"react-dom":8,"react-router-dom":15,"./components/About":10,"./components/MyNav":11,"./components/CV":12,"./components/Feature":13,"./components/Research":14}],1104:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -90355,5 +90359,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[1101,6], null)
+},{}]},{},[1104,6], null)
 //# sourceMappingURL=/src.9973f6c3.map
