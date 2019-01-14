@@ -98,7 +98,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({38:[function(require,module,exports) {
+})({40:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -159,13 +159,13 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":38}],3:[function(require,module,exports) {
+},{"./bundle-url":40}],3:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"./..\\fonts\\glyphicons-halflings-regular.eot":16,"./..\\fonts\\glyphicons-halflings-regular.woff2":17,"./..\\fonts\\glyphicons-halflings-regular.woff":18,"./..\\fonts\\glyphicons-halflings-regular.ttf":19,"./..\\fonts\\glyphicons-halflings-regular.svg":20,"_css_loader":9}],1093:[function(require,module,exports) {
+},{"./..\\fonts\\glyphicons-halflings-regular.eot":17,"./..\\fonts\\glyphicons-halflings-regular.woff2":18,"./..\\fonts\\glyphicons-halflings-regular.woff":19,"./..\\fonts\\glyphicons-halflings-regular.ttf":20,"./..\\fonts\\glyphicons-halflings-regular.svg":21,"_css_loader":9}],1192:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -194,7 +194,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '32223' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '9390' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -335,7 +335,7 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}],1095:[function(require,module,exports) {
+},{}],1194:[function(require,module,exports) {
 var getBundleURL = require('./bundle-url').getBundleURL;
 
 function loadBundlesLazy(bundles) {
@@ -416,6 +416,6 @@ LazyPromise.prototype.catch = function (onError) {
   if (this.promise === null) this.promise = new Promise(this.executor);
   return this.promise.catch(onError);
 };
-},{"./bundle-url":38}],0:[function(require,module,exports) {
-var b=require(1095);b.load([["glyphicons-halflings-regular.0be0fc2d.eot",16],["glyphicons-halflings-regular.3d4a9a08.woff2",17],["glyphicons-halflings-regular.0ccf1219.woff",18],["glyphicons-halflings-regular.1ef5369a.ttf",19],["glyphicons-halflings-regular.356e2b63.svg",20]]);
-},{}]},{},[1093,0], null)
+},{"./bundle-url":40}],0:[function(require,module,exports) {
+var b=require(1194);b.load([["glyphicons-halflings-regular.0be0fc2d.eot",17],["glyphicons-halflings-regular.3d4a9a08.woff2",18],["glyphicons-halflings-regular.0ccf1219.woff",19],["glyphicons-halflings-regular.1ef5369a.ttf",20],["glyphicons-halflings-regular.356e2b63.svg",21]]);
+},{}]},{},[1192,0], null)
