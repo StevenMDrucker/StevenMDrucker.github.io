@@ -1,8 +1,10 @@
 import * as React from 'react';
 import * as RB from 'react-bootstrap';
+
 import ReactHtmlParser from 'react-html-parser';
 
-export class MyPopup extends React.Component<any, any> {    
+export class MyPopup extends React.Component<any, any> { 
+       
   componentWillMount() {
       this.setState({ showModal: false, item: null });    
   }
