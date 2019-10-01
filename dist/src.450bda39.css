@@ -51,6 +51,9 @@ b {
   font-size: 16px;
   color: #222; }
 
+.featureDiv {
+  padding: 100px; }
+
 .featureTitle {
   text-align: center;
   font-family: 'Lato', helvetica, arial, sans-serif, bold;
