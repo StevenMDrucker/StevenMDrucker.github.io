@@ -3,14 +3,15 @@ import * as React from 'react';
 import { Image,  Row, Col } from 'react-bootstrap';
 import ReactMarkdown  from 'react-markdown';
 const headShot = require("../../images/justheadmed.jpg");
-
+const myText = require("../../data/cv.md");
 export class About extends React.Component<any, any> {
 
     constructor(props) {
         super(props);
         this.state = { info:null};
-
+        
         fetch('https://gist.githubusercontent.com/StevenMDrucker/89d3aeba972f1f44bf7454928c12e117/raw/Bio.md')                
+        //fetch(myText)                
         .then(response => {
             if (!response.ok) {
                 throw new Error("Failed with HTTP code " + response.status);
@@ -18,7 +19,6 @@ export class About extends React.Component<any, any> {
             return(response.text())
         }).then(text=> {
             this.setState( {info: text})
-
         });
     }
 

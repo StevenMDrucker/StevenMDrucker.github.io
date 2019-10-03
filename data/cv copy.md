@@ -1,16 +1,16 @@
-Steven M. Drucker
-=================
+# Steven M. Drucker
+##### Partner, Research Manager
+## Microsoft Research
+![](http://www.steven-drucker.com/justheadmed.07d9b61e.jpg)
+email: [sdrucker@microsoft.com](mailto:sdrucker@microsoft.com)
 
-|               |  |
-| ----- | ---- |
-|  | email: [sdrucker@microsoft.com](mailto:sdrucker@microsoft.com) |
-|  | web: [www.steven-drucker.com](http://steven-drucker.com/) |
-|  | office: 425-703-5850 |
-|  | vidoes: [Videos](https://www.youtube.com/channel/UCgh_BTNsTeI7MScu6e-9Yxw) |
---------------------    ------------------
+web: [www.steven-drucker.com](http://steven-drucker.com/)
 
-Personal Profile
----------
+office: 425-703-5850
+
+vidoes: [https://www.youtube.com/channel/UCgh_BTNsTeI7MScu6e-9Yxw](https://www.youtube.com/channel/UCgh_BTNsTeI7MScu6e-9Yxw)
+
+# _Personal Profile_
 
 Dr. Steven M Drucker has a 30+ year career in computer research and development focusing on graphics, interfaces, and information visualization. In the course of his research, he has developed prototypes, products, and websites; managed several groups; published over 100 papers; and filed over 130 patents.
 
@@ -20,66 +20,62 @@ Before coming to Microsoft, he received his Ph.D. from the Computer Graphics and
 
 He has demonstrated his work on stage with Satya Nadella at the Microsoft CEO Summit and with Bill Gates at the Consumer Electronics Show (CES) and Microsoft&#39;s Worldwide Marketing Conference. He has shipped numerous products including a project for visualizing large datasets and another project for gathering and acting on information collected from the web; was written up in the New York Times; filed over 130 patents; and published papers on technologies as diverse as exploratory search, information visualization, multi-user environments, online social interaction, hypermedia research, human and robot perceptual capabilities, robot learning, parallel computer graphics, spectator oriented gaming, and human interfaces for camera control.
 
-Education
----------
+# _Education_
 
-- 1989-1994, **Ph.D, Massachusetts Institute of Technology - Media Lab**
-    - Thesis title: Integlligent Camera Control for Graphical Environments: Advisor, David Zeltzer, Committee: Dr. Alex Pentland, Dr. Pattie Maes, Glorianna Davenport. Research topics included virtual environments, human computer interaction, telerobotics, and parallel computer graphic algorithms.
+### _1989-1994_,  **Ph.D, Massachusetts Institute of Technology - Media Lab**
+> Thesis title: Integlligent Camera Control for Graphical Environments: Advisor, David Zeltzer, Committee: Dr. Alex Pentland, Dr. Pattie Maes, Glorianna Davenport. Research topics included virtual environments, human computer interaction, telerobotics, and parallel computer graphic algorithms.
 
-- 1986-1989, **ScM. Massachusetts Institute of Technology - Artificial Intelligence Laboratory**
-    -  Thesis title: Task Level learning on a complex task: Advisors: John Hollerbach, Chris Atkeson Research topics included machine learning, robot juggling, robot hand manipulation, tactile sensing, real time vision. GPA. 5.0/5.0
+### _1986-1989_, **ScM. Massachusetts Institute of Technology - Artificial Intelligence Laboratory**
+> Thesis title: Task Level learning on a complex task: Advisors: John Hollerbach, Chris Atkeson Research topics included machine learning, robot juggling, robot hand manipulation, tactile sensing, real time vision. GPA. 5.0/5.0
 
-- 1981-1984,  **ScB. Brown University**
-    - Graduated Magna Cum Laude with Honors, Sc.B. in Department of Neurosciences.
+### _1981-1984_,  **ScB. Brown University**
+> Graduated Magna Cum Laude with Honors, Sc.B. in Department of Neurosciences.
 
+# _Work Experience_
 
-Work Experience
-----------
+###  _November 2018 - Present_: **Principal Researcher and Manager of the Visualization and Interactive Data Analysis (VIDA) group at Microsoft Research**
+> Exploring the intersection of HCI and data. Exploring three primary areas: the creation of tools to facilitate communication of insights in data; understanding and troubleshooting of Machine Learning models using visualization techniques; and immersive analytics - exploration of new UI strategies including AR/VR and mixed initiative interaction in the domain of visual analytics.
 
-- November 2018 - Present: **Principal Researcher and Manager of the Visualization and Interactive Data Analysis (VIDA) group at Microsoft Research**
-    - Exploring the intersection of HCI and data. Exploring three primary areas: the creation of tools to facilitate communication of insights in data; understanding and troubleshooting of Machine Learning models using visualization techniques; and immersive analytics - exploration of new UI strategies including AR/VR and mixed initiative interaction in the domain of visual analytics.
+### _October 2010 - November 2018_: **Principal Researcher at Microsoft Research in Visualization and Interaction for Business and Entertainment (MSR VIBE)**
+> Working on interactive visualization technologies for understanding and communicating about infromation and data. Released SandDance, particle based visualization in PowerBI and over the web. Demonstrated on stage with Satya Nadella at the 2016 Microsoft CEO Summit. Other projects include touch interaction for visualizations, intelligent clustering, tools for understanding and debugging machine learning, and an office extensibility architecture which has been adopted as the basic extensibility mechanism for Office in 2015.
 
-- October 2010 - November 2018: **Principal Researcher at Microsoft Research in Visualization and Interaction for Business and Entertainment (MSR VIBE)**
-    - Working on interactive visualization technologies for understanding and communicating about infromation and data. Released SandDance, particle based visualization in PowerBI and over the web. Demonstrated on stage with Satya Nadella at the 2016 Microsoft CEO Summit. Other projects include touch interaction for visualizations, intelligent clustering, tools for understanding and debugging machine learning, and an office extensibility architecture which has been adopted as the basic extensibility mechanism for Office in 2015.
+### _April 2008 - October 2010_: **Principal Researcher Microsoft Research vXTeam**
+> Worked on information visualization and scalable computational systems and displays. Projects included parallel algorithms for computer graphics and large display interaction for visualization.
 
-- April 2008 - October 2010: **Principal Researcher Microsoft Research vXTeam**
-    - Worked on information visualization and scalable computational systems and displays. Projects included parallel algorithms for computer graphics and large display interaction for visualization.
+### _April 2006 - April 2008_: **Principal Scientist Microsoft Live Labs**
+> Led a group focussed on user interface, information visualization, and machine learning. Shipped technologies ranging from Microsoft Thumbtack for gathering and displaying web collections, and Microsoft Pivot for visualizing collections.
 
-- April 2006 - April 2008: **Principal Scientist Microsoft Live Labs**
-    - Led a group focussed on user interface, information visualization, and machine learning. Shipped technologies ranging from Microsoft Thumbtack for gathering and displaying web collections, and Microsoft Pivot for visualizing collections.
+### _October 1999 - March 2006_: **Senior Researcher Microsoft Next Media Group**
+> Directed research efforts in social computing and virtual environments.
 
-- _October 1999 - March 2006: **Senior Researcher Microsoft Next Media Group**
-    - Directed research efforts in social computing and virtual environments.
+### _June 1995 - September 1999_: **Lead-researcher Microsoft Research Virtual Worlds Group**
+> Worked at the intersection of interaction and media. Demonstrated photo management software for large collections of photos at CES on stage with Bill Gates. Media browsing for movie collections. Augmented television consumption.
 
-- _June 1995 - September 1999_: **Lead-researcher Microsoft Research Virtual Worlds Group**
-    - Worked at the intersection of interaction and media. Demonstrated photo management software for large collections of photos at CES on stage with Bill Gates. Media browsing for movie collections. Augmented television consumption.
+### _June 1994 - May 1995_: **Interzone Inc., Co-founder with John Underkoffler**
+> Designed and implemented early wine purchase system over the World Wide Web.
 
-- June 1994 - May 1995_: **Interzone Inc., Co-founder with John Underkoffler**
-    - Designed and implemented early wine purchase system over the World Wide Web.
+### _June 1993 - March 1995_: **Medical Media Systems, Consultant**
+> User Interface design and graphics systems programming for Medical Computer Graphics company.
 
--   June 1993 - March 1995_: **Medical Media Systems, Consultant**
-    - User Interface design and graphics systems programming for Medical Computer Graphics company.
+### _January 1993 - June 1994_: **MIT Media Laboratory, Teaching Assistant**
+> Teaching Assistant and Research Assistant in Computer Graphics and Animation..
 
-- January 1993 - June 1994_: **MIT Media Laboratory, Teaching Assistant**
-    - Teaching Assistant and Research Assistant in Computer Graphics and Animation..
+### _June 1991, June 1992_: **NHK Japan Broadcasting, Tokyo, Consultant**
+> Installed and taught an experimental 3D graphics system and interfaced with 3D input device.
 
-- June 1991, June 1992_: **NHK Japan Broadcasting, Tokyo, Consultant**
-    - Installed and taught an experimental 3D graphics system and interfaced with 3D input device.
+### _September 1986, June 1989_: **MIT Artificial Intelligence Laboratory, Research Assistant**
+> Developed learning algorithms for controlling a juggling robot and tactile sensing systems.
 
-- September 1986, June 1989_: **MIT Artificial Intelligence Laboratory, Research Assistant**
-    - Developed learning algorithms for controlling a juggling robot and tactile sensing systems.
+### _September 1984 - June 1986_: **Institute for Information and Scholarship - Brown University, Full-time Employee**
+> Developed prototype Hypertext system and implemented framework layer of Intermedia, a hypermedia system. Development platforms included UNIX 4.2 BSD on Sun Workstations, IBM PC/RTs and Apple Macintoshes.
 
-- September 1984 - June 1986_: **Institute for Information and Scholarship - Brown University, Full-time Employee**
-    - Developed prototype Hypertext system and implemented framework layer of Intermedia, a hypermedia system. Development platforms included UNIX 4.2 BSD on Sun Workstations, IBM PC/RTs and Apple Macintoshes.
+### _June 1982 - June 1984_: **Neural Science Department - Brown University, Research Assistant**
+> Led to eventual honors work in plasticity in cat visual system and motion gated visual environments.
 
-- June 1982 - June 1984_: **Neural Science Department - Brown University, Research Assistant**
-    - Led to eventual honors work in plasticity in cat visual system and motion gated visual environments.
+### _June 1983 - June 1984_: **Gould Laboratory, Brown University, Technical Support Staff Leader**
+> Leader of group of students assigned to diagnose and correct problems related to the experimental classroom of networked Apollo Workstations. Implemented interactive three-dimensional model of the human brain, later used in introductory neuroscience class.
 
--   June 1983 - June 1984_: **Gould Laboratory, Brown University, Technical Support Staff Leader**
-    - Leader of group of students assigned to diagnose and correct problems related to the experimental classroom of networked Apollo Workstations. Implemented interactive three-dimensional model of the human brain, later used in introductory neuroscience class.
-
-Key Skills
----------------
+# _Key Skills_
 #### Areas of Expertise:
 + Information Visualization
 + Human Computer Interaction
@@ -104,8 +100,7 @@ Key Skills
 - Illustrator
 - AfterEffects
 
-Bibliography
--------------
+# _Bibliography_
 
 1. Fred Hohman, Arjun Srinivasan, **Steven M. Drucker**, TeleGam: Combining Visualization and Verbalization for Interpretable Machine Learning, in _IEEE Transactions on Visualization and Computer Graphics, 2019.
 1. Jina Suh, Soroush Ghorashi, Gonzalo Ramos, Nan-Chen Chen, **Steven Drucker**, Johan Verwey, Patrice Simard. 2019. AnchorViz: Facilitating Semantic Data Exploration and Concept Discovery for Interactive Machine Learning. In _ACM Transactions on Interactive Intelligent Systems (TiiS)_ August, 2019, Vol 10.
@@ -226,8 +221,7 @@ Bibliography
 1. David M Siegel,  **Steven M Drucker** , and Inaki Garabieta. 1987. _Performance analysis of a tactile sensor_. IEEE.
 1. Nicole Yankelovich, Bernard Haan, and  **Steven M Drucker**. 1987. Connections in Context: The intermedia system. _Providence, Rhode Island: Institute for Research in Information and Scholarship, Brown University_.
 
-Press
------
+# _Press_
 - [Research Podcast-Visualizing Data and Other Big Ideas](https://www.microsoft.com/en-us/research/blog/visualizing-data-big-ideas-dr-steven-drucker/?ocid=msr_podcast_sdrucker_profile)
 - [SandDance, a web app](https://www.microsoft.com/en-us/garage/profiles/profile-sanddance.aspx)
 - [Exploring Data Visually: Microsoft SandDance](https://www.schemadesign.com/work/microsoft-sanddance)
@@ -252,8 +246,7 @@ Press
 - [Spectator: Microsoft 5000th Patent ](http://research.microsoft.com/~sdrucker/Press/spectator.mht)XGP Gaming, 3/2006
 - [At home with Microsoft Research ](http://research.microsoft.com/~sdrucker/Press/IT%20Business.mht)ca, Interview 4/13/2006)
 
-Invited Presentations
---------
+# _Invited Presentations_
 - Microsoft CEO Summit Keynote Demo
 - Texas A&amp;M: Distinguished Lecturer
 - Georgia Tech (Atlanta, GA) Distinguished Lecturer
@@ -279,16 +272,14 @@ Invited Presentations
 - Dartmouth University (NH)
 - MERL (Cambridge, MA.)
 
-Selected Presentations
-----------
+# _Selected Presentations_
 - [Making Tools for Making Games](http://research.microsoft.com/~sdrucker/Presentations/Making%20Tools%20for%20Making%20Games.ppt), Presented at Education Arcade, E3, May, 2004.
 - [Creating Novel Experiences for interacting with media ](http://research.microsoft.com/~sdrucker/novel2004.ppt), Presented at Strategy Day, November, 2004
 - [Information Overload meets Information Visualization: Building user interfaces to deal with too much information ](http://research.microsoft.com/~sdrucker/Presentations/MIT2006.ppt), MIT, 2006.
 - [Dealing with your Digital &#39;Stuff&#39;: Lessons from Information Visualization for Interacting with collections ](http://research.microsoft.com/~sdrucker/Presentations/DealingWithDigitalStuff.pptx). Georgia Tech, SFU, 2012
 - [Visualization Communication. ](http://research.microsoft.com/~sdrucker/presentations/visualizationCommunication.pptx)HCIC, 2012
 
-Reviews and Committees
-----------
+# _Reviews and Committees_
 - SIGCHI Papers Chair: 2021
 - SIGCHI Subcommittee Chair: 2017, 2018
 - SIGCHI Awards Chair 2016,2017
@@ -310,8 +301,7 @@ Reviews and Committees
 - INRIA Evaluation Committee Distinguished Member, 2018
 - iCampus Joint Steering Committee (Microsoft-MIT Educational Technology Grant)
 
-Granted Patents
--------------
+# _Granted Patents_
 1. Gestures involving direct interaction with a data visualization  
 1. Progressive query computation using streaming architectures  
 1. Interactive semantic data exploration for error discovery  

@@ -37,6 +37,7 @@ export class Research extends React.Component<any, any> {
             searchTerm: "",
             filterSpec: {}
         };
+        //fetch('https://gist.githubusercontent.com/StevenMDrucker/0891f73a9e54d25cf72402c052e2563a/raw/8c839ef9e9eae86581a4952a82298e67006dea0a/testresearch.json')        
         fetch(`https://gist.githubusercontent.com/StevenMDrucker/ff65d612c7ff3a611b571f2a95ed8ab6/raw/researchData.json`)        
         .then(response => {
             if (!response.ok) {
@@ -44,7 +45,9 @@ export class Research extends React.Component<any, any> {
             }
             return(response.json())
         }).then(data=> {
+            let uid=0;
             var finalresults =  _.reverse(_.sortBy(data, (a) => a.tags["year"]));
+            finalresults = _.map(finalresults, (d)=>{d['id'] = uid++; return(d)});
             this.globalData = finalresults;            
             this.globalData = this.calculateResults({}, "year", true, "");
             this.onSortBy("year");

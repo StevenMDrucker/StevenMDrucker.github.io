@@ -291,3 +291,59 @@ table {
 .titleClass:hover {
   fill: red;
 }
+
+/* Title of the resume */
+.bio h1 {
+  font-size: 45px;
+  color: #eceaea;
+  text-align:left;
+  margin-bottom:15px;
+}
+
+/* Titles of categories */
+.bio h2 {
+  color: #eceaea;
+  font-size: 32px;
+}
+/* There is a bar just before each category */
+
+/* Definitions */
+.bio dt {
+  float: left;
+  clear: left;
+  width: 17%;
+  font-weight: bold;
+}
+.bio dd {
+  margin-left: 17%;
+}
+.bio p {
+  margin-top:0;
+  margin-bottom:7px;
+}
+
+/* Blockquotes */
+.bio blockquote {
+  text-align: center
+}
+
+/* Links */
+.bio a {
+  text-decoration: none;
+}
+
+/* Horizontal separators */
+.bio hr {
+  color: #A6A6A6;
+}
+
+.bio table {
+  width: 100%;
+  border-top: solid;
+  border-bottom: solid;
+  border-color:#999999;
+}
+
+.bio .li .li {
+    list-style: none;
+}
