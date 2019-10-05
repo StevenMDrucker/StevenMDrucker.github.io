@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "deploy": "parcel build ./src/index.html --out-dir ./docscp ",
+    "deploy": "parcel build ./src/index.html --out-dir ./docs",
     "build": "tsc -p .",
     "start": "parcel serve ./src/index.html --open"
   },
