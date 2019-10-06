@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "homepage":"https://stevenmdrucker.github.io/SDruckerHome",
   "scripts": {
-    "deploy": "parcel build ./docs/src/index.htm --out-dir ./dist",
+    "deploy": "parcel build ./docs/src/index.htm --public-url ./ --out-dir ./dist && cp dist/index.html dist/404.html",
     "build": "tsc -p .",
     "publish": "gh-pages -d ./dist", 
     "start": "parcel serve ./docs/src/index.htm --open"
