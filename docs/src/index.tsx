@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import JSON from "../data/researchData.json"
+//import JSON from "../data/researchData.json"
 import { BrowserRouter as Router, HashRouter, Route, Link, hashHistory, Switch} from 'react-router-dom'
 import {About} from "./components/About"
 import { MyNav } from './components/MyNav';
@@ -12,7 +12,7 @@ import {Research} from './components/Research';
 class Root extends React.Component<any, any> {
     render() {
         return(            
-            <HashRouter history={hashHistory}>                
+            <HashRouter basename='/' history={hashHistory}>                
             <div>         
                 <MyNav />
                 <Switch>                    
