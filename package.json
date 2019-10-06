@@ -3,9 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "deploy": "parcel build ./src/index.html --out-dir ./docs",
+    "deploy": "parcel build ./docs/src/index.html --out-dir ./docs",
     "build": "tsc -p .",
-    "start": "parcel serve ./src/index.html --open"
+    "start": "parcel serve ./docs/src/index.html --open"
   },
   "devDependencies": {
     "@types/react": "16.4.7",
