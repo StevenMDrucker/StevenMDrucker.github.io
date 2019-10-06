@@ -12,7 +12,7 @@ import {Research} from './components/Research';
 class Root extends React.Component<any, any> {
     render() {
         return(            
-            <HashRouter basename='/' history={hashHistory}>                
+            <HashRouter basename='/SDruckerHome' history={hashHistory}>                
             <div>         
                 <MyNav />
                 <Switch>                    

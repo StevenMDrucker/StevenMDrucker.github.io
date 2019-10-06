@@ -165,7 +165,7 @@ module.exports = reloadCSS;
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"./..\\fonts\\glyphicons-halflings-regular.eot":11,"./..\\fonts\\glyphicons-halflings-regular.woff2":10,"./..\\fonts\\glyphicons-halflings-regular.woff":13,"./..\\fonts\\glyphicons-halflings-regular.ttf":12,"./..\\fonts\\glyphicons-halflings-regular.svg":14,"_css_loader":9}],1187:[function(require,module,exports) {
+},{"./..\\fonts\\glyphicons-halflings-regular.eot":10,"./..\\fonts\\glyphicons-halflings-regular.woff2":11,"./..\\fonts\\glyphicons-halflings-regular.woff":12,"./..\\fonts\\glyphicons-halflings-regular.ttf":14,"./..\\fonts\\glyphicons-halflings-regular.svg":13,"_css_loader":9}],1187:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -194,7 +194,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '31151' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '33843' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -417,5 +417,5 @@ LazyPromise.prototype.catch = function (onError) {
   return this.promise.catch(onError);
 };
 },{"./bundle-url":15}],0:[function(require,module,exports) {
-var b=require(1189);b.load([["glyphicons-halflings-regular.12ed340a.eot",11],["glyphicons-halflings-regular.2fa30067.woff2",10],["glyphicons-halflings-regular.f597a76a.woff",13],["glyphicons-halflings-regular.27401c4c.ttf",12],["glyphicons-halflings-regular.11a3d873.svg",14]]);
+var b=require(1189);b.load([["glyphicons-halflings-regular.12ed340a.eot",10],["glyphicons-halflings-regular.2fa30067.woff2",11],["glyphicons-halflings-regular.f597a76a.woff",12],["glyphicons-halflings-regular.27401c4c.ttf",14],["glyphicons-halflings-regular.11a3d873.svg",13]]);
 },{}]},{},[1187,0], null)
