@@ -2,9 +2,11 @@
   "name": "sdruckerhome-app",
   "private": true,
   "version": "1.0.0",
+  "homepage":"https://stevenmdrucker.github.io/SDruckerHome",
   "scripts": {
-    "deploy": "parcel build ./docs/src/index.htm --out-dir ./docs",
+    "deploy": "parcel build ./docs/src/index.htm --out-dir ./dist",
     "build": "tsc -p .",
+    "publish": "gh-pages -d ./dist",
     "start": "parcel serve ./docs/src/index.htm --open"
   },
   "devDependencies": {
@@ -21,6 +23,7 @@
     "@types/d3": "^5.7.2",
     "@types/react-slick": "^0.23.4",
     "d3": "^5.12.0",
+    "gh-pages": "^2.1.1",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
