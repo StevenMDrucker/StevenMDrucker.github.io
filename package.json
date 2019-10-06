@@ -6,7 +6,7 @@
   "scripts": {
     "deploy": "parcel build ./docs/src/index.htm --out-dir ./dist",
     "build": "tsc -p .",
-    "publish": "gh-pages -d ./dist",
+    "publish": "gh-pages -d ./dist", 
     "start": "parcel serve ./docs/src/index.htm --open"
   },
   "devDependencies": {
