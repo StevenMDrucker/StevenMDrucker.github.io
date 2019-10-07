@@ -75,5 +75,5 @@ _site
 .sass-cache
 
 #app and distribution folders
-app
-dist
+#app
+#dist

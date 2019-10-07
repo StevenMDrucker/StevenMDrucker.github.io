@@ -17,6 +17,9 @@ body {
   overflow-x: hidden;
   text-align: center; }
 
+.resultsDisplay {
+  padding: 5px; }
+
 label {
   display: inline-block;
   padding: 6px 10px 6px 0px; }
@@ -63,6 +66,12 @@ table {
 
 .myFacet {
   cursor: pointer; }
+
+.myFacet thead {
+  font-size: 15px; }
+
+.myFacet tbody {
+  font-size: 12px; }
 
 .grid {
   list-style: none;
@@ -130,7 +139,7 @@ table {
   padding: 5px;
   width: 150px;
   height: 100px;
-  margin: 0 0 0 10; }
+  margin: 0 0 0px 15px; }
 
 .grid-item p {
   text-align: left;
@@ -162,6 +171,9 @@ table {
 
 .filterPanel.panel-heading {
   background: red; }
+
+.panel-group {
+  padding: 2px 0 0 0; }
 
 .bio div {
   font-family: Calibri;
@@ -197,6 +209,9 @@ table {
 .chart {
   background: white; }
 
+#cv p {
+  color: black; }
+
 .keyword {
   font-size: 9pt;
   text-anchor: end; }
@@ -214,4 +229,14 @@ table {
 
 .highlighted {
   stroke: purple;
+  fill: purple;
   stroke-width: 1px; }
+
+.titleClass {
+  fill: black;
+  font-size: 11px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif; }
+
+.titleClass:hover {
+  fill: red; }
