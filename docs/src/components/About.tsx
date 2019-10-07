@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Image,  Row, Col } from 'react-bootstrap';
 import ReactMarkdown  from 'react-markdown';
 const headShot = require("../../images/justheadmed.jpg");
-const myText = require("../../data/cv.md");
+//const myText = require("../../data/cv.md");
 export class About extends React.Component<any, any> {
 
     constructor(props) {
