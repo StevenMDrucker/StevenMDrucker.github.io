@@ -15,7 +15,9 @@ $ npm run start
 ## Build
 ```sh
 $ npm run deploy
+$ npm run publish 
 ```
+Uses gh-pages to publish to github
 Then copy contents of app directory to toplevel of steven-drucker.com
 
 ## Update
