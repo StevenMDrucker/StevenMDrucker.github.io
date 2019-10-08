@@ -11,7 +11,7 @@ export class About extends React.Component<any, any> {
         this.state = { info:null};
         
         //fetch('https://gist.githubusercontent.com/StevenMDrucker/89d3aeba972f1f44bf7454928c12e117/raw/Bio.md')                
-        fetch('https://stevenmdrucker.github.io/ResearchContent')
+        fetch('https://stevenmdrucker.github.io/ResearchContent/Bio.md')
         //fetch(myText)                
         .then(response => {
             if (!response.ok) {
