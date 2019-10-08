@@ -29,7 +29,7 @@ export class CardComponent extends React.Component<any, any> {
             return false;
         }
     }
-
+// <img src={"http://www.steven-drucker.com/client/"+val.img} width="180" height="120" />
     render() {
         var val = this.props.theItem;        
         if (this.props.mode == "tile") {            
@@ -38,7 +38,7 @@ export class CardComponent extends React.Component<any, any> {
                     onMouseOut= {(e)=>this.props.handleOut(val)}
                     onClick=  {(e)=>this.props.handleClick(val)}
                     key={"i"+val.id}> 
-                    <img src={"http://www.steven-drucker.com/client/"+val.img} width="180" height="120" />
+                    <img src={"https://stevenmdrucker.github.io/ResearchContent/"+val.img} width="180" height="120" />
                     {val.caption}
                 </div>;
          } else if (this.props.mode == "details") {

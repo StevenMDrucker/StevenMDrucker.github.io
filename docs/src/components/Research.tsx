@@ -38,7 +38,8 @@ export class Research extends React.Component<any, any> {
             filterSpec: {}
         };
         //fetch('https://gist.githubusercontent.com/StevenMDrucker/0891f73a9e54d25cf72402c052e2563a/raw/8c839ef9e9eae86581a4952a82298e67006dea0a/testresearch.json')        
-        fetch(`https://gist.githubusercontent.com/StevenMDrucker/ff65d612c7ff3a611b571f2a95ed8ab6/raw/researchData.json`)        
+        //fetch(`https://gist.githubusercontent.com/StevenMDrucker/ff65d612c7ff3a611b571f2a95ed8ab6/raw/researchData.json`)        
+        fetch(`https://stevenmdrucker.github.io/ResearchContent/researchData.json`)        
         .then(response => {
             if (!response.ok) {
                 throw new Error("Failed with HTTP code " + response.status);

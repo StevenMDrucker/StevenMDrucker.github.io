@@ -2,9 +2,9 @@
 
 
 > Some notes: 
-* Hardcoded to read researchData.json from gist: http://StevenMDrucker/researchData.json
-* Hardcoded to read images from steven-drucker.com/client/researchImages
-* Hardcoded to read bio.md from gist: http://StevenMDrucker/bio.md
+* Hardcoded to read researchData.json from https://stevenmdrucker.github.io/ResearchContent/ 
+* Hardcoded to read images from https://stevenmdrucker.github.io/ResearchContent/researchImages
+* Hardcoded to read bio.md from gist: https://stevenmdrucker.github.io/ResearchContent/Bio.md
 * styles in both styles/main.scss and index.scss
 
 ## Develop
