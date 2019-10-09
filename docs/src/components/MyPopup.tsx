@@ -27,7 +27,7 @@ export class MyPopup extends React.Component<any, any> {
             </RB.Modal.Header>
                 
             <div className="center">
-                <img src={"http://www.steven-drucker.com/client/" + this.state.item.img} width="400" height="300"></img>
+                <img src={"https://stevenmdrucker.github.io/ResearchContent/" + this.state.item.img} width="400" height="300"></img>
             </div>
             <br />
             

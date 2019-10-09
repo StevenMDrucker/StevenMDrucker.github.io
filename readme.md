@@ -21,8 +21,10 @@ Uses gh-pages to publish to github
 Then copy contents of app directory to toplevel of steven-drucker.com
 
 ## Update
-* Update data in researchData.json in gist
-* Add image to steven-drucker.com/client/researchImages
-* To add feature, Bio or CV need to edit corresponding component and redeploy
+* Update data in https://stevenmdrucker.github.io/ResearchContent/researchData.json
+* Add image to https://stevenmdrucker.github.io/ResearchContent/researchImages
++ To update Bio change https://stevenmdrucker.github.io/ResearchContent/Bio.md
++ Currently CV needs to be editted in source and recompiled.
+
 
 

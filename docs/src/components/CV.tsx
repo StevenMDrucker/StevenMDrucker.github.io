@@ -22,7 +22,7 @@ export class CV extends React.Component<any, any> {
                     <div id="contactDetails" className="quickFade delayFour">
                         <ul>
                             <li>email: <a href="mailto:sdrucker@microsoft.com" target="_blank">sdrucker@microsoft.com</a></li>
-                            <li>web: <a href="http://steven-drucker.com">www.steven-drucker.com</a></li>
+                            <li>web: <a href="https://stevenmdrucker.github.io/">www.steven-drucker.com</a></li>
                             <li>office: 425-703-5850</li>
                             <li>vidoes: <a href="https://www.youtube.com/channel/UCgh_BTNsTeI7MScu6e-9Yxw">youtube link</a></li>
                         </ul>
