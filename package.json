@@ -7,6 +7,7 @@
     "predeploy": "rimraf ./dist && parcel build ./docs/src/index.htm --public-url ./dist --out-dir ./dist && copy .\\dist\\index.html .\\index.html",
     "deploy": "git add -A && git commit -a -m 'deploy' && git push",
     "oldpublish": "gh-pages -b 'master' -d ./dist",
+    "publish": "git add -A && git commit -a -m 'deploy' && git push",
     "build": "rimraf ./dist &&  parcel build ./docs/src/index.htm --public-url ./dist --out-dir ./dist && copy .\\dist\\index.html .\\index.html",
     "buildtsc": "tsc -p .",
     "start": "parcel serve ./docs/src/index.htm --open",
