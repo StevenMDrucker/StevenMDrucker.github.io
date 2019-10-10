@@ -1,6 +1,3 @@
-
-
-import { Link } from 'react-router'
 import {Navbar, Nav, NavItem, Row, Col} from 'react-bootstrap'
 import * as React from 'react';
 
