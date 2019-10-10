@@ -7,7 +7,7 @@
     "predeploy": "rimraf ./dist && parcel build ./docs/src/index.htm --public-url ./ --out-dir ./dist",
     "deploy": "gh-pages -b 'master' -d ./dist",
     "publish": "gh-pages -b 'master' -d ./dist",
-    "build": "rimraf ./dist &&  parcel build ./docs/src/index.htm --public-url ./ --out-dir ./dist",
+    "build": "rimraf ./dist &&  parcel build ./docs/src/index.htm --public-url ./dist --out-dir ./dist",
     "buildtsc": "tsc -p .",
     "start": "parcel serve ./docs/src/index.htm --open",
     "help": "gh-pages --help"
