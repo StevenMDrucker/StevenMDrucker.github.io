@@ -9,8 +9,7 @@ export class About extends React.Component<any, any> {
     constructor(props) {
         super(props); 
         this.state = { info:null};
-        
-        //fetch('https://gist.githubusercontent.com/StevenMDrucker/89d3aeba972f1f44bf7454928c12e117/raw/Bio.md')                
+                
         //fetch(myText)                
         //fetch('https://stevenmdrucker.github.io/ResearchContent/CV.md')
         fetch('https://stevenmdrucker.github.io/ResearchContent/Bio.md')        
