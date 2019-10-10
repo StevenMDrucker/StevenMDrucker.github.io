@@ -4,19 +4,18 @@
   "version": "1.0.0",
   "homepage": "https://stevenmdrucker.github.io/SDruckerHome",
   "scripts": {
-    "predeploy": "rimraf ./dist && parcel build ./docs/src/index.htm --public-url ./ --out-dir ./dist",
+    "predeploy": "rimraf ./dist && parcel build ./docs/src/index.htm --public-url ./ --out-dir ./dist && copy .\\dist\\index.html .\\index.html",
     "deploy": "gh-pages -b 'master' -d ./dist",
     "publish": "gh-pages -b 'master' -d ./dist",
-    "build": "rimraf ./dist &&  parcel build ./docs/src/index.htm --public-url ./dist --out-dir ./dist",
+    "build": "rimraf ./dist &&  parcel build ./docs/src/index.htm --public-url ./dist --out-dir ./dist && copy .\\dist\\index.html .\\index.html",
     "buildtsc": "tsc -p .",
     "start": "parcel serve ./docs/src/index.htm --open",
-    "help": "gh-pages --help"
+    "copy": "copy .\\dist\\index.html .\\index.html"
   },
   "devDependencies": {
     "@types/react": "16.4.7",
     "@types/react-dom": "16.0.6",
     "cssnano": "^4.1.10",
-    "node-sass": "^4.12.0",
     "sass": "^1.23.0",
     "typescript": "^3.6.3"
   },
