@@ -1,7 +1,7 @@
 
 
 import { Link } from 'react-router'
-import {Navbar, Nav, NavItem, Row, Col, LinkContainer} from 'react-bootstrap'
+import {Navbar, Nav, NavItem, Row, Col} from 'react-bootstrap'
 import * as React from 'react';
 
 export class MyNav extends React.Component<any, any> { 
