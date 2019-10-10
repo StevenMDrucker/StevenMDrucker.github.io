@@ -1,11 +1,8 @@
-Steven M. Drucker
-=================
-
-|               |  |
-| ----- | ---- |
-|  | email: [sdrucker@microsoft.com](mailto:sdrucker@microsoft.com) |
-|  | web: [www.steven-drucker.com](http://steven-drucker.com/) |
-|  | office: 425-703-5850 |
+| Steven M. Drucker | |
+| ----- | ----: |
+| Partner Research Manager | email: [sdrucker@microsoft.com](mailto:sdrucker@microsoft.com) |
+| Microsoft Research [(MSR)](http://research.microsoft.com)  | web: [www.steven-drucker.com](http://steven-drucker.com/) |
+| Visualization and Data Analytics Group [(VIDA)](http://aka.ms/msr-vida)| office: 425-703-5850 |
 |  | vidoes: [Videos](https://www.youtube.com/channel/UCgh_BTNsTeI7MScu6e-9Yxw) |
 --------------------    ------------------
 
@@ -20,8 +17,10 @@ Before coming to Microsoft, he received his Ph.D. from the Computer Graphics and
 
 He has demonstrated his work on stage with Satya Nadella at the Microsoft CEO Summit and with Bill Gates at the Consumer Electronics Show (CES) and Microsoft&#39;s Worldwide Marketing Conference. He has shipped numerous products including a project for visualizing large datasets and another project for gathering and acting on information collected from the web; was written up in the New York Times; filed over 130 patents; and published papers on technologies as diverse as exploratory search, information visualization, multi-user environments, online social interaction, hypermedia research, human and robot perceptual capabilities, robot learning, parallel computer graphics, spectator oriented gaming, and human interfaces for camera control.
 
-Education
----------
+______
+
+### Education
+
 
 - 1989-1994, **Ph.D, Massachusetts Institute of Technology - Media Lab**
     - Thesis title: Integlligent Camera Control for Graphical Environments: Advisor, David Zeltzer, Committee: Dr. Alex Pentland, Dr. Pattie Maes, Glorianna Davenport. Research topics included virtual environments, human computer interaction, telerobotics, and parallel computer graphic algorithms.
@@ -32,9 +31,9 @@ Education
 - 1981-1984,  **ScB. Brown University**
     - Graduated Magna Cum Laude with Honors, Sc.B. in Department of Neurosciences.
 
+_____
 
-Work Experience
-----------
+### Work Experience
 
 - November 2018 - Present: **Principal Researcher and Manager of the Visualization and Interactive Data Analysis (VIDA) group at Microsoft Research**
     - Exploring the intersection of HCI and data. Exploring three primary areas: the creation of tools to facilitate communication of insights in data; understanding and troubleshooting of Machine Learning models using visualization techniques; and immersive analytics - exploration of new UI strategies including AR/VR and mixed initiative interaction in the domain of visual analytics.
@@ -78,34 +77,19 @@ Work Experience
 -   June 1983 - June 1984_: **Gould Laboratory, Brown University, Technical Support Staff Leader**
     - Leader of group of students assigned to diagnose and correct problems related to the experimental classroom of networked Apollo Workstations. Implemented interactive three-dimensional model of the human brain, later used in introductory neuroscience class.
 
-Key Skills
----------------
-#### Areas of Expertise:
-+ Information Visualization
-+ Human Computer Interaction
-+ Machine Learning
+_____
 
-#### Programming Languages/Environments/Frameworks:
-- C,C++,C#,Java
-- Python, Pandas, R, LISP, SQL
-- Javascript, ECMAScript,Typescript
-- DirectX, OpenGL
-- JQuery, Angular, React/Redux
+### Key Skills
+| Areas of Expertise | Programming Languages/Environments/Frameworks | Applications |
+| ----- | ---- | --- |
+| Information Visualization | C, C++, C#, Java | Tableau, PowerBI |
+| Human Computer Interaction | Python, Pandas, R, LISP, SQL |   MS OFfice |
+| Machine Learning | DirectX, OpenGL | Latex |
+| | JQuery, Angular, React/Redux | Photoshop, Premiere, Illustrator |
 
-## Applications:
+_____
 
-- Tableau
-- PowerBI
-- Excel
-- Word
-- LaTeX
-- Photoshop
-- Premiere
-- Illustrator
-- AfterEffects
-
-Bibliography
--------------
+## Bibliography
 
 1. Fred Hohman, Arjun Srinivasan, **Steven M. Drucker**, TeleGam: Combining Visualization and Verbalization for Interpretable Machine Learning, in _IEEE Transactions on Visualization and Computer Graphics, 2019.
 1. Jina Suh, Soroush Ghorashi, Gonzalo Ramos, Nan-Chen Chen, **Steven Drucker**, Johan Verwey, Patrice Simard. 2019. AnchorViz: Facilitating Semantic Data Exploration and Concept Discovery for Interactive Machine Learning. In _ACM Transactions on Interactive Intelligent Systems (TiiS)_ August, 2019, Vol 10.
@@ -226,8 +210,10 @@ Bibliography
 1. David M Siegel,  **Steven M Drucker** , and Inaki Garabieta. 1987. _Performance analysis of a tactile sensor_. IEEE.
 1. Nicole Yankelovich, Bernard Haan, and  **Steven M Drucker**. 1987. Connections in Context: The intermedia system. _Providence, Rhode Island: Institute for Research in Information and Scholarship, Brown University_.
 
-Press
------
+____
+
+### Press
+
 - [Research Podcast-Visualizing Data and Other Big Ideas](https://www.microsoft.com/en-us/research/blog/visualizing-data-big-ideas-dr-steven-drucker/?ocid=msr_podcast_sdrucker_profile)
 - [SandDance, a web app](https://www.microsoft.com/en-us/garage/profiles/profile-sanddance.aspx)
 - [Exploring Data Visually: Microsoft SandDance](https://www.schemadesign.com/work/microsoft-sanddance)
@@ -252,8 +238,11 @@ Press
 - [Spectator: Microsoft 5000th Patent ](http://research.microsoft.com/~sdrucker/Press/spectator.mht)XGP Gaming, 3/2006
 - [At home with Microsoft Research ](http://research.microsoft.com/~sdrucker/Press/IT%20Business.mht)ca, Interview 4/13/2006)
 
-Invited Presentations
---------
+
+_____
+
+### Invited Presentations
+
 - Microsoft CEO Summit Keynote Demo
 - Texas A&amp;M: Distinguished Lecturer
 - Georgia Tech (Atlanta, GA) Distinguished Lecturer
@@ -279,16 +268,20 @@ Invited Presentations
 - Dartmouth University (NH)
 - MERL (Cambridge, MA.)
 
-Selected Presentations
-----------
+____
+
+### Selected Presentations
+
 - [Making Tools for Making Games](http://research.microsoft.com/~sdrucker/Presentations/Making%20Tools%20for%20Making%20Games.ppt), Presented at Education Arcade, E3, May, 2004.
 - [Creating Novel Experiences for interacting with media ](http://research.microsoft.com/~sdrucker/novel2004.ppt), Presented at Strategy Day, November, 2004
 - [Information Overload meets Information Visualization: Building user interfaces to deal with too much information ](http://research.microsoft.com/~sdrucker/Presentations/MIT2006.ppt), MIT, 2006.
 - [Dealing with your Digital &#39;Stuff&#39;: Lessons from Information Visualization for Interacting with collections ](http://research.microsoft.com/~sdrucker/Presentations/DealingWithDigitalStuff.pptx). Georgia Tech, SFU, 2012
 - [Visualization Communication. ](http://research.microsoft.com/~sdrucker/presentations/visualizationCommunication.pptx)HCIC, 2012
 
-Reviews and Committees
-----------
+_____
+
+### Reviews and Committees
+
 - SIGCHI Papers Chair: 2021
 - SIGCHI Subcommittee Chair: 2017, 2018
 - SIGCHI Awards Chair 2016,2017
@@ -310,8 +303,10 @@ Reviews and Committees
 - INRIA Evaluation Committee Distinguished Member, 2018
 - iCampus Joint Steering Committee (Microsoft-MIT Educational Technology Grant)
 
-Granted Patents
--------------
+_____
+
+### Granted Patents
+
 1. Gestures involving direct interaction with a data visualization  
 1. Progressive query computation using streaming architectures  
 1. Interactive semantic data exploration for error discovery  

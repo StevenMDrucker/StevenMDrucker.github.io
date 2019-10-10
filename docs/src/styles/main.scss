@@ -1,8 +1,8 @@
-$background: lightblue;
-
+$background: #f3f3f3;
 body {
   background: $background;
   font-family: "Helvetica Neue", serif;
+
 }
 
 html {
@@ -14,8 +14,8 @@ html {
 }
 
 body {
-  background-color: #eee;
-  color: #333;
+  background-color: $background;
+  color: black;
   font-family: sans-serif;
   padding: 0.5em 1em;
   overflow-y: scroll;
@@ -212,14 +212,22 @@ table {
 .panel-group {
   padding: 2px 0 0 0;
 }
-.bio div {
-    font-family: Calibri;
+.cv li {
+  color: black;
+}
+.cv div {
+    font-family: sans-serif;
     font-size: 18px;    
     margin-bottom: 33px;
     margin-left: 0px;
     margin-right: 0px;
     text-align: left;
 }
+.cv img {
+  left: 30px;
+  top: 80px;
+}
+
 .bio img {
     left: 30px;
     top: 80px;
@@ -229,6 +237,9 @@ table {
     margin-top: 75px;
 }
 
+.cv {
+  background: #f0f0f0;
+}
 .spacer {
   height:20px;
 }
@@ -253,7 +264,7 @@ table {
   background: white;
 }
 
-#cv p {
+.cv p {
   color: black;
 }
 .keyword {
@@ -292,58 +303,117 @@ table {
   fill: red;
 }
 
+.bio {
+  background: black;
+  color: white;  
+}
+
+.bio p {
+  color: lightgray;
+  font-size: 18px;
+}
+.cv p {
+  color: black;
+}
 /* Title of the resume */
-.bio h1 {
+.cv h1 {
   font-size: 45px;
-  color: #eceaea;
+  float: left;
+  color: black;
   text-align:left;
   margin-bottom:15px;
+ 
 }
 
 /* Titles of categories */
-.bio h2 {
-  color: #eceaea;
+.cv h2 {
+  margin-top:50px;
+  color: #cf8a05;
+  font-size: 32px;
+}
+
+.cv h3 {  
+  color: #cf8a05;
   font-size: 32px;
 }
 /* There is a bar just before each category */
 
 /* Definitions */
-.bio dt {
+.cv dt {
   float: left;
   clear: left;
   width: 17%;
   font-weight: bold;
 }
-.bio dd {
+.cv dd {
   margin-left: 17%;
 }
-.bio p {
+.cv p {
   margin-top:0;
   margin-bottom:7px;
 }
 
 /* Blockquotes */
-.bio blockquote {
+.cv blockquote {
   text-align: center
 }
 
 /* Links */
-.bio a {
+.cv a {
+  color: blue;
   text-decoration: none;
 }
 
+.cv table a {
+  color: blue;
+  text-decoration: none;
+}
 /* Horizontal separators */
-.bio hr {
-  color: #A6A6A6;
+.cv hr {
+  background:$background;
 }
 
-.bio table {
-  width: 100%;
-  border-top: solid;
+.cv table {
+    width: 100%;       
+    border-top: none;
+    border-bottom: none;
+    border-color:#999999;
+    background:$background;
+    color: black;
+    font-size: 18px;    
+  }
+
+.cv table th {
+  font-size: 48px;
+}
+.cv h3+table th {
+  font-size: 16px;
+}
+
+h3+table {
+ width: 100%; 
+  font-size: 18px;
+  border-top: none;
+  border-bottom: none;
+  color: black;;
+}
+
+h3+table th {
+   border-top: none;
+   border-bottom: solid;
+   color: black;
+ }
+
+ h3+table tbody {
+  border-top: none;
   border-bottom: solid;
-  border-color:#999999;
+  color: black;;
 }
 
-.bio .li .li {
+.cv ul li {
+  list-style: none;
+}
+
+.cv .li .li {
     list-style: none;
 }
