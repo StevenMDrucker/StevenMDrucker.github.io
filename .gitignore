@@ -76,4 +76,4 @@ _site
 
 #app and distribution folders
 app
-dist
+#dist
