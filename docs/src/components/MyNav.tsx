@@ -18,10 +18,10 @@ export class MyNav extends React.Component<any, any> {
             </Navbar.Header>
             <Navbar.Collapse>
               <Nav bsStyle="pills">  
-                    <NavItem eventKey={1} href="/SDruckerHome/#/about"> Bio </NavItem>
-                    <NavItem eventKey={2} href="/SDruckerHome/#/Featured"> Featured </NavItem>
-                    <NavItem eventKey={3} href="/SDruckerHome/#/Research"> Research </NavItem>              
-                    <NavItem eventKey={4} href="/SDruckerHome/#/CV"> CV </NavItem>
+                    <NavItem eventKey={1} href="/#/about"> Bio </NavItem>
+                    <NavItem eventKey={2} href="/#/Featured"> Featured </NavItem>
+                    <NavItem eventKey={3} href="/#/Research"> Research </NavItem>              
+                    <NavItem eventKey={4} href="/#/CV"> CV </NavItem>
               </Nav>
             </Navbar.Collapse>
             </Navbar>
