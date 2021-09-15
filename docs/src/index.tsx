@@ -10,7 +10,7 @@ import {Research} from './components/Research';
 import {createHashHistory } from 'history'; 
 
 class Root extends React.Component<any, any> {
-    history = createHashHistory({ basename: '/SDruckerHome' });
+    history = createHashHistory({ basename: '/' });
     render() {
         console.log("public URL" + process.env.PUBLIC_URL);
         return(            
