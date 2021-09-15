@@ -2,7 +2,7 @@
   "name": "sdruckerhome-app",
   "private": true,
   "version": "1.0.0",
-  "homepage": "https://stevenmdrucker.github.io/SDruckerHome",
+  "homepage": "https://stevenmdrucker.github.io/",
   "scripts": {
     "predeploy": "rimraf ./dist && parcel build ./docs/src/index.htm --public-url ./dist --out-dir ./dist && copy .\\dist\\index.html .\\index.html",
     "deploy": "git add -A && git commit -a -m 'deploy' && git push",
