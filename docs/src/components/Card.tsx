@@ -1,86 +1,73 @@
-import {Row, Col, Button, SplitButton, MenuItem} from 'react-bootstrap';
-//import ReactHtmlParser from 'react-html-parser';
+import parse from 'html-react-parser';
 
-import * as React from 'react';
-import * as PropTypes from 'prop-types';
-import ReactHtmlParser from  'react-html-parser';
-//import * as ImageAssets from "../../researchImages/**";
-
-
-export class CardComponent extends React.Component<any, any> { 
-    static propTypes = {
-        theItem: PropTypes.object,
-        mode: PropTypes.string,
-        handleOver: PropTypes.func,
-        handleOut: PropTypes.func,
-        handleClick: PropTypes.func
-    } 
-
-    constructor(props)
-    {
-        super(props);
-        this.state = {};
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        if (this.props.mode !== nextProps.mode) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-// <img src={"http://www.steven-drucker.com/client/"+val.img} width="180" height="120" />
-    render() {
-        var val = this.props.theItem;        
-        if (this.props.mode == "tile") {            
-             var theCard = 
-                <div onMouseEnter= {(e)=>this.props.handleOver(val)}
-                    onMouseOut= {(e)=>this.props.handleOut(val)}
-                    onClick=  {(e)=>this.props.handleClick(val)}
-                    key={"i"+val.id}> 
-                    <img src={"https://stevenmdrucker.github.io/ResearchContent/"+val.img} width="180" height="120" />
-                    {val.caption}
-                </div>;
-         } else if (this.props.mode == "details") {
-            var theCard = 
-                <div onMouseEnter= {(e)=>this.props.handleOver(val)}
-                    onMouseOut= {(e)=>this.props.handleOut(val)}
-                    onClick=  {(e)=>this.props.handleClick(val)}
-                    key={"i"+val.id}> 
-                    <Row>
-                        <Col lg={2} sm={2} md={2}>
-                        <Row>
-                        <img className="detailsImage" src={"https://stevenmdrucker.github.io/ResearchContent/"+val.img} width="180" height="120" />                        
-                        </Row>
-                        <Row  style={{textAlign: "left", margin: 5}}>
-                            <Button bsStyle="primary" href={val.pdf}>Paper</Button>
-                            <span> </span>
-                            {val.video != '' ? <Button bsStyle="primary" href={val.video}>Video</Button> : null}
-                        </Row>
-                        </Col>
-                        <Col lg={10} sm={10} md={10}>
-                        <div className="DCaption"> {val.caption} </div>
-                        <div className="DReference"> {ReactHtmlParser(val.bibEntry)}</div>                        
-                        <div className="DAbstract"> {val.abstract}</div>
-                        </Col>
-                    </Row>
-                </div>;
-        } else if (this.props.mode == "publication") {
-        var theCard =  
-            <div onMouseEnter= {(e)=>this.props.handleOver(val)}
-                onMouseOut= {(e)=>this.props.handleOut(val)}
-                onClick=  {(e)=>this.props.handleClick(val)}
-                key={"i"+val.id}>
-                <Row> 
-                <Col lg={12} sm={12} md={12}>
-                    <span style={{display: "block", float:"left", marginRight:"5px"}}> <a href={val.pdf}> PDF </a> </span> <span className="DReference"> {ReactHtmlParser(val.bibEntry)}</span>
-                </Col>
-                </Row>
-            </div>;
-      }
-      return(theCard);
-    }
+interface CardProps {
+  theItem: any;
+  mode: string;
+  handleOver: (val: any) => void;
+  handleOut: (val: any) => void;
+  handleClick: (val: any) => void;
 }
 
+export function CardComponent({ theItem, mode, handleOver, handleOut, handleClick }: CardProps) {
+  const val = theItem;
+
+  if (mode === 'tile') {
+    return (
+      <div
+        onMouseEnter={() => handleOver(val)}
+        onMouseOut={() => handleOut(val)}
+        onClick={() => handleClick(val)}
+      >
+        <img src={`https://stevenmdrucker.github.io/ResearchContent/${val.img}`} width="180" height="120" alt={val.caption} />
+        {val.caption}
+      </div>
+    );
+  }
+
+  if (mode === 'details') {
+    return (
+      <div
+        onMouseEnter={() => handleOver(val)}
+        onMouseOut={() => handleOut(val)}
+        onClick={() => handleClick(val)}
+      >
+        <div className="row">
+          <div className="col-lg-2 col-sm-2 col-md-2">
+            <div className="row">
+              <img className="detailsImage" src={`https://stevenmdrucker.github.io/ResearchContent/${val.img}`} width="180" height="120" alt={val.caption} />
+            </div>
+            <div className="row" style={{ textAlign: 'left', margin: 5 }}>
+              <a className="btn btn-primary btn-sm me-1" href={val.pdf}>Paper</a>
+              {val.video !== '' && <a className="btn btn-primary btn-sm" href={val.video}>Video</a>}
+            </div>
+          </div>
+          <div className="col-lg-10 col-sm-10 col-md-10">
+            <div className="DCaption">{val.caption}</div>
+            <div className="DReference">{parse(val.bibEntry || '')}</div>
+            <div className="DAbstract">{val.abstract}</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // publication mode
+  return (
+    <div
+      onMouseEnter={() => handleOver(val)}
+      onMouseOut={() => handleOut(val)}
+      onClick={() => handleClick(val)}
+    >
+      <div className="row">
+        <div className="col-lg-12 col-sm-12 col-md-12">
+          <span style={{ display: 'block', float: 'left', marginRight: '5px' }}>
+            <a href={val.pdf}>PDF</a>
+          </span>
+          <span className="DReference">{parse(val.bibEntry || '')}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default CardComponent;

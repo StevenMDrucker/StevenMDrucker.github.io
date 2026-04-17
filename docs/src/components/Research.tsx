@@ -1,340 +1,329 @@
-import * as React from 'react';
-//import JSON from "../../data/researchData.json"
-//import JSON from "https://gist.githubusercontent.com/StevenMDrucker/ff65d612c7ff3a611b571f2a95ed8ab6/raw/c3d4226e390060f51f771199c9c8872f39eed68e/researchData.json"
-import * as _ from "lodash";
-import { Form, FormControl, Button, ButtonToolbar, DropdownButton, SplitButton, MenuItem, Grid, Row, Col, Tabs, Tab, PanelGroup, Panel } from 'react-bootstrap';
-import { Index } from "../components/Index";
-import { FacetPanel } from "../components/FacetPanel";
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import _ from 'lodash';
+import { Index } from './Index';
+import { FacetPanel } from './FacetPanel';
 import { MyPopup } from './MyPopup';
-import {KeywordVis} from '../components/KeywordVis';
-import {TimelineVis} from '../components/TimelineVis';
-import ContainerDimensions from 'react-container-dimensions'
-import * as D3 from "d3";
+import { KeywordVis } from './KeywordVis';
+import { TimelineVis } from './TimelineVis';
 
+function useContainerWidth(ref: React.RefObject<HTMLDivElement | null>) {
+  const [width, setWidth] = useState(0);
+  useEffect(() => {
+    if (!ref.current) return;
+    const obs = new ResizeObserver(entries => setWidth(entries[0].contentRect.width));
+    obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+  return width;
+}
 
-export class Research extends React.Component<any, any> {
-    globalData = [];
-    facetPanels = {};
+function calcResults(
+  globalData: any[],
+  filterSpec: Record<string, string[]>,
+  orderBy: string,
+  reverse: boolean,
+  searchTerm: string
+): any[] {
+  const filtered = _.reduce(filterSpec, (result, value, key) => {
+    return _.filter(result, o => !_.isEmpty(_.intersection(value, o.tags[key])));
+  }, globalData);
 
-    constructor(props) {
-        super(props);
+  const sorted = reverse
+    ? _.reverse(_.sortBy(filtered, a => a.tags[orderBy]))
+    : _.sortBy(filtered, a => a.tags[orderBy]);
 
-        // Bind the this context to the handler function
-        this.handleBrush = this.handleBrush.bind(this);
-        this.handleFilter = this.handleFilter.bind(this);
-        this.handleBrushReset = this.handleBrushReset.bind(this);
-        this.openModal = this.openModal.bind(this);
-        this.searchUpdated = this.searchUpdated.bind(this);
-        this.handleExit = this.handleExit.bind(this);
-        this.state = {
-            researchData: [],
-            currentProjects: [],
-            highlight: [],
-            itemHovered: '',
-            sortedBy: 'year',
-            reverse: false,
-            mode: "tile",
-            searchTerm: "",
-            filterSpec: {}
-        };
-        //fetch('https://gist.githubusercontent.com/StevenMDrucker/0891f73a9e54d25cf72402c052e2563a/raw/8c839ef9e9eae86581a4952a82298e67006dea0a/testresearch.json')        
-        //fetch(`https://gist.githubusercontent.com/StevenMDrucker/ff65d612c7ff3a611b571f2a95ed8ab6/raw/researchData.json`)        
-        fetch(`https://stevenmdrucker.github.io/ResearchContent/researchData.json`)        
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Failed with HTTP code " + response.status);
-            }
-            return(response.json())
-        }).then(data=> {
-            let uid=0;
-            var finalresults =  _.reverse(_.sortBy(data, (a) => a.tags["year"]));
-            finalresults = _.map(finalresults, (d)=>{d['id'] = uid++; return(d)});
-            this.globalData = finalresults;            
-            this.globalData = this.calculateResults({}, "year", true, "");
-            this.onSortBy("year");
-            this.setState({"researchData": this.globalData}); 
-            this.resetData();
-            this.tileMode();
-        });
-    }
-    
-    calculateResults(localFilterSpec, localOrderBy, localReverse, localSearchTerm) {
-        var results =
-            _.reduce(localFilterSpec, (result, value, key) => {
-                result = _.filter(result, (o) => {
-                    return !_.isEmpty(_.intersection(value, o.tags[key]))
-                });
-                return result
-            }, this.globalData)        
-        var afacet = localOrderBy;        
-        var finalresults = (localReverse) ? _.reverse(_.sortBy(results, (a) => a.tags[afacet])) : _.sortBy(results, (a) => a.tags[afacet]);
+  return searchTerm.length === 0
+    ? sorted
+    : sorted.filter(a => _.startsWith(_.toLower(a.caption), _.toLower(searchTerm)));
+}
 
-        var searchResearchData = localSearchTerm.length == 0 ? finalresults : finalresults.filter((a) => _.startsWith(_.toLower(a.caption), _.toLower(localSearchTerm)));
-        return (searchResearchData);
-    }
-    onSortBy(afacet: string) {
-        var reverse = false;
-        if (this.state.sortedBy === afacet) {
-            if (this.state.reverse) {
-                this.setState({ "reverse": false });
-            } else {
-                reverse = true;
-                this.setState({ "reverse": true });
-            }
-        } else {
-            this.setState({ "sortedBy": afacet });
-        }
+export function Research() {
+  const globalDataRef = useRef<any[]>([]);
+  const visContainerRef = useRef<HTMLDivElement>(null);
+  const visWidth = useContainerWidth(visContainerRef);
+  const dropRef = useRef<HTMLDivElement>(null);
 
-        this.setState({ "researchData": this.calculateResults(this.state.filterSpec, afacet, reverse, this.state.searchTerm) });
-    }
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const [researchData, setResearchData] = useState<any[]>([]);
+  const [currentProjects, setCurrentProjects] = useState<string[]>([]);
+  const [itemHovered, setItemHovered] = useState<any>(null);
+  const [sortedBy, setSortedBy] = useState('year');
+  const [reverse, setReverse] = useState(false);
+  const [mode, setMode] = useState('tile');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filterSpec, setFilterSpec] = useState<Record<string, string[]>>({});
+  const [modalItem, setModalItem] = useState<any | null>(null);
+  const [dropOpen, setDropOpen] = useState(false);
+  const [openPanel, setOpenPanel] = useState<number | null>(0);
+  const [fitMode, setFitMode] = useState(false);
 
-    convertData(anItem) {
-        var facetlist = _.filter(_.keys(anItem), (a) => _.startsWith(a, "facet"));
-        var newItem = Object.assign({}, anItem);
-        newItem["tags"] = {};
-        _.each(facetlist, (afacet) => {
-            delete newItem[afacet];
-            var facetname = afacet.split('.')[1]
-            newItem["tags"][facetname] = anItem[afacet].split(',');
-        });
-        return (newItem);
-    }
-    resetData() {
-        this.setState({ "searchTerm": "" });
-        this.setState({ "filterSpec": {} });
-        this.setState({ "reverse": false });
-        this.setState({ "researchData": this.globalData });
-    }
-
-    openModal(myval: any) {
-
-        if (typeof (myval) == "string") {
-            var myIndex = _.findIndex(this.globalData, (a) => a.caption == myval);
-            if (myIndex >= 0) {
-                this.refs.myPopup.setState({ showModal: true, item: this.globalData[myIndex] });
-            }
-        } else {
-            this.refs.myPopup.setState({ showModal: true, item: myval });
-        }
-    }
-
-
-
-    calculateLocalData() {
-        if (this.globalData != null) {
-            var facets = _.keys(this.globalData[0].tags);
-            var researchData = this.globalData;
-            var filterSpec = this.state.filterSpec;
-            _.each(facets, val => {
-                var localfilterspec = _.omit(filterSpec, val);
-                this.facetPanels[val] = _.reduce(localfilterspec, function (result, value, key) { result = _.filter(result, function (o) { return !_.isEmpty(_.intersection(value, o.tags[key])) }); return result }, researchData)
-            });
-        }
-    }
-
-    searchUpdated(e) {
-        var term = e.target.value;
-        this.setState({ "searchTerm": term });
-        this.setState({ "researchData": this.calculateResults(this.state.filterSpec, this.state.orderBy, this.state.reverse, term) });
-    }
-
-    tileMode() {
-        this.setState({ 'mode': "tile" })
-    }
-
-    detailMode() {
-        this.setState({ 'mode': "details" })
-    }
-
-    keywordMode() {
-        this.setState({ 'mode': "keyword" })
-    }
-    timelineMode() {
-        this.setState({ 'mode': "timeline" })
-    }
-    publicationMode() {
-        this.setState({ 'mode': "publication" })
-    }
-
-    handleBrush(title: any, val: any) {
-        var projList = _.map(_.filter(this.state.researchData, (proj) => (_.includes(proj.tags[title], val))), (aProj) => aProj.caption);
-        this.setState({ "currentProjects": projList });
-        this.setState({ "highlight": [title, val] });
-    }
-
-    handleBrushOut(val) {
-        this.setState({ 'itemHovered': val });
-        this.setState({ "currentProjects": [] });
-        this.setState({ "highlight": [] });
-    }
-
-    handleBrushReset() {
-        this.setState({ 'itemHovered': '' });
-        this.setState({ "currentProjects": [] });
-        this.setState({ "highlight": [] });
-    }
-
-    handleFilter(title: any, val: any) {
-        var localFilterSpec = this.state.filterSpec;
-        if (title in localFilterSpec) {
-            if (localFilterSpec[title].indexOf(val) >= 0) {
-                localFilterSpec[title] = _.filter(localFilterSpec[title], (a) => (a != val));
-                if (_.isEmpty(localFilterSpec[title])) {
-                    delete localFilterSpec[title];
-                }
-            } else {
-                localFilterSpec[title].push(val);
-            }
-        } else {
-            localFilterSpec[title] = [val];
-        }
-        this.setState({ "filterSpec": localFilterSpec });
-        this.setState({ "researchData": this.calculateResults(localFilterSpec, this.state.orderBy, this.state.reverse, this.state.searchTerm) });
-    }
-
-    handleExit() {
-        this.setState({ 'highlight': '' });
-        this.setState({ "currentProjects": [] });
-        this.setState({"over":null});
-    }
-
-
-    render() {
-        var self = this;
-        var subjects = [];
-        var years = [];
-        var collaborators = [];
-        var tabList = [];
-        if (this.state != null) {
-            if (!_.isEmpty(this.state.researchData)) {
-                this.calculateLocalData();
-                var self = this;
-                var i = 0;
-                tabList = _.map(this.facetPanels, (filteredVals, tag) => {
-                    i++;
-                    var values = _.countBy(_.flatMap(filteredVals, val => val.tags[tag]));
-                    //   <Tab eventKey={i} title={tag}>
-                    //         <FacetPanel items={values} filterSpec={this.state.filterSpec} itemTitle={tag} selected = {this.state.itemHovered} brush = {this.handleBrush} filter = {this.handleFilter} clearFilter= {this.handleExit}>
-                    //         </FacetPanel>
-                    //   </Tab>);
-                    return (
-                        //     <Tab eventKey={i} title={tag}>
-                        //         <FacetPanel items={values} filterSpec={this.state.filterSpec} itemTitle={tag} selected = {this.state.itemHovered} brush = {this.handleBrush} filter = {this.handleFilter} clearFilter= {this.handleExit}>
-                        //         </FacetPanel>
-                        //   </Tab>);
-                        <Panel key={i} eventKey={i} header={tag} className="filterPanel" style={{ "cursor": "pointer" }}>
-                            <Panel.Heading>
-                                <Panel.Title componentClass="h3" toggle>{tag}
-                                </Panel.Title>
-                            </Panel.Heading>
-                            <Panel.Body collapsible>
-                                <FacetPanel key={"P" + i} items={values} filterSpec={this.state.filterSpec} itemTitle={tag} selected={this.state.itemHovered} brush={this.handleBrush} filter={this.handleFilter} clearFilter={this.handleExit}>
-                                </FacetPanel>
-                            </Panel.Body>
-                        </Panel>);
-                });
-            }
-        if (!_.isEmpty(this.state.researchData) && this.state.researchData.length > 0) {
-            var facets = _.keys(this.state.researchData[0].tags);
-            var sortByItems = facets.map((afacet,i)=> <MenuItem key={i} eventKey={i} onSelect={(e)=>this.onSortBy(afacet)}> {afacet} </MenuItem>  );
-        } else {
-            sortByItems = '';
-        }
-                 // <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
-                    //     {tabList}
-                    // </Tabs>
-        const divStyle = {
-        margin: '0 20 2 20'
-        };
-        var resultsDisplay:any = '';
-        if (this.state.mode == "tile" || this.state.mode == "details" || this.state.mode == "publication") {
-            resultsDisplay = <Index mode={this.state.mode} items={this.state.researchData} currentProjects={this.state.currentProjects} handleClick={this.openModal} brushOut={e => this.handleBrushOut(e)} brushReset={e => this.handleBrushReset()} />            
-        } else if (this.state.mode == "keyword") {
-            resultsDisplay = <div> 
-                <ContainerDimensions>
-                    { ({width, height}) =>
-                    <KeywordVis items={this.state.researchData} currentProjects={this.state.currentProjects} highlight={this.state.highlight} handleClick={this.openModal} width={width} height={960}>
-                    </KeywordVis> 
-                    }
-                </ContainerDimensions>                    
-              </div>
-              
-        } else if (this.state.mode == "timeline") {
-            resultsDisplay = <div>
-                <ContainerDimensions> 
-                   { ({ width, height }) => 
-                    <TimelineVis items={this.state.researchData} currentProjects={this.state.currentProjects} handleClick={this.openModal} width={width} height={height}>
-                    </TimelineVis> 
-                    
-                    }
-                 </ContainerDimensions>
-              </div>
-              
-        } else  resultsDisplay = <div>No View</div>
-        var rowStyle = {
-            margin: "0 0 0 25",
-        }
-        var buttonBarStyle = {
-            margin: "0 0 10 0",
-        }
-    //                            <SearchInput className="search-input" onChange={this.searchUpdated} />
-        var itemsDisplayedString = '';    
-        if (!_.isEmpty(this.state.researchData)) {
-             itemsDisplayedString = this.state.researchData.length == 1 ? 
-            this.state.researchData.length + " item displayed" :
-            this.state.researchData.length + " items displayed";
-        }
-        return(<div> 
-            <Grid className="show-grid" fluid={true} style={rowStyle}>           
-                <Row>          
-                    <Col lg={10} sm={10} md={10}>
-                        <Row>
-                        <Col lg={6} sm={6} md={6}>
-                              <ButtonToolbar style={{float:"left"}}>                         
-                                {/* Provides extra visual weight and identifies the primary action in a set of buttons */}
-                                <Button key="Tiles" style={{ background: "brown" }} bsSize="small" onClick={e => this.tileMode()}>Tile</Button>
-                                <Button key="Details" bsSize="small" bsStyle="primary" onClick={e => this.detailMode()}>Detail</Button>
-                                <Button key="Publications" bsSize="small" bsStyle="success" onClick={e => this.publicationMode()}>Publication</Button>
-                                <Button key="TimelineVis" bsSize="small" bsStyle="info" onClick={e => this.timelineMode()}>TimelineVis</Button>
-                                <Button key="KeywordVis" bsSize="small" bsStyle="warning" onClick={e => this.keywordMode()}>KeywordVis</Button>
-                                <DropdownButton style={{float:"right"}} bsSize="small" title={"Sort By: " + self.state.sortedBy + " " + ((self.state.reverse) ? String.fromCharCode( 8595 ) : String.fromCharCode(8593))} pullRight id="split-button-pull-right">
-                                 {sortByItems}
-                                </DropdownButton>                          
-                            </ButtonToolbar>
-                        </Col>
-                        <Col lg={4} sm={4} md={4} lgOffset={1} smOffset={1} mdOffset={1}>
-                              <div style={{padding:"0 20px 0 0", display:"table-cell", verticalAlignment:"middle"}}> {itemsDisplayedString}  </div>
-                                <Form  inline style={{padding:"0 0 5 0", display:"table-cell", verticalAlignment:"middle"}}>
-                                    <FormControl
-                                        bsSize="small"
-                                        type="text"
-                                        value={this.state.searchTerm}
-                                        placeholder="Search"
-                                        onChange={this.searchUpdated}
-                                        
-                                    />
-                                </Form>
-                        </ Col>
-                        </Row>
-                        <Row className="resultsDisplay">
-                            {resultsDisplay}
-                        </Row>
-                    </Col>
-                    <Col lg={2} sm={2} md={2}>
-                        <Row>
-
-                            <Button style={divStyle} bsSize="small" bsStyle="default" onClick={e=>this.resetData()} >Reset Filter</Button>
-
-                            <MyPopup ref="myPopup"> </MyPopup>                                      
-                        </Row>
-            
-                        <PanelGroup defaultActiveKey={1} id="uncontrolled-tab-example" accordion>
-                            {tabList}
-                        </PanelGroup>
-                    </Col>                   
-                </Row>
-            </Grid>
-        </div>);
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (dropRef.current && !dropRef.current.contains(e.target as Node)) {
+        setDropOpen(false);
       }
     };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  // Fetch data once
+  useEffect(() => {
+    fetch('https://stevenmdrucker.github.io/ResearchContent/researchData.json')
+      .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(data => {
+        let uid = 0;
+        const withIds = _.map(data, d => { d.id = uid++; return d; });
+        const sorted = _.reverse(_.sortBy(withIds, a => a.tags['year']));
+        globalDataRef.current = sorted;
+        setDataLoaded(true);
+        setResearchData(sorted);
+      });
+  }, []);
+
+  // Facet panels derived from full data + current filter spec (excluding each facet's own filter)
+  const facetPanels: Record<string, any[]> = useMemo(() => {
+    if (!dataLoaded || globalDataRef.current.length === 0) return {};
+    const facets = _.keys(globalDataRef.current[0]?.tags ?? {});
+    const panels: Record<string, any[]> = {};
+    facets.forEach(facet => {
+      const localFilterSpec = _.omit(filterSpec, facet);
+      panels[facet] = _.reduce(localFilterSpec, (result: any[], value, key) => {
+        return _.filter(result, o => !_.isEmpty(_.intersection(value as string[], o.tags[key])));
+      }, globalDataRef.current);
+    });
+    return panels;
+  }, [filterSpec, dataLoaded]);
+
+  const onSortBy = useCallback((facet: string) => {
+    let newReverse = false;
+    if (sortedBy === facet) {
+      newReverse = !reverse;
+      setReverse(newReverse);
+    } else {
+      setSortedBy(facet);
+      setReverse(false);
+    }
+    setResearchData(calcResults(globalDataRef.current, filterSpec, facet, newReverse, searchTerm));
+    setDropOpen(false);
+  }, [sortedBy, reverse, filterSpec, searchTerm]);
+
+  const handleFilter = useCallback((title: string, val: string) => {
+    setFilterSpec(prev => {
+      const next = { ...prev };
+      if (title in next) {
+        if (next[title].includes(val)) {
+          next[title] = next[title].filter(a => a !== val);
+          if (next[title].length === 0) delete next[title];
+        } else {
+          next[title] = [...next[title], val];
+        }
+      } else {
+        next[title] = [val];
+      }
+      setResearchData(calcResults(globalDataRef.current, next, sortedBy, reverse, searchTerm));
+      return next;
+    });
+  }, [sortedBy, reverse, searchTerm]);
+
+  const handleBrush = useCallback((title: string, val: string) => {
+    const projList = _.map(
+      _.filter(researchData, proj => _.includes(proj.tags[title], val)),
+      p => p.caption
+    );
+    setCurrentProjects(projList);
+  }, [researchData]);
+
+  const handleBrushReset = useCallback(() => {
+    setItemHovered(null);
+    setCurrentProjects([]);
+  }, []);
+
+  const handleExit = useCallback(() => {
+    setItemHovered(null);
+    setCurrentProjects([]);
+  }, []);
+
+  const searchUpdated = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+    setResearchData(calcResults(globalDataRef.current, filterSpec, sortedBy, reverse, term));
+  };
+
+  const resetData = () => {
+    setSearchTerm('');
+    setFilterSpec({});
+    setReverse(false);
+    setResearchData(globalDataRef.current);
+  };
+
+  const openModal = (myval: any) => {
+    if (typeof myval === 'string') {
+      const found = _.find(globalDataRef.current, a => a.caption === myval);
+      if (found) setModalItem(found);
+    } else {
+      setModalItem(myval);
+    }
+  };
+
+  // Facets for sort dropdown
+  const facets = dataLoaded && researchData.length > 0
+    ? _.keys(researchData[0].tags)
+    : [];
+
+  const itemsDisplayedString = researchData.length === 1
+    ? '1 item displayed'
+    : `${researchData.length} items displayed`;
+
+  let resultsDisplay: React.ReactNode = null;
+  if (mode === 'tile' || mode === 'details' || mode === 'publication') {
+    resultsDisplay = (
+      <Index
+        mode={mode}
+        items={researchData}
+        currentProjects={currentProjects}
+        handleClick={openModal}
+        brushOut={e => { setItemHovered(e); }}
+        brushReset={() => handleBrushReset()}
+      />
+    );
+  } else if (mode === 'keyword') {
+    resultsDisplay = (
+      <div className={fitMode ? '' : 'vis-scroll'}>
+        <KeywordVis
+          items={researchData}
+          currentProjects={currentProjects}
+          highlight={[]}
+          handleClick={openModal}
+          containerWidth={visWidth || 800}
+          fitMode={fitMode}
+        />
+      </div>
+    );
+  } else if (mode === 'timeline') {
+    resultsDisplay = (
+      <div className={fitMode ? '' : 'vis-scroll'}>
+        <TimelineVis
+          items={researchData}
+          currentProjects={currentProjects}
+          handleClick={openModal}
+          width={visWidth || 800}
+          height={0}
+          containerWidth={visWidth || 800}
+          fitMode={fitMode}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div className="container-fluid" style={{ margin: '0 0 0 25px' }}>
+        <div className="row">
+          <div className="col-lg-10 col-sm-10 col-md-10">
+            <div className="row mb-2">
+              <div className="col-lg-6 col-sm-6 col-md-6">
+                <div className="btn-toolbar gap-1 flex-wrap">
+                  <button className="btn btn-sm" style={{ background: 'brown', color: 'white' }} onClick={() => setMode('tile')}>Tile</button>
+                  <button className="btn btn-primary btn-sm" onClick={() => setMode('details')}>Detail</button>
+                  <button className="btn btn-success btn-sm" onClick={() => setMode('publication')}>Publication</button>
+                  <button className="btn btn-info btn-sm" onClick={() => setMode('timeline')}>TimelineVis</button>
+                  <button className="btn btn-warning btn-sm" onClick={() => setMode('keyword')}>KeywordVis</button>
+                  {(mode === 'timeline' || mode === 'keyword') && (
+                    <button
+                      className={`btn btn-sm ${fitMode ? 'btn-light' : 'btn-outline-light'}`}
+                      onClick={() => setFitMode(f => !f)}
+                      title={fitMode ? 'Switch to scrollable full-size view' : 'Scale to fit in page'}
+                    >
+                      {fitMode ? 'Zoom' : 'Fit'}
+                    </button>
+                  )}
+
+                  <div className="dropdown ms-auto" ref={dropRef}>
+                    <button
+                      className="btn btn-sm btn-secondary dropdown-toggle"
+                      onClick={() => setDropOpen(o => !o)}
+                    >
+                      Sort: {sortedBy} {reverse ? '↓' : '↑'}
+                    </button>
+                    <ul className={`dropdown-menu${dropOpen ? ' show' : ''}`}>
+                      {facets.map((facet, i) => (
+                        <li key={i}>
+                          <button className="dropdown-item" onClick={() => onSortBy(facet)}>{facet}</button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-4 col-sm-4 col-md-4 offset-lg-1 offset-sm-1 offset-md-1">
+                <div style={{ display: 'table-cell', verticalAlign: 'middle', paddingRight: '20px' }}>
+                  {itemsDisplayedString}
+                </div>
+                <input
+                  className="form-control form-control-sm d-inline-block"
+                  style={{ width: 'auto' }}
+                  type="text"
+                  value={searchTerm}
+                  placeholder="Search"
+                  onChange={searchUpdated}
+                />
+              </div>
+            </div>
+            <div ref={visContainerRef} className="row resultsDisplay">
+              {resultsDisplay}
+            </div>
+          </div>
+
+          <div className="col-lg-2 col-sm-2 col-md-2">
+            <div className="row mb-2">
+              <button
+                className="btn btn-sm btn-secondary"
+                style={{ margin: '0 20px 2px 20px' }}
+                onClick={resetData}
+              >
+                Reset Filter
+              </button>
+            </div>
+
+            <div className="accordion" id="filterAccordion">
+              {Object.entries(facetPanels).map(([tag, filteredVals], i) => {
+                const values = _.countBy(_.flatMap(filteredVals, val => val.tags[tag]));
+                const isOpen = openPanel === i;
+                return (
+                  <div className="accordion-item" key={i}>
+                    <h2 className="accordion-header">
+                      <button
+                        className={`accordion-button py-1 px-2${isOpen ? '' : ' collapsed'}`}
+                        style={{ fontSize: '13px', fontWeight: 'bold' }}
+                        onClick={() => setOpenPanel(isOpen ? null : i)}
+                      >
+                        {tag}
+                      </button>
+                    </h2>
+                    <div className={`accordion-collapse collapse${isOpen ? ' show' : ''}`}>
+                      <div className="accordion-body p-1" style={{ maxHeight: '400px', overflowY: 'scroll' }}>
+                        <FacetPanel
+                          items={values}
+                          filterSpec={filterSpec}
+                          itemTitle={tag}
+                          selected={itemHovered}
+                          brush={handleBrush}
+                          filter={handleFilter}
+                          clearFilter={handleExit}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <MyPopup item={modalItem} onClose={() => setModalItem(null)} />
+    </div>
+  );
 }

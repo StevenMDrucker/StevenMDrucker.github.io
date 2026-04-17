@@ -14,13 +14,13 @@ html {
 }
 
 body {
-  background-color: $background;
-  color: black;
+  background-color: black;
+  color: #aaa;
   font-family: sans-serif;
   padding: 0.5em 1em;
   overflow-y: scroll;
   overflow-x: hidden;
-  text-align: center;
+  text-align: left;
 }
 
 .resultsDisplay {
@@ -264,6 +264,29 @@ table {
   background: white;
 }
 
+.vis-scroll {
+  overflow-x: scroll;
+  overflow-y: scroll;
+  max-height: 80vh;
+  scrollbar-width: thin;
+  scrollbar-color: #666 #222;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #222;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 5px;
+  }
+  &::-webkit-scrollbar-corner {
+    background: #222;
+  }
+}
+
 .cv p {
   color: black;
 }
@@ -305,12 +328,36 @@ table {
 
 .bio {
   background: black;
-  color: white;  
+  color: white;
+  text-align: left;
 }
 
 .bio p {
   color: lightgray;
   font-size: 18px;
+  text-align: left;
+}
+
+.bio-content {
+  text-align: left;
+}
+
+// Dark-theme nav tabs for bio subtabs
+.bio-tabs .nav-link {
+  color: #aaa;
+  border-color: #555 #555 transparent;
+  background: transparent;
+}
+
+.bio-tabs .nav-link:hover {
+  color: #fff;
+  border-color: #666 #666 transparent;
+}
+
+.bio-tabs .nav-link.active {
+  color: #fff;
+  background-color: #222;
+  border-color: #666 #666 #222;
 }
 
 .cv p {

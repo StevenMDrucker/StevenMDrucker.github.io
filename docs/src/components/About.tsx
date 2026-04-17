@@ -1,54 +1,67 @@
-
-import * as React from 'react';
-import { Image,  Row, Col } from 'react-bootstrap';
-import ReactMarkdown  from 'react-markdown';
+import { useState, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-const headShot = require("../../images/justheadmed.jpg");
-//const myText = require("../../data/cv.md");
-export class About extends React.Component<any, any> {
+import headShot from '../../images/justheadmed.jpg';
 
-    constructor(props) {
-        super(props); 
-        this.state = { info:null};
-        
-        //fetch('https://gist.githubusercontent.com/StevenMDrucker/89d3aeba972f1f44bf7454928c12e117/raw/Bio.md')                
-        //fetch(myText)                
-        //fetch('https://stevenmdrucker.github.io/ResearchContent/CV.md')
-        fetch('https://stevenmdrucker.github.io/ResearchContent/Bio.md')        
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Failed with HTTP code " + response.status);
-            }
-            return(response.text())
-        }).then(text=> {
-            this.setState( {info: text})
-        });
-    }
+type BioTab = 'Full' | 'Medium' | 'Short';
 
-    render() {
-        return(
-            <div>
-             <Col lg={2} md={2} sm={1}>
-             </Col>
-             <Col lg={8} md={8} sm={10}>        
-             <div className="bio">
-               <Row>
-                   <Col lg={3} md={4} sm={5}>
-                       <Image src={headShot} responsive></Image>
-                   </Col>
-                   <Col lg={9} md={8} sm={5}>
-                       <div>                           
-                           <ReactMarkdown children={this.state.info} remarkPlugins={[remarkGfm]} />
-                        </div>
-                   </Col>
-   
-                </Row>
-           </div>
-             </Col>          
-             <Col lg={3} md={2} sm={1}>
-             </Col>       
-   
-           </div>
-           )
+function parseBioSections(text: string): Record<BioTab, string> {
+  const sections: Record<BioTab, string> = { Full: '', Medium: '', Short: '' };
+  const parts = text.split(/^(?=(?:Full|Medium|Short):)/m);
+  parts.forEach(part => {
+    const match = part.match(/^(Full|Medium|Short):\s*([\s\S]*)/);
+    if (match) {
+      sections[match[1] as BioTab] = match[2].trim();
     }
+  });
+  // If no sections found, put everything in Full
+  if (!sections.Full && !sections.Medium && !sections.Short) {
+    sections.Full = text.trim();
+  }
+  return sections;
+}
+
+export function About() {
+  const [sections, setSections] = useState<Record<BioTab, string>>({ Full: '', Medium: '', Short: '' });
+  const [activeTab, setActiveTab] = useState<BioTab>('Full');
+
+  useEffect(() => {
+    fetch('https://stevenmdrucker.github.io/ResearchContent/Bio.md')
+      .then(response => {
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        return response.text();
+      })
+      .then(text => setSections(parseBioSections(text)));
+  }, []);
+
+  return (
+    <div className="row">
+      <div className="col-lg-2 col-md-2 col-sm-1"></div>
+      <div className="col-lg-8 col-md-8 col-sm-10">
+        <div className="bio">
+          <div className="row">
+            <div className="col-lg-3 col-md-4 col-sm-5">
+              <img src={headShot} className="img-fluid" alt="Steven Drucker" />
+            </div>
+            <div className="col-lg-9 col-md-8 col-sm-7">
+              <ul className="nav nav-tabs bio-tabs mb-3">
+                {(['Full', 'Medium', 'Short'] as BioTab[]).map(tab => (
+                  <li className="nav-item" key={tab}>
+                    <button
+                      className={`nav-link${activeTab === tab ? ' active' : ''}`}
+                      onClick={() => setActiveTab(tab)}
+                    >{tab}</button>
+                  </li>
+                ))}
+              </ul>
+              <div className="bio-content">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{sections[activeTab]}</ReactMarkdown>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="col-lg-2 col-md-2 col-sm-1"></div>
+    </div>
+  );
 }

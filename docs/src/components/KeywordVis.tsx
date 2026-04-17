@@ -1,155 +1,134 @@
-import * as React from 'react';
-import * as D3 from "d3";
-import * as _ from "lodash";
+import { useState } from 'react';
+import * as D3 from 'd3';
+import _ from 'lodash';
 
-
-
-export class KeywordVis extends React.Component<any, any> { 
-    constructor(props)
-    {
-        super(props);
-        this.state = {highlightProjects:[],
-            highlightSubjects:[],
-          currentProject:'',
-          currentSubect:''};  
-          this.calcHighlightSubject = this.calcHighlightSubject.bind(this);
-    }
-
-  localHandleClick(val) {
-    this.props.handleClick(val);
-  }
-
-  calcHighlight(aproject) {
-    if ((this.props.currentProjects.indexOf(aproject)>=0) || (this.state.highlightProjects.indexOf(aproject)>=0)) {
-          return("highlighted");
-      } else {
-          if (this.state.currentProject == aproject) {
-              return("highlighted");
-          }
-          return("normal")
-      }
-    //   if (this.state.highlightProjects.indexOf(aproject)>=0) {
-    //       return("highlighted");
-    //   } else {
-    //       if (this.state.currentProject == aproject) {
-    //           return("highlighted");
-    //       }
-    //       return("normal")
-    //   }
-  }
-  calcHighlightSubject(aSubject) {
-      if (this.state.highlightSubjects.indexOf(aSubject)>=0) {
-          return("highlighted");
-      } else if (this.state.currentSubject == aSubject) {
-          return("highlighted");
-      } else if (this.props.highlight.length > 1) {
-          if (this.props.highlight[0] == "subject") {
-              if (this.props.highlight[1] == aSubject) {
-                  return("highlighted");
-              }
-          }
-      }
-
-      return("normal");
-  }
-  
-  highlightProjects(aKey) {
-      var toHighlight = _.filter(this.props.items, (anItem)=> anItem.tags.subject.indexOf(aKey)>=0);
-      var highlightList = _.map(toHighlight, (e)=>e.caption);
-      this.setState({highlightProjects:highlightList});
-      this.setState({currentSubject:aKey});      
-  }
-
-  clearHighlightProjects() {
-      this.setState({"highlightProjects":[]});
-      this.setState({currentSubject:''});
-  }
-
-   highlightSubjects(aProject) {
-      var theProject = _.filter(this.props.items, (anItem)=> (anItem.caption == aProject));
-      var highlightList = theProject[0].tags.subject;
-      this.setState({highlightSubjects:highlightList});
-      this.setState({currentProject:aProject});
-  }
-
-  clearHighlightSubjects() {
-      this.setState({"highlightSubjects":[]});
-      this.setState({currentProject:''});
-  }
-  render() {
-    const {  items } = this.props;
-    var width = this.props.width;
-    var height = Math.max(this.props.height, 960);
-    var keywords = _.orderBy(_.uniq(_.flatten(_.map(items, function (d) { return d.tags["subject"] }))));
-    var projects = _.map(items, function (d) { return d.caption });
-    var marginx = 150;
-    var marginy = 170;
-    var xmaxspacing = 20;
-    var ymaxspacing = 20;
-    
-    var xspacing = Math.min((width - marginx-10)/projects.length, xmaxspacing);
-    var yspacing = Math.min((height - marginy-5)/keywords.length, ymaxspacing);
-    var xmaxpos = marginx+  xspacing*(projects.length);
-    var ymaxpos = marginy + yspacing*(keywords.length);
-
-    var y = D3.scaleLinear()
-        .domain([0, keywords.length])
-        .range([marginy, ymaxpos]);
-    var x = D3.scaleLinear()
-        .domain([0, projects.length])
-        .range([marginx, xmaxpos]);
-
-    var keywordlist = keywords.map((akey,i)=> {
-        return(<g key={"k"+i} transform={"translate(" + (marginx-5) + "," + y(i) + ")" }>
-            <text  dy="-.3em" className={"keyword "+ this.calcHighlightSubject(akey)}  
-            onMouseEnter={(e)=>this.highlightProjects(akey)} 
-            onMouseLeave={(e)=>this.clearHighlightProjects()}>{akey}</text>
-        </g>);
-    } );
-
-    var projectlist =projects.map((akey,i)=> {
-        return(<g key={"p"+i} transform={"translate(" + x(i) + ",150)" }>
-            <text onClick=  {(e)=>this.localHandleClick(akey)} dy=".3em" transform="rotate(-90)" className={"project " + this.calcHighlight(akey)} 
-            onMouseEnter={(e)=>this.highlightSubjects(akey)} 
-            onMouseLeave={(e)=>this.clearHighlightSubjects()}>
-            {akey}
-            </text>
-        </g>);
-    } );
-
-    var vertlines = projects.map((akey,i)=> {
-         return(<line  key={"l"+i} x1={x(i)} x2={x(i)} y1={marginy-7} y2={y(keywords.length-1)-7} className={"vertline " + this.calcHighlight(akey)}></line>
-        );
-    })
-
-    var horlines = keywords.map((akey,i)=> {
-         return(<line key={"hl"+i} x1={marginx} x2={x(projects.length-1)} y1={y(i)-7} y2={y(i)-7} className={"horline " + this.calcHighlightSubject(akey)}> </line>
-        );
-    })
-    var circles = _.flatten(items.map((anItem, i) => {
-        return(
-            anItem.tags.subject.map((sItem, j) => {
-                var vertPosition = y(keywords.indexOf(sItem))-7;
-                var horPosition = x(i);
-                return(<circle key={"c"+i+"d"+j} cx={horPosition} cy={vertPosition} r={2} fill={'red'} />); 
-            })
-        );
-    }));
- /*           <circle cx={30} cy={80} r={25} fill={'red'} /> */
-    
-    return (
-        
-        <svg cursor="pointer" width={width} height={height} className='chart'>
-    
-            {keywordlist}
-            {projectlist}
-            {vertlines}
-            {horlines}
-            {circles}
-        </svg>
-    );
-  }
+interface KeywordVisProps {
+  items: any[];
+  currentProjects: string[];
+  highlight: any[];
+  handleClick: (val: any) => void;
+  containerWidth?: number;
+  fitMode?: boolean;
 }
 
+export function KeywordVis({ items, currentProjects, highlight, handleClick, containerWidth = 800, fitMode = false }: KeywordVisProps) {
+  const [highlightProjects, setHighlightProjects] = useState<string[]>([]);
+  const [highlightSubjects, setHighlightSubjects] = useState<string[]>([]);
+  const [currentProject, setCurrentProject] = useState('');
+  const [currentSubject, setCurrentSubject] = useState('');
+
+  const keywords = _.orderBy(_.uniq(_.flatten(_.map(items, d => d.tags['subject']))));
+  const projects = _.map(items, d => d.caption);
+  const marginx = 150;
+  const marginy = 170;
+  const xspacing = 16;
+  const yspacing = 18;
+  const xmaxpos = marginx + xspacing * projects.length;
+  const ymaxpos = marginy + yspacing * keywords.length;
+  const width = xmaxpos + 20;
+  const height = ymaxpos + 10;
+
+  const y = D3.scaleLinear().domain([0, keywords.length]).range([marginy, ymaxpos]);
+  const x = D3.scaleLinear().domain([0, projects.length]).range([marginx, xmaxpos]);
+
+  const calcHighlight = (aproject: string) => {
+    if (currentProjects.indexOf(aproject) >= 0 || highlightProjects.indexOf(aproject) >= 0) {
+      return 'highlighted';
+    }
+    if (currentProject === aproject) return 'highlighted';
+    return 'normal';
+  };
+
+  const calcHighlightSubject = (aSubject: string) => {
+    if (highlightSubjects.indexOf(aSubject) >= 0) return 'highlighted';
+    if (currentSubject === aSubject) return 'highlighted';
+    if (highlight.length > 1 && highlight[0] === 'subject' && highlight[1] === aSubject) return 'highlighted';
+    return 'normal';
+  };
+
+  const doHighlightProjects = (aKey: string) => {
+    const toHighlight = _.filter(items, anItem => anItem.tags.subject.indexOf(aKey) >= 0);
+    setHighlightProjects(_.map(toHighlight, e => e.caption));
+    setCurrentSubject(aKey);
+  };
+
+  const clearHighlightProjects = () => {
+    setHighlightProjects([]);
+    setCurrentSubject('');
+  };
+
+  const doHighlightSubjects = (aProject: string) => {
+    const theProject = _.filter(items, anItem => anItem.caption === aProject);
+    if (theProject.length > 0) setHighlightSubjects(theProject[0].tags.subject);
+    setCurrentProject(aProject);
+  };
+
+  const clearHighlightSubjects = () => {
+    setHighlightSubjects([]);
+    setCurrentProject('');
+  };
+
+  const keywordlist = keywords.map((akey, i) => (
+    <g key={`k${i}`} transform={`translate(${marginx - 5},${y(i)})`}>
+      <text
+        dy="-.3em"
+        className={`keyword ${calcHighlightSubject(akey)}`}
+        onMouseEnter={() => doHighlightProjects(akey)}
+        onMouseLeave={() => clearHighlightProjects()}
+      >{akey}</text>
+    </g>
+  ));
+
+  const projectlist = projects.map((akey, i) => (
+    <g key={`p${i}`} transform={`translate(${x(i)},150)`}>
+      <text
+        onClick={() => handleClick(akey)}
+        dy=".3em"
+        transform="rotate(-90)"
+        className={`project ${calcHighlight(akey)}`}
+        onMouseEnter={() => doHighlightSubjects(akey)}
+        onMouseLeave={() => clearHighlightSubjects()}
+      >{akey}</text>
+    </g>
+  ));
+
+  const vertlines = projects.map((akey, i) => (
+    <line key={`l${i}`} x1={x(i)} x2={x(i)} y1={marginy - 7} y2={y(keywords.length - 1) - 7} className={`vertline ${calcHighlight(akey)}`} />
+  ));
+
+  const horlines = keywords.map((akey, i) => (
+    <line key={`hl${i}`} x1={marginx} x2={x(projects.length - 1)} y1={y(i) - 7} y2={y(i) - 7} className={`horline ${calcHighlightSubject(akey)}`} />
+  ));
+
+  const circles = _.flatten(items.map((anItem, i) =>
+    anItem.tags.subject.map((sItem: string, j: number) => {
+      const vertPosition = y(keywords.indexOf(sItem)) - 7;
+      const horPosition = x(i);
+      return <circle key={`c${i}d${j}`} cx={horPosition} cy={vertPosition} r={2} fill="red" />;
+    })
+  ));
+
+  const fitStyle = fitMode
+    ? { width: '100%', height: '80vh', display: 'block' } as React.CSSProperties
+    : { display: 'block' } as React.CSSProperties;
+
+  return (
+    <svg
+      cursor="pointer"
+      width={fitMode ? undefined : width}
+      height={fitMode ? undefined : height}
+      viewBox={`0 0 ${width} ${height}`}
+      preserveAspectRatio={fitMode ? 'xMinYMin meet' : undefined}
+      className="chart"
+      style={fitStyle}
+    >
+      {keywordlist}
+      {projectlist}
+      {vertlines}
+      {horlines}
+      {circles}
+    </svg>
+  );
+}
 
 export default KeywordVis;

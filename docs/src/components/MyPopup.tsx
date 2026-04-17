@@ -1,79 +1,59 @@
-import * as React from 'react';
-import * as RB from 'react-bootstrap';
+import parse from 'html-react-parser';
 
-import ReactHtmlParser from 'react-html-parser';
+interface MyPopupProps {
+  item: any | null;
+  onClose: () => void;
+}
 
-export class MyPopup extends React.Component<any, any> { 
-       
-  componentWillMount() {
-      this.setState({ showModal: false, item: null });    
-  }
+export function MyPopup({ item, onClose }: MyPopupProps) {
+  if (!item) return null;
 
-  close() {
-    this.setState({ showModal: false, item: null });    
-  }
-
-  open(itemVal) {
-    this.setState({ showModal: true, item: itemVal });
-  }
-
-  render() {      
-      if (this.state.item) {   
-        return (
-        <div>                
-            <RB.Modal show={this.state.showModal} onHide={(e)=>this.close()}>
-            <RB.Modal.Header closeButton>
-                <RB.Modal.Title>{this.state.item.caption}</RB.Modal.Title>
-            </RB.Modal.Header>
-                
-            <div className="center">
-                <img src={"https://stevenmdrucker.github.io/ResearchContent/" + this.state.item.img} width="400" height="300"></img>
+  return (
+    <>
+      <div
+        className="modal-backdrop fade show"
+        onClick={onClose}
+        style={{ zIndex: 1040 }}
+      />
+      <div
+        className="modal fade show d-block"
+        tabIndex={-1}
+        style={{ zIndex: 1050 }}
+        role="dialog"
+      >
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">{item.caption}</h5>
+              <button type="button" className="btn-close" onClick={onClose} aria-label="Close" />
             </div>
-            <br />
-            
-            <div className="center">
-
-                <RB.Button  bsSize="small" bsStyle="primary" href={this.state.item.pdf} >Paper</RB.Button>                
-                {this.state.item.video != '' ? <RB.Button  bsSize="small" bsStyle="primary" href={this.state.item.video} >Video</RB.Button> : null}
-
+            <div className="modal-body">
+              <div className="text-center">
+                <img
+                  src={`https://stevenmdrucker.github.io/ResearchContent/${item.img}`}
+                  width="400"
+                  height="300"
+                  alt={item.caption}
+                />
+              </div>
+              <br />
+              <div className="text-center">
+                <a className="btn btn-primary btn-sm" href={item.pdf}>Paper</a>
+                {item.video !== '' && (
+                  <a className="btn btn-primary btn-sm ms-2" href={item.video}>Video</a>
+                )}
+              </div>
+              <h6 style={{ textAlign: 'left', marginTop: '1rem' }}>
+                Reference: {parse(item.bibEntry || '')}
+              </h6>
+              <p style={{ textAlign: 'left' }}>Abstract: {item.abstract}</p>
             </div>
-            <RB.Modal.Body>  
-                <h6 style={{textAlign:"left"}} >Reference: {ReactHtmlParser(this.state.item.bibEntry)} </h6>
-                <p style={{textAlign:"left"}}> Abstract: {this.state.item.abstract} </p>
-            </RB.Modal.Body>
-            <RB.Modal.Footer>
-                <RB.Button onClick={(e)=>this.close()}>Close</RB.Button>
-            </RB.Modal.Footer>
-            </RB.Modal>
+            <div className="modal-footer">
+              <button className="btn btn-secondary" onClick={onClose}>Close</button>
+            </div>
+          </div>
         </div>
-        );
-      } else {
-          return (
-        <div>                
-            <RB.Modal show={this.state.showModal} onHide={(e)=>this.close()}>
-            <RB.Modal.Header closeButton>
-                <RB.Modal.Title>Modal heading</RB.Modal.Title>
-            </RB.Modal.Header>
-            <RB.Modal.Body>
-                <h4>Text in a modal</h4>
-                
-                <h4>Overflowing text to show scroll behavior</h4>
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-            </RB.Modal.Body>
-            <RB.Modal.Footer>
-                <RB.Button onClick={(e)=>this.close()}>Close</RB.Button>
-            </RB.Modal.Footer>
-            </RB.Modal>
-        </div>
-          );
-      }
-  }
+      </div>
+    </>
+  );
 }

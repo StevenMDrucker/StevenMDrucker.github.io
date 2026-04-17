@@ -1,92 +1,78 @@
-import * as React from 'react';
-import * as _ from "lodash";
-import {Row, Col, Button, SplitButton, MenuItem} from 'react-bootstrap';
-import Card from '../components/Card';
-//import FacetPanel from 'components/FacetPanel/FacetPanel';
-//import { CSSGrid, SpringGrid, measureItems, makeResponsive,enterExitStyle } from 'react-stonecutter';
-import Masonry from 'react-masonry-component';
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import _ from 'lodash';
+import CardComponent from './Card';
 
-var masonryOptions = {
-  transitionDuration: 500,  
-  itemSelector: ".researchItem",
-  columnWidth: 200,
-  gutter: 20,
-  resize: true
-};
-const enterExitStyles = ['Simple', 'Skew', 'Newspaper',  'Fold Up', 'From Center', 'From Left to Right', 'From Top', 'From Bottom'];
-export class Index extends React.Component<any, any> {
-    constructor(props)
-    {
-        super(props);
-    }
-  componentWillMount() {
-
-    this.setState({"over":null});
-    this.handleOver = this.handleOver.bind(this);
-    this.handleOut = this.handleOut.bind(this);
-    this.localHandleClick = this.localHandleClick.bind(this);
-  };
-  handleOver(val) {
-    this.setState({"over":val});
-    this.props.brushOut(val);
-  };
-  handleOut(val) {
-    this.setState({"over":null});
-      this.props.brushReset(val);
-  };
-  localHandleClick(val) {
-    this.props.handleClick(val);
-  };
-
-  generateCard(val,i) {
-    var overItem = this.state.over;
-    var highlighted = _.includes(this.props.currentProjects,val.caption);
-
-    if (this.props.mode == "tile") {
-      var theClass = highlighted ? "researchItem gridItem selected" : "researchItem gridItem ";
-      theClass = (val == overItem) ? "researchItem gridItem  myOver" : theClass;
-    } else if (this.props.mode == "details") {
-      var theClass = highlighted ? "researchItem detailItem selected" : "researchItem detailItem ";
-      theClass = (val == overItem) ? "researchItem detailItem  myOver" : theClass;
-    } else { 
-       var theClass = highlighted ? "researchItem publicationItem selected" : "researchItem publicationItem ";
-      theClass = (val == overItem) ? "researchItem publicationItem  myOver" : theClass;
-    }
-    return(<div className={theClass} key={"k"+val.id}>
-            <Card theItem={val} mode={this.props.mode} handleOver={e=>this.handleOver(e)} 
-            handleOut={e=>this.handleOut(e)} handleClick={e=>this.localHandleClick(e)} />
-          </div>
-    );
-  }
- 
-  render() {
-    if (this.props.items.length === 0) {
-      return (
-        <p ref="empty">Index is empty. </p>        
-      );
-    }
-    
-    var dataList =  this.props.items.map( (val,i) => {
-      var aCard = this.generateCard(val,i);
-      return(aCard);  
-    });
-              
- //const { Grid } = this.state;
- return (
-    
-    
-
-    <Masonry
-        className={'indexClass'}
-        elementType={'div'}  
-        options={masonryOptions}
-        disableImagesLoaded={false}
-        updateOnEachImageLoad={false}
-        >
-        {dataList}
-        </Masonry>);
-  }    
+interface IndexProps {
+  mode: string;
+  items: any[];
+  currentProjects: string[];
+  handleClick: (val: any) => void;
+  brushOut: (val: any) => void;
+  brushReset: (val: any) => void;
 }
 
+export function Index({ mode, items, currentProjects, handleClick, brushOut, brushReset }: IndexProps) {
+  const [over, setOver] = useState<any>(null);
+
+  const handleOver = (val: any) => {
+    setOver(val);
+    brushOut(val);
+  };
+
+  const handleOut = (val: any) => {
+    setOver(null);
+    brushReset(val);
+  };
+
+  if (items.length === 0) {
+    return <p>Index is empty.</p>;
+  }
+
+  const containerStyle: React.CSSProperties = mode === 'tile'
+    ? { display: 'flex', flexWrap: 'wrap', gap: '20px', cursor: 'pointer' }
+    : { cursor: 'pointer' };
+
+  return (
+    <div className="indexClass" style={containerStyle}>
+      <AnimatePresence mode="popLayout">
+        {items.map(val => {
+          const highlighted = _.includes(currentProjects, val.caption);
+          let theClass = '';
+          if (mode === 'tile') {
+            theClass = highlighted ? 'researchItem gridItem selected' : 'researchItem gridItem';
+            if (val === over) theClass = 'researchItem gridItem myOver';
+          } else if (mode === 'details') {
+            theClass = highlighted ? 'researchItem detailItem selected' : 'researchItem detailItem';
+            if (val === over) theClass = 'researchItem detailItem myOver';
+          } else {
+            theClass = highlighted ? 'researchItem publicationItem selected' : 'researchItem publicationItem';
+            if (val === over) theClass = 'researchItem publicationItem myOver';
+          }
+
+          return (
+            <motion.div
+              key={val.id}
+              layout
+              className={theClass}
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.85 }}
+              transition={{ duration: 0.25 }}
+            >
+              <CardComponent
+                theItem={val}
+                mode={mode}
+                handleOver={e => handleOver(e)}
+                handleOut={e => handleOut(e)}
+                handleClick={e => handleClick(e)}
+              />
+            </motion.div>
+          );
+        })}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 export default Index;
