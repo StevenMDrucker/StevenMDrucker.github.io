@@ -4,10 +4,10 @@
   "version": "2.0.0",
   "homepage": "https://stevenmdrucker.github.io/",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "cp .dev.html index.html && vite",
+    "build": "cp .dev.html index.html && vite build",
     "preview": "vite preview",
-    "deploy": "git add -A && git commit -a -m 'deploy' && git push"
+    "deploy": "npm run build && git add index.html assets/ .dev.html && git commit -m 'deploy' && git push"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
