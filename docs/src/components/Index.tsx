@@ -58,6 +58,7 @@ export function Index({ mode, items, currentProjects, handleClick, brushOut, bru
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.85 }}
+              whileHover={mode === 'tile' ? { scale: 1.04, zIndex: 2 } : undefined}
               transition={{ duration: 0.25 }}
             >
               <CardComponent

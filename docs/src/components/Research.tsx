@@ -217,53 +217,69 @@ export function Research() {
     );
   }
 
+  const viewModes = [
+    { id: 'tile',        label: 'Tile',        icon: '⊞' },
+    { id: 'details',     label: 'Detail',      icon: '≡' },
+    { id: 'publication', label: 'Publication', icon: '¶' },
+    { id: 'timeline',    label: 'Timeline',    icon: '◷' },
+    { id: 'keyword',     label: 'Keywords',    icon: '⊛' },
+  ];
+
   return (
     <div>
-      <div className="container-fluid" style={{ margin: '0 0 0 25px' }}>
+      <div className="container-fluid" style={{ padding: '0 1.25rem' }}>
         <div className="row">
           <div className="col-lg-10 col-sm-10 col-md-10">
-            <div className="row mb-2">
-              <div className="col-lg-6 col-sm-6 col-md-6">
-                <div className="btn-toolbar gap-1 flex-wrap">
-                  <button className="btn btn-sm" style={{ background: 'brown', color: 'white' }} onClick={() => setMode('tile')}>Tile</button>
-                  <button className="btn btn-primary btn-sm" onClick={() => setMode('details')}>Detail</button>
-                  <button className="btn btn-success btn-sm" onClick={() => setMode('publication')}>Publication</button>
-                  <button className="btn btn-info btn-sm" onClick={() => setMode('timeline')}>TimelineVis</button>
-                  <button className="btn btn-warning btn-sm" onClick={() => setMode('keyword')}>KeywordVis</button>
-                  {(mode === 'timeline' || mode === 'keyword') && (
-                    <button
-                      className={`btn btn-sm ${fitMode ? 'btn-light' : 'btn-outline-light'}`}
-                      onClick={() => setFitMode(f => !f)}
-                      title={fitMode ? 'Switch to scrollable full-size view' : 'Scale to fit in page'}
-                    >
-                      {fitMode ? 'Zoom' : 'Fit'}
-                    </button>
-                  )}
+            <div className="row mb-2 pt-2">
+              <div className="col-12 d-flex flex-wrap align-items-center gap-2">
 
-                  <div className="dropdown ms-auto" ref={dropRef}>
+                {/* View toggle pill group */}
+                <div className="view-toggle">
+                  {viewModes.map(vm => (
                     <button
-                      className="btn btn-sm btn-secondary dropdown-toggle"
-                      onClick={() => setDropOpen(o => !o)}
+                      key={vm.id}
+                      className={`view-btn${mode === vm.id ? ' active' : ''}`}
+                      onClick={() => setMode(vm.id)}
                     >
-                      Sort: {sortedBy} {reverse ? '↓' : '↑'}
+                      <span className="view-icon">{vm.icon}</span>
+                      <span>{vm.label}</span>
                     </button>
-                    <ul className={`dropdown-menu${dropOpen ? ' show' : ''}`}>
-                      {facets.map((facet, i) => (
-                        <li key={i}>
-                          <button className="dropdown-item" onClick={() => onSortBy(facet)}>{facet}</button>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  ))}
                 </div>
-              </div>
-              <div className="col-lg-4 col-sm-4 col-md-4 offset-lg-1 offset-sm-1 offset-md-1">
-                <div style={{ display: 'table-cell', verticalAlign: 'middle', paddingRight: '20px' }}>
-                  {itemsDisplayedString}
+
+                {/* Fit/Zoom toggle */}
+                {(mode === 'timeline' || mode === 'keyword') && (
+                  <button
+                    className={`fit-zoom-btn${fitMode ? ' active' : ''}`}
+                    onClick={() => setFitMode(f => !f)}
+                    title={fitMode ? 'Switch to scrollable full-size view' : 'Scale to fit in page'}
+                  >
+                    {fitMode ? '⤡ Zoom' : '⤢ Fit'}
+                  </button>
+                )}
+
+                {/* Sort dropdown */}
+                <div className="dropdown" ref={dropRef}>
+                  <button
+                    className="sort-dropdown-btn dropdown-toggle"
+                    onClick={() => setDropOpen(o => !o)}
+                  >
+                    Sort: {sortedBy} {reverse ? '↓' : '↑'}
+                  </button>
+                  <ul className={`dropdown-menu dropdown-menu-dark${dropOpen ? ' show' : ''}`} style={{ fontSize: '0.8rem' }}>
+                    {facets.map((facet, i) => (
+                      <li key={i}>
+                        <button className="dropdown-item" onClick={() => onSortBy(facet)}>{facet}</button>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
+
+                {/* Count + search */}
+                <span className="items-count ms-auto">{itemsDisplayedString}</span>
                 <input
-                  className="form-control form-control-sm d-inline-block"
-                  style={{ width: 'auto' }}
+                  className="research-search form-control form-control-sm"
+                  style={{ width: '140px' }}
                   type="text"
                   value={searchTerm}
                   placeholder="Search"
@@ -277,12 +293,8 @@ export function Research() {
           </div>
 
           <div className="col-lg-2 col-sm-2 col-md-2">
-            <div className="row mb-2">
-              <button
-                className="btn btn-sm btn-secondary"
-                style={{ margin: '0 20px 2px 20px' }}
-                onClick={resetData}
-              >
+            <div className="pt-2 mb-2">
+              <button className="reset-filter-btn" onClick={resetData}>
                 Reset Filter
               </button>
             </div>
