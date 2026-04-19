@@ -72,14 +72,15 @@ a { color: $accent; }
 
   .site-nav-link {
     display: block;
-    padding: 0.35rem 0.9rem;
-    color: $text-muted;
+    padding: 0.35rem 1rem;
+    color: $text;
     text-decoration: none;
     border-radius: 6px;
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
     transition: color 0.15s, background 0.15s;
-    &:hover { color: $text; background: rgba(255,255,255,0.06); }
+    &:hover { color: #fff; background: rgba(255,255,255,0.09); }
     &.active { color: $accent; background: $accent-dim; }
   }
 }
@@ -360,6 +361,33 @@ a { color: $accent; }
 .DCaption  { text-align: left; font-size: 1rem; font-weight: 700; color: $text; margin-bottom: 4px; }
 .DReference { text-align: left; font-weight: 600; font-size: 0.78rem; color: $text-muted; }
 .DAbstract  { text-align: left; color: $text-muted; font-size: 0.875rem; line-height: 1.6; }
+
+.detail-btn {
+  display: inline-block;
+  padding: 0.28rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: $font;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  border-radius: 5px;
+  border: 1.5px solid;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  &.btn-paper {
+    color: $accent;
+    border-color: rgba(56,189,248,0.5);
+    background: rgba(56,189,248,0.08);
+    &:hover { background: rgba(56,189,248,0.2); border-color: $accent; color: #fff; }
+  }
+  &.btn-video {
+    color: $accent2;
+    border-color: rgba(129,140,248,0.5);
+    background: rgba(129,140,248,0.08);
+    &:hover { background: rgba(129,140,248,0.2); border-color: $accent2; color: #fff; }
+  }
+}
 
 // ── Filter Accordion ─────────────────────────────────────
 .accordion-item {
