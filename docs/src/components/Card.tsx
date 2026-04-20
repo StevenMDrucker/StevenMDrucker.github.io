@@ -15,7 +15,7 @@ export function CardComponent({ theItem, mode, handleOver, handleOut, handleClic
     return (
       <div
         onMouseEnter={() => handleOver(val)}
-        onMouseOut={() => handleOut(val)}
+        onMouseLeave={() => handleOut(val)}
         onClick={() => handleClick(val)}
       >
         <img src={`https://stevenmdrucker.github.io/ResearchContent/${val.img}`} width="180" height="120" alt={val.caption} />
@@ -28,7 +28,7 @@ export function CardComponent({ theItem, mode, handleOver, handleOut, handleClic
     return (
       <div
         onMouseEnter={() => handleOver(val)}
-        onMouseOut={() => handleOut(val)}
+        onMouseLeave={() => handleOut(val)}
         onClick={() => handleClick(val)}
       >
         <div className="row">
@@ -55,7 +55,7 @@ export function CardComponent({ theItem, mode, handleOver, handleOut, handleClic
   return (
     <div
       onMouseEnter={() => handleOver(val)}
-      onMouseOut={() => handleOut(val)}
+      onMouseLeave={() => handleOut(val)}
       onClick={() => handleClick(val)}
     >
       <div className="row">

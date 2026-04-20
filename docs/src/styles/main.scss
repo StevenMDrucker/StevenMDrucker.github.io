@@ -340,12 +340,13 @@ a { color: $accent; }
 .researchItem { background-color: transparent; }
 
 .selected {
-  border-color: rgba(238,102,102,0.55) !important;
-  box-shadow: 0 0 12px rgba(238,102,102,0.18) !important;
+  border-color: rgba(251,113,133,0.9) !important;
+  box-shadow: 0 0 0 2px rgba(251,113,133,0.4), 0 0 20px rgba(251,113,133,0.35) !important;
+  background-color: rgba(251,113,133,0.1) !important;
 }
 .myOver {
-  border-color: rgba(129,140,248,0.55) !important;
-  box-shadow: 0 0 12px rgba(129,140,248,0.2) !important;
+  border-color: rgba(129,140,248,0.8) !important;
+  box-shadow: 0 0 0 2px rgba(129,140,248,0.35), 0 0 16px rgba(129,140,248,0.3) !important;
 }
 
 .indexClass { width: 100%; cursor: pointer; }
@@ -428,7 +429,12 @@ a { color: $accent; }
 .myFacet {
   cursor: pointer;
   thead { font-size: 13px; font-weight: 600; color: $text; }
-  tbody { font-size: 12px; color: $text-muted; }
+  tbody {
+    font-size: 12px; color: $text-muted;
+    tr { transition: background-color 0.12s; }
+    tr.selected { background-color: rgba(251,113,133,0.22) !important; color: $text !important; font-weight: 600; }
+    tr.myOver   { background-color: rgba(129,140,248,0.2)  !important; color: $text !important; }
+  }
 }
 
 // ── Featured Carousel ────────────────────────────────────
@@ -739,8 +745,8 @@ body.light-theme {
   .gridItem { background: #fff; border-color: rgba(0,0,0,0.1); color: #1e293b; &:hover { box-shadow: 0 0 16px rgba(2,132,199,0.2), 0 4px 18px rgba(0,0,0,0.1); border-color: rgba(2,132,199,0.4); } }
   .detailItem { background: #fff; border-color: rgba(0,0,0,0.1); color: #1e293b; &:hover { border-color: rgba(2,132,199,0.3); } }
   .publicationItem { border-bottom-color: rgba(0,0,0,0.1); color: #1e293b; }
-  .selected { border-color: rgba(220,38,38,0.5) !important; box-shadow: 0 0 12px rgba(220,38,38,0.15) !important; }
-  .myOver { border-color: rgba(99,102,241,0.5) !important; box-shadow: 0 0 12px rgba(99,102,241,0.15) !important; }
+  .selected { border-color: rgba(220,38,38,0.85) !important; box-shadow: 0 0 0 2px rgba(220,38,38,0.3), 0 0 16px rgba(220,38,38,0.2) !important; background-color: rgba(220,38,38,0.07) !important; }
+  .myOver { border-color: rgba(99,102,241,0.7) !important; box-shadow: 0 0 0 2px rgba(99,102,241,0.25), 0 0 14px rgba(99,102,241,0.18) !important; }
 
   .DCaption { color: #0f172a; }
   .DReference { color: #475569; }
@@ -754,7 +760,7 @@ body.light-theme {
   .accordion-button { background: #f8fafc !important; color: #1e293b !important; &:not(.collapsed) { color: #0284c7 !important; background: #f0f6ff !important; } &::after { filter: none; } }
   .accordion-body { background: #fff !important; }
   .reset-filter-btn { background: #f8fafc; border-color: rgba(0,0,0,0.12); color: #475569; &:hover { color: #0f172a; border-color: rgba(0,0,0,0.25); } }
-  .myFacet { thead { color: #0f172a; } tbody { color: #475569; } }
+  .myFacet { thead { color: #0f172a; } tbody { color: #475569; tr.selected { background-color: rgba(220,38,38,0.12) !important; color: #0f172a !important; font-weight: 600; } tr.myOver { background-color: rgba(99,102,241,0.1) !important; color: #0f172a !important; } } }
   .dropdown-menu-dark { background-color: #fff !important; border-color: rgba(0,0,0,0.1) !important;
     .dropdown-item { color: #334155 !important; &:hover { background: rgba(0,0,0,0.05) !important; color: #0f172a !important; } }
   }

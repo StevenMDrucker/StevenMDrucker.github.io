@@ -12,7 +12,7 @@ interface FacetPanelProps {
 }
 
 export function FacetPanel({ items, filterSpec, itemTitle, selected, brush, filter, clearFilter }: FacetPanelProps) {
-  const [over, setOver] = useState<any>(null);
+  const [over, setOver] = useState<string | null>(null);
   const [order, setOrder] = useState<string>('count');
   const [orderReverse, setOrderReverse] = useState<string>('desc');
 
@@ -39,7 +39,7 @@ export function FacetPanel({ items, filterSpec, itemTitle, selected, brush, filt
     const itemName = val.name;
     const itemCount = val.count;
     const theClass = _.includes(itemHoveredTags, itemName) ? 'selected' : '';
-    const isOver = val === over;
+    const isOver = itemName === over;
     const rowClass = isOver ? 'myOver' : theClass;
     const filtered = (itemTitle in filterSpec && _.indexOf(filterSpec[itemTitle], itemName) > -1) ? 'x' : '';
 
@@ -47,8 +47,8 @@ export function FacetPanel({ items, filterSpec, itemTitle, selected, brush, filt
       <tr
         className={rowClass}
         key={`i${i}`}
-        onMouseOut={() => { clearFilter(); setOver(null); }}
-        onMouseOver={() => { brush(itemTitle, itemName); setOver(val); }}
+        onMouseLeave={() => { clearFilter(); setOver(null); }}
+        onMouseEnter={() => { brush(itemTitle, itemName); setOver(itemName); }}
         onClick={() => filter(itemTitle, itemName)}
       >
         <td>{filtered}</td>
