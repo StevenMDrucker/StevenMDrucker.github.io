@@ -31,22 +31,18 @@ export function MyPopup({ item, onClose }: MyPopupProps) {
               <div className="text-center">
                 <img
                   src={`https://stevenmdrucker.github.io/ResearchContent/${item.img}`}
-                  width="400"
-                  height="300"
+                  style={{ maxWidth: '100%', maxHeight: 300, objectFit: 'contain', borderRadius: 6 }}
                   alt={item.caption}
                 />
               </div>
-              <br />
-              <div className="text-center">
-                <a className="btn btn-primary btn-sm" href={item.pdf}>Paper</a>
-                {item.video !== '' && (
-                  <a className="btn btn-primary btn-sm ms-2" href={item.video}>Video</a>
-                )}
+              <div className="text-center mt-3" style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                {item.pdf && <a className="detail-btn btn-paper" href={item.pdf} target="_blank" rel="noreferrer">Paper</a>}
+                {item.video && <a className="detail-btn btn-video" href={item.video} target="_blank" rel="noreferrer">Video</a>}
               </div>
-              <h6 style={{ textAlign: 'left', marginTop: '1rem' }}>
+              <h6 style={{ textAlign: 'left', marginTop: '1.25rem' }}>
                 Reference: {parse(item.bibEntry || '')}
               </h6>
-              <p style={{ textAlign: 'left' }}>Abstract: {item.abstract}</p>
+              <p style={{ textAlign: 'left' }}>{item.abstract}</p>
             </div>
             <div className="modal-footer">
               <button className="btn btn-secondary" onClick={onClose}>Close</button>
