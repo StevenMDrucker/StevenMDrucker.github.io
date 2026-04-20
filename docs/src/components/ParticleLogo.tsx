@@ -41,11 +41,13 @@ interface Props {
    * so the next sibling sits snug below the text baseline.
    */
   alignLeft?: boolean;
+  /** Override the auto-computed particle point size (logical px radius). */
+  pointSize?: number;
   className?: string;
   style?: React.CSSProperties;
 }
 
-export function ParticleLogo({ fontSize = 72, height, idle = true, alignLeft = false, className, style }: Props) {
+export function ParticleLogo({ fontSize = 72, height, idle = true, alignLeft = false, pointSize: pointSizeProp, className, style }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -104,7 +106,7 @@ export function ParticleLogo({ fontSize = 72, height, idle = true, alignLeft = f
     const damping   = 0.88;
     const repRadius = fontSize * 1.4;
     const repForce  = 14;
-    const pointSize = Math.max(1.4, fontSize / 36);
+    const pointSize = pointSizeProp ?? Math.max(1.4, fontSize / 36);
 
     // ── State machine ─────────────────────────────────────────────────────────
     const S = { SCATTERED: 0, FORMING: 1, FORMED: 2, SCATTERING: 3 };
@@ -137,7 +139,7 @@ export function ParticleLogo({ fontSize = 72, height, idle = true, alignLeft = f
       // Padding constrained so scatter stays inside canvas
       const padX = Math.min(tw * 0.12, (W - tw) / 2 * 0.85);
       const padY = Math.min(th * 0.55, (H - th) / 2 * 0.85);
-      const x0 = minX - padX, xW = tw + padX * 2;
+      const x0 = minX, xW = tw + padX;  // never scatter left of the 'S'
       const y0 = minY - padY, yH = th + padY * 2;
       for (let i = 0; i < N; i++) {
         scatterX[i] = Math.max(1, Math.min(W - 1, x0 + Math.random() * xW));
