@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { ParticleLogo } from './ParticleLogo';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import headShot from '../../images/justheadmed.jpg';
@@ -48,7 +49,7 @@ export function About() {
 
         {/* Content column */}
         <div className="col-lg-9 col-md-8 col-sm-12">
-          <h1 className="bio-name">Steven M. Drucker</h1>
+          <ParticleLogo fontSize={62} alignLeft />
           <p className="bio-tagline">Researcher · Inventor · Visualist</p>
 
           <div className="bio-stats">

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { ParticleLogo } from './ParticleLogo';
 
 export function MyNav() {
   const [dark, setDark] = useState(() => localStorage.getItem('theme') !== 'light');
@@ -17,8 +18,8 @@ export function MyNav() {
   return (
     <nav className="site-nav">
       <div className="site-nav-inner">
-        <NavLink className="site-brand" to="/about">
-          Steven M.&nbsp;<span className="brand-accent">Drucker</span>
+        <NavLink className="site-brand" to="/about" style={{ display: 'flex', alignItems: 'center' }}>
+          <ParticleLogo fontSize={18} height={44} />
         </NavLink>
         <ul className="site-nav-links">
           <li>
