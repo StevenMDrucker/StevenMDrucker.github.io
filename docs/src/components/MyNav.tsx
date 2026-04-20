@@ -19,7 +19,7 @@ export function MyNav() {
     <nav className="site-nav">
       <div className="site-nav-inner">
         <NavLink className="site-brand" to="/about" style={{ display: 'flex', alignItems: 'center' }}>
-          <ParticleLogo fontSize={18} height={44} />
+          <ParticleLogo fontSize={18} height={44} pointSize={3} />
         </NavLink>
         <ul className="site-nav-links">
           <li>
