@@ -32,10 +32,11 @@ const slides: Slide[] = [
     year: 2002,
     venue: 'Microsoft Research · Microsoft 5,000th Patent',
     citations: 0,
-    img: RC + 'researchImages/spectator3.jpg',
+    img: RC + 'researchImages/spectator_photo.jpg',
     citation: '<div class="csl-entry">He, L., Wong, C. G., Roseway, A. J., Drucker, S. M., Cohen, M. F., and De Mar, S. D. (2006). <i>Spectator Experience For Networked Gaming</i>. US Patent US-2006-0098013-A1. Microsoft Corporation. (Concept developed 2002, filed 2003.)</div>',
     text: `A system that turns online multiplayer games into spectator sports by giving non-playing viewers live, interactive access to matches. Spectators could switch cameras, track specific players, access real-time stats, and interact with the broadcast — capabilities that turned passive observation into an active social experience. Shipped as a proof of concept in MechWarrior and described in Microsoft's 5,000th patent. Twitch, which Amazon acquired for nearly $1 billion in 2014, commercialized this exact idea roughly nine years later. Spectator Gaming was the academic and engineering proof that people will watch strangers play video games — and want to interact while doing so.`,
     pdf: 'https://docs.google.com/viewer?url=https://github.com/StevenMDrucker/ResearchContent/raw/master/papers/spectator.pdf',
+    video: 'http://research.microsoft.com/~sdrucker/Video/spectator.asf',
   },
   {
     title: 'MyLifeBits: Fulfilling the Memex Vision',
