@@ -70,6 +70,14 @@ async function fetchPdf(pdfUrl) {
   if (pdfUrl.startsWith(RC_PREFIX)) {
     const relativePath = pdfUrl.slice(RC_PREFIX.length); // e.g. "papers/2004_Agarwala_Photomontage.pdf"
     const localPath = path.join(LOCAL_CONTENT, relativePath);
+
+    // Check for a _textproxy variant first (same stem, _textproxy suffix before .pdf)
+    const textproxyPath = localPath.replace(/\.pdf$/i, '_textproxy.pdf');
+    if (fs.existsSync(textproxyPath)) {
+      console.log(`  [using text proxy: ${path.basename(textproxyPath)}]`);
+      return fs.readFileSync(textproxyPath);
+    }
+
     if (fs.existsSync(localPath)) {
       return fs.readFileSync(localPath);
     }
@@ -161,9 +169,16 @@ async function main() {
     process.exit(1);
   }
 
-  // Fetch paper index
-  console.log('Fetching researchData.json …');
-  const allPapers = await fetch(BASE_URL + 'researchData.json').then(r => r.json());
+  // Fetch paper index — prefer local copy so unpushed URL edits are picked up
+  const LOCAL_DATA = path.join(LOCAL_CONTENT, 'researchData.json');
+  let allPapers;
+  if (fs.existsSync(LOCAL_DATA)) {
+    console.log(`Reading researchData.json from local: ${LOCAL_DATA}`);
+    allPapers = JSON.parse(fs.readFileSync(LOCAL_DATA, 'utf8'));
+  } else {
+    console.log('Fetching researchData.json …');
+    allPapers = await fetch(BASE_URL + 'researchData.json').then(r => r.json());
+  }
   const withPdf   = allPapers.filter(p => p.pdf);
   console.log(`${withPdf.length} papers have PDF paths\n`);
 

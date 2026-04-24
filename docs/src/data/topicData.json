@@ -13,6 +13,23 @@
     "Visualization"
   ],
   "papers": {
+    "Task Level Learning": {
+      "year": 1989,
+      "pages": 13,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 1,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.7,
+        "Visualization": 0.7
+      }
+    },
     "Interactive Digital Photomontage": {
       "year": 2004,
       "pages": 9,
@@ -1137,14 +1154,14 @@
     },
     "Tactile Sensor": {
       "year": 1987,
-      "pages": 7,
+      "pages": 9,
       "weights": {
         "Hypertext": 0,
         "Robotics": 0.6,
         "Graphics": 0,
         "Camera": 0,
         "Social": 0,
-        "User Interfaces": 0.8,
+        "User Interfaces": 1,
         "Information": 0.3,
         "Media": 0,
         "Presentation": 0,
@@ -1333,6 +1350,23 @@
         "Social": 0.6,
         "User Interfaces": 0.8,
         "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Intermedia2": {
+      "year": 1988,
+      "pages": 32,
+      "weights": {
+        "Hypertext": 1,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.8,
         "Media": 0,
         "Presentation": 0,
         "Machine Learning": 0,
@@ -1937,6 +1971,40 @@
     "Dear Pictograph": {
       "year": 2020,
       "pages": 13,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Evaluating Interactive ML Systems": {
+      "year": 2020,
+      "pages": 11,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.7,
+        "Visualization": 0.7
+      }
+    },
+    "Visualization Grammars SIG": {
+      "year": 2021,
+      "pages": 3,
       "weights": {
         "Hypertext": 0,
         "Robotics": 0,
