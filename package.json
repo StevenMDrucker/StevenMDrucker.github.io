@@ -7,18 +7,21 @@
     "dev": "cp .dev.html index.html && vite",
     "build": "cp .dev.html index.html && vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && git add index.html assets/ .dev.html && git commit -m 'deploy' && git push"
+    "deploy": "npm run build && git add index.html assets/ .dev.html && git commit -m 'deploy' && git push",
+    "extract-topics": "node scripts/extract-topics.mjs"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.4",
+    "@anthropic-ai/sdk": "^0.90.0",
     "@types/d3": "^7.4.3",
     "@types/lodash": "^4.17.13",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@types/react-slick": "^0.23.13",
+    "@vitejs/plugin-react": "^4.3.4",
+    "pdf-parse": "^1.1.1",
+    "sass": "^1.83.4",
     "typescript": "^5.7.3",
-    "vite": "^6.0.11",
-    "sass": "^1.83.4"
+    "vite": "^6.0.11"
   },
   "dependencies": {
     "d3": "^7.9.0",

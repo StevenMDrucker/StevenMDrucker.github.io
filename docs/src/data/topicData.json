@@ -1,0 +1,1955 @@
+{
+  "topics": [
+    "Hypertext",
+    "Robotics",
+    "Graphics",
+    "Camera",
+    "Social",
+    "User Interfaces",
+    "Information",
+    "Media",
+    "Presentation",
+    "Machine Learning",
+    "Visualization"
+  ],
+  "papers": {
+    "Interactive Digital Photomontage": {
+      "year": 2004,
+      "pages": 9,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0.2,
+        "Camera": 0.1,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0.6,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Geospatial Stream": {
+      "year": 2011,
+      "pages": 4,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Modeltracker": {
+      "year": 2015,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.9,
+        "Visualization": 0.7
+      }
+    },
+    "Informal Decisions": {
+      "year": 2007,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0.6,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.3,
+        "Information": 0.8,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Bones": {
+      "year": 2016,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Stat!": {
+      "year": 2013,
+      "pages": 4,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "iClusterTheory": {
+      "year": 2010,
+      "pages": 7,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.9,
+        "Visualization": 0.7
+      }
+    },
+    "DesignReflections": {
+      "year": 2013,
+      "pages": 8,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Iterating Visualization Tools": {
+      "year": 2017,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Feature Insight": {
+      "year": 2015,
+      "pages": 8,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.7,
+        "Visualization": 0.7
+      }
+    },
+    "Terrain Registration": {
+      "year": 2008,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0.6,
+        "Camera": 0.4,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0.2,
+        "Presentation": 0.8,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Flatland": {
+      "year": 2001,
+      "pages": 7,
+      "weights": {
+        "Hypertext": 0.2,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0.4,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0.5,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Demowiz": {
+      "year": 2014,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0.9,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Avatar Eye Gaze": {
+      "year": 2000,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0.6,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Graphic enhancement for conference calls": {
+      "year": 2000,
+      "pages": 9,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0.9,
+        "Camera": 0,
+        "Social": 0.8,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Code Thumbnails": {
+      "year": 2006,
+      "pages": 8,
+      "weights": {
+        "Hypertext": 0.2,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "V4V": {
+      "year": 2005,
+      "pages": 9,
+      "weights": {
+        "Hypertext": 0.6,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0.9,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Relations, Templates": {
+      "year": 2007,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0.6,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.8,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Summarizing Web Sessions": {
+      "year": 2006,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0.6,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.8,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Spectator (concept)": {
+      "year": 2003,
+      "pages": 7,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 1,
+        "Social": 0.3,
+        "User Interfaces": 0.8,
+        "Information": 0.6,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Phototriage": {
+      "year": 2003,
+      "pages": 7,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0.7,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "MOOs to Multi-user apps": {
+      "year": 1999,
+      "pages": 8,
+      "weights": {
+        "Hypertext": 0.2,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0.8,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "iCluster": {
+      "year": 2011,
+      "pages": 18,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.9,
+        "Visualization": 0.7
+      }
+    },
+    "TouchViz": {
+      "year": 2013,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Cinema Program": {
+      "year": 1992,
+      "pages": 4,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0.2,
+        "Camera": 1,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Smart Skip": {
+      "year": 2002,
+      "pages": 8,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0.8,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Powerpoint Diff": {
+      "year": 2006,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0.8,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Visual Decision Maker": {
+      "year": 2005,
+      "pages": 9,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0.3,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0.7,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.8
+      }
+    },
+    "Parallel Radiosity": {
+      "year": 1992,
+      "pages": 12,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 1,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Token TV": {
+      "year": 2001,
+      "pages": 33,
+      "weights": {
+        "Hypertext": 0.6,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0.7,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "MediaBrowser": {
+      "year": 2004,
+      "pages": 4,
+      "weights": {
+        "Hypertext": 0.2,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0.7,
+        "Presentation": 0.4,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Virtual Museum": {
+      "year": 1994,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 1,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "SandDance": {
+      "year": 2013,
+      "pages": 9,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "CamDroid": {
+      "year": 1995,
+      "pages": 6,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0.2,
+        "Camera": 1,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Virtual Football": {
+      "year": 1994,
+      "pages": 207,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0.2,
+        "Camera": 1,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Conversation Agent": {
+      "year": 1994,
+      "pages": 207,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0.2,
+        "Camera": 1,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "SlideSpace": {
+      "year": 2016,
+      "pages": 30,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0.8,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Dynamic Web": {
+      "year": 2007,
+      "pages": 17,
+      "weights": {
+        "Hypertext": 0.2,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.8,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.3,
+        "Visualization": 0.7
+      }
+    },
+    "Big Data Interaction": {
+      "year": 2012,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0.3,
+        "User Interfaces": 1,
+        "Information": 0.6,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.7,
+        "Visualization": 0.8
+      }
+    },
+    "Logan": {
+      "year": 2016,
+      "pages": 4,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Bi Analytics": {
+      "year": 2014,
+      "pages": 3,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.7,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 1
+      }
+    },
+    "Vis-a-vis": {
+      "year": 2011,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "WebCharts": {
+      "year": 2010,
+      "pages": 7,
+      "weights": {
+        "Hypertext": 0.6,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "IncrementalVis": {
+      "year": 2013,
+      "pages": 8,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Incremental Visualization": {
+      "year": 2012,
+      "pages": 8,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Memex Vision": {
+      "year": 2002,
+      "pages": 5,
+      "weights": {
+        "Hypertext": 0.6,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0.9,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Foveated": {
+      "year": 2012,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0.6,
+        "Robotics": 0,
+        "Graphics": 1,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "FaceRec": {
+      "year": 2007,
+      "pages": 8,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 1,
+        "Visualization": 0.7
+      }
+    },
+    "Narrative": {
+      "year": 2013,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0.9,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "TimeQuilt": {
+      "year": 2005,
+      "pages": 4,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.6,
+        "Media": 1,
+        "Presentation": 0.7,
+        "Machine Learning": 0,
+        "Visualization": 0.8
+      }
+    },
+    "Imageflow": {
+      "year": 2010,
+      "pages": 4,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0.6,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.8,
+        "Media": 0.3,
+        "Presentation": 0.7,
+        "Machine Learning": 0,
+        "Visualization": 0.9
+      }
+    },
+    "Social Dilemma Testing": {
+      "year": 2000,
+      "pages": 8,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0.8,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0.6,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Cliplets": {
+      "year": 2012,
+      "pages": 11,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0.7,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Refinery": {
+      "year": 2015,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.8,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 1
+      }
+    },
+    "Completion": {
+      "year": 2012,
+      "pages": 8,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0.6,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.7,
+        "Visualization": 0.7
+      }
+    },
+    "Topic-Lead-Lag": {
+      "year": 2015,
+      "pages": 14,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Annotation Gigapixel Images": {
+      "year": 2008,
+      "pages": 4,
+      "weights": {
+        "Hypertext": 0.6,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0.2,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Contextual Facets": {
+      "year": 2009,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0.9,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0.2,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.8,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Step User Interfaces": {
+      "year": 2006,
+      "pages": 6,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "GestureElicitation": {
+      "year": 2014,
+      "pages": 6,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Gestalt": {
+      "year": 2010,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 1,
+        "Visualization": 0.7
+      }
+    },
+    "Prospect": {
+      "year": 2011,
+      "pages": 6,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.9,
+        "Visualization": 0.7
+      }
+    },
+    "Sequence Preprocessing": {
+      "year": 2016,
+      "pages": 4,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Pixaura": {
+      "year": 2008,
+      "pages": 4,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0.7,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Parallel Raytracing": {
+      "year": 1992,
+      "pages": 9,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0.9,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Find That Photo": {
+      "year": 2006,
+      "pages": 3,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0.4,
+        "Social": 0.2,
+        "User Interfaces": 1,
+        "Information": 0.8,
+        "Media": 0.9,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Tactile Sensor": {
+      "year": 1987,
+      "pages": 7,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0.6,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Counting Community": {
+      "year": 1999,
+      "pages": 2,
+      "weights": {
+        "Hypertext": 0.2,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0.8,
+        "User Interfaces": 0.3,
+        "Information": 0.4,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.9
+      }
+    },
+    "Social Life of Avatars": {
+      "year": 2000,
+      "pages": 8,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0.2,
+        "Camera": 0,
+        "Social": 0.8,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Visual Snippets": {
+      "year": 2009,
+      "pages": 11,
+      "weights": {
+        "Hypertext": 0.6,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.7,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "reForm": {
+      "year": 2009,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0.2,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.8,
+        "Visualization": 0.7
+      }
+    },
+    "VWorlds": {
+      "year": 1998,
+      "pages": 9,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0.2,
+        "Camera": 0,
+        "Social": 0.8,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Streaming Chat": {
+      "year": 1999,
+      "pages": 7,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0.8,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0.6,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Cartoon Animation Filter": {
+      "year": 2006,
+      "pages": 5,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0.6,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0.4,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Web Search Variability": {
+      "year": 2007,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0.6,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 1,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Search Workshop": {
+      "year": 2007,
+      "pages": 4,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 1,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Exploratory Search": {
+      "year": 2006,
+      "pages": 4,
+      "weights": {
+        "Hypertext": 0.6,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.7,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.9
+      }
+    },
+    "Collaborative Visualization": {
+      "year": 1999,
+      "pages": 8,
+      "weights": {
+        "Hypertext": 0.2,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0.6,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Intermedia1": {
+      "year": 1988,
+      "pages": 16,
+      "weights": {
+        "Hypertext": 1,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.6,
+        "Media": 0.3,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Mission Planner": {
+      "year": 1992,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0.6,
+        "Camera": 0.8,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Squeries": {
+      "year": 2015,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Panoramic Data": {
+      "year": 2014,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Immersive VA Interaction": {
+      "year": 2018,
+      "pages": 45,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "TimeSlice": {
+      "year": 2012,
+      "pages": 4,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "AnchorViz": {
+      "year": 2019,
+      "pages": 12,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.7,
+        "Visualization": 0.9
+      }
+    },
+    "ATOM": {
+      "year": 2018,
+      "pages": 12,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Barchart Differences": {
+      "year": 2018,
+      "pages": 12,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "DNN Querying Videos": {
+      "year": 2018,
+      "pages": 6,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0.6,
+        "Presentation": 0,
+        "Machine Learning": 0.9,
+        "Visualization": 0.7
+      }
+    },
+    "FiberClay": {
+      "year": 2018,
+      "pages": 11,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0.6,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Interactive Data Facts": {
+      "year": 2018,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Immersive VAST": {
+      "year": 2018,
+      "pages": 25,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Narrative Patterns": {
+      "year": 2018,
+      "pages": 30,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0.7,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Data Audiences": {
+      "year": 2018,
+      "pages": 22,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0.6,
+        "Presentation": 0.7,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "GAMut": {
+      "year": 2019,
+      "pages": 13,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.9,
+        "Visualization": 0.7
+      }
+    },
+    "Semantic AnchorViz": {
+      "year": 2018,
+      "pages": 38,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.7,
+        "Visualization": 0.9
+      }
+    },
+    "TensorWatch": {
+      "year": 2019,
+      "pages": 6,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.7,
+        "Visualization": 0.7
+      }
+    },
+    "Affinity Lens": {
+      "year": 2019,
+      "pages": 13,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Managing Notebook Messes": {
+      "year": 2019,
+      "pages": 12,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "TeleGam": {
+      "year": 2019,
+      "pages": 5,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.7,
+        "Visualization": 0.7
+      }
+    },
+    "What Did My AI Learn": {
+      "year": 2022,
+      "pages": 27,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.9,
+        "Visualization": 0.7
+      }
+    },
+    "NL2VIS": {
+      "year": 2021,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Data Visceralization": {
+      "year": 2021,
+      "pages": 11,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Fork It": {
+      "year": 2021,
+      "pages": 12,
+      "weights": {
+        "Hypertext": 0.2,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 1,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.7,
+        "Visualization": 0.8
+      }
+    },
+    "AI Model Communication": {
+      "year": 2021,
+      "pages": 24,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0.6,
+        "Machine Learning": 1,
+        "Visualization": 0.7
+      }
+    },
+    "Reuse Strategies": {
+      "year": 2022,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "DITL": {
+      "year": 2022,
+      "pages": 10,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Composites": {
+      "year": 2022,
+      "pages": 9,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 1,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "AI Code Assistants for Notebooks": {
+      "year": 2023,
+      "pages": 18,
+      "weights": {
+        "Hypertext": 0.2,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.6,
+        "Visualization": 0.7
+      }
+    },
+    "AI-Assisted Data Analysis": {
+      "year": 2024,
+      "pages": 22,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.2,
+        "Visualization": 0.7
+      }
+    },
+    "Data Formulator 2": {
+      "year": 2025,
+      "pages": 17,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Visualization Retargeting": {
+      "year": 2025,
+      "pages": 5,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.7,
+        "Visualization": 0.9
+      }
+    },
+    "ImaginationVellum": {
+      "year": 2025,
+      "pages": 19,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0.6,
+        "Visualization": 0.7
+      }
+    },
+    "InChorus": {
+      "year": 2020,
+      "pages": 13,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    },
+    "Dear Pictograph": {
+      "year": 2020,
+      "pages": 13,
+      "weights": {
+        "Hypertext": 0,
+        "Robotics": 0,
+        "Graphics": 0,
+        "Camera": 0,
+        "Social": 0,
+        "User Interfaces": 0.8,
+        "Information": 0.3,
+        "Media": 0,
+        "Presentation": 0,
+        "Machine Learning": 0,
+        "Visualization": 0.7
+      }
+    }
+  }
+}

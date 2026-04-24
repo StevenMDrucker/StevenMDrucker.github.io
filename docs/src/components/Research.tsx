@@ -5,6 +5,7 @@ import { FacetPanel } from './FacetPanel';
 import { MyPopup } from './MyPopup';
 import { KeywordVis } from './KeywordVis';
 import { TimelineVis } from './TimelineVis';
+import { StreamgraphVis } from './StreamgraphVis';
 
 function useContainerWidth(ref: React.RefObject<HTMLDivElement | null>) {
   const [width, setWidth] = useState(0);
@@ -215,6 +216,17 @@ export function Research() {
         />
       </div>
     );
+  } else if (mode === 'stream') {
+    resultsDisplay = (
+      <div className={fitMode ? '' : 'vis-scroll'}>
+        <StreamgraphVis
+          items={researchData}
+          handleClick={openModal}
+          containerWidth={visWidth || 800}
+          fitMode={fitMode}
+        />
+      </div>
+    );
   }
 
   const viewModes = [
@@ -223,6 +235,7 @@ export function Research() {
     { id: 'publication', label: 'Publication', icon: '¶' },
     { id: 'timeline',    label: 'Timeline',    icon: '◷' },
     { id: 'keyword',     label: 'Keywords',    icon: '⊛' },
+    { id: 'stream',      label: 'Streamgraph', icon: '〜' },
   ];
 
   return (
@@ -248,7 +261,7 @@ export function Research() {
                 </div>
 
                 {/* Fit/Zoom toggle */}
-                {(mode === 'timeline' || mode === 'keyword') && (
+                {(mode === 'timeline' || mode === 'keyword' || mode === 'stream') && (
                   <button
                     className={`fit-zoom-btn${fitMode ? ' active' : ''}`}
                     onClick={() => setFitMode(f => !f)}
