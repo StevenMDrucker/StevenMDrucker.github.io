@@ -8,7 +8,9 @@
     "build": "cp .dev.html index.html && vite build",
     "preview": "vite preview",
     "deploy": "npm run build && git add index.html assets/ .dev.html && git commit -m 'deploy' && git push",
-    "extract-topics": "node scripts/extract-topics.mjs"
+    "extract-topics": "node scripts/extract-topics.mjs",
+    "extract-text": "node scripts/extract-text.mjs",
+    "analyze-topics": "node scripts/analyze-topics.mjs"
   },
   "devDependencies": {
     "@anthropic-ai/sdk": "^0.90.0",

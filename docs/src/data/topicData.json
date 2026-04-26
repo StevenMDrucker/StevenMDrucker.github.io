@@ -28,7 +28,8 @@
         "Presentation": 0,
         "Machine Learning": 0.7,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 5259
     },
     "Interactive Digital Photomontage": {
       "year": 2004,
@@ -45,7 +46,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 7424
     },
     "Geospatial Stream": {
       "year": 2011,
@@ -62,7 +64,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 2509
     },
     "Modeltracker": {
       "year": 2015,
@@ -79,7 +82,8 @@
         "Presentation": 0,
         "Machine Learning": 0.9,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 7873
     },
     "Informal Decisions": {
       "year": 2007,
@@ -96,7 +100,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 6925
     },
     "Bones": {
       "year": 2016,
@@ -113,7 +118,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 9274
     },
     "Stat!": {
       "year": 2013,
@@ -130,7 +136,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 3732
     },
     "iClusterTheory": {
       "year": 2010,
@@ -147,7 +154,8 @@
         "Presentation": 0,
         "Machine Learning": 0.9,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 5385
     },
     "DesignReflections": {
       "year": 2013,
@@ -164,7 +172,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 7254
     },
     "Iterating Visualization Tools": {
       "year": 2017,
@@ -181,7 +190,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 11117
     },
     "Feature Insight": {
       "year": 2015,
@@ -198,7 +208,8 @@
         "Presentation": 0,
         "Machine Learning": 0.7,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 7639
     },
     "Terrain Registration": {
       "year": 2008,
@@ -215,7 +226,8 @@
         "Presentation": 0.8,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 6195
     },
     "Flatland": {
       "year": 2001,
@@ -232,7 +244,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 4437
     },
     "Demowiz": {
       "year": 2014,
@@ -249,7 +262,8 @@
         "Presentation": 0.9,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 8155
     },
     "Avatar Eye Gaze": {
       "year": 2000,
@@ -266,7 +280,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 6323
     },
     "Graphic enhancement for conference calls": {
       "year": 2000,
@@ -283,7 +298,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 6720
     },
     "Code Thumbnails": {
       "year": 2006,
@@ -300,7 +316,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 5822
     },
     "V4V": {
       "year": 2005,
@@ -317,7 +334,8 @@
         "Presentation": 0.9,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 7312
     },
     "Relations, Templates": {
       "year": 2007,
@@ -334,7 +352,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 8435
     },
     "Summarizing Web Sessions": {
       "year": 2006,
@@ -351,7 +370,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 7944
     },
     "Spectator (concept)": {
       "year": 2003,
@@ -368,7 +388,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 2714
     },
     "Phototriage": {
       "year": 2003,
@@ -385,7 +406,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 1558
     },
     "MOOs to Multi-user apps": {
       "year": 1999,
@@ -402,7 +424,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 5043
     },
     "iCluster": {
       "year": 2011,
@@ -419,7 +442,8 @@
         "Presentation": 0,
         "Machine Learning": 0.9,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 7113
     },
     "TouchViz": {
       "year": 2013,
@@ -436,7 +460,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 7202
     },
     "Cinema Program": {
       "year": 1992,
@@ -453,7 +478,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 3495
     },
     "Smart Skip": {
       "year": 2002,
@@ -470,7 +496,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 5265
     },
     "Powerpoint Diff": {
       "year": 2006,
@@ -487,7 +514,8 @@
         "Presentation": 0.8,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 6454
     },
     "Visual Decision Maker": {
       "year": 2005,
@@ -504,7 +532,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.8
-      }
+      },
+      "wordcount": 3594
     },
     "Parallel Radiosity": {
       "year": 1992,
@@ -521,7 +550,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 792
     },
     "Token TV": {
       "year": 2001,
@@ -538,7 +568,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 17254
     },
     "MediaBrowser": {
       "year": 2004,
@@ -555,7 +586,8 @@
         "Presentation": 0.4,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 3515
     },
     "Virtual Museum": {
       "year": 1994,
@@ -572,7 +604,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 6507
     },
     "SandDance": {
       "year": 2013,
@@ -589,7 +622,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 7275
     },
     "CamDroid": {
       "year": 1995,
@@ -606,7 +640,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 4190
     },
     "Virtual Football": {
       "year": 1994,
@@ -623,7 +658,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 54036
     },
     "Conversation Agent": {
       "year": 1994,
@@ -640,7 +676,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 54036
     },
     "SlideSpace": {
       "year": 2016,
@@ -657,7 +694,8 @@
         "Presentation": 0.8,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 16222
     },
     "Dynamic Web": {
       "year": 2007,
@@ -674,7 +712,8 @@
         "Presentation": 0,
         "Machine Learning": 0.3,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 7299
     },
     "Big Data Interaction": {
       "year": 2012,
@@ -691,7 +730,8 @@
         "Presentation": 0,
         "Machine Learning": 0.7,
         "Visualization": 0.8
-      }
+      },
+      "wordcount": 6838
     },
     "Logan": {
       "year": 2016,
@@ -708,7 +748,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 3650
     },
     "Bi Analytics": {
       "year": 2014,
@@ -725,7 +766,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 1
-      }
+      },
+      "wordcount": 1612
     },
     "Vis-a-vis": {
       "year": 2011,
@@ -742,7 +784,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 7741
     },
     "WebCharts": {
       "year": 2010,
@@ -759,7 +802,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 6020
     },
     "IncrementalVis": {
       "year": 2013,
@@ -776,7 +820,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 4824
     },
     "Incremental Visualization": {
       "year": 2012,
@@ -793,7 +838,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 4824
     },
     "Memex Vision": {
       "year": 2002,
@@ -810,7 +856,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 3636
     },
     "Foveated": {
       "year": 2012,
@@ -827,7 +874,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 8738
     },
     "FaceRec": {
       "year": 2007,
@@ -844,7 +892,8 @@
         "Presentation": 0,
         "Machine Learning": 1,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 6216
     },
     "Narrative": {
       "year": 2013,
@@ -861,7 +910,8 @@
         "Presentation": 0.9,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 10537
     },
     "TimeQuilt": {
       "year": 2005,
@@ -878,7 +928,8 @@
         "Presentation": 0.7,
         "Machine Learning": 0,
         "Visualization": 0.8
-      }
+      },
+      "wordcount": 2787
     },
     "Imageflow": {
       "year": 2010,
@@ -895,7 +946,8 @@
         "Presentation": 0.7,
         "Machine Learning": 0,
         "Visualization": 0.9
-      }
+      },
+      "wordcount": 3175
     },
     "Social Dilemma Testing": {
       "year": 2000,
@@ -912,7 +964,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 5601
     },
     "Cliplets": {
       "year": 2012,
@@ -929,7 +982,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 6806
     },
     "Refinery": {
       "year": 2015,
@@ -946,7 +1000,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 1
-      }
+      },
+      "wordcount": 7431
     },
     "Completion": {
       "year": 2012,
@@ -963,7 +1018,8 @@
         "Presentation": 0,
         "Machine Learning": 0.7,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 6410
     },
     "Topic-Lead-Lag": {
       "year": 2015,
@@ -980,7 +1036,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 11031
     },
     "Annotation Gigapixel Images": {
       "year": 2008,
@@ -997,7 +1054,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 3780
     },
     "Contextual Facets": {
       "year": 2009,
@@ -1014,7 +1072,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 8327
     },
     "Step User Interfaces": {
       "year": 2006,
@@ -1031,7 +1090,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 2664
     },
     "GestureElicitation": {
       "year": 2014,
@@ -1048,7 +1108,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 3035
     },
     "Gestalt": {
       "year": 2010,
@@ -1065,7 +1126,8 @@
         "Presentation": 0,
         "Machine Learning": 1,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 8124
     },
     "Prospect": {
       "year": 2011,
@@ -1082,7 +1144,8 @@
         "Presentation": 0,
         "Machine Learning": 0.9,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 5128
     },
     "Sequence Preprocessing": {
       "year": 2016,
@@ -1099,7 +1162,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 4486
     },
     "Pixaura": {
       "year": 2008,
@@ -1116,7 +1180,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 3815
     },
     "Parallel Raytracing": {
       "year": 1992,
@@ -1133,7 +1198,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 1897
     },
     "Find That Photo": {
       "year": 2006,
@@ -1150,7 +1216,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 1491
     },
     "Tactile Sensor": {
       "year": 1987,
@@ -1167,7 +1234,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 5611
     },
     "Counting Community": {
       "year": 1999,
@@ -1184,7 +1252,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.9
-      }
+      },
+      "wordcount": 1430
     },
     "Social Life of Avatars": {
       "year": 2000,
@@ -1201,7 +1270,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 5805
     },
     "Visual Snippets": {
       "year": 2009,
@@ -1218,7 +1288,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 7635
     },
     "reForm": {
       "year": 2009,
@@ -1235,7 +1306,8 @@
         "Presentation": 0,
         "Machine Learning": 0.8,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 8288
     },
     "VWorlds": {
       "year": 1998,
@@ -1252,7 +1324,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 5872
     },
     "Streaming Chat": {
       "year": 1999,
@@ -1269,7 +1342,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 5509
     },
     "Cartoon Animation Filter": {
       "year": 2006,
@@ -1286,7 +1360,8 @@
         "Presentation": 0.4,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 3471
     },
     "Web Search Variability": {
       "year": 2007,
@@ -1303,7 +1378,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 10447
     },
     "Search Workshop": {
       "year": 2007,
@@ -1320,7 +1396,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 1985
     },
     "Exploratory Search": {
       "year": 2006,
@@ -1337,7 +1414,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.9
-      }
+      },
+      "wordcount": 1775
     },
     "Collaborative Visualization": {
       "year": 1999,
@@ -1354,7 +1432,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 5100
     },
     "Intermedia2": {
       "year": 1988,
@@ -1371,7 +1450,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 12140
     },
     "Intermedia1": {
       "year": 1988,
@@ -1388,7 +1468,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 10245
     },
     "Mission Planner": {
       "year": 1992,
@@ -1405,7 +1486,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 3311
     },
     "Squeries": {
       "year": 2015,
@@ -1422,7 +1504,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 8356
     },
     "Panoramic Data": {
       "year": 2014,
@@ -1439,7 +1522,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 10248
     },
     "Immersive VA Interaction": {
       "year": 2018,
@@ -1456,7 +1540,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 17933
     },
     "TimeSlice": {
       "year": 2012,
@@ -1473,7 +1558,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 3510
     },
     "AnchorViz": {
       "year": 2019,
@@ -1490,7 +1576,8 @@
         "Presentation": 0,
         "Machine Learning": 0.7,
         "Visualization": 0.9
-      }
+      },
+      "wordcount": 10293
     },
     "ATOM": {
       "year": 2018,
@@ -1507,7 +1594,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 8972
     },
     "Barchart Differences": {
       "year": 2018,
@@ -1524,7 +1612,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 9822
     },
     "DNN Querying Videos": {
       "year": 2018,
@@ -1541,7 +1630,8 @@
         "Presentation": 0,
         "Machine Learning": 0.9,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 4934
     },
     "FiberClay": {
       "year": 2018,
@@ -1558,7 +1648,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 11304
     },
     "Interactive Data Facts": {
       "year": 2018,
@@ -1575,7 +1666,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 11650
     },
     "Immersive VAST": {
       "year": 2018,
@@ -1592,7 +1684,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 9905
     },
     "Narrative Patterns": {
       "year": 2018,
@@ -1609,7 +1702,8 @@
         "Presentation": 0.7,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 7919
     },
     "Data Audiences": {
       "year": 2018,
@@ -1626,7 +1720,8 @@
         "Presentation": 0.7,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 7385
     },
     "GAMut": {
       "year": 2019,
@@ -1643,7 +1738,8 @@
         "Presentation": 0,
         "Machine Learning": 0.9,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 9745
     },
     "Semantic AnchorViz": {
       "year": 2018,
@@ -1660,7 +1756,8 @@
         "Presentation": 0,
         "Machine Learning": 0.7,
         "Visualization": 0.9
-      }
+      },
+      "wordcount": 22853
     },
     "TensorWatch": {
       "year": 2019,
@@ -1677,7 +1774,8 @@
         "Presentation": 0,
         "Machine Learning": 0.7,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 4037
     },
     "Affinity Lens": {
       "year": 2019,
@@ -1694,7 +1792,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 11033
     },
     "Managing Notebook Messes": {
       "year": 2019,
@@ -1711,7 +1810,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 9234
     },
     "TeleGam": {
       "year": 2019,
@@ -1728,7 +1828,8 @@
         "Presentation": 0,
         "Machine Learning": 0.7,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 4770
     },
     "What Did My AI Learn": {
       "year": 2022,
@@ -1745,7 +1846,8 @@
         "Presentation": 0,
         "Machine Learning": 0.9,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 14907
     },
     "NL2VIS": {
       "year": 2021,
@@ -1762,7 +1864,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 7975
     },
     "Data Visceralization": {
       "year": 2021,
@@ -1779,7 +1882,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 11994
     },
     "Fork It": {
       "year": 2021,
@@ -1796,7 +1900,8 @@
         "Presentation": 0,
         "Machine Learning": 0.7,
         "Visualization": 0.8
-      }
+      },
+      "wordcount": 9431
     },
     "AI Model Communication": {
       "year": 2021,
@@ -1813,7 +1918,8 @@
         "Presentation": 0.6,
         "Machine Learning": 1,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 14093
     },
     "Reuse Strategies": {
       "year": 2022,
@@ -1830,7 +1936,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 9963
     },
     "DITL": {
       "year": 2022,
@@ -1847,7 +1954,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 7965
     },
     "Composites": {
       "year": 2022,
@@ -1864,7 +1972,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 8036
     },
     "AI Code Assistants for Notebooks": {
       "year": 2023,
@@ -1881,7 +1990,8 @@
         "Presentation": 0,
         "Machine Learning": 0.6,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 15268
     },
     "AI-Assisted Data Analysis": {
       "year": 2024,
@@ -1898,7 +2008,8 @@
         "Presentation": 0,
         "Machine Learning": 0.2,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 19570
     },
     "Data Formulator 2": {
       "year": 2025,
@@ -1915,7 +2026,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 13354
     },
     "Visualization Retargeting": {
       "year": 2025,
@@ -1932,7 +2044,8 @@
         "Presentation": 0,
         "Machine Learning": 0.7,
         "Visualization": 0.9
-      }
+      },
+      "wordcount": 4905
     },
     "ImaginationVellum": {
       "year": 2025,
@@ -1949,7 +2062,8 @@
         "Presentation": 0,
         "Machine Learning": 0.6,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 15476
     },
     "InChorus": {
       "year": 2020,
@@ -1966,7 +2080,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 10423
     },
     "Dear Pictograph": {
       "year": 2020,
@@ -1983,7 +2098,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 9730
     },
     "Evaluating Interactive ML Systems": {
       "year": 2020,
@@ -2000,7 +2116,8 @@
         "Presentation": 0,
         "Machine Learning": 0.7,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 5321
     },
     "Visualization Grammars SIG": {
       "year": 2021,
@@ -2017,7 +2134,8 @@
         "Presentation": 0,
         "Machine Learning": 0,
         "Visualization": 0.7
-      }
+      },
+      "wordcount": 2754
     }
   }
 }
