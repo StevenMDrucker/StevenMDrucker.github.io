@@ -81,8 +81,33 @@ const TOPICS_V2 = [
   { name: 'Immersive & AR/VR',       desc: 'virtual reality, augmented reality, immersive environments, mixed reality, spatial interaction, VR analytics, 3D UI' },
 ];
 
-// ── active taxonomy (switch here to roll back to v1) ─────────────────────────
-const TOPICS = TOPICS_V2;
+// ─── taxonomy v3 (16 topics) ─────────────────────────────────────────────────
+// Restores Visualization and Interaction Design as legitimate long-running
+// threads (but scoped to work where they ARE the primary contribution, not
+// just background technique). Drops "Interactive Visualization" (folded into
+// Visualization + Visual Analytics). Broadens Robotics to catch tactile work.
+// Adds Interaction Design for the HCI / gesture / usability thread.
+const TOPICS_V3 = [
+  { name: 'Hypertext & Links',   desc: 'hypertext systems, hypermedia, linked documents, web links, transclusion, document structure, Intermedia — the subject is linking and navigating documents' },
+  { name: 'Computer Graphics',   desc: 'rendering algorithms, ray tracing, radiosity, parallel graphics, 3D animation, shading — the primary contribution is a graphics technique or system' },
+  { name: '3D Navigation & Camera', desc: 'virtual camera control, cinematography, viewpoint selection, 3D navigation, camera path planning, visibility constraints — the paper\'s focus is on how to control or plan movement through 3D space' },
+  { name: 'Robotics & Sensing',  desc: 'robot learning, tactile sensing, haptic feedback, task-level robot control, juggling, autonomous manipulation, motor skill acquisition' },
+  { name: 'Online Communities',  desc: 'avatars, virtual worlds, MOOs, MUDs, chat systems, computer-mediated communication, social spaces, online social interaction' },
+  { name: 'Photo & Image Tools', desc: 'photo management, photo triage, image browsing, photomontage, image completion, image annotation, photo collections — tools for working with still images' },
+  { name: 'Video & Rich Media',  desc: 'video browsing, video editing, cliplets, video annotation, streaming, screencast, token TV — tools for working with time-based media' },
+  { name: 'Web Search & Content',desc: 'web search, information retrieval, web content extraction, webpage structure analysis, query formulation, search result presentation' },
+  { name: 'Visualization',       desc: 'visualization research: novel visual encodings, chart design and evaluation, perceptual studies of representations, visualization theory, readability, visual variables — the paper\'s primary contribution IS the visualization itself or how to evaluate/design visualizations' },
+  { name: 'Visual Analytics',    desc: 'visual analytics systems, interactive data exploration, dashboards, big data interaction, incremental visualization, uncertainty visualization — emphasis on combining computation with visualization for analysis' },
+  { name: 'Data Storytelling',   desc: 'narrative visualization, data-driven storytelling, presentation tools, slideshow design, demonstration systems, communicating data to audiences' },
+  { name: 'Human-in-the-Loop ML', desc: 'interactive machine learning, active learning, labeling interfaces, model debugging, classifier evaluation, ML fairness tools, visual tools for understanding or steering ML models, face recognition systems' },
+  { name: 'AI Assistance',       desc: 'AI-assisted analysis, large language models, code generation, natural language interfaces, NL-to-visualization, AI explanation, GPT tools, conversational agents for data' },
+  { name: 'Notebooks & Code',    desc: 'computational notebooks, Jupyter, code assistants, notebook management, literate programming, data science coding workflows, code thumbnails' },
+  { name: 'Immersive & AR/VR',   desc: 'virtual reality, augmented reality, immersive analytics, mixed reality, spatial interaction, VR data exploration' },
+  { name: 'Interaction Design',  desc: 'user interface design, input methods, gesture elicitation, touch interaction, usability evaluation, multi-device systems, HCI experiments, UI design patterns and guidelines — the primary contribution is a new interaction technique or HCI study' },
+];
+
+// ── active taxonomy (change TOPICS_V3 → TOPICS_V2 or TOPICS_V1 to roll back)
+const TOPICS = TOPICS_V3;
 
 const TOPIC_NAMES = TOPICS.map(t => t.name);
 

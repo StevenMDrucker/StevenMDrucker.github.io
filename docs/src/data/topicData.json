@@ -3,18 +3,19 @@
     "Hypertext & Links",
     "Computer Graphics",
     "3D Navigation & Camera",
-    "Robotics & Task Learning",
+    "Robotics & Sensing",
     "Online Communities",
     "Photo & Image Tools",
     "Video & Rich Media",
     "Web Search & Content",
-    "Interactive Visualization",
+    "Visualization",
     "Visual Analytics",
     "Data Storytelling",
     "Human-in-the-Loop ML",
     "AI Assistance",
     "Notebooks & Code",
-    "Immersive & AR/VR"
+    "Immersive & AR/VR",
+    "Interaction Design"
   ],
   "papers": {
     "Task Level Learning": {
@@ -22,20 +23,21 @@
       "pages": 13,
       "weights": {
         "Hypertext & Links": 0,
-        "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 1,
+        "Computer Graphics": 0.3,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 1,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.3,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Interactive Digital Photomontage": {
@@ -43,20 +45,21 @@
       "pages": 9,
       "weights": {
         "Hypertext & Links": 0,
-        "Computer Graphics": 0.3,
-        "3D Navigation & Camera": 0.6,
-        "Robotics & Task Learning": 0,
+        "Computer Graphics": 1,
+        "3D Navigation & Camera": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 1,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.3,
-        "Visual Analytics": 0,
+        "Visualization": 1,
+        "Visual Analytics": 0.6,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Geospatial Stream": {
@@ -66,60 +69,63 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0.3,
         "3D Navigation & Camera": 1,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Modeltracker": {
       "year": 2015,
       "pages": 10,
       "weights": {
-        "Hypertext & Links": 0.2,
+        "Hypertext & Links": 0,
         "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.6,
+        "Visualization": 0.9,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
-        "Human-in-the-Loop ML": 0.8,
+        "Human-in-the-Loop ML": 1,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Informal Decisions": {
       "year": 2007,
       "pages": 10,
       "weights": {
-        "Hypertext & Links": 0.8,
+        "Hypertext & Links": 0.4,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
-        "Web Search & Content": 0.9,
-        "Interactive Visualization": 0.1,
-        "Visual Analytics": 0.1,
-        "Data Storytelling": 0.1,
+        "Web Search & Content": 0.6,
+        "Visualization": 0,
+        "Visual Analytics": 0,
+        "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Bones": {
@@ -129,18 +135,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
-        "Visual Analytics": 0,
+        "Visualization": 0.3,
+        "Visual Analytics": 0.5,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
-        "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Notebooks & Code": 0.4,
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Stat!": {
@@ -149,19 +156,20 @@
       "weights": {
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
-        "Visual Analytics": 0,
+        "Visualization": 0.6,
+        "Visual Analytics": 1,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "iClusterTheory": {
@@ -169,20 +177,21 @@
       "pages": 7,
       "weights": {
         "Hypertext & Links": 0.2,
-        "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Computer Graphics": 0.3,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
-        "Visual Analytics": 0,
+        "Visualization": 0.6,
+        "Visual Analytics": 0.4,
         "Data Storytelling": 0,
-        "Human-in-the-Loop ML": 0.4,
-        "AI Assistance": 0,
+        "Human-in-the-Loop ML": 1,
+        "AI Assistance": 0.8,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "DesignReflections": {
@@ -192,39 +201,41 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 1,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Iterating Visualization Tools": {
       "year": 2017,
       "pages": 10,
       "weights": {
-        "Hypertext & Links": 0.2,
-        "Computer Graphics": 0.1,
+        "Hypertext & Links": 0.1,
+        "Computer Graphics": 0.3,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.4,
-        "Visual Analytics": 0,
-        "Data Storytelling": 0,
+        "Visualization": 1,
+        "Visual Analytics": 0.6,
+        "Data Storytelling": 0.4,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Feature Insight": {
@@ -234,60 +245,63 @@
         "Hypertext & Links": 0.1,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.1,
-        "Visual Analytics": 0.2,
+        "Visualization": 0.6,
+        "Visual Analytics": 1,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Terrain Registration": {
       "year": 2008,
       "pages": 10,
       "weights": {
-        "Hypertext & Links": 0,
-        "Computer Graphics": 1,
+        "Hypertext & Links": 0.1,
+        "Computer Graphics": 0.3,
         "3D Navigation & Camera": 1,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
-        "Photo & Image Tools": 1,
+        "Photo & Image Tools": 0.2,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 1
       }
     },
     "Flatland": {
       "year": 2001,
       "pages": 7,
       "weights": {
-        "Hypertext & Links": 0.2,
+        "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 1,
-        "Robotics & Task Learning": 0,
-        "Online Communities": 0.6,
+        "Robotics & Sensing": 0,
+        "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Demowiz": {
@@ -296,19 +310,20 @@
       "weights": {
         "Hypertext & Links": 0,
         "Computer Graphics": 0.3,
-        "3D Navigation & Camera": 0.6,
-        "Robotics & Task Learning": 0,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
-        "Video & Rich Media": 0.8,
+        "Video & Rich Media": 0.9,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 1,
         "Visual Analytics": 0,
         "Data Storytelling": 0.6,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Avatar Eye Gaze": {
@@ -316,20 +331,21 @@
       "pages": 10,
       "weights": {
         "Hypertext & Links": 0,
-        "Computer Graphics": 1,
+        "Computer Graphics": 0.3,
         "3D Navigation & Camera": 1,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 1,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 1
       }
     },
     "Graphic enhancement for conference calls": {
@@ -339,18 +355,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 1,
         "3D Navigation & Camera": 1,
-        "Robotics & Task Learning": 0,
-        "Online Communities": 1,
+        "Robotics & Sensing": 0,
+        "Online Communities": 0.6,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 1,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0.6
       }
     },
     "Code Thumbnails": {
@@ -358,83 +375,87 @@
       "pages": 8,
       "weights": {
         "Hypertext & Links": 0.2,
-        "Computer Graphics": 0.1,
-        "3D Navigation & Camera": 0.8,
-        "Robotics & Task Learning": 0,
+        "Computer Graphics": 0.8,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
-        "Notebooks & Code": 0.2,
-        "Immersive & AR/VR": 0
+        "Notebooks & Code": 1,
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "V4V": {
       "year": 2005,
       "pages": 9,
       "weights": {
-        "Hypertext & Links": 0.2,
-        "Computer Graphics": 0.1,
-        "3D Navigation & Camera": 0.8,
-        "Robotics & Task Learning": 0,
+        "Hypertext & Links": 0.1,
+        "Computer Graphics": 0.3,
+        "3D Navigation & Camera": 0.9,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Relations, Templates": {
       "year": 2007,
       "pages": 10,
       "weights": {
-        "Hypertext & Links": 0.8,
+        "Hypertext & Links": 0.4,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
-        "Web Search & Content": 0.9,
-        "Interactive Visualization": 0.2,
-        "Visual Analytics": 0.1,
-        "Data Storytelling": 0.1,
+        "Web Search & Content": 0.6,
+        "Visualization": 0,
+        "Visual Analytics": 0,
+        "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 1
       }
     },
     "Summarizing Web Sessions": {
       "year": 2006,
       "pages": 10,
       "weights": {
-        "Hypertext & Links": 0.4,
+        "Hypertext & Links": 0.2,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
-        "Web Search & Content": 0.6,
-        "Interactive Visualization": 0,
+        "Web Search & Content": 0.4,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0.4
       }
     },
     "Spectator (concept)": {
@@ -444,81 +465,85 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0.3,
         "3D Navigation & Camera": 1,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Phototriage": {
       "year": 2003,
       "pages": 7,
       "weights": {
-        "Hypertext & Links": 0.2,
-        "Computer Graphics": 0.1,
-        "3D Navigation & Camera": 0.8,
-        "Robotics & Task Learning": 0,
+        "Hypertext & Links": 0,
+        "Computer Graphics": 0,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
-        "Photo & Image Tools": 0.9,
+        "Photo & Image Tools": 1,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "MOOs to Multi-user apps": {
       "year": 1999,
       "pages": 8,
       "weights": {
-        "Hypertext & Links": 0.2,
+        "Hypertext & Links": 0,
         "Computer Graphics": 0,
-        "3D Navigation & Camera": 0.8,
-        "Robotics & Task Learning": 0,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 1,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "iCluster": {
       "year": 2011,
       "pages": 18,
       "weights": {
-        "Hypertext & Links": 0.2,
+        "Hypertext & Links": 0.1,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.1,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
-        "Human-in-the-Loop ML": 0.2,
+        "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "TouchViz": {
@@ -526,20 +551,21 @@
       "pages": 10,
       "weights": {
         "Hypertext & Links": 0,
-        "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Computer Graphics": 0.3,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
-        "Visual Analytics": 0,
+        "Visualization": 0.8,
+        "Visual Analytics": 1,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 1
       }
     },
     "Cinema Program": {
@@ -549,18 +575,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0.3,
         "3D Navigation & Camera": 1,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.3,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Smart Skip": {
@@ -569,40 +596,42 @@
       "weights": {
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
-        "3D Navigation & Camera": 0.6,
-        "Robotics & Task Learning": 0,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 1,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Powerpoint Diff": {
       "year": 2006,
       "pages": 10,
       "weights": {
-        "Hypertext & Links": 0,
-        "Computer Graphics": 0,
+        "Hypertext & Links": 0.1,
+        "Computer Graphics": 0.3,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.6,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Visual Decision Maker": {
@@ -610,20 +639,21 @@
       "pages": 9,
       "weights": {
         "Hypertext & Links": 0,
-        "Computer Graphics": 0.3,
-        "3D Navigation & Camera": 0.8,
-        "Robotics & Task Learning": 0,
+        "Computer Graphics": 0.8,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.8,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0.8
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 1
       }
     },
     "Parallel Radiosity": {
@@ -633,81 +663,85 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 1,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Token TV": {
       "year": 2001,
       "pages": 33,
       "weights": {
-        "Hypertext & Links": 0.8,
-        "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Hypertext & Links": 0.2,
+        "Computer Graphics": 0.3,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
-        "Video & Rich Media": 0.9,
-        "Web Search & Content": 0.1,
-        "Interactive Visualization": 0.2,
-        "Visual Analytics": 0.1,
+        "Video & Rich Media": 1,
+        "Web Search & Content": 0,
+        "Visualization": 0.6,
+        "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "MediaBrowser": {
       "year": 2004,
       "pages": 4,
       "weights": {
-        "Hypertext & Links": 0.2,
-        "Computer Graphics": 0.1,
-        "3D Navigation & Camera": 0.8,
-        "Robotics & Task Learning": 0,
+        "Hypertext & Links": 0,
+        "Computer Graphics": 0.3,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
-        "Photo & Image Tools": 0.9,
+        "Photo & Image Tools": 1,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Virtual Museum": {
       "year": 1994,
       "pages": 10,
       "weights": {
-        "Hypertext & Links": 0.2,
-        "Computer Graphics": 0.1,
+        "Hypertext & Links": 0.1,
+        "Computer Graphics": 0.3,
         "3D Navigation & Camera": 1,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 1
+        "Immersive & AR/VR": 0.6,
+        "Interaction Design": 0
       }
     },
     "SandDance": {
@@ -716,19 +750,20 @@
       "weights": {
         "Hypertext & Links": 0,
         "Computer Graphics": 0.3,
-        "3D Navigation & Camera": 0.6,
-        "Robotics & Task Learning": 0,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.8,
-        "Visual Analytics": 0.2,
-        "Data Storytelling": 0.4,
+        "Visualization": 1,
+        "Visual Analytics": 0.6,
+        "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "CamDroid": {
@@ -736,20 +771,21 @@
       "pages": 6,
       "weights": {
         "Hypertext & Links": 0,
-        "Computer Graphics": 0.3,
+        "Computer Graphics": 0,
         "3D Navigation & Camera": 1,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.3,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0.3
       }
     },
     "Virtual Football": {
@@ -759,18 +795,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0.3,
         "3D Navigation & Camera": 1,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.3,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Conversation Agent": {
@@ -780,18 +817,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0.3,
         "3D Navigation & Camera": 1,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.3,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
-        "AI Assistance": 0,
+        "AI Assistance": 0.6,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "SlideSpace": {
@@ -799,62 +837,65 @@
       "pages": 30,
       "weights": {
         "Hypertext & Links": 0,
-        "Computer Graphics": 0,
-        "3D Navigation & Camera": 0.6,
-        "Robotics & Task Learning": 0,
+        "Computer Graphics": 0.3,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.8,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Dynamic Web": {
       "year": 2007,
       "pages": 17,
       "weights": {
-        "Hypertext & Links": 0.8,
+        "Hypertext & Links": 0.2,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 1
       }
     },
     "Big Data Interaction": {
       "year": 2012,
       "pages": 10,
       "weights": {
-        "Hypertext & Links": 0.2,
+        "Hypertext & Links": 0.1,
         "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "3D Navigation & Camera": 0.8,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
-        "Visual Analytics": 0,
+        "Visualization": 0,
+        "Visual Analytics": 0.6,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 1
       }
     },
     "Logan": {
@@ -863,19 +904,20 @@
       "weights": {
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Bi Analytics": {
@@ -885,39 +927,41 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 1,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Vis-a-vis": {
       "year": 2011,
       "pages": 10,
       "weights": {
-        "Hypertext & Links": 0.1,
-        "Computer Graphics": 0.2,
-        "3D Navigation & Camera": 0.8,
-        "Robotics & Task Learning": 0,
+        "Hypertext & Links": 0,
+        "Computer Graphics": 0.3,
+        "3D Navigation & Camera": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.4,
-        "Visual Analytics": 0,
+        "Visualization": 1,
+        "Visual Analytics": 0.6,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "WebCharts": {
@@ -925,20 +969,21 @@
       "pages": 7,
       "weights": {
         "Hypertext & Links": 0.2,
-        "Computer Graphics": 0.1,
-        "3D Navigation & Camera": 0.4,
-        "Robotics & Task Learning": 0,
+        "Computer Graphics": 0.6,
+        "3D Navigation & Camera": 0.8,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.2,
+        "Visualization": 1,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "IncrementalVis": {
@@ -946,41 +991,43 @@
       "pages": 8,
       "weights": {
         "Hypertext & Links": 0,
-        "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Computer Graphics": 0.3,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.6,
+        "Visualization": 0.6,
         "Visual Analytics": 1,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Incremental Visualization": {
       "year": 2012,
       "pages": 8,
       "weights": {
-        "Hypertext & Links": 0.2,
-        "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Hypertext & Links": 0,
+        "Computer Graphics": 0.3,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.4,
-        "Visual Analytics": 0.8,
+        "Visualization": 0.6,
+        "Visual Analytics": 1,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Memex Vision": {
@@ -990,39 +1037,41 @@
         "Hypertext & Links": 1,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 1,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Foveated": {
       "year": 2012,
       "pages": 10,
       "weights": {
-        "Hypertext & Links": 0.2,
+        "Hypertext & Links": 0.1,
         "Computer Graphics": 1,
-        "3D Navigation & Camera": 0.8,
-        "Robotics & Task Learning": 0,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
-        "Visual Analytics": 0,
+        "Visualization": 0.6,
+        "Visual Analytics": 0.4,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "FaceRec": {
@@ -1032,39 +1081,41 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
-        "Human-in-the-Loop ML": 0,
+        "Human-in-the-Loop ML": 1,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Narrative": {
       "year": 2013,
       "pages": 10,
       "weights": {
-        "Hypertext & Links": 0.2,
-        "Computer Graphics": 0.1,
-        "3D Navigation & Camera": 0.4,
-        "Robotics & Task Learning": 0,
+        "Hypertext & Links": 0.1,
+        "Computer Graphics": 0.3,
+        "3D Navigation & Camera": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.2,
+        "Visualization": 1,
         "Visual Analytics": 0,
         "Data Storytelling": 1,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "TimeQuilt": {
@@ -1072,62 +1123,65 @@
       "pages": 4,
       "weights": {
         "Hypertext & Links": 0,
-        "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Computer Graphics": 0.3,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 1,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
-        "Visual Analytics": 0,
+        "Visualization": 1,
+        "Visual Analytics": 0.6,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0.6
       }
     },
     "Imageflow": {
       "year": 2010,
       "pages": 4,
       "weights": {
-        "Hypertext & Links": 0.1,
-        "Computer Graphics": 0.8,
-        "3D Navigation & Camera": 0.9,
-        "Robotics & Task Learning": 0,
+        "Hypertext & Links": 0,
+        "Computer Graphics": 1,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
-        "Photo & Image Tools": 0.2,
+        "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
-        "Web Search & Content": 0.1,
-        "Interactive Visualization": 0.3,
+        "Web Search & Content": 0,
+        "Visualization": 1,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Social Dilemma Testing": {
       "year": 2000,
       "pages": 8,
       "weights": {
-        "Hypertext & Links": 0.2,
+        "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
-        "Online Communities": 0.8,
+        "Robotics & Sensing": 0,
+        "Online Communities": 0.6,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Cliplets": {
@@ -1135,20 +1189,21 @@
       "pages": 11,
       "weights": {
         "Hypertext & Links": 0.1,
-        "Computer Graphics": 0.2,
-        "3D Navigation & Camera": 0.4,
-        "Robotics & Task Learning": 0,
+        "Computer Graphics": 0.3,
+        "3D Navigation & Camera": 0.8,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0.9,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Refinery": {
@@ -1156,20 +1211,21 @@
       "pages": 10,
       "weights": {
         "Hypertext & Links": 0.2,
-        "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Computer Graphics": 0.3,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.4,
+        "Visualization": 0.8,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Completion": {
@@ -1179,18 +1235,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 1,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 1,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Topic-Lead-Lag": {
@@ -1198,20 +1255,21 @@
       "pages": 14,
       "weights": {
         "Hypertext & Links": 0.2,
-        "Computer Graphics": 0.4,
-        "3D Navigation & Camera": 0.6,
-        "Robotics & Task Learning": 0.1,
-        "Online Communities": 0.1,
-        "Photo & Image Tools": 0.1,
-        "Video & Rich Media": 0.1,
-        "Web Search & Content": 0.2,
-        "Interactive Visualization": 0.4,
+        "Computer Graphics": 0.3,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
+        "Online Communities": 0,
+        "Photo & Image Tools": 0,
+        "Video & Rich Media": 0,
+        "Web Search & Content": 0,
+        "Visualization": 0.8,
         "Visual Analytics": 0.6,
-        "Data Storytelling": 0.3,
-        "Human-in-the-Loop ML": 0.1,
-        "AI Assistance": 0.1,
-        "Notebooks & Code": 0.1,
-        "Immersive & AR/VR": 0
+        "Data Storytelling": 0,
+        "Human-in-the-Loop ML": 0,
+        "AI Assistance": 0,
+        "Notebooks & Code": 0,
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Annotation Gigapixel Images": {
@@ -1219,20 +1277,21 @@
       "pages": 4,
       "weights": {
         "Hypertext & Links": 0.2,
-        "Computer Graphics": 0.1,
-        "3D Navigation & Camera": 0.8,
-        "Robotics & Task Learning": 0,
+        "Computer Graphics": 1,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
-        "Photo & Image Tools": 0.4,
+        "Photo & Image Tools": 0.6,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.2,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Contextual Facets": {
@@ -1242,18 +1301,19 @@
         "Hypertext & Links": 0.8,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.6,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Step User Interfaces": {
@@ -1263,18 +1323,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 1
       }
     },
     "GestureElicitation": {
@@ -1283,19 +1344,20 @@
       "weights": {
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 1
       }
     },
     "Gestalt": {
@@ -1304,19 +1366,20 @@
       "weights": {
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Prospect": {
@@ -1325,19 +1388,20 @@
       "weights": {
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
-        "Human-in-the-Loop ML": 0.6,
+        "Human-in-the-Loop ML": 1,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Sequence Preprocessing": {
@@ -1347,39 +1411,41 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
-        "Visual Analytics": 0,
+        "Visualization": 0.6,
+        "Visual Analytics": 0.8,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0.3
       }
     },
     "Pixaura": {
       "year": 2008,
       "pages": 4,
       "weights": {
-        "Hypertext & Links": 0.2,
+        "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 1,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Parallel Raytracing": {
@@ -1389,39 +1455,41 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 1,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Find That Photo": {
       "year": 2006,
       "pages": 3,
       "weights": {
-        "Hypertext & Links": 0.2,
+        "Hypertext & Links": 0.1,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
-        "Photo & Image Tools": 0.8,
+        "Photo & Image Tools": 0.9,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.6,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Tactile Sensor": {
@@ -1431,60 +1499,63 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 1.0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Counting Community": {
       "year": 1999,
       "pages": 2,
       "weights": {
-        "Hypertext & Links": 0.8,
+        "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 1,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Social Life of Avatars": {
       "year": 2000,
       "pages": 8,
       "weights": {
-        "Hypertext & Links": 0.2,
-        "Computer Graphics": 0.8,
-        "3D Navigation & Camera": 0.6,
-        "Robotics & Task Learning": 0,
+        "Hypertext & Links": 0,
+        "Computer Graphics": 1,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 1,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0.6
       }
     },
     "Visual Snippets": {
@@ -1492,41 +1563,43 @@
       "pages": 11,
       "weights": {
         "Hypertext & Links": 0.2,
-        "Computer Graphics": 0,
+        "Computer Graphics": 0.1,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0.6,
-        "Interactive Visualization": 0,
+        "Visualization": 0.9,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "reForm": {
       "year": 2009,
       "pages": 10,
       "weights": {
-        "Hypertext & Links": 0.8,
-        "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Hypertext & Links": 0.2,
+        "Computer Graphics": 0.1,
+        "3D Navigation & Camera": 0.4,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
-        "Human-in-the-Loop ML": 0.2,
+        "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "VWorlds": {
@@ -1535,40 +1608,42 @@
       "weights": {
         "Hypertext & Links": 0,
         "Computer Graphics": 0.3,
-        "3D Navigation & Camera": 0.8,
-        "Robotics & Task Learning": 0,
-        "Online Communities": 0.6,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
+        "Online Communities": 0.8,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 1
+        "Immersive & AR/VR": 1,
+        "Interaction Design": 0
       }
     },
     "Streaming Chat": {
       "year": 1999,
       "pages": 7,
       "weights": {
-        "Hypertext & Links": 0.2,
+        "Hypertext & Links": 0,
         "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
-        "Online Communities": 0.8,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
+        "Online Communities": 1,
         "Photo & Image Tools": 0,
-        "Video & Rich Media": 0,
+        "Video & Rich Media": 1,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 1,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Cartoon Animation Filter": {
@@ -1576,20 +1651,21 @@
       "pages": 5,
       "weights": {
         "Hypertext & Links": 0,
-        "Computer Graphics": 0.3,
+        "Computer Graphics": 1,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 1,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Web Search Variability": {
@@ -1598,19 +1674,20 @@
       "weights": {
         "Hypertext & Links": 0.2,
         "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 1,
-        "Interactive Visualization": 0,
+        "Visualization": 0,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Search Workshop": {
@@ -1619,40 +1696,42 @@
       "weights": {
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0.6,
-        "Interactive Visualization": 0,
+        "Visualization": 0,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Exploratory Search": {
       "year": 2006,
       "pages": 4,
       "weights": {
-        "Hypertext & Links": 0.2,
+        "Hypertext & Links": 0.1,
         "Computer Graphics": 0,
-        "3D Navigation & Camera": 1,
-        "Robotics & Task Learning": 0,
+        "3D Navigation & Camera": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
-        "Web Search & Content": 0.6,
-        "Interactive Visualization": 0,
+        "Web Search & Content": 0.9,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Collaborative Visualization": {
@@ -1660,20 +1739,21 @@
       "pages": 8,
       "weights": {
         "Hypertext & Links": 0.2,
-        "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Computer Graphics": 0.1,
+        "3D Navigation & Camera": 0.4,
+        "Robotics & Sensing": 0,
         "Online Communities": 0.8,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.6,
+        "Visualization": 0.9,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Intermedia2": {
@@ -1683,18 +1763,19 @@
         "Hypertext & Links": 1,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Intermedia1": {
@@ -1704,18 +1785,19 @@
         "Hypertext & Links": 1,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Mission Planner": {
@@ -1723,62 +1805,65 @@
       "pages": 10,
       "weights": {
         "Hypertext & Links": 0,
-        "Computer Graphics": 1,
+        "Computer Graphics": 0.3,
         "3D Navigation & Camera": 1,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.8,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Squeries": {
       "year": 2015,
       "pages": 10,
       "weights": {
-        "Hypertext & Links": 0.2,
+        "Hypertext & Links": 0.1,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.1,
+        "Visualization": 0.6,
         "Visual Analytics": 0.4,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Panoramic Data": {
       "year": 2014,
       "pages": 10,
       "weights": {
-        "Hypertext & Links": 0.2,
-        "Computer Graphics": 0.1,
-        "3D Navigation & Camera": 0.8,
-        "Robotics & Task Learning": 0,
+        "Hypertext & Links": 0.1,
+        "Computer Graphics": 0.3,
+        "3D Navigation & Camera": 0.6,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.2,
-        "Visual Analytics": 0.4,
+        "Visualization": 1,
+        "Visual Analytics": 0.8,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 1
       }
     },
     "Immersive VA Interaction": {
@@ -1788,39 +1873,41 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 1,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 1,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 1
+        "Immersive & AR/VR": 1,
+        "Interaction Design": 0.6
       }
     },
     "TimeSlice": {
       "year": 2012,
       "pages": 4,
       "weights": {
-        "Hypertext & Links": 0.2,
+        "Hypertext & Links": 0,
         "Computer Graphics": 0,
-        "3D Navigation & Camera": 0.8,
-        "Robotics & Task Learning": 0,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.6,
+        "Visualization": 1,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "AnchorViz": {
@@ -1830,18 +1917,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.6,
+        "Visualization": 0.8,
         "Visual Analytics": 0.2,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 1,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "ATOM": {
@@ -1851,18 +1939,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 1,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 1,
+        "Visualization": 1,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Barchart Differences": {
@@ -1872,39 +1961,41 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
-        "Visual Analytics": 0,
+        "Visualization": 1,
+        "Visual Analytics": 0.6,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "DNN Querying Videos": {
       "year": 2018,
       "pages": 6,
       "weights": {
-        "Hypertext & Links": 0.2,
+        "Hypertext & Links": 0.1,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
-        "Video & Rich Media": 1,
+        "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
-        "Human-in-the-Loop ML": 0.6,
+        "Human-in-the-Loop ML": 0.4,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "FiberClay": {
@@ -1912,41 +2003,43 @@
       "pages": 11,
       "weights": {
         "Hypertext & Links": 0,
-        "Computer Graphics": 1,
+        "Computer Graphics": 0.3,
         "3D Navigation & Camera": 1,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.6,
-        "Visual Analytics": 0.8,
+        "Visualization": 0.8,
+        "Visual Analytics": 0.3,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 1
+        "Immersive & AR/VR": 1,
+        "Interaction Design": 0.3
       }
     },
     "Interactive Data Facts": {
       "year": 2018,
       "pages": 10,
       "weights": {
-        "Hypertext & Links": 0.2,
-        "Computer Graphics": 0,
+        "Hypertext & Links": 0.1,
+        "Computer Graphics": 0.3,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.6,
-        "Visual Analytics": 0,
-        "Data Storytelling": 0,
+        "Visualization": 1,
+        "Visual Analytics": 0.6,
+        "Data Storytelling": 0.4,
         "Human-in-the-Loop ML": 0,
-        "AI Assistance": 0,
+        "AI Assistance": 0.8,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Immersive VAST": {
@@ -1956,18 +2049,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 1,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 1,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 1
+        "Immersive & AR/VR": 1,
+        "Interaction Design": 0
       }
     },
     "Narrative Patterns": {
@@ -1976,19 +2070,20 @@
       "weights": {
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 1,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Data Audiences": {
@@ -1998,18 +2093,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 1,
         "Visual Analytics": 0,
-        "Data Storytelling": 0.6,
+        "Data Storytelling": 1,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "GAMut": {
@@ -2019,18 +2115,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.2,
-        "Visual Analytics": 0.8,
+        "Visualization": 0.6,
+        "Visual Analytics": 1,
         "Data Storytelling": 0,
-        "Human-in-the-Loop ML": 0,
+        "Human-in-the-Loop ML": 0.8,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Semantic AnchorViz": {
@@ -2040,18 +2137,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.6,
-        "Visual Analytics": 0,
+        "Visualization": 0.8,
+        "Visual Analytics": 0.2,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 1,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "TensorWatch": {
@@ -2060,19 +2158,20 @@
       "weights": {
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
-        "Visual Analytics": 0,
+        "Visualization": 1,
+        "Visual Analytics": 0.6,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Affinity Lens": {
@@ -2081,19 +2180,20 @@
       "weights": {
         "Hypertext & Links": 0,
         "Computer Graphics": 0.3,
-        "3D Navigation & Camera": 0.6,
-        "Robotics & Task Learning": 0,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
-        "Visual Analytics": 0.3,
+        "Visualization": 0.6,
+        "Visual Analytics": 0.8,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 1
+        "Immersive & AR/VR": 1,
+        "Interaction Design": 0.6
       }
     },
     "Managing Notebook Messes": {
@@ -2103,60 +2203,63 @@
         "Hypertext & Links": 0.2,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.1,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 1,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "TeleGam": {
       "year": 2019,
       "pages": 5,
       "weights": {
-        "Hypertext & Links": 0.2,
+        "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.2,
-        "Visual Analytics": 0.8,
+        "Visualization": 1,
+        "Visual Analytics": 0.6,
         "Data Storytelling": 0,
-        "Human-in-the-Loop ML": 0.6,
-        "AI Assistance": 0,
+        "Human-in-the-Loop ML": 0.4,
+        "AI Assistance": 0.2,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "What Did My AI Learn": {
       "year": 2022,
       "pages": 27,
       "weights": {
-        "Hypertext & Links": 0.2,
+        "Hypertext & Links": 0.1,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.1,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
-        "Human-in-the-Loop ML": 0.6,
-        "AI Assistance": 0.4,
+        "Human-in-the-Loop ML": 0,
+        "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "NL2VIS": {
@@ -2166,18 +2269,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
-        "Visual Analytics": 0,
-        "Data Storytelling": 0,
-        "Human-in-the-Loop ML": 0,
-        "AI Assistance": 0,
+        "Visualization": 1,
+        "Visual Analytics": 0.6,
+        "Data Storytelling": 0.4,
+        "Human-in-the-Loop ML": 0.2,
+        "AI Assistance": 0.8,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0.6
       }
     },
     "Data Visceralization": {
@@ -2187,18 +2291,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 1,
         "3D Navigation & Camera": 1,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 1,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 1
+        "Immersive & AR/VR": 1,
+        "Interaction Design": 0
       }
     },
     "Fork It": {
@@ -2208,18 +2313,19 @@
         "Hypertext & Links": 0.2,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.1,
+        "Visualization": 0.6,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
-        "Notebooks & Code": 0.9,
-        "Immersive & AR/VR": 0
+        "Notebooks & Code": 1,
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "AI Model Communication": {
@@ -2229,18 +2335,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
-        "Human-in-the-Loop ML": 0,
-        "AI Assistance": 0.6,
+        "Human-in-the-Loop ML": 0.6,
+        "AI Assistance": 0.5,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Reuse Strategies": {
@@ -2250,18 +2357,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 0,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 1,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "DITL": {
@@ -2271,18 +2379,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 1,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
-        "Notebooks & Code": 1,
-        "Immersive & AR/VR": 0
+        "Notebooks & Code": 0.6,
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Composites": {
@@ -2292,18 +2401,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 1,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
-        "Visual Analytics": 1,
+        "Visualization": 1,
+        "Visual Analytics": 0.6,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 1
+        "Immersive & AR/VR": 0.8,
+        "Interaction Design": 0.6
       }
     },
     "AI Code Assistants for Notebooks": {
@@ -2313,18 +2423,19 @@
         "Hypertext & Links": 0.2,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.2,
+        "Visualization": 1,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0.8,
         "Notebooks & Code": 1,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "AI-Assisted Data Analysis": {
@@ -2334,18 +2445,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
-        "Visual Analytics": 0,
+        "Visualization": 1,
+        "Visual Analytics": 0.6,
         "Data Storytelling": 0,
-        "Human-in-the-Loop ML": 0,
+        "Human-in-the-Loop ML": 0.4,
         "AI Assistance": 1,
-        "Notebooks & Code": 0.6,
-        "Immersive & AR/VR": 0
+        "Notebooks & Code": 0.8,
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0.6
       }
     },
     "Data Formulator 2": {
@@ -2353,62 +2465,65 @@
       "pages": 17,
       "weights": {
         "Hypertext & Links": 0,
-        "Computer Graphics": 0,
-        "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Computer Graphics": 0.3,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.6,
-        "Visual Analytics": 0.4,
+        "Visualization": 1,
+        "Visual Analytics": 0.6,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0.8,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Visualization Retargeting": {
       "year": 2025,
       "pages": 5,
       "weights": {
-        "Hypertext & Links": 0.2,
-        "Computer Graphics": 0.1,
-        "3D Navigation & Camera": 0.4,
-        "Robotics & Task Learning": 0,
+        "Hypertext & Links": 0,
+        "Computer Graphics": 0.3,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.6,
+        "Visualization": 1,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0.8,
-        "Notebooks & Code": 0.4,
-        "Immersive & AR/VR": 0
+        "Notebooks & Code": 0,
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "ImaginationVellum": {
       "year": 2025,
       "pages": 19,
       "weights": {
-        "Hypertext & Links": 0.2,
-        "Computer Graphics": 0.4,
+        "Hypertext & Links": 0.1,
+        "Computer Graphics": 0.9,
         "3D Navigation & Camera": 0.8,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 1,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
-        "AI Assistance": 0.2,
+        "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "InChorus": {
@@ -2418,18 +2533,19 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0,
+        "Visualization": 1,
         "Visual Analytics": 0,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 1
       }
     },
     "Dear Pictograph": {
@@ -2439,60 +2555,63 @@
         "Hypertext & Links": 0,
         "Computer Graphics": 0.3,
         "3D Navigation & Camera": 1,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.6,
-        "Visual Analytics": 0.4,
-        "Data Storytelling": 0.8,
+        "Visualization": 1,
+        "Visual Analytics": 0,
+        "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 1
+        "Immersive & AR/VR": 1,
+        "Interaction Design": 0.6
       }
     },
     "Evaluating Interactive ML Systems": {
       "year": 2020,
       "pages": 11,
       "weights": {
-        "Hypertext & Links": 0.2,
-        "Computer Graphics": 0.1,
-        "3D Navigation & Camera": 0.8,
-        "Robotics & Task Learning": 0,
+        "Hypertext & Links": 0,
+        "Computer Graphics": 0.3,
+        "3D Navigation & Camera": 1,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.2,
-        "Visual Analytics": 0,
+        "Visualization": 1,
+        "Visual Analytics": 0.6,
         "Data Storytelling": 0,
-        "Human-in-the-Loop ML": 0.8,
+        "Human-in-the-Loop ML": 1,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     },
     "Visualization Grammars SIG": {
       "year": 2021,
       "pages": 3,
       "weights": {
-        "Hypertext & Links": 0.2,
+        "Hypertext & Links": 0.1,
         "Computer Graphics": 0,
         "3D Navigation & Camera": 0,
-        "Robotics & Task Learning": 0,
+        "Robotics & Sensing": 0,
         "Online Communities": 0,
         "Photo & Image Tools": 0,
         "Video & Rich Media": 0,
         "Web Search & Content": 0,
-        "Interactive Visualization": 0.2,
-        "Visual Analytics": 0.4,
+        "Visualization": 1,
+        "Visual Analytics": 0.6,
         "Data Storytelling": 0,
         "Human-in-the-Loop ML": 0,
         "AI Assistance": 0,
         "Notebooks & Code": 0,
-        "Immersive & AR/VR": 0
+        "Immersive & AR/VR": 0,
+        "Interaction Design": 0
       }
     }
   }
