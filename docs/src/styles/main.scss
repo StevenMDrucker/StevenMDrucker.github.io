@@ -429,9 +429,14 @@ a { color: $accent; }
 
 .myFacet {
   cursor: pointer;
-  thead { font-size: 13px; font-weight: 600; color: $text; }
+  // Override Bootstrap's CSS variable so its direct cell rule resolves
+  // to our theme color instead of Bootstrap's default --bs-body-color
+  --bs-table-color: #{$text};
+  --bs-table-border-color: #{$border};
+  thead { font-size: 13px; font-weight: 600; }
   tbody {
-    font-size: 12px; color: $text-muted;
+    font-size: 12px;
+    td { color: $text-muted; } // more specific than Bootstrap's var-driven rule
     tr > td { transition: background-color 0.12s, color 0.12s; }
     tr.selected > td { background-color: rgba(244, 63, 94, 0.42) !important; color: #fff !important; font-weight: 600; }
     tr.myOver > td   { background-color: rgba(99, 102, 241, 0.42) !important; color: #fff !important; }
@@ -761,7 +766,13 @@ body.light-theme {
   .accordion-button { background: #f8fafc !important; color: #1e293b !important; &:not(.collapsed) { color: #0284c7 !important; background: #f0f6ff !important; } &::after { filter: none; } }
   .accordion-body { background: #fff !important; }
   .reset-filter-btn { background: #f8fafc; border-color: rgba(0,0,0,0.12); color: #475569; &:hover { color: #0f172a; border-color: rgba(0,0,0,0.25); } }
-  .myFacet { thead { color: #0f172a; } tbody { color: #475569; tr.selected > td { background-color: rgba(220, 38, 38, 0.18) !important; color: #1e293b !important; font-weight: 600; } tr.myOver > td { background-color: rgba(99, 102, 241, 0.15) !important; color: #1e293b !important; } } }
+  .myFacet {
+    --bs-table-color: #0f172a;
+    --bs-table-border-color: rgba(0, 0, 0, 0.15);
+    tbody td { color: #475569; }
+    tr.selected > td { background-color: rgba(220, 38, 38, 0.18) !important; color: #1e293b !important; font-weight: 600; }
+    tr.myOver > td   { background-color: rgba(99, 102, 241, 0.15) !important; color: #1e293b !important; }
+  }
   .dropdown-menu-dark { background-color: #fff !important; border-color: rgba(0,0,0,0.1) !important;
     .dropdown-item { color: #334155 !important; &:hover { background: rgba(0,0,0,0.05) !important; color: #0f172a !important; } }
   }
