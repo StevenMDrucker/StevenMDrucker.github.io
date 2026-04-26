@@ -42,9 +42,10 @@ const OUTPUT_FILE = path.join(ROOT, 'docs/src/data/topicData.json');
 const OLLAMA_URL  = process.env.OLLAMA_URL  || 'http://localhost:11434';
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'llama3.2';
 
-// ─── fixed taxonomy ───────────────────────────────────────────────────────────
+// ─── taxonomy v1 (original, 11 topics) ───────────────────────────────────────
 // Derived from the Timeline's primaryList; UI-Information split into two.
-const TOPICS = [
+// Kept for rollback — to revert, set TOPICS = TOPICS_V1 below.
+const TOPICS_V1 = [
   { name: 'Hypertext',        desc: 'hypertext, hypermedia, web links, linked documents, browser navigation' },
   { name: 'Robotics',         desc: 'robot learning, robot control, tactile sensing, autonomous systems' },
   { name: 'Graphics',         desc: 'computer graphics, rendering, ray tracing, radiosity, 3D animation, parallel graphics' },
@@ -57,6 +58,31 @@ const TOPICS = [
   { name: 'Machine Learning', desc: 'machine learning, classification, deep learning, neural networks, model debugging, ML tools' },
   { name: 'Visualization',    desc: 'information visualization, data visualization, visual analytics, interactive charts, visual query' },
 ];
+
+// ─── taxonomy v2 (15 topics, TF-IDF–informed) ────────────────────────────────
+// Splits the three universal v1 topics (User Interfaces, Visualization,
+// Information) into more discriminating sub-areas, and separates narrow
+// early-career topics (Robotics, Hypertext) from their natural neighbours.
+const TOPICS_V2 = [
+  { name: 'Hypertext & Links',        desc: 'hypertext systems, hypermedia, linked documents, web links, transclusion, document structure, Intermedia' },
+  { name: 'Computer Graphics',        desc: 'rendering, ray tracing, radiosity, parallel graphics, 3D animation, scan conversion, shading' },
+  { name: '3D Navigation & Camera',   desc: 'virtual camera control, cinematography, viewpoint selection, 3D navigation, camera path planning, visibility constraints' },
+  { name: 'Robotics & Task Learning', desc: 'robot learning, tactile sensing, task-level control, juggling, autonomous manipulation, motor skill learning' },
+  { name: 'Online Communities',       desc: 'avatars, virtual worlds, MOOs, MUDs, chat, computer-mediated communication, social spaces, online interaction' },
+  { name: 'Photo & Image Tools',      desc: 'photo management, photo triage, image browsing, photomontage, image completion, image annotation, photo collections' },
+  { name: 'Video & Rich Media',       desc: 'video browsing, video editing, cliplets, media collections, streaming, token TV, screencast, media lifecycle' },
+  { name: 'Web Search & Content',     desc: 'web search, information retrieval, web content extraction, webpage structure, query formulation, search variability' },
+  { name: 'Interactive Visualization',desc: 'information visualization, interactive charts, SandDance, visual query, faceted browsing, data tables, visual encoding' },
+  { name: 'Visual Analytics',         desc: 'visual analytics, data exploration, dashboard, big data, incremental visualization, uncertainty visualization, immersive analytics' },
+  { name: 'Data Storytelling',        desc: 'narrative visualization, data-driven storytelling, presentation tools, slideshow, demonstration, animation, audience communication' },
+  { name: 'Human-in-the-Loop ML',    desc: 'interactive machine learning, active learning, labeling, model debugging, classifier evaluation, AnchorViz, ML fairness' },
+  { name: 'AI Assistance',           desc: 'AI-assisted analysis, language models, code generation, AI explanation, model communication, GPT, LLM tools' },
+  { name: 'Notebooks & Code',        desc: 'computational notebooks, Jupyter, code assistants, notebook management, literate programming, data science workflows' },
+  { name: 'Immersive & AR/VR',       desc: 'virtual reality, augmented reality, immersive environments, mixed reality, spatial interaction, VR analytics, 3D UI' },
+];
+
+// ── active taxonomy (switch here to roll back to v1) ─────────────────────────
+const TOPICS = TOPICS_V2;
 
 const TOPIC_NAMES = TOPICS.map(t => t.name);
 
@@ -99,7 +125,7 @@ async function ollamaChat(prompt) {
     body: JSON.stringify({
       model: OLLAMA_MODEL,
       stream: false,
-      options: { temperature: 0.0, num_predict: 300 },
+      options: { temperature: 0.0, num_predict: 600 },
       messages: [{ role: 'user', content: prompt }],
     }),
   });
@@ -132,7 +158,8 @@ Topics to rate:
 ${topicLines}
 
 Return ONLY a JSON object mapping each topic name to its score, e.g.:
-{"Hypertext":0.0,"Robotics":0.0,"Graphics":0.0,"Camera":0.0,"Social":0.0,"User Interfaces":0.8,"Information":0.3,"Media":0.0,"Presentation":0.0,"Machine Learning":0.0,"Visualization":0.7}`;
+${JSON.stringify(Object.fromEntries(TOPIC_NAMES.map((n, i) => [n, i === 0 ? 0.8 : i === 1 ? 0.3 : 0.0])))}`;
+
 
   const raw = await ollamaChat(prompt);
   const m = raw.match(/\{[\s\S]*\}/);
