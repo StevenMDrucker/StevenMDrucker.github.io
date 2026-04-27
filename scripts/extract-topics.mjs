@@ -37,8 +37,9 @@ const ROOT       = path.resolve(__dirname, '..');
 const BASE_URL   = 'https://stevenmdrucker.github.io/ResearchContent/';
 const LOCAL_CONTENT = process.env.RESEARCH_CONTENT_PATH
   || path.join(process.env.HOME, 'Documents/Projects/WebSite/ResearchContent');
-const CACHE_FILE = path.join(__dirname, '.extract-cache.json');
-const OUTPUT_FILE = path.join(ROOT, 'docs/src/data/topicData.json');
+const CACHE_FILE   = path.join(__dirname, '.extract-cache.json');
+const TEXT_CACHE   = path.join(__dirname, '.text-cache');   // raw PDF text per paper
+const OUTPUT_FILE  = path.join(ROOT, 'docs/src/data/topicData.json');
 const OLLAMA_URL  = process.env.OLLAMA_URL  || 'http://localhost:11434';
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'llama3.2';
 
@@ -252,8 +253,12 @@ async function main() {
     console.log(`Loaded ${Object.keys(cache).length} cached entries\n`);
   }
 
-  const results = [];   // { key, year, pages, weights }
+  const results = [];   // { key, year, pages, wordcount, weights }
   const skipped = [];
+  fs.mkdirSync(TEXT_CACHE, { recursive: true });
+
+  // Sanitise a paper caption to a safe filename
+  const safeKey = key => key.replace(/[^a-zA-Z0-9_\-]/g, '_');
 
   for (let i = 0; i < withPdf.length; i++) {
     const paper = withPdf[i];
@@ -280,19 +285,24 @@ async function main() {
         console.log('  ✗ too little text'); skipped.push(key); continue;
       }
 
-      const pages   = parsed.numpages || 1;
-      const weights = await ratePaper(parsed.text, key, pages);
+      // ── persist full text to .text-cache/<key>.txt ──────────────────────────
+      const txtPath = path.join(TEXT_CACHE, safeKey(key) + '.txt');
+      fs.writeFileSync(txtPath, parsed.text);
+
+      const pages     = parsed.numpages || 1;
+      const wordcount = (parsed.text.match(/[a-zA-Z']+/g) || []).length;
+      const weights   = await ratePaper(parsed.text, key, pages);
 
       const top = Object.entries(weights)
         .filter(([, v]) => v > 0)
         .sort((a, b) => b[1] - a[1])
         .map(([k, v]) => `${k}:${v}`)
         .join('  ');
-      console.log(`  ✓ [${pages}pp] ${top}`);
+      console.log(`  ✓ [${pages}pp, ${wordcount.toLocaleString()}w] ${top}`);
 
-      cache[key] = { pages, weights };
+      cache[key] = { pages, wordcount, weights };
       fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 2));
-      results.push({ key, year, pages, weights });
+      results.push({ key, year, pages, wordcount, weights });
 
     } catch (e) {
       console.error(`  ✗ ${e.message}`);
@@ -308,8 +318,8 @@ async function main() {
 
   // Build output
   const papers = {};
-  for (const { key, year, pages, weights } of results) {
-    papers[key] = { year, pages, weights };
+  for (const { key, year, pages, wordcount, weights } of results) {
+    papers[key] = { year, pages, wordcount: wordcount ?? 0, weights };
   }
 
   const output = { topics: TOPIC_NAMES, papers };
