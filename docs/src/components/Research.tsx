@@ -6,6 +6,7 @@ import { MyPopup } from './MyPopup';
 import { KeywordVis } from './KeywordVis';
 import { TimelineVis } from './TimelineVis';
 import { StreamgraphVis } from './StreamgraphVis';
+import { WordParticleVis } from './WordParticleVis';
 
 function useContainerWidth(ref: React.RefObject<HTMLDivElement | null>) {
   const [width, setWidth] = useState(0);
@@ -227,6 +228,16 @@ export function Research() {
         />
       </div>
     );
+  } else if (mode === 'particles') {
+    resultsDisplay = (
+      <div className={fitMode ? '' : 'vis-scroll'}>
+        <WordParticleVis
+          items={researchData}
+          containerWidth={visWidth || 800}
+          fitMode={fitMode}
+        />
+      </div>
+    );
   }
 
   const viewModes = [
@@ -236,6 +247,7 @@ export function Research() {
     { id: 'timeline',    label: 'Timeline',    icon: '◷' },
     { id: 'keyword',     label: 'Keywords',    icon: '⊛' },
     { id: 'stream',      label: 'Streamgraph', icon: '〜' },
+    { id: 'particles',   label: 'Particles',   icon: '·' },
   ];
 
   return (
@@ -261,7 +273,7 @@ export function Research() {
                 </div>
 
                 {/* Fit/Zoom toggle */}
-                {(mode === 'timeline' || mode === 'keyword' || mode === 'stream') && (
+                {(mode === 'timeline' || mode === 'keyword' || mode === 'stream' || mode === 'particles') && (
                   <button
                     className={`fit-zoom-btn${fitMode ? ' active' : ''}`}
                     onClick={() => setFitMode(f => !f)}
