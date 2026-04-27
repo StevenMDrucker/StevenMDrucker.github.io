@@ -106,8 +106,19 @@ const TOPICS_V3 = [
   { name: 'Interaction Design',  desc: 'user interface design, input methods, gesture elicitation, touch interaction, usability evaluation, multi-device systems, HCI experiments, UI design patterns and guidelines — the primary contribution is a new interaction technique or HCI study' },
 ];
 
-// ── active taxonomy (change TOPICS_V3 → TOPICS_V2 or TOPICS_V1 to roll back)
-const TOPICS = TOPICS_V3;
+// ─── taxonomy v4 (16 topics, camera topic narrowed) ──────────────────────────
+// Only change from v3: "3D Navigation & Camera" is scoped tightly to papers
+// whose PRIMARY contribution is a camera-control or 3D-navigation SYSTEM —
+// NOT papers that happen to display data in 3D or use spatial metaphors.
+const TOPICS_V4 = TOPICS_V3.map(t =>
+  t.name !== '3D Navigation & Camera' ? t : {
+    name: '3D Navigation & Camera',
+    desc: 'building or studying a camera-control or viewpoint-selection system: automated cinematography, camera path planning for sports or broadcast, virtual camera interfaces, first-person navigation interfaces in virtual museums or games, camera constraint solvers — the paper\'s central research problem is HOW a camera or viewer moves through a scene. NOT papers that visualize data in 3D, NOT immersive analytics (those go to Immersive & AR/VR), NOT computer graphics rendering techniques (those go to Computer Graphics)',
+  }
+);
+
+// ── active taxonomy (change TOPICS_V4 → TOPICS_V3/V2/V1 to roll back)
+const TOPICS = TOPICS_V4;
 
 const TOPIC_NAMES = TOPICS.map(t => t.name);
 
