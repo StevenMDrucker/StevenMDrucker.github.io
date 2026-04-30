@@ -6,7 +6,6 @@
  * Layouts
  *  • Timeline — proportional topic bands (by particle count), x = year within band
  *  • By Year  — x = publication year, particles stack vertically
- *  • By Paper — year-sorted paper grid; canvas boxes + captions per paper
  *  • By Word  — top-40 words as columns (most→least freq), bottom-up stacks
  */
 
@@ -64,14 +63,15 @@ interface Particle {
 }
 
 // ─── constants ───────────────────────────────────────────────────────────────
-type LayoutMode = 'timeline' | 'year' | 'paper' | 'word';
+type LayoutMode = 'timeline' | 'year' | 'word';
 
 const LERP_K   = 0.09;
 const R_NORM   = 2.5;
 const R_HOV    = 4.5;
 const STEP     = R_NORM * 2 + 0.8;   // ~6 px between particle centres
 const LEGEND_W = 182;
-const PAD = { t: 20, r: 8, b: 50, l: 8 } as const;
+// PAD.l = 130 reserves space for topic labels on the left (used in timeline mode)
+const PAD = { t: 20, r: 8, b: 50, l: 130 } as const;
 const TOP_WORDS = 40;                  // words shown in word layout
 
 function spread(seed: number, range: number): number {
@@ -92,8 +92,9 @@ export function WordParticleVis({
   const rafRef    = useRef(0);
 
   // RAF-loop refs (updated without restarting loop)
-  const brushedTopicRef = useRef<string | null>(null);   // pinned via click
-  const hovTopicRef     = useRef<string | null>(null);   // transient hover
+  const brushedTopicRef = useRef<string | null>(null);   // pinned via legend click
+  const hovTopicRef     = useRef<string | null>(null);   // transient legend hover
+  const hovWordRef      = useRef<string | null>(null);   // word hovered on canvas
   const layoutRef       = useRef<LayoutMode>('timeline');
 
   // React state for UI
@@ -194,12 +195,23 @@ export function WordParticleVis({
       byTopicYear.forEach((byYr, topic) => {
         const bt = bTop.get(topic) ?? PAD.t;
         const bh = Math.max(bH.get(topic) ?? 10, 10);
+        // gridW: fit all particles into band height → expand horizontally for square clusters
         byYr.forEach((idxs, yr) => {
-          const x0   = yearX(yr);
-          const step = Math.min((bh - 4) / Math.max(idxs.length, 1), STEP);
-          idxs.forEach((i, k) => {
-            tx[i] = x0 + spread(i, 6);
-            ty[i] = bt + 4 + k * step;
+          const x0 = yearX(yr);
+          const n  = idxs.length;
+          // maxRows from band height; gridW fills horizontally to keep shape square-ish
+          const maxRows = Math.max(1, Math.floor((bh - 6) / STEP));
+          const gridW   = Math.max(1, Math.ceil(n / maxRows));
+          // sort by caption then paperRank so same-paper words cluster together
+          const sorted = idxs.slice().sort((a, b) => {
+            const cc = particles[a].caption.localeCompare(particles[b].caption);
+            return cc !== 0 ? cc : particles[a].paperRank - particles[b].paperRank;
+          });
+          sorted.forEach((i, k) => {
+            const gc = k % gridW;
+            const gr = Math.floor(k / gridW);
+            tx[i] = x0 + gc * STEP + spread(i, 1.5);
+            ty[i] = bt + 3 + gr * STEP + spread(i * 7, 1.5);
           });
         });
       });
@@ -223,48 +235,14 @@ export function WordParticleVis({
       });
     }
 
-    // ── By Paper: year-sorted grid cells ──────────────────────────────────────
-    else if (mode === 'paper') {
-      const paperOrder = [...new Set(particles.map(p => p.caption))].sort((a, b) => {
-        const ay  = particles.find(p => p.caption === a)?.year ?? 0;
-        const by2 = particles.find(p => p.caption === b)?.year ?? 0;
-        return ay - by2;
-      });
-      const nP    = paperOrder.length;
-      const nCols = Math.max(1, Math.ceil(Math.sqrt(nP * (IW / IH))));
-      const nRows = Math.ceil(nP / nCols);
-      const cellW = IW / nCols;
-      const cellH = IH / nRows;
-
-      const byPaper = new Map<string, number[]>();
-      particles.forEach((p, i) => {
-        if (!byPaper.has(p.caption)) byPaper.set(p.caption, []);
-        byPaper.get(p.caption)!.push(i);
-      });
-
-      paperOrder.forEach((cap, pi) => {
-        const col   = pi % nCols;
-        const row   = Math.floor(pi / nCols);
-        const cxC   = PAD.l + col * cellW + cellW / 2;
-        const cyC   = PAD.t + row * cellH + cellH / 2;
-        const idxs  = (byPaper.get(cap) ?? []).sort((a, b) => particles[a].paperRank - particles[b].paperRank);
-        const n     = idxs.length;
-        const sW    = Math.max(3, Math.ceil(Math.sqrt(n)));
-        const sStep = Math.min((cellW - 6) / sW, (cellH - 16) / Math.ceil(n / sW), STEP);
-        const nRows2 = Math.ceil(n / sW);
-        idxs.forEach((idx, k) => {
-          const sc = k % sW;
-          const sr = Math.floor(k / sW);
-          tx[idx] = cxC - sStep * (sW - 1) / 2     + sc * sStep + spread(idx * 5,  sStep * 0.2);
-          ty[idx] = cyC - sStep * (nRows2 - 1) / 2 + sr * sStep + spread(idx * 13, sStep * 0.2);
-        });
-      });
-    }
-
-    // ── By Word: columns sorted most→least freq, bottom-up stacking ───────────
+    // ── By Word: columns sorted most→least freq (by particle count), bottom-up stacking
     else if (mode === 'word') {
-      const topWordIdxs = [...new Set(particles.map(p => p.wordIdx))]
-        .sort((a, b) => WD.freqs[b] - WD.freqs[a])
+      // Sort by how many particles exist for each word in the current filtered set
+      // (not global WD.freqs) so columns are strictly monotonically decreasing in height
+      const wordParticleCount = new Map<number, number>();
+      particles.forEach(p => wordParticleCount.set(p.wordIdx, (wordParticleCount.get(p.wordIdx) ?? 0) + 1));
+      const topWordIdxs = [...wordParticleCount.keys()]
+        .sort((a, b) => (wordParticleCount.get(b) ?? 0) - (wordParticleCount.get(a) ?? 0))
         .slice(0, TOP_WORDS);
       const wPosMap = new Map<number, number>(topWordIdxs.map((wi, i) => [wi, i]));
       const nW   = topWordIdxs.length;
@@ -324,9 +302,10 @@ export function WordParticleVis({
 
     function draw() {
       if (!alive) return;
-      const p    = pos.current;
-      const mode = layoutRef.current;
+      const p           = pos.current;
+      const mode        = layoutRef.current;
       const activeTopic = brushedTopicRef.current ?? hovTopicRef.current;
+      const activeWord  = hovWordRef.current;
 
       ctx.clearRect(0, 0, CW, H);
 
@@ -336,7 +315,7 @@ export function WordParticleVis({
         p.cy[i] += (p.ty[i] - p.cy[i]) * LERP_K;
       }
 
-      // ── Timeline band backgrounds ─────────────────────────────────────────
+      // ── Timeline band backgrounds + left-margin topic labels ──────────────
       if (mode === 'timeline') {
         const activeTopics = TD.topics.filter(t => particles.some(pt => pt.primaryTopic === t));
         const topicCount   = new Map<string, number>();
@@ -346,64 +325,48 @@ export function WordParticleVis({
         activeTopics.forEach(t => {
           const h  = ((topicCount.get(t) ?? 0) / total) * IH;
           const hl = activeTopic === t;
-          ctx.fillStyle = TOPIC_COLOR[t] ?? '#888';
-          ctx.globalAlpha = hl ? 0.20 : 0.09;
+          // coloured band fill
+          ctx.fillStyle   = TOPIC_COLOR[t] ?? '#888';
+          ctx.globalAlpha = hl ? 0.22 : 0.10;
           ctx.fillRect(PAD.l, cumY, IW, h);
           // separator line
-          ctx.globalAlpha = 0.18;
+          ctx.globalAlpha = 0.20;
           ctx.strokeStyle = '#555';
           ctx.lineWidth   = 0.5;
-          ctx.beginPath(); ctx.moveTo(PAD.l, cumY); ctx.lineTo(PAD.l + IW, cumY); ctx.stroke();
-          // band label (right side, small)
-          ctx.globalAlpha = 0.55;
+          ctx.beginPath(); ctx.moveTo(0, cumY); ctx.lineTo(CW, cumY); ctx.stroke();
+          // left-margin topic label (right-aligned, vertically centred in band)
+          ctx.globalAlpha = hl ? 0.90 : 0.60;
           ctx.fillStyle   = TOPIC_COLOR[t] ?? '#888';
-          ctx.font        = '8px system-ui,sans-serif';
-          ctx.textAlign   = 'left';
-          const lbl = t.length > 22 ? t.slice(0, 20) + '…' : t;
-          ctx.fillText(lbl, PAD.l + 3, Math.min(cumY + h - 3, cumY + 12));
+          ctx.font        = `${h < 16 ? 7 : 8}px system-ui,sans-serif`;
+          ctx.textAlign   = 'right';
+          const lbl = t.length > 20 ? t.slice(0, 18) + '…' : t;
+          const labelY = Math.max(cumY + 9, Math.min(cumY + h - 3, cumY + h / 2 + 4));
+          ctx.fillText(lbl, PAD.l - 5, labelY);
           cumY += h;
         });
         ctx.globalAlpha = 1;
       }
 
-      // ── Paper boxes (computed from current lerped positions) ───────────────
-      if (mode === 'paper') {
-        const bboxes = new Map<string, { x0: number; y0: number; x1: number; y1: number }>();
-        for (let i = 0; i < N; i++) {
-          const cap = particles[i].caption;
-          if (!bboxes.has(cap)) bboxes.set(cap, { x0: Infinity, y0: Infinity, x1: -Infinity, y1: -Infinity });
-          const b = bboxes.get(cap)!;
-          if (p.cx[i] < b.x0) b.x0 = p.cx[i];
-          if (p.cy[i] < b.y0) b.y0 = p.cy[i];
-          if (p.cx[i] > b.x1) b.x1 = p.cx[i];
-          if (p.cy[i] > b.y1) b.y1 = p.cy[i];
-        }
-        ctx.save();
-        bboxes.forEach((b, cap) => {
-          if (!isFinite(b.x0)) return;
-          const pd = 5;
-          ctx.strokeStyle = 'rgba(180,180,180,0.30)';
-          ctx.lineWidth   = 0.75;
-          ctx.strokeRect(b.x0 - pd, b.y0 - pd - 9, b.x1 - b.x0 + pd * 2, b.y1 - b.y0 + pd * 2 + 9);
-          ctx.fillStyle   = 'rgba(160,160,160,0.65)';
-          ctx.font        = '6.5px system-ui,sans-serif';
-          ctx.textAlign   = 'center';
-          const lbl = cap.length > 22 ? cap.slice(0, 20) + '…' : cap;
-          ctx.fillText(lbl, (b.x0 + b.x1) / 2, b.y0 - pd - 1);
-        });
-        ctx.restore();
-      }
-
-      // ── particles (2-pass when topic is active) ───────────────────────────
-      const passes = activeTopic ? 2 : 1;
+      // ── particles — dual brushing: word (canvas) AND/OR topic (legend) ────
+      // Priority: activeTopic from legend dims by topic; activeWord dims by word
+      // When both are set, a particle survives if it matches topic OR matches word
+      const hasBrush = !!(activeTopic || activeWord);
+      const passes   = hasBrush ? 2 : 1;
       for (let pass = 0; pass < passes; pass++) {
         for (let i = 0; i < N; i++) {
-          const pt      = particles[i];
-          const isMatch = activeTopic ? pt.primaryTopic === activeTopic : true;
+          const pt = particles[i];
+          let isMatch: boolean;
+          if (activeTopic && activeWord) {
+            isMatch = pt.primaryTopic === activeTopic || pt.word === activeWord;
+          } else if (activeTopic) {
+            isMatch = pt.primaryTopic === activeTopic;
+          } else {
+            isMatch = pt.word === activeWord;
+          }
           if (passes > 1 && pass === 0 &&  isMatch) continue;
           if (passes > 1 && pass === 1 && !isMatch) continue;
 
-          ctx.globalAlpha = activeTopic ? (isMatch ? 0.92 : 0.05) : 0.68;
+          ctx.globalAlpha = hasBrush ? (isMatch ? 0.92 : 0.05) : 0.68;
           ctx.fillStyle   = pt.color;
           ctx.beginPath();
           ctx.arc(p.cx[i], p.cy[i], R_NORM, 0, Math.PI * 2);
@@ -435,19 +398,16 @@ export function WordParticleVis({
       if (dx * dx + dy * dy < R_HOV * R_HOV * 2.5) { found = particles[i]; break; }
     }
     if (found) {
-      hovTopicRef.current = found.primaryTopic;
-      if (!brushedTopicRef.current) setHighlightTopic(found.primaryTopic);
+      hovWordRef.current = found.word;  // word brushing from canvas — does NOT affect topic legend
       setTooltip({ cx: e.clientX, cy: e.clientY, p: found });
     } else {
-      hovTopicRef.current = brushedTopicRef.current;
-      if (!brushedTopicRef.current) setHighlightTopic(null);
+      hovWordRef.current = null;
       setTooltip(null);
     }
   }, [N, CW, H, particles]);
 
   const handleMouseLeave = useCallback(() => {
-    hovTopicRef.current = brushedTopicRef.current;
-    if (!brushedTopicRef.current) setHighlightTopic(null);
+    hovWordRef.current = null;
     setTooltip(null);
   }, []);
 
@@ -478,7 +438,6 @@ export function WordParticleVis({
   const BTNS: { id: LayoutMode; label: string; icon: string }[] = [
     { id: 'timeline', label: 'Timeline', icon: '◷' },
     { id: 'year',     label: 'By Year',  icon: '≡' },
-    { id: 'paper',    label: 'By Paper', icon: '⊞' },
     { id: 'word',     label: 'By Word',  icon: '⊛' },
   ];
 
@@ -632,33 +591,27 @@ function drawAxes(
     }
   }
 
-  // word column labels (rotated, bottom)
+  // word column labels (rotated, bottom) — must use same sort as computeTargets
   if (mode === 'word') {
-    const topWordIdxs = [...new Set(particles.map(p => p.wordIdx))]
-      .sort((a, b) => WD.freqs[b] - WD.freqs[a])
+    const wordParticleCount = new Map<number, number>();
+    particles.forEach(p => wordParticleCount.set(p.wordIdx, (wordParticleCount.get(p.wordIdx) ?? 0) + 1));
+    const topWordIdxs = [...wordParticleCount.keys()]
+      .sort((a, b) => (wordParticleCount.get(b) ?? 0) - (wordParticleCount.get(a) ?? 0))
       .slice(0, TOP_WORDS);
-    const nW   = topWordIdxs.length;
-    const colW = IW / nW;
-    const STEP_L = R_NORM * 2 + 0.8;
-    const gridW  = Math.min(10, Math.max(3, Math.round(colW / STEP_L)));
+    const nW     = topWordIdxs.length;
+    const colW   = IW / nW;
+    const gridW  = Math.min(10, Math.max(3, Math.round(colW / STEP)));
     ctx.fillStyle = '#888';
     ctx.textAlign = 'right';
     topWordIdxs.forEach((wi, col) => {
-      const x0     = PAD.l + col * colW + colW / 2 - ((gridW - 1) / 2) * STEP_L;
-      const xLabel = x0 + ((gridW - 1) / 2) * STEP_L;
+      const x0     = PAD.l + col * colW + colW / 2 - ((gridW - 1) / 2) * STEP;
+      const xLabel = x0 + ((gridW - 1) / 2) * STEP;
       ctx.save();
       ctx.translate(xLabel, H - PAD.b + 4);
       ctx.rotate(-Math.PI * 0.42);
       ctx.fillText(WD.words[wi], 0, 0);
       ctx.restore();
     });
-  }
-
-  // paper view hint
-  if (mode === 'paper') {
-    ctx.textAlign = 'left';
-    ctx.fillStyle = '#555';
-    ctx.fillText('papers sorted by year →', PAD.l + 2, H - PAD.b + 12);
   }
 
   ctx.restore();
