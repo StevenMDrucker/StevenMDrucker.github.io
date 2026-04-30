@@ -1,20 +1,20 @@
 /**
  * WordParticleVis — SandDance-style animated particle visualization.
- * Each particle is a (word × paper) occurrence.  Layouts animate smoothly
+ * Each particle is a (word × paper) occurrence. Layouts animate smoothly
  * between configurations using a lerp loop on a Canvas 2D context.
  *
  * Layouts
- *  • By Year  — x = publication year, particles stack vertically within each year
- *  • By Paper — papers in a year-sorted grid; words arranged within each cell
- *  • By Topic — horizontal bands by primary topic, x = year within band
- *  • By Word  — top-50 words as columns, papers stacked within each column
+ *  • Timeline — proportional topic bands (by particle count), x = year within band
+ *  • By Year  — x = publication year, particles stack vertically
+ *  • By Paper — year-sorted paper grid; canvas boxes + captions per paper
+ *  • By Word  — top-40 words as columns (most→least freq), bottom-up stacks
  */
 
 import { useRef, useEffect, useMemo, useState, useCallback } from 'react';
 import wordDataRaw  from '../data/wordData.json';
 import topicDataRaw from '../data/topicData.json';
 
-// ─── types ─────────────────────────────────────────────────────────────────────
+// ─── types ──────────────────────────────────────────────────────────────────
 interface WData {
   words: string[];
   freqs: number[];
@@ -28,7 +28,7 @@ interface TData {
 const WD = wordDataRaw  as WData;
 const TD = topicDataRaw as TData;
 
-// ─── topic colour map ───────────────────────────────────────────────────────────
+// ─── topic colour map ────────────────────────────────────────────────────────
 const TOPIC_COLOR: Record<string, string> = {
   'Hypertext & Links':      '#4e79a7',
   'Computer Graphics':      '#f28e2b',
@@ -48,7 +48,7 @@ const TOPIC_COLOR: Record<string, string> = {
   'Interaction Design':     '#acc236',
 };
 
-// ─── particle definition ────────────────────────────────────────────────────────
+// ─── particle ────────────────────────────────────────────────────────────────
 interface Particle {
   id: number;
   word: string;
@@ -58,26 +58,27 @@ interface Particle {
   caption: string;
   year: number;
   primaryTopic: string;
+  topicOrder: number;
   color: string;
   paperRank: number;
 }
 
-// ─── constants ──────────────────────────────────────────────────────────────────
-type LayoutMode = 'year' | 'paper' | 'topic' | 'word';
+// ─── constants ───────────────────────────────────────────────────────────────
+type LayoutMode = 'timeline' | 'year' | 'paper' | 'word';
 
-const LERP_K  = 0.09;   // per-frame lerp factor (~95% in ~32 frames ≈ 0.5 s)
-const R_NORM  = 2.5;    // default particle radius
-const R_HOV   = 4.5;    // hovered word radius
+const LERP_K   = 0.09;
+const R_NORM   = 2.5;
+const R_HOV    = 4.5;
+const STEP     = R_NORM * 2 + 0.8;   // ~6 px between particle centres
+const LEGEND_W = 182;
+const PAD = { t: 20, r: 8, b: 50, l: 8 } as const;
+const TOP_WORDS = 40;                  // words shown in word layout
 
-// Fixed padding — large enough for topic labels (left) and word labels (bottom)
-const PAD = { t: 20, r: 16, b: 64, l: 144 } as const;
-
-// ─── deterministic spread (golden-ratio sequence) ───────────────────────────────
 function spread(seed: number, range: number): number {
   return ((seed * 1.6180339887) % 1) * range - range * 0.5;
 }
 
-// ─── component ─────────────────────────────────────────────────────────────────
+// ─── component ───────────────────────────────────────────────────────────────
 export function WordParticleVis({
   items,
   containerWidth = 800,
@@ -87,36 +88,43 @@ export function WordParticleVis({
   containerWidth?: number;
   fitMode?: boolean;
 }) {
-  const canvasRef  = useRef<HTMLCanvasElement>(null);
-  const rafRef     = useRef(0);
-  const layoutRef  = useRef<LayoutMode>('year');
-  const hovRef     = useRef<string | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const rafRef    = useRef(0);
 
-  const [layoutMode, setLayoutMode] = useState<LayoutMode>('year');
-  const [hoveredWord, setHoveredWord] = useState<string | null>(null);
+  // RAF-loop refs (updated without restarting loop)
+  const brushedTopicRef = useRef<string | null>(null);   // pinned via click
+  const hovTopicRef     = useRef<string | null>(null);   // transient hover
+  const layoutRef       = useRef<LayoutMode>('timeline');
 
-  const W = containerWidth;
-  const H = fitMode ? Math.round(window.innerHeight * 0.66) : 500;
-  const IW = W  - PAD.l - PAD.r;
+  // React state for UI
+  const [layoutMode,     setLayoutMode]     = useState<LayoutMode>('timeline');
+  const [pinnedTopic,    setPinnedTopic]    = useState<string | null>(null);
+  const [highlightTopic, setHighlightTopic] = useState<string | null>(null);
+  const [tooltip, setTooltip] = useState<{ cx: number; cy: number; p: Particle } | null>(null);
+
+  const CW = Math.max(400, containerWidth - LEGEND_W - 16);
+  const H  = fitMode ? Math.round(window.innerHeight * 0.72) : 560;
+  const IW = CW - PAD.l - PAD.r;
   const IH = H  - PAD.t - PAD.b;
 
-  // keep refs in sync with state (read from RAF loop without restarts)
+  // sync layout ref
   useEffect(() => { layoutRef.current = layoutMode; }, [layoutMode]);
 
-  // ── build particle list ──────────────────────────────────────────────────────
+  // ── build particle list ────────────────────────────────────────────────────
   const particles = useMemo<Particle[]>(() => {
     const captionSet = new Set<string>(items.map((d: any) => d.caption));
     const out: Particle[] = [];
     let id = 0;
-
     WD.papers.forEach(paper => {
       if (!captionSet.has(paper.caption)) return;
       const te = TD.papers[paper.caption];
       const weights = te?.weights ?? {};
       let primaryTopic = 'Visualization';
       let maxW = 0;
-      Object.entries(weights).forEach(([t, w]) => { if (w > maxW) { maxW = w; primaryTopic = t; } });
-
+      Object.entries(weights).forEach(([t, w]) => {
+        if ((w as number) > maxW) { maxW = w as number; primaryTopic = t; }
+      });
+      const topicOrder = TD.topics.indexOf(primaryTopic);
       paper.tw.forEach(([widx, freq], rank) => {
         out.push({
           id: id++,
@@ -127,6 +135,7 @@ export function WordParticleVis({
           caption:     paper.caption,
           year:        paper.year ?? 2000,
           primaryTopic,
+          topicOrder,
           color:       TOPIC_COLOR[primaryTopic] ?? '#888',
           paperRank:   rank,
         });
@@ -137,52 +146,92 @@ export function WordParticleVis({
 
   const N = particles.length;
 
-  // ── Float32 position buffers (live outside React render cycle) ────────────────
+  // ── position buffers ───────────────────────────────────────────────────────
   const pos = useRef({
     cx: new Float32Array(0), cy: new Float32Array(0),
     tx: new Float32Array(0), ty: new Float32Array(0),
   });
 
-  // ── layout computation ────────────────────────────────────────────────────────
+  // ── layout computation ─────────────────────────────────────────────────────
   const computeTargets = useCallback((mode: LayoutMode) => {
     const tx = new Float32Array(N);
     const ty = new Float32Array(N);
     if (N === 0) return { tx, ty };
 
-    const yrs  = particles.map(p => p.year);
-    const yMin = Math.min(...yrs);
-    const yMax = Math.max(...yrs);
+    const yrs    = particles.map(p => p.year);
+    const yMin   = Math.min(...yrs);
+    const yMax   = Math.max(...yrs);
     const yrRange = Math.max(yMax - yMin, 1);
-    const yearX = (yr: number) => PAD.l + ((yr - yMin) / yrRange) * IW;
+    const yearX  = (yr: number) => PAD.l + ((yr - yMin) / yrRange) * IW;
 
-    // ── By Year ────────────────────────────────────────────────────────────────
-    if (mode === 'year') {
+    // ── Timeline: proportional topic bands, x = year ─────────────────────────
+    if (mode === 'timeline') {
+      const activeTopics = TD.topics.filter(t => particles.some(p => p.primaryTopic === t));
+      const topicCount   = new Map<string, number>();
+      particles.forEach(p => topicCount.set(p.primaryTopic, (topicCount.get(p.primaryTopic) ?? 0) + 1));
+      const total = particles.length;
+
+      // proportional band heights
+      let cumY = PAD.t;
+      const bTop = new Map<string, number>();
+      const bH   = new Map<string, number>();
+      activeTopics.forEach(t => {
+        const h = ((topicCount.get(t) ?? 0) / total) * IH;
+        bTop.set(t, cumY);
+        bH.set(t, h);
+        cumY += h;
+      });
+
+      // group by topic → year, then stack
+      const byTopicYear = new Map<string, Map<number, number[]>>();
+      particles.forEach((p, i) => {
+        if (!byTopicYear.has(p.primaryTopic)) byTopicYear.set(p.primaryTopic, new Map());
+        const byYr = byTopicYear.get(p.primaryTopic)!;
+        if (!byYr.has(p.year)) byYr.set(p.year, []);
+        byYr.get(p.year)!.push(i);
+      });
+
+      byTopicYear.forEach((byYr, topic) => {
+        const bt = bTop.get(topic) ?? PAD.t;
+        const bh = Math.max(bH.get(topic) ?? 10, 10);
+        byYr.forEach((idxs, yr) => {
+          const x0   = yearX(yr);
+          const step = Math.min((bh - 4) / Math.max(idxs.length, 1), STEP);
+          idxs.forEach((i, k) => {
+            tx[i] = x0 + spread(i, 6);
+            ty[i] = bt + 4 + k * step;
+          });
+        });
+      });
+    }
+
+    // ── By Year ───────────────────────────────────────────────────────────────
+    else if (mode === 'year') {
       const byYear = new Map<number, number[]>();
       particles.forEach((p, i) => {
         if (!byYear.has(p.year)) byYear.set(p.year, []);
         byYear.get(p.year)!.push(i);
       });
-      const step = R_NORM * 2 + 0.6;
       byYear.forEach((idxs, yr) => {
         const x0  = yearX(yr);
         const tot = idxs.length;
-        const y0  = PAD.t + IH / 2 - (tot * step) / 2;
+        const y0  = PAD.t + IH / 2 - (tot * STEP) / 2;
         idxs.forEach((i, k) => {
-          tx[i] = x0 + spread(i,        10);
-          ty[i] = y0 + spread(i * 7.1,  4) + k * step;
+          tx[i] = x0 + spread(i,       10);
+          ty[i] = y0 + spread(i * 7.1,  4) + k * STEP;
         });
       });
     }
 
-    // ── By Paper ───────────────────────────────────────────────────────────────
+    // ── By Paper: year-sorted grid cells ──────────────────────────────────────
     else if (mode === 'paper') {
       const paperOrder = [...new Set(particles.map(p => p.caption))].sort((a, b) => {
-        const ay = particles.find(p => p.caption === a)?.year ?? 0;
+        const ay  = particles.find(p => p.caption === a)?.year ?? 0;
         const by2 = particles.find(p => p.caption === b)?.year ?? 0;
         return ay - by2;
       });
       const nP    = paperOrder.length;
-      const nCols = Math.ceil(Math.sqrt(nP * (IW / IH)));
+      const nCols = Math.max(1, Math.ceil(Math.sqrt(nP * (IW / IH))));
       const nRows = Math.ceil(nP / nCols);
       const cellW = IW / nCols;
       const cellH = IH / nRows;
@@ -194,107 +243,79 @@ export function WordParticleVis({
       });
 
       paperOrder.forEach((cap, pi) => {
-        const col = pi % nCols;
-        const row = Math.floor(pi / nCols);
-        const cx  = PAD.l + col * cellW + cellW / 2;
-        const cy  = PAD.t + row * cellH + cellH / 2;
-        const idxs = (byPaper.get(cap) ?? [])
-          .sort((a, b) => particles[a].paperRank - particles[b].paperRank);
-        const n = idxs.length;
-        const subCols = Math.ceil(Math.sqrt(n));
-        const step    = Math.min(cellW, cellH) / (subCols + 1);
+        const col   = pi % nCols;
+        const row   = Math.floor(pi / nCols);
+        const cxC   = PAD.l + col * cellW + cellW / 2;
+        const cyC   = PAD.t + row * cellH + cellH / 2;
+        const idxs  = (byPaper.get(cap) ?? []).sort((a, b) => particles[a].paperRank - particles[b].paperRank);
+        const n     = idxs.length;
+        const sW    = Math.max(3, Math.ceil(Math.sqrt(n)));
+        const sStep = Math.min((cellW - 6) / sW, (cellH - 16) / Math.ceil(n / sW), STEP);
+        const nRows2 = Math.ceil(n / sW);
         idxs.forEach((idx, k) => {
-          const sc = k % subCols;
-          const sr = Math.floor(k / subCols);
-          tx[idx] = cx - step * (subCols - 1) / 2 + sc * step + spread(idx * 5,  step * 0.25);
-          ty[idx] = cy - step * (Math.ceil(n / subCols) - 1) / 2 + sr * step + spread(idx * 13, step * 0.25);
+          const sc = k % sW;
+          const sr = Math.floor(k / sW);
+          tx[idx] = cxC - sStep * (sW - 1) / 2     + sc * sStep + spread(idx * 5,  sStep * 0.2);
+          ty[idx] = cyC - sStep * (nRows2 - 1) / 2 + sr * sStep + spread(idx * 13, sStep * 0.2);
         });
       });
     }
 
-    // ── By Topic ───────────────────────────────────────────────────────────────
-    else if (mode === 'topic') {
-      const activeTopics = TD.topics.filter(t => particles.some(p => p.primaryTopic === t));
-      const nT    = activeTopics.length;
-      const bandH = IH / nT;
-
-      const byTopic = new Map<string, number[]>();
-      particles.forEach((p, i) => {
-        if (!byTopic.has(p.primaryTopic)) byTopic.set(p.primaryTopic, []);
-        byTopic.get(p.primaryTopic)!.push(i);
-      });
-
-      activeTopics.forEach((topic, ti) => {
-        const bandTop = PAD.t + ti * bandH;
-        const idxs    = byTopic.get(topic) ?? [];
-        const byYr    = new Map<number, number[]>();
-        idxs.forEach(i => {
-          const yr = particles[i].year;
-          if (!byYr.has(yr)) byYr.set(yr, []);
-          byYr.get(yr)!.push(i);
-        });
-        byYr.forEach((yidxs, yr) => {
-          const x0 = yearX(yr);
-          yidxs.forEach((i, k) => {
-            tx[i] = x0 + spread(i,       8);
-            ty[i] = bandTop + bandH * 0.08 + (k / yidxs.length) * bandH * 0.84;
-          });
-        });
-      });
-    }
-
-    // ── By Word ────────────────────────────────────────────────────────────────
+    // ── By Word: columns sorted most→least freq, bottom-up stacking ───────────
     else if (mode === 'word') {
       const topWordIdxs = [...new Set(particles.map(p => p.wordIdx))]
         .sort((a, b) => WD.freqs[b] - WD.freqs[a])
-        .slice(0, 50);
-      const wPos  = new Map<number, number>(topWordIdxs.map((wi, i) => [wi, i]));
-      const nW    = topWordIdxs.length;
-      const colW  = IW / nW;
-      const step  = R_NORM * 2 + 0.5;
+        .slice(0, TOP_WORDS);
+      const wPosMap = new Map<number, number>(topWordIdxs.map((wi, i) => [wi, i]));
+      const nW   = topWordIdxs.length;
+      const colW = IW / nW;
+      // sub-grid width per word (3–10), based on average column width
+      const gridW = Math.min(10, Math.max(3, Math.round(colW / STEP)));
 
       const byWord = new Map<number, number[]>();
       particles.forEach((p, i) => {
-        const pos2 = wPos.get(p.wordIdx);
-        if (pos2 === undefined) {
-          // Park off-screen particles to the right — they animate back when layout changes
-          tx[i] = W + 60;
-          ty[i] = PAD.t + IH / 2 + spread(i * 3, 40);
-          return;
+        if (wPosMap.has(p.wordIdx)) {
+          if (!byWord.has(p.wordIdx)) byWord.set(p.wordIdx, []);
+          byWord.get(p.wordIdx)!.push(i);
+        } else {
+          // park off-screen
+          tx[i] = CW + 80;
+          ty[i] = PAD.t + IH / 2;
         }
-        if (!byWord.has(p.wordIdx)) byWord.set(p.wordIdx, []);
-        byWord.get(p.wordIdx)!.push(i);
       });
 
       topWordIdxs.forEach((wi, col) => {
-        const x0   = PAD.l + col * colW + colW / 2;
-        const idxs = (byWord.get(wi) ?? []).sort((a, b) => particles[a].year - particles[b].year);
-        const tot  = idxs.length;
-        const y0   = PAD.t + IH / 2 - (tot * step) / 2;
-        idxs.forEach((i, k) => {
-          tx[i] = x0 + spread(i * 3, Math.min(colW - 2, 5));
-          ty[i] = y0 + k * step;
+        const x0   = PAD.l + col * colW + colW / 2 - ((gridW - 1) / 2) * STEP;
+        const idxs = (byWord.get(wi) ?? []).sort((a, b) => {
+          const pa = particles[a], pb = particles[b];
+          if (pa.topicOrder !== pb.topicOrder) return pa.topicOrder - pb.topicOrder;
+          return pa.caption.localeCompare(pb.caption);
+        });
+        const baseY = PAD.t + IH; // bottom edge
+        idxs.forEach((idx, k) => {
+          const subCol = k % gridW;
+          const subRow = Math.floor(k / gridW);
+          tx[idx] = x0 + subCol * STEP + spread(idx * 5,  0.5);
+          ty[idx] = baseY - subRow * STEP + spread(idx * 13, 0.5);
         });
       });
     }
 
     return { tx, ty };
-  }, [particles, N, W, H, IW, IH]);
+  }, [particles, N, CW, H, IW, IH]);
 
-  // ── update targets on layout change ──────────────────────────────────────────
+  // ── update targets on layout/particles change ──────────────────────────────
   useEffect(() => {
     if (N === 0) return;
     const p = pos.current;
     const { tx, ty } = computeTargets(layoutMode);
-
-    // First render or N changed: snap straight to target
     if (p.cx.length !== N) {
       p.cx = tx.slice(); p.cy = ty.slice();
     }
     p.tx = tx; p.ty = ty;
   }, [layoutMode, computeTargets, N]);
 
-  // ── continuous RAF draw loop ──────────────────────────────────────────────────
+  // ── RAF draw loop ──────────────────────────────────────────────────────────
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || N === 0) return;
@@ -303,66 +324,162 @@ export function WordParticleVis({
 
     function draw() {
       if (!alive) return;
-      const p   = pos.current;
-      const hov = hovRef.current;
+      const p    = pos.current;
+      const mode = layoutRef.current;
+      const activeTopic = brushedTopicRef.current ?? hovTopicRef.current;
 
-      ctx.clearRect(0, 0, W, H);
+      ctx.clearRect(0, 0, CW, H);
 
-      // ── lerp current → target ─────────────────────────────────────────────
+      // lerp
       for (let i = 0; i < N; i++) {
         p.cx[i] += (p.tx[i] - p.cx[i]) * LERP_K;
         p.cy[i] += (p.ty[i] - p.cy[i]) * LERP_K;
       }
 
-      // ── draw particles (2 passes to keep hovered on top) ─────────────────
-      for (let pass = 0; pass < (hov ? 2 : 1); pass++) {
-        for (let i = 0; i < N; i++) {
-          const pt  = particles[i];
-          const isH = hov ? pt.word === hov : false;
-          if (hov && pass === 0 &&  isH) continue;   // draw dim first
-          if (hov && pass === 1 && !isH) continue;   // draw bright second
+      // ── Timeline band backgrounds ─────────────────────────────────────────
+      if (mode === 'timeline') {
+        const activeTopics = TD.topics.filter(t => particles.some(pt => pt.primaryTopic === t));
+        const topicCount   = new Map<string, number>();
+        particles.forEach(pt => topicCount.set(pt.primaryTopic, (topicCount.get(pt.primaryTopic) ?? 0) + 1));
+        const total = particles.length;
+        let cumY = PAD.t;
+        activeTopics.forEach(t => {
+          const h  = ((topicCount.get(t) ?? 0) / total) * IH;
+          const hl = activeTopic === t;
+          ctx.fillStyle = TOPIC_COLOR[t] ?? '#888';
+          ctx.globalAlpha = hl ? 0.20 : 0.09;
+          ctx.fillRect(PAD.l, cumY, IW, h);
+          // separator line
+          ctx.globalAlpha = 0.18;
+          ctx.strokeStyle = '#555';
+          ctx.lineWidth   = 0.5;
+          ctx.beginPath(); ctx.moveTo(PAD.l, cumY); ctx.lineTo(PAD.l + IW, cumY); ctx.stroke();
+          // band label (right side, small)
+          ctx.globalAlpha = 0.55;
+          ctx.fillStyle   = TOPIC_COLOR[t] ?? '#888';
+          ctx.font        = '8px system-ui,sans-serif';
+          ctx.textAlign   = 'left';
+          const lbl = t.length > 22 ? t.slice(0, 20) + '…' : t;
+          ctx.fillText(lbl, PAD.l + 3, Math.min(cumY + h - 3, cumY + 12));
+          cumY += h;
+        });
+        ctx.globalAlpha = 1;
+      }
 
-          ctx.globalAlpha = hov ? (isH ? 0.95 : 0.07) : 0.68;
+      // ── Paper boxes (computed from current lerped positions) ───────────────
+      if (mode === 'paper') {
+        const bboxes = new Map<string, { x0: number; y0: number; x1: number; y1: number }>();
+        for (let i = 0; i < N; i++) {
+          const cap = particles[i].caption;
+          if (!bboxes.has(cap)) bboxes.set(cap, { x0: Infinity, y0: Infinity, x1: -Infinity, y1: -Infinity });
+          const b = bboxes.get(cap)!;
+          if (p.cx[i] < b.x0) b.x0 = p.cx[i];
+          if (p.cy[i] < b.y0) b.y0 = p.cy[i];
+          if (p.cx[i] > b.x1) b.x1 = p.cx[i];
+          if (p.cy[i] > b.y1) b.y1 = p.cy[i];
+        }
+        ctx.save();
+        bboxes.forEach((b, cap) => {
+          if (!isFinite(b.x0)) return;
+          const pd = 5;
+          ctx.strokeStyle = 'rgba(180,180,180,0.30)';
+          ctx.lineWidth   = 0.75;
+          ctx.strokeRect(b.x0 - pd, b.y0 - pd - 9, b.x1 - b.x0 + pd * 2, b.y1 - b.y0 + pd * 2 + 9);
+          ctx.fillStyle   = 'rgba(160,160,160,0.65)';
+          ctx.font        = '6.5px system-ui,sans-serif';
+          ctx.textAlign   = 'center';
+          const lbl = cap.length > 22 ? cap.slice(0, 20) + '…' : cap;
+          ctx.fillText(lbl, (b.x0 + b.x1) / 2, b.y0 - pd - 1);
+        });
+        ctx.restore();
+      }
+
+      // ── particles (2-pass when topic is active) ───────────────────────────
+      const passes = activeTopic ? 2 : 1;
+      for (let pass = 0; pass < passes; pass++) {
+        for (let i = 0; i < N; i++) {
+          const pt      = particles[i];
+          const isMatch = activeTopic ? pt.primaryTopic === activeTopic : true;
+          if (passes > 1 && pass === 0 &&  isMatch) continue;
+          if (passes > 1 && pass === 1 && !isMatch) continue;
+
+          ctx.globalAlpha = activeTopic ? (isMatch ? 0.92 : 0.05) : 0.68;
           ctx.fillStyle   = pt.color;
           ctx.beginPath();
-          ctx.arc(p.cx[i], p.cy[i], isH ? R_HOV : R_NORM, 0, Math.PI * 2);
+          ctx.arc(p.cx[i], p.cy[i], R_NORM, 0, Math.PI * 2);
           ctx.fill();
         }
       }
       ctx.globalAlpha = 1;
 
-      // ── axis / label overlays ─────────────────────────────────────────────
-      drawLabels(ctx, layoutRef.current, particles, W, H, IW, IH);
+      // ── axes / word labels ─────────────────────────────────────────────────
+      drawAxes(ctx, mode, particles, CW, H, IW, IH);
 
       rafRef.current = requestAnimationFrame(draw);
     }
 
     draw();
     return () => { alive = false; cancelAnimationFrame(rafRef.current); };
-  }, [particles, N, W, H]); // does NOT restart on layoutMode/hover changes
+  }, [particles, N, CW, H]); // NOT layout/hover — read via refs
 
-  // ── mouse interaction ─────────────────────────────────────────────────────────
+  // ── mouse events ──────────────────────────────────────────────────────────
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
     const rect = canvasRef.current?.getBoundingClientRect();
     if (!rect) return;
-    // account for CSS scaling (fitMode)
-    const mx = (e.clientX - rect.left) * (W / rect.width);
-    const my = (e.clientY - rect.top)  * (H / rect.height);
+    const mx = (e.clientX - rect.left) * (CW / rect.width);
+    const my = (e.clientY - rect.top)  * (H  / rect.height);
     const p  = pos.current;
-    let found: string | null = null;
+    let found: Particle | null = null;
     for (let i = 0; i < N; i++) {
       const dx = p.cx[i] - mx, dy = p.cy[i] - my;
-      if (dx * dx + dy * dy < R_HOV * R_HOV * 2.5) { found = particles[i].word; break; }
+      if (dx * dx + dy * dy < R_HOV * R_HOV * 2.5) { found = particles[i]; break; }
     }
-    hovRef.current = found;
-    setHoveredWord(found);
-  }, [N, W, H, particles]);
+    if (found) {
+      hovTopicRef.current = found.primaryTopic;
+      if (!brushedTopicRef.current) setHighlightTopic(found.primaryTopic);
+      setTooltip({ cx: e.clientX, cy: e.clientY, p: found });
+    } else {
+      hovTopicRef.current = brushedTopicRef.current;
+      if (!brushedTopicRef.current) setHighlightTopic(null);
+      setTooltip(null);
+    }
+  }, [N, CW, H, particles]);
+
+  const handleMouseLeave = useCallback(() => {
+    hovTopicRef.current = brushedTopicRef.current;
+    if (!brushedTopicRef.current) setHighlightTopic(null);
+    setTooltip(null);
+  }, []);
+
+  const handleLegendHover = useCallback((topic: string | null) => {
+    if (brushedTopicRef.current) return; // pinned — ignore hover
+    hovTopicRef.current = topic;
+    setHighlightTopic(topic);
+  }, []);
+
+  const handleLegendClick = useCallback((topic: string) => {
+    const next = brushedTopicRef.current === topic ? null : topic;
+    brushedTopicRef.current = next;
+    hovTopicRef.current     = next;
+    setPinnedTopic(next);
+    setHighlightTopic(next);
+  }, []);
+
+  const clearPin = useCallback(() => {
+    brushedTopicRef.current = null;
+    hovTopicRef.current     = null;
+    setPinnedTopic(null);
+    setHighlightTopic(null);
+  }, []);
+
+  // ── derived ────────────────────────────────────────────────────────────────
+  const activeTopics = TD.topics.filter(t => particles.some(p => p.primaryTopic === t));
 
   const BTNS: { id: LayoutMode; label: string; icon: string }[] = [
-    { id: 'year',  label: 'By Year',  icon: '◷' },
-    { id: 'paper', label: 'By Paper', icon: '⊞' },
-    { id: 'topic', label: 'By Topic', icon: '⊛' },
-    { id: 'word',  label: 'By Word',  icon: '≡' },
+    { id: 'timeline', label: 'Timeline', icon: '◷' },
+    { id: 'year',     label: 'By Year',  icon: '≡' },
+    { id: 'paper',    label: 'By Paper', icon: '⊞' },
+    { id: 'word',     label: 'By Word',  icon: '⊛' },
   ];
 
   return (
@@ -382,122 +499,166 @@ export function WordParticleVis({
             </button>
           ))}
         </div>
-
-        {hoveredWord
-          ? <span style={{ fontSize: 12, opacity: 0.9, marginLeft: 10 }}>
-              <strong>"{hoveredWord}"</strong>
-              {' — '}
-              {particles.filter(p => p.word === hoveredWord).length} papers
-            </span>
-          : null}
-
         <span style={{ marginLeft: 'auto', fontSize: 11, opacity: 0.4 }}>
           {N.toLocaleString()} word×paper particles
         </span>
       </div>
 
-      {/* ── canvas ── */}
-      <canvas
-        ref={canvasRef}
-        width={W}
-        height={H}
-        style={fitMode
-          ? { width: '100%', height: '66vh', display: 'block' }
-          : { display: 'block' }}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={() => { hovRef.current = null; setHoveredWord(null); }}
-      />
+      {/* ── canvas + right legend ── */}
+      <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
 
-      {/* ── topic legend ── */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3px 12px', marginTop: 6 }}>
-        {TD.topics.map(t => (
-          <span key={t} style={{ display: 'flex', alignItems: 'center', gap: 3, fontSize: 10, opacity: 0.75 }}>
-            <span style={{
-              width: 7, height: 7, borderRadius: '50%',
-              background: TOPIC_COLOR[t] ?? '#999',
-              display: 'inline-block', flexShrink: 0,
-            }} />
-            {t}
-          </span>
-        ))}
+        {/* canvas */}
+        <canvas
+          ref={canvasRef}
+          width={CW}
+          height={H}
+          style={fitMode
+            ? { width: '100%', height: '72vh', display: 'block', flexShrink: 0 }
+            : { display: 'block', flexShrink: 0 }}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+        />
+
+        {/* right legend */}
+        <div style={{ width: LEGEND_W, flexShrink: 0, paddingTop: 2 }}>
+          <div style={{
+            fontSize: 9, opacity: 0.45, marginBottom: 5,
+            textTransform: 'uppercase', letterSpacing: '0.07em',
+            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+          }}>
+            <span>Topics</span>
+            {pinnedTopic && (
+              <button
+                onClick={clearPin}
+                style={{
+                  fontSize: 9, background: 'none', border: '1px solid #555',
+                  borderRadius: 3, padding: '1px 5px', cursor: 'pointer',
+                  color: 'inherit', opacity: 0.7,
+                }}
+              >
+                unpin
+              </button>
+            )}
+          </div>
+          {activeTopics.map(t => {
+            const isHL     = highlightTopic === t;
+            const isPinned = pinnedTopic === t;
+            return (
+              <div
+                key={t}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 5,
+                  fontSize: 10, padding: '2px 5px', borderRadius: 3,
+                  cursor: 'pointer',
+                  opacity: highlightTopic && !isHL ? 0.28 : 0.85,
+                  background: isHL ? 'rgba(255,255,255,0.07)' : 'transparent',
+                  fontWeight: isPinned ? 700 : 400,
+                  transition: 'opacity 0.12s',
+                }}
+                onClick={() => handleLegendClick(t)}
+                onMouseEnter={() => handleLegendHover(t)}
+                onMouseLeave={() => handleLegendHover(null)}
+              >
+                <span style={{
+                  width: isPinned ? 9 : 7, height: isPinned ? 9 : 7,
+                  borderRadius: '50%', flexShrink: 0,
+                  background: TOPIC_COLOR[t] ?? '#999',
+                  border: isPinned ? '1.5px solid rgba(255,255,255,0.7)' : 'none',
+                  display: 'inline-block',
+                }} />
+                {t}
+              </div>
+            );
+          })}
+        </div>
       </div>
+
+      {/* ── tooltip ── */}
+      {tooltip && (
+        <div style={{
+          position: 'fixed',
+          left: tooltip.cx + 14,
+          top:  tooltip.cy - 12,
+          background: 'rgba(25,25,28,0.93)',
+          color: '#e8e8e8',
+          fontSize: 11,
+          padding: '6px 9px',
+          borderRadius: 5,
+          pointerEvents: 'none',
+          zIndex: 9999,
+          maxWidth: 230,
+          lineHeight: 1.55,
+          boxShadow: '0 2px 8px rgba(0,0,0,0.5)',
+        }}>
+          <div><strong>"{tooltip.p.word}"</strong></div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 2 }}>
+            <span style={{
+              width: 8, height: 8, borderRadius: '50%', flexShrink: 0,
+              background: tooltip.p.color, display: 'inline-block',
+            }} />
+            <span style={{ opacity: 0.85 }}>{tooltip.p.primaryTopic}</span>
+          </div>
+          <div style={{ opacity: 0.60, marginTop: 1, fontSize: 10 }}>{tooltip.p.caption}</div>
+        </div>
+      )}
     </div>
   );
 }
 
-// ─── axis / label drawing (outside component to keep render fn clean) ───────────
-
-function drawLabels(
+// ─── axis / label drawing (outside component) ────────────────────────────────
+function drawAxes(
   ctx: CanvasRenderingContext2D,
   mode: LayoutMode,
   particles: Particle[],
   W: number, H: number, IW: number, IH: number,
 ) {
-  const yrs   = particles.map(p => p.year);
-  const yMin  = Math.min(...yrs);
-  const yMax  = Math.max(...yrs);
+  if (particles.length === 0) return;
+  const yrs     = particles.map(p => p.year);
+  const yMin    = Math.min(...yrs);
+  const yMax    = Math.max(...yrs);
   const yrRange = Math.max(yMax - yMin, 1);
-  const yearX = (yr: number) => PAD.l + ((yr - yMin) / yrRange) * IW;
+  const yearX   = (yr: number) => PAD.l + ((yr - yMin) / yrRange) * IW;
 
   ctx.save();
-  ctx.font      = '9px system-ui, sans-serif';
+  ctx.font      = '9px system-ui,sans-serif';
   ctx.fillStyle = '#777';
 
-  // ── year tick labels (year & topic modes) ────────────────────────────────────
-  if (mode === 'year' || mode === 'topic') {
+  // year tick labels (timeline & year modes)
+  if (mode === 'timeline' || mode === 'year') {
     const tickStep = yrRange <= 15 ? 2 : 5;
     ctx.textAlign = 'center';
     for (let yr = Math.ceil(yMin / tickStep) * tickStep; yr <= yMax; yr += tickStep) {
-      ctx.fillText(String(yr), yearX(yr), H - PAD.b + 14);
+      ctx.fillText(String(yr), yearX(yr), H - PAD.b + 12);
     }
   }
 
-  // ── topic band labels ────────────────────────────────────────────────────────
-  if (mode === 'topic') {
-    const activeTopics = TD.topics.filter(t => particles.some(p => p.primaryTopic === t));
-    const nT    = activeTopics.length;
-    const bandH = IH / nT;
-    ctx.textAlign = 'right';
-    activeTopics.forEach((t, ti) => {
-      const y = PAD.t + ti * bandH + bandH / 2 + 3;
-      ctx.fillStyle = TOPIC_COLOR[t] ?? '#888';
-      const label   = t.length > 20 ? t.slice(0, 18) + '…' : t;
-      ctx.fillText(label, PAD.l - 6, y);
-      // faint band separator
-      ctx.save();
-      ctx.strokeStyle = '#333'; ctx.lineWidth = 0.5; ctx.globalAlpha = 0.25;
-      ctx.beginPath();
-      ctx.moveTo(PAD.l, PAD.t + ti * bandH);
-      ctx.lineTo(PAD.l + IW, PAD.t + ti * bandH);
-      ctx.stroke();
-      ctx.restore();
-    });
-  }
-
-  // ── word column labels ───────────────────────────────────────────────────────
+  // word column labels (rotated, bottom)
   if (mode === 'word') {
     const topWordIdxs = [...new Set(particles.map(p => p.wordIdx))]
       .sort((a, b) => WD.freqs[b] - WD.freqs[a])
-      .slice(0, 50);
+      .slice(0, TOP_WORDS);
     const nW   = topWordIdxs.length;
     const colW = IW / nW;
+    const STEP_L = R_NORM * 2 + 0.8;
+    const gridW  = Math.min(10, Math.max(3, Math.round(colW / STEP_L)));
     ctx.fillStyle = '#888';
     ctx.textAlign = 'right';
     topWordIdxs.forEach((wi, col) => {
-      const x = PAD.l + col * colW + colW / 2;
+      const x0     = PAD.l + col * colW + colW / 2 - ((gridW - 1) / 2) * STEP_L;
+      const xLabel = x0 + ((gridW - 1) / 2) * STEP_L;
       ctx.save();
-      ctx.translate(x, H - PAD.b + 4);
-      ctx.rotate(-Math.PI * 0.45);
+      ctx.translate(xLabel, H - PAD.b + 4);
+      ctx.rotate(-Math.PI * 0.42);
       ctx.fillText(WD.words[wi], 0, 0);
       ctx.restore();
     });
   }
 
-  // ── paper-grid year arrow hint ────────────────────────────────────────────────
+  // paper view hint
   if (mode === 'paper') {
     ctx.textAlign = 'left';
     ctx.fillStyle = '#555';
-    ctx.fillText('papers sorted by year →', PAD.l, H - PAD.b + 14);
+    ctx.fillText('papers sorted by year →', PAD.l + 2, H - PAD.b + 12);
   }
 
   ctx.restore();
