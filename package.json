@@ -10,7 +10,9 @@
     "deploy": "npm run build && git add index.html assets/ .dev.html && git commit -m 'deploy' && git push",
     "extract-topics": "node scripts/extract-topics.mjs",
     "extract-text": "node scripts/extract-text.mjs",
-    "analyze-topics": "node scripts/analyze-topics.mjs"
+    "analyze-topics": "node scripts/analyze-topics.mjs",
+    "word-stats": "node scripts/compute-word-stats.mjs",
+    "word-stats-report": "node scripts/compute-word-stats.mjs --report"
   },
   "devDependencies": {
     "@anthropic-ai/sdk": "^0.90.0",
