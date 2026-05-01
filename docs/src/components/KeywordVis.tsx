@@ -19,17 +19,31 @@ export function KeywordVis({ items, currentProjects, highlight, handleClick, con
 
   const keywords = _.orderBy(_.uniq(_.flatten(_.map(items, d => d.tags['subject']))));
   const projects = _.map(items, d => d.caption);
+  const N = projects.length;
+
   const marginx = 150;
   const marginy = 170;
-  const xspacing = 16;
   const yspacing = 18;
-  const xmaxpos = marginx + xspacing * projects.length;
-  const ymaxpos = marginy + yspacing * keywords.length;
-  const width = xmaxpos + 20;
-  const height = ymaxpos + 10;
+
+  // --- Dynamic x-spacing ---
+  // In fit mode: shrink column spacing so the SVG exactly fills containerWidth with no
+  //   horizontal scroll.  Circle radius scales with spacing; floor at 1 px so dots remain
+  //   visible.  No viewBox tricks – we just recompute the natural SVG width.
+  // In non-fit (scroll) mode: use the natural 16 px spacing.  If the total width exceeds
+  //   the container, the parent's vis-scroll class handles scrolling.
+  const naturalXSpacing = 16;
+  const xspacing = (fitMode && containerWidth > 0)
+    ? Math.max(4, (containerWidth - marginx - 20) / N)
+    : naturalXSpacing;
+  const circleRadius = fitMode ? Math.max(1, Math.min(2, xspacing / 4)) : 2;
+
+  const xmaxpos  = marginx + xspacing * N;
+  const ymaxpos  = marginy + yspacing * keywords.length;
+  const svgWidth  = Math.ceil(xmaxpos + 20);
+  const svgHeight = Math.ceil(ymaxpos + 10);
 
   const y = D3.scaleLinear().domain([0, keywords.length]).range([marginy, ymaxpos]);
-  const x = D3.scaleLinear().domain([0, projects.length]).range([marginx, xmaxpos]);
+  const x = D3.scaleLinear().domain([0, N]).range([marginx, xmaxpos]);
 
   const calcHighlight = (aproject: string) => {
     if (currentProjects.indexOf(aproject) >= 0 || highlightProjects.indexOf(aproject) >= 0) {
@@ -97,30 +111,24 @@ export function KeywordVis({ items, currentProjects, highlight, handleClick, con
   ));
 
   const horlines = keywords.map((akey, i) => (
-    <line key={`hl${i}`} x1={marginx} x2={x(projects.length - 1)} y1={y(i) - 7} y2={y(i) - 7} className={`horline ${calcHighlightSubject(akey)}`} />
+    <line key={`hl${i}`} x1={marginx} x2={x(N - 1)} y1={y(i) - 7} y2={y(i) - 7} className={`horline ${calcHighlightSubject(akey)}`} />
   ));
 
   const circles = _.flatten(items.map((anItem, i) =>
     anItem.tags.subject.map((sItem: string, j: number) => {
       const vertPosition = y(keywords.indexOf(sItem)) - 7;
-      const horPosition = x(i);
-      return <circle key={`c${i}d${j}`} cx={horPosition} cy={vertPosition} r={2} fill="red" />;
+      const horPosition  = x(i);
+      return <circle key={`c${i}d${j}`} cx={horPosition} cy={vertPosition} r={circleRadius} fill="red" />;
     })
   ));
-
-  const fitStyle = fitMode
-    ? { width: '100%', height: '80vh', display: 'block' } as React.CSSProperties
-    : { display: 'block' } as React.CSSProperties;
 
   return (
     <svg
       cursor="pointer"
-      width={fitMode ? undefined : width}
-      height={fitMode ? undefined : height}
-      viewBox={`0 0 ${width} ${height}`}
-      preserveAspectRatio={fitMode ? 'xMinYMin meet' : undefined}
+      width={svgWidth}
+      height={svgHeight}
       className="chart"
-      style={fitStyle}
+      style={{ display: 'block' }}
     >
       {keywordlist}
       {projectlist}
