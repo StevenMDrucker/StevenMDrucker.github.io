@@ -102,7 +102,7 @@ export function WordParticleVis({
   const [pinnedTopic,    setPinnedTopic]    = useState<string | null>(null);
   const [highlightTopic, setHighlightTopic] = useState<string | null>(null);
   const [tooltip, setTooltip] = useState<{ cx: number; cy: number; p: Particle } | null>(null);
-  const [yearGridW,      setYearGridW]      = useState(20);  // slider: particles per row in year view
+  const [yearGridW,      setYearGridW]      = useState(5);   // slider: particles per row in year view
 
   const CW = Math.max(400, containerWidth - LEGEND_W - 16);
   const H  = fitMode ? Math.round(window.innerHeight * 0.72) : 560;
@@ -475,7 +475,7 @@ export function WordParticleVis({
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, opacity: 0.8 }}>
             <span style={{ opacity: 0.6 }}>Width:</span>
             <input
-              type="range" min="10" max="50" step="1" value={yearGridW}
+              type="range" min="2" max="20" step="1" value={yearGridW}
               onChange={e => setYearGridW(Number(e.target.value))}
               style={{ width: 90, accentColor: '#aaa' }}
             />
