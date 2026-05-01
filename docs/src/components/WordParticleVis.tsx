@@ -102,6 +102,7 @@ export function WordParticleVis({
   const [pinnedTopic,    setPinnedTopic]    = useState<string | null>(null);
   const [highlightTopic, setHighlightTopic] = useState<string | null>(null);
   const [tooltip, setTooltip] = useState<{ cx: number; cy: number; p: Particle } | null>(null);
+  const [yearGridW,      setYearGridW]      = useState(20);  // slider: particles per row in year view
 
   const CW = Math.max(400, containerWidth - LEGEND_W - 16);
   const H  = fitMode ? Math.round(window.innerHeight * 0.72) : 560;
@@ -217,20 +218,31 @@ export function WordParticleVis({
       });
     }
 
-    // ── By Year ───────────────────────────────────────────────────────────────
+    // ── By Year: bottom-aligned grid bars, sorted by topic → paper → rank ────
     else if (mode === 'year') {
-      const byYear = new Map<number, number[]>();
+      const bottomY = PAD.t + IH;
+      const byYear  = new Map<number, number[]>();
       particles.forEach((p, i) => {
         if (!byYear.has(p.year)) byYear.set(p.year, []);
         byYear.get(p.year)!.push(i);
       });
       byYear.forEach((idxs, yr) => {
-        const x0  = yearX(yr);
-        const tot = idxs.length;
-        const y0  = PAD.t + IH / 2 - (tot * STEP) / 2;
-        idxs.forEach((i, k) => {
-          tx[i] = x0 + spread(i,       10);
-          ty[i] = y0 + spread(i * 7.1,  4) + k * STEP;
+        const xCenter = yearX(yr);
+        const gw      = yearGridW;            // particles per row (from slider)
+        const xLeft   = xCenter - ((gw - 1) / 2) * STEP;
+        // sort: topicOrder → caption → paperRank
+        const sorted = idxs.slice().sort((a, b) => {
+          const pa = particles[a], pb = particles[b];
+          if (pa.topicOrder !== pb.topicOrder) return pa.topicOrder - pb.topicOrder;
+          const cc = pa.caption.localeCompare(pb.caption);
+          if (cc !== 0) return cc;
+          return pa.paperRank - pb.paperRank;
+        });
+        sorted.forEach((i, k) => {
+          const col = k % gw;
+          const row = Math.floor(k / gw);
+          tx[i] = xLeft + col * STEP + spread(i, 0.8);
+          ty[i] = bottomY - row * STEP + spread(i * 7, 0.8);
         });
       });
     }
@@ -280,7 +292,7 @@ export function WordParticleVis({
     }
 
     return { tx, ty };
-  }, [particles, N, CW, H, IW, IH]);
+  }, [particles, N, CW, H, IW, IH, yearGridW]);
 
   // ── update targets on layout/particles change ──────────────────────────────
   useEffect(() => {
@@ -458,6 +470,19 @@ export function WordParticleVis({
             </button>
           ))}
         </div>
+        {/* Year-view width slider */}
+        {layoutMode === 'year' && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, opacity: 0.8 }}>
+            <span style={{ opacity: 0.6 }}>Width:</span>
+            <input
+              type="range" min="10" max="50" step="1" value={yearGridW}
+              onChange={e => setYearGridW(Number(e.target.value))}
+              style={{ width: 90, accentColor: '#aaa' }}
+            />
+            <span style={{ minWidth: 20, opacity: 0.6 }}>{yearGridW}</span>
+          </div>
+        )}
+
         <span style={{ marginLeft: 'auto', fontSize: 11, opacity: 0.4 }}>
           {N.toLocaleString()} word×paper particles
         </span>
