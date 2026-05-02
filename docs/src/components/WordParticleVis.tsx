@@ -104,10 +104,43 @@ export function WordParticleVis({
   const [tooltip, setTooltip] = useState<{ cx: number; cy: number; p: Particle } | null>(null);
   const [yearGridW,      setYearGridW]      = useState(5);   // slider: particles per row in year view
 
-  const CW = Math.max(400, containerWidth - LEGEND_W - 16);
-  const H  = fitMode ? Math.round(window.innerHeight * 0.72) : 560;
+  // ── canvas sizing ──────────────────────────────────────────────────────────
+  // baseCW: container minus legend — the "visible" width before any expansion
+  const baseCW = Math.max(400, containerWidth - LEGEND_W - 16);
+
+  // Year range of currently displayed particles (used to prevent column overlap)
+  const yrRange = useMemo(() => {
+    if (particles.length === 0) return 10;
+    const yrs = particles.map(p => p.year);
+    return Math.max(Math.max(...yrs) - Math.min(...yrs), 1);
+  }, [particles]);
+
+  // Minimum canvas width per mode so particle columns never overlap:
+  //   By Year   — each year needs yearGridW particles wide × STEP px
+  //   Timeline  — at least 30 px / year so columns have breathing room
+  //   By Word   — no minimum (columns are auto-sized to fit)
+  const minCWForMode = useMemo(() => {
+    if (layoutMode === 'year')
+      return Math.ceil(PAD.l + PAD.r + yrRange * yearGridW * STEP + 40);
+    if (layoutMode === 'timeline')
+      return Math.ceil(PAD.l + PAD.r + yrRange * 30 + 40);
+    return 0;
+  }, [layoutMode, yrRange, yearGridW]);
+
+  // Actual canvas width — expands beyond baseCW when needed; container scrolls
+  const CW = Math.max(baseCW, minCWForMode);
+
+  // Square-ish height for timeline & year (H ≈ W × 1.05, slightly taller than wide).
+  // Word layout keeps its fixed/viewport height.
+  const H = (layoutMode === 'timeline' || layoutMode === 'year')
+    ? Math.round(CW * 1.05)
+    : (fitMode ? Math.round(window.innerHeight * 0.72) : 560);
+
   const IW = CW - PAD.l - PAD.r;
   const IH = H  - PAD.t - PAD.b;
+
+  // Whether the canvas exceeds the visible area → enable horizontal scroll
+  const canvasNeedsScroll = CW > baseCW;
 
   // sync layout ref
   useEffect(() => { layoutRef.current = layoutMode; }, [layoutMode]);
@@ -259,8 +292,9 @@ export function WordParticleVis({
       const wPosMap = new Map<number, number>(topWordIdxs.map((wi, i) => [wi, i]));
       const nW   = topWordIdxs.length;
       const colW = IW / nW;
-      // sub-grid width per word (3–10), based on average column width
-      const gridW = Math.min(10, Math.max(3, Math.round(colW / STEP)));
+      // sub-grid width: floor ensures particles stay strictly within their column;
+      // clamp 1–10 so very sparse views still show at least one column of dots
+      const gridW = Math.min(10, Math.max(1, Math.floor(colW / STEP)));
 
       const byWord = new Map<number, number[]>();
       particles.forEach((p, i) => {
@@ -292,7 +326,7 @@ export function WordParticleVis({
     }
 
     return { tx, ty };
-  }, [particles, N, CW, H, IW, IH, yearGridW]);
+  }, [particles, N, CW, H, IW, IH, yearGridW, yrRange]);
 
   // ── update targets on layout/particles change ──────────────────────────────
   useEffect(() => {
@@ -491,17 +525,21 @@ export function WordParticleVis({
       {/* ── canvas + right legend ── */}
       <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
 
-        {/* canvas */}
-        <canvas
-          ref={canvasRef}
-          width={CW}
-          height={H}
-          style={fitMode
-            ? { width: '100%', height: '72vh', display: 'block', flexShrink: 0 }
-            : { display: 'block', flexShrink: 0 }}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-        />
+        {/* scroll wrapper — expands horizontally when canvas exceeds visible width */}
+        <div style={{
+          overflowX: canvasNeedsScroll ? 'auto' : 'visible',
+          flexGrow: 1,
+          flexShrink: 1,
+        }}>
+          <canvas
+            ref={canvasRef}
+            width={CW}
+            height={H}
+            style={{ display: 'block' }}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+          />
+        </div>
 
         {/* right legend */}
         <div style={{ width: LEGEND_W, flexShrink: 0, paddingTop: 2 }}>
@@ -625,7 +663,7 @@ function drawAxes(
       .slice(0, TOP_WORDS);
     const nW     = topWordIdxs.length;
     const colW   = IW / nW;
-    const gridW  = Math.min(10, Math.max(3, Math.round(colW / STEP)));
+    const gridW  = Math.min(10, Math.max(1, Math.floor(colW / STEP)));
     ctx.fillStyle = '#888';
     ctx.textAlign = 'right';
     topWordIdxs.forEach((wi, col) => {
