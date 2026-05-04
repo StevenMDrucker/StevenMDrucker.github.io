@@ -79,8 +79,10 @@ const R_HOV    = 4.5;
 const STEP     = R_NORM * 2 + 0.8;   // ~6 px between particle centres
 const LEGEND_W = 182;
 const PAD = { t: 20, r: 8, b: 50, l: 130 } as const;
-const TOP_WORDS  = 40;
-const TOP_UNIQUE = 8;   // distinctive stems per topic in unique mode
+const TOP_WORDS    = 40;
+const TOP_UNIQUE   = 8;    // distinctive stems per topic in unique mode
+const UNIQUE_ROW_H = STEP + 2;   // px height per word row (unique mode)
+const UNIQUE_GAP   = 22;         // px vertical gap between topic groups (unique mode)
 
 function spread(seed: number, range: number): number {
   return ((seed * 1.6180339887) % 1) * range - range * 0.5;
@@ -238,15 +240,37 @@ export function WordParticleVis({
     }
 
     // ── Unique Words ──────────────────────────────────────────────────────
-    // One column per (topic, distinctive-word) pair; topics separated by a gap slot.
+    // Rotated 90°: words on left Y-axis (no rotation), particles stack rightward.
+    // Height driven by number of topic×word rows; width by max particles in any row.
     if (layoutMode === 'unique') {
-      const H   = H_vp;
-      const IH  = H - PAD.t - PAD.b;
-      const nT  = TD.topics.filter(t => particles.some(p => p.primaryTopic === t)).length;
-      const totalSlots = nT > 0 ? nT * TOP_UNIQUE + (nT - 1) : TOP_UNIQUE;
-      const minIW = Math.ceil(totalSlots * (STEP + 1));
-      const IW    = Math.max(baseCW - PAD.l - PAD.r, minIW);
-      const CW    = Math.max(baseCW, PAD.l + PAD.r + IW);
+      const K   = TOP_UNIQUE;
+      const activeTopics_u = TD.topics.filter(t => particles.some(p => p.primaryTopic === t));
+      const nT  = activeTopics_u.length;
+      // Build per-topic stem lists
+      const topicStemLists = new Map<string, number[]>();
+      activeTopics_u.forEach(t => {
+        topicStemLists.set(t, (WS.topicWords[t] ?? []).slice(0, K).map(([si]) => si));
+      });
+      // Count particles per (topic, word) row to get maximum row width
+      const rowCounts = new Map<string, number>();
+      particles.forEach(p => {
+        const stems = topicStemLists.get(p.primaryTopic);
+        if (!stems) return;
+        const stemIdx = WS.wordToStem[String(p.wordIdx)] ?? -1;
+        const wi = stems.indexOf(stemIdx);
+        if (wi >= 0) {
+          const key = `${p.primaryTopic}_${wi}`;
+          rowCounts.set(key, (rowCounts.get(key) ?? 0) + 1);
+        }
+      });
+      const maxRowCount = rowCounts.size > 0 ? Math.max(...rowCounts.values()) : 1;
+      // Canvas height: K rows per topic + gap between groups
+      const H_content = nT * K * UNIQUE_ROW_H + Math.max(0, nT - 1) * UNIQUE_GAP;
+      const H  = Math.max(200, PAD.t + PAD.b + H_content);
+      const IH = H - PAD.t - PAD.b;
+      // Canvas width: enough for the widest row
+      const IW = Math.max(baseCW - PAD.l - PAD.r, maxRowCount * STEP + 20);
+      const CW = Math.max(baseCW, PAD.l + PAD.r + IW);
       return { ...fallback, CW, H, IW, IH };
     }
 
@@ -382,47 +406,47 @@ export function WordParticleVis({
       });
     }
 
-    // ── Unique Words ─────────────────────────────────────────────────────────
+    // ── Unique Words (rotated 90°) ────────────────────────────────────────────
+    // Y-axis = words (rows), X-axis = particle stacks going rightward.
+    // Topic groups are separated by UNIQUE_GAP vertical space.
     else if (mode === 'unique') {
+      const K = TOP_UNIQUE;
       const activeTopics_u = TD.topics.filter(t => particles.some(p => p.primaryTopic === t));
-      const K    = TOP_UNIQUE;
-      const nT   = activeTopics_u.length;
-      const totalSlots = nT > 0 ? nT * K + (nT - 1) : K;
-      const colW  = iw / totalSlots;
-      const gridR = Math.max(1, Math.floor(colW / STEP));
 
-      // Per-topic top-K distinctive stems
       const topicStemList = new Map<string, number[]>();
       activeTopics_u.forEach(t => {
         topicStemList.set(t, (WS.topicWords[t] ?? []).slice(0, K).map(([si]) => si));
       });
 
-      // Bucket particles into (topicIdx, wordPos) columns
-      const colBuckets = new Map<string, number[]>();
+      // rowY: vertical centre of the (topicIdx, wordIdx) row
+      const rowY = (ti: number, wi: number) =>
+        PAD.t + ti * (K * UNIQUE_ROW_H + UNIQUE_GAP) + wi * UNIQUE_ROW_H + UNIQUE_ROW_H / 2;
+
+      // Bucket particles into (topicIdx, wordIdx) rows
+      const rowBuckets = new Map<string, number[]>();
       particles.forEach((p, i) => {
-        const stemIdx = WS.wordToStem[String(p.wordIdx)] ?? -1;
         const stems   = topicStemList.get(p.primaryTopic);
+        const stemIdx = WS.wordToStem[String(p.wordIdx)] ?? -1;
         const wiInT   = stems ? stems.indexOf(stemIdx) : -1;
         if (wiInT >= 0) {
           const key = `${activeTopics_u.indexOf(p.primaryTopic)}_${wiInT}`;
-          if (!colBuckets.has(key)) colBuckets.set(key, []);
-          colBuckets.get(key)!.push(i);
+          if (!rowBuckets.has(key)) rowBuckets.set(key, []);
+          rowBuckets.get(key)!.push(i);
         } else {
-          tx[i] = cw + 80; ty[i] = PAD.t + ih / 2;
+          tx[i] = cw + 80; ty[i] = PAD.t + ih / 2;   // park off-screen
         }
       });
 
-      const baseY = PAD.t + ih;
+      // Position: stack left→right along each row
       activeTopics_u.forEach((t, ti) => {
         const stems = topicStemList.get(t) ?? [];
         stems.forEach((_, wi) => {
-          const slotIdx = ti * (K + 1) + wi;
-          const xCenter = PAD.l + (slotIdx + 0.5) * colW;
-          const idxs    = (colBuckets.get(`${ti}_${wi}`) ?? [])
+          const yc   = rowY(ti, wi);
+          const idxs = (rowBuckets.get(`${ti}_${wi}`) ?? [])
             .slice().sort((a, b) => particles[a].caption.localeCompare(particles[b].caption));
           idxs.forEach((idx, k) => {
-            tx[idx] = xCenter - ((gridR - 1) / 2) * STEP + (k % gridR) * STEP + spread(idx * 5, 0.5);
-            ty[idx] = baseY - Math.floor(k / gridR) * STEP + spread(idx * 13, 0.5);
+            tx[idx] = PAD.l + k * STEP + spread(idx * 5, 0.5);
+            ty[idx] = yc + spread(idx * 13, 0.4);
           });
         });
       });
@@ -438,7 +462,7 @@ export function WordParticleVis({
     const { tx, ty } = computeTargets(layoutMode);
     if (p.cx.length !== N) { p.cx = tx.slice(); p.cy = ty.slice(); }
     p.tx = tx; p.ty = ty;
-  }, [layoutMode, computeTargets, N]);
+  }, [layoutMode, computeTargets, N, layoutMetrics]); // layoutMetrics triggers re-layout when yearGridW/sizing changes
 
   // ── RAF draw loop ─────────────────────────────────────────────────────────
   useEffect(() => {
@@ -486,21 +510,27 @@ export function WordParticleVis({
         ctx.globalAlpha = 1;
       }
 
-      // ── Unique: topic group column backgrounds ────────────────────────────
+      // ── Unique: horizontal row bands + faint topic name watermark ───────────
       if (mode === 'unique') {
         const activeTopics_u = TD.topics.filter(t => particles.some(q => q.primaryTopic === t));
         const K = TOP_UNIQUE;
-        const nT = activeTopics_u.length;
-        const totalSlots = nT > 0 ? nT * K + (nT - 1) : K;
-        const colW = IW / totalSlots;
-        let slotStart = 0;
-        activeTopics_u.forEach(t => {
-          const xLeft  = PAD.l + slotStart * colW;
-          const hl     = activeTopic === t;
+        activeTopics_u.forEach((t, ti) => {
+          const bandTop = PAD.t + ti * (K * UNIQUE_ROW_H + UNIQUE_GAP);
+          const bandH   = K * UNIQUE_ROW_H;
+          const hl      = activeTopic === t;
+          // Coloured row band background
           ctx.fillStyle   = TOPIC_COLOR[t] ?? '#888';
-          ctx.globalAlpha = hl ? 0.20 : 0.07;
-          ctx.fillRect(xLeft, PAD.t, K * colW, IH);
-          slotStart += K + 1;
+          ctx.globalAlpha = hl ? 0.18 : 0.06;
+          ctx.fillRect(PAD.l, bandTop, IW, bandH);
+          // Faint topic name watermark centred in the band
+          ctx.save();
+          const fontSize = Math.max(10, Math.min(32, bandH * 0.55));
+          ctx.font        = `bold ${fontSize}px system-ui,sans-serif`;
+          ctx.textAlign   = 'left';
+          ctx.fillStyle   = TOPIC_COLOR[t] ?? '#888';
+          ctx.globalAlpha = hl ? 0.22 : 0.10;
+          ctx.fillText(t, PAD.l + 6, bandTop + bandH / 2 + fontSize * 0.35);
+          ctx.restore();
         });
         ctx.globalAlpha = 1;
       }
@@ -863,42 +893,20 @@ function drawAxes(
     });
   }
 
-  // unique mode: topic group labels + rotated word labels
+  // unique mode: horizontal word labels on left, no bottom axis
   if (mode === 'unique') {
+    const K = TOP_UNIQUE;
     const activeTopics_u = TD.topics.filter(t => particles.some(p => p.primaryTopic === t));
-    const K          = TOP_UNIQUE;
-    const nT         = activeTopics_u.length;
-    const totalSlots = nT > 0 ? nT * K + (nT - 1) : K;
-    const colW       = IW / totalSlots;
-    let slotStart    = 0;
-    activeTopics_u.forEach(t => {
-      const xLeft   = PAD.l + slotStart * colW;
-      const xCenter = xLeft + K * colW / 2;
-      // topic label — bold, near-white, readable on dark background
-      ctx.textAlign   = 'center';
-      ctx.font        = 'bold 10.5px system-ui,sans-serif';
-      ctx.fillStyle   = 'rgba(238,238,238,0.96)';
-      ctx.globalAlpha = 1;
-      ctx.fillText(t.length > 16 ? t.slice(0, 14) + '…' : t, xCenter, H - PAD.b + 12);
-      // small colored underline stripe below topic label
-      ctx.fillStyle   = TOPIC_COLOR[t] ?? '#999';
-      ctx.globalAlpha = 0.75;
-      ctx.fillRect(xLeft + 2, H - PAD.b + 14, K * colW - 4, 2);
-      // per-word rotated labels — lighter gray, slightly larger
+    ctx.textAlign = 'right';
+    ctx.fillStyle = 'rgba(210,210,210,0.92)';
+    ctx.globalAlpha = 1;
+    activeTopics_u.forEach((t, ti) => {
       const stems = (WS.topicWords[t] ?? []).slice(0, K).map(([si]) => si);
-      ctx.fillStyle   = 'rgba(205,205,205,0.92)';
-      ctx.globalAlpha = 1;
       stems.forEach((si, wi) => {
-        const xLabel = PAD.l + (slotStart + wi + 0.5) * colW;
-        ctx.save();
-        ctx.translate(xLabel, H - PAD.b + 18);
-        ctx.rotate(-Math.PI * 0.42);
-        ctx.textAlign = 'right';
-        ctx.font = '8.5px system-ui,sans-serif';
-        ctx.fillText(WS.stems[si] ?? '', 0, 0);
-        ctx.restore();
+        const yc = PAD.t + ti * (K * UNIQUE_ROW_H + UNIQUE_GAP) + wi * UNIQUE_ROW_H + UNIQUE_ROW_H / 2;
+        ctx.font = '9px system-ui,sans-serif';
+        ctx.fillText(WS.stems[si] ?? '', PAD.l - 5, yc + 3);
       });
-      slotStart += K + 1;
     });
     ctx.globalAlpha = 1;
   }
