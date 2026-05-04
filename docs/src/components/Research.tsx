@@ -235,6 +235,7 @@ export function Research() {
           items={researchData}
           containerWidth={visWidth || 800}
           fitMode={fitMode}
+          handleClick={openModal}
         />
       </div>
     );
