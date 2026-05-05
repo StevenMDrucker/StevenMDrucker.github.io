@@ -21,8 +21,8 @@ export const TOPIC_COLOR: Record<string, string> = {
   'Web Search & Content':                 '#ff9da7',
   'Notebooks & Code':                     '#f67019',
   'Interaction Design':                   '#acc236',
-  'UI for AI':                            '#9467bd',
-  'AI for UI':                            '#17becf',
+  'UI/Visualization for ML':                            '#9467bd',
+  'AI Assistance':                            '#17becf',
   'Visual Analytics':                     '#bab0ac',
 };
 
@@ -53,8 +53,8 @@ export const TOPIC_ORDER: string[] = [
   'Web Search & Content',
   'Notebooks & Code',
   'Interaction Design',
-  'UI for AI',
-  'AI for UI',
+  'UI/Visualization for ML',
+  'AI Assistance',
   'Visual Analytics',
 ];
 
@@ -67,10 +67,9 @@ export const TOPIC_RENAME: Record<string, string> = {
   'Photo & Image Tools':   'Photo/Video Tools',
   'Video & Rich Media':    'Photo/Video Tools',
   'Data Storytelling':     'Storytelling, Presentation & Cameras',
-  'Human-in-the-Loop ML': 'UI for AI',       // default; specific papers overridden
+  'Human-in-the-Loop ML': 'UI/Visualization for ML',       // default; specific papers overridden
   'Immersive & AR/VR':     'Computer Graphics & AR/VR', // default; specific papers overridden
   '3D Navigation & Camera': 'Storytelling, Presentation & Cameras', // eliminated — default fallback
-  'AI Assistance':          'AI for UI',      // eliminated — default fallback
 };
 
 /**
