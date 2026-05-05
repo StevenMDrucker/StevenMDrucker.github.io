@@ -101,8 +101,14 @@ export function WordParticleVis({
   const [highlightTopic, setHighlightTopic] = useState<string | null>(null);
   const [tooltip, setTooltip] = useState<{ cx: number; cy: number; p: Particle } | null>(null);
   const [yearGridW,      setYearGridW]      = useState(5);
+  // Measured width of the scroll wrapper — more reliable than computing from
+  // containerWidth, which can drift due to Bootstrap row negative-margins and
+  // OS scrollbar geometry differences between desktop and tablet.
+  const [scrollWrapWidth, setScrollWrapWidth] = useState(
+    Math.max(400, containerWidth - LEGEND_W - 16)
+  );
 
-  const baseCW = Math.max(400, containerWidth - LEGEND_W - 16);
+  const baseCW = Math.max(400, scrollWrapWidth);
 
   useEffect(() => { layoutRef.current = layoutMode; }, [layoutMode]);
 
@@ -659,9 +665,16 @@ export function WordParticleVis({
   useEffect(() => {
     const el = scrollWrapRef.current;
     if (!el) return;
+    // Prevent outer page scroll while hovering the canvas
     const onWheel = (e: WheelEvent) => e.preventDefault();
     el.addEventListener('wheel', onWheel, { passive: false });
-    return () => el.removeEventListener('wheel', onWheel);
+    // Measure the true available width so baseCW never causes overflow
+    const ro = new ResizeObserver(entries => {
+      const w = entries[0]?.contentRect.width;
+      if (w && w > 0) setScrollWrapWidth(Math.floor(w));
+    });
+    ro.observe(el);
+    return () => { el.removeEventListener('wheel', onWheel); ro.disconnect(); };
   }, []);
 
   return (
