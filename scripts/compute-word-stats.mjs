@@ -29,9 +29,10 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT      = path.resolve(__dirname, '..');
 
-const WORD_DATA_PATH  = path.join(ROOT, 'docs/src/data/wordData.json');
-const TOPIC_DATA_PATH = path.join(ROOT, 'docs/src/data/topicData.json');
-const OUT_PATH        = path.join(ROOT, 'docs/src/data/wordStats.json');
+const WORD_DATA_PATH      = path.join(ROOT, 'docs/src/data/wordData.json');
+const TOPIC_DATA_PATH     = path.join(ROOT, 'docs/src/data/topicData.json');
+const TOPIC_OVERRIDES_PATH = path.join(ROOT, 'docs/src/data/topicOverrides.json');
+const OUT_PATH            = path.join(ROOT, 'docs/src/data/wordStats.json');
 
 const args   = process.argv.slice(2);
 const REPORT = args.includes('--report');
@@ -152,14 +153,57 @@ function stem(w) {
 
 
 // ─── load data ────────────────────────────────────────────────────────────────
-const WD = JSON.parse(fs.readFileSync(WORD_DATA_PATH, 'utf8'));
-const TD = JSON.parse(fs.readFileSync(TOPIC_DATA_PATH, 'utf8'));
+const WD  = JSON.parse(fs.readFileSync(WORD_DATA_PATH,       'utf8'));
+const TD  = JSON.parse(fs.readFileSync(TOPIC_DATA_PATH,      'utf8'));
+const OVR = JSON.parse(fs.readFileSync(TOPIC_OVERRIDES_PATH, 'utf8')).overrides;
 
-const WORDS  = WD.words;   // global vocab
-const FREQS  = WD.freqs;   // global frequency per word index
-const PAPERS = WD.papers;  // array of { caption, year, wordcount, tw: [[idx,cnt],...] }
-const TOPICS = TD.topics;
-const TPAPERS = TD.papers; // keyed by caption
+const WORDS   = WD.words;   // global vocab
+const FREQS   = WD.freqs;   // global frequency per word index
+const PAPERS  = WD.papers;  // array of { caption, year, wordcount, tw: [[idx,cnt],...] }
+const TPAPERS = TD.papers;  // keyed by caption: { weights: { topic: weight } }
+
+// ─── new canonical topic taxonomy ────────────────────────────────────────────
+// Matches topicColors.ts: manual overrides take priority over ML weights +
+// rename map.  Each paper belongs 100% to exactly one topic.
+const TOPIC_RENAME = {
+  'Computer Graphics':      'Computer Graphics & AR/VR',
+  'Photo & Image Tools':    'Photo/Video Tools',
+  'Video & Rich Media':     'Photo/Video Tools',
+  'Data Storytelling':      'Storytelling, Presentation & Cameras',
+  'Human-in-the-Loop ML':  'UI/Visualization for ML',
+  'Immersive & AR/VR':      'Computer Graphics & AR/VR',
+  '3D Navigation & Camera': 'Storytelling, Presentation & Cameras',
+  'AI Assistance':          'AI Assistance',  // self (old) → new AI Assistance
+};
+
+function resolveTopic(caption) {
+  const ov = OVR[caption];
+  if (ov && !ov.startsWith('──')) return ov;
+  const weights = TPAPERS[caption]?.weights ?? {};
+  let best = '', maxW = -Infinity;
+  for (const [t, w] of Object.entries(weights)) {
+    if (w > maxW) { maxW = w; best = t; }
+  }
+  if (best) return TOPIC_RENAME[best] ?? best;
+  return 'Visualization';
+}
+
+// Ordered topic list (matches TOPIC_ORDER in topicColors.ts)
+const TOPICS = [
+  'Robotics & Sensing',
+  'Hypertext & Links',
+  'Computer Graphics & AR/VR',
+  'Storytelling, Presentation & Cameras',
+  'Online Communities',
+  'Visualization',
+  'Photo/Video Tools',
+  'Web Search & Content',
+  'Notebooks & Code',
+  'Interaction Design',
+  'UI/Visualization for ML',
+  'AI Assistance',
+  'Visual Analytics',
+];
 
 const N_PAPERS = PAPERS.length;
 const N_TOPICS = TOPICS.length;
@@ -245,27 +289,23 @@ const paperUnique = PAPERS.map((paper, j) => {
 });
 
 // ─── per-topic stem aggregation ───────────────────────────────────────────────
-// For each topic, aggregate weighted stem counts across all papers.
-// weight = the paper's topic weight from topicData.
-// Then compute TF-IDF where the "document" is the entire topic cluster.
+// Each paper belongs 100% to its resolved canonical topic (hard assignment).
+// This matches how the visualisations display papers and gives much sharper
+// per-topic TF-IDF than soft ML weights.
 
 const topicCounts   = TOPICS.map(() => ({}));  // topic → stemIdx → weighted count
 const topicTotals   = new Float32Array(N_TOPICS);
 
 PAPERS.forEach((paper, j) => {
-  const tw = TPAPERS[paper.caption];
-  if (!tw) return;
+  const topic = resolveTopic(paper.caption);
+  const ti    = TOPICS.indexOf(topic);
+  if (ti < 0) return;
   const stemCounts = paperStemData[j];
   const total = Object.values(stemCounts).reduce((a, b) => a + b, 0) || 1;
-
-  TOPICS.forEach((topic, ti) => {
-    const w = tw.weights?.[topic] ?? 0;
-    if (w < 0.1) return;
-    for (const [si, cnt] of Object.entries(stemCounts)) {
-      topicCounts[ti][si] = (topicCounts[ti][si] || 0) + (cnt / total) * w;
-    }
-    topicTotals[ti] += w;
-  });
+  for (const [si, cnt] of Object.entries(stemCounts)) {
+    topicCounts[ti][si] = (topicCounts[ti][si] || 0) + cnt / total;
+  }
+  topicTotals[ti] += 1;
 });
 
 // Topic-level TF-IDF: IDF across topics (topic document frequency)
