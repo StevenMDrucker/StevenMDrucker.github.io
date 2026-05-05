@@ -14,6 +14,7 @@ import { useRef, useEffect, useMemo, useState, useCallback } from 'react';
 import wordDataRaw  from '../data/wordData.json';
 import topicDataRaw from '../data/topicData.json';
 import wordStatsRaw from '../data/wordStats.json';
+import { TOPIC_COLOR as TOPIC_COLOR_SHARED } from '../data/topicColors';
 
 // ─── types ───────────────────────────────────────────────────────────────────
 interface WData {
@@ -35,25 +36,8 @@ const WD = wordDataRaw  as WData;
 const TD = topicDataRaw as TData;
 const WS = wordStatsRaw as unknown as WSData;
 
-// ─── topic colour map ────────────────────────────────────────────────────────
-const TOPIC_COLOR: Record<string, string> = {
-  'Hypertext & Links':      '#4e79a7',
-  'Computer Graphics':      '#f28e2b',
-  '3D Navigation & Camera': '#e15759',
-  'Robotics & Sensing':     '#76b7b2',
-  'Online Communities':     '#59a14f',
-  'Photo & Image Tools':    '#edc948',
-  'Video & Rich Media':     '#b07aa1',
-  'Web Search & Content':   '#ff9da7',
-  'Visualization':          '#9c755f',
-  'Visual Analytics':       '#bab0ac',
-  'Data Storytelling':      '#d37295',
-  'Human-in-the-Loop ML':   '#e377c2',
-  'AI Assistance':          '#4dc9f6',
-  'Notebooks & Code':       '#f67019',
-  'Immersive & AR/VR':      '#537bc4',
-  'Interaction Design':     '#acc236',
-};
+// ─── topic colour map (re-exported from shared data file) ───────────────────
+const TOPIC_COLOR = TOPIC_COLOR_SHARED;
 
 // ─── particle ────────────────────────────────────────────────────────────────
 interface Particle {
@@ -263,14 +247,14 @@ export function WordParticleVis({
           rowCounts.set(key, (rowCounts.get(key) ?? 0) + 1);
         }
       });
-      const maxRowCount = rowCounts.size > 0 ? Math.max(...rowCounts.values()) : 1;
       // Canvas height: K rows per topic + gap between groups
       const H_content = nT * K * UNIQUE_ROW_H + Math.max(0, nT - 1) * UNIQUE_GAP;
       const H  = Math.max(200, PAD.t + PAD.b + H_content);
       const IH = H - PAD.t - PAD.b;
-      // Canvas width: enough for the widest row
-      const IW = Math.max(baseCW - PAD.l - PAD.r, maxRowCount * STEP + 20);
-      const CW = Math.max(baseCW, PAD.l + PAD.r + IW);
+      // Canvas width: exactly baseCW so no forced horizontal scroll.
+      // Particles that overflow are clipped — in practice rows are short.
+      const IW = baseCW - PAD.l - PAD.r;
+      const CW = baseCW;
       return { ...fallback, CW, H, IW, IH };
     }
 
@@ -522,14 +506,14 @@ export function WordParticleVis({
           ctx.fillStyle   = TOPIC_COLOR[t] ?? '#888';
           ctx.globalAlpha = hl ? 0.18 : 0.06;
           ctx.fillRect(PAD.l, bandTop, IW, bandH);
-          // Faint topic name watermark centred in the band
+          // Topic name watermark — right-aligned inside the band
           ctx.save();
           const fontSize = Math.max(10, Math.min(32, bandH * 0.55));
           ctx.font        = `bold ${fontSize}px system-ui,sans-serif`;
-          ctx.textAlign   = 'left';
+          ctx.textAlign   = 'right';
           ctx.fillStyle   = TOPIC_COLOR[t] ?? '#888';
-          ctx.globalAlpha = hl ? 0.22 : 0.10;
-          ctx.fillText(t, PAD.l + 6, bandTop + bandH / 2 + fontSize * 0.35);
+          ctx.globalAlpha = hl ? 0.55 : 0.30;
+          ctx.fillText(t, PAD.l + IW - 6, bandTop + bandH / 2 + fontSize * 0.35);
           ctx.restore();
         });
         ctx.globalAlpha = 1;
