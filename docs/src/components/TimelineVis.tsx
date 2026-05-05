@@ -1,24 +1,6 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import topicDataRaw from '../data/topicData.json';
-import { TOPIC_COLOR, TOPIC_ORDER } from '../data/topicColors';
-
-interface TData {
-  topics: string[];
-  papers: Record<string, { year: number; weights: Record<string, number> }>;
-}
-const TD = topicDataRaw as TData;
-
-/** Derive primary ML topic for a paper caption (matches WordParticleVis logic). */
-function primaryTopic(caption: string): string {
-  const weights = TD.papers[caption]?.weights ?? {};
-  let best = 'Visualization';
-  let maxW = -Infinity;
-  Object.entries(weights).forEach(([t, w]) => {
-    if ((w as number) > maxW) { maxW = w as number; best = t; }
-  });
-  return best;
-}
+import { TOPIC_COLOR, TOPIC_ORDER, resolveTopic } from '../data/topicColors';
 
 interface TimelineVisProps {
   items: any[];
@@ -30,20 +12,20 @@ interface TimelineVisProps {
   fitMode?: boolean;
 }
 
-export function TimelineVis({ items, currentProjects, handleClick, width, containerWidth, fitMode = false }: TimelineVisProps) {
+export function TimelineVis({ items, currentProjects, handleClick, width, fitMode = false }: TimelineVisProps) {
 
   const marginx = 50;
   const marginy = 20;
 
-  // Assign each item its ML-derived primary topic
-  const itemsWithTopic = items.map(d => ({ ...d, mlTopic: primaryTopic(d.caption) }));
+  // Assign each item its resolved topic
+  const itemsWithTopic = items.map(d => ({ ...d, resolvedTopic: resolveTopic(d.caption) }));
 
-  // Active topics in canonical order (only those present in the current items)
-  const presentTopics = new Set(itemsWithTopic.map(d => d.mlTopic));
+  // Active topics in canonical order (only those present in current items)
+  const presentTopics = new Set(itemsWithTopic.map(d => d.resolvedTopic));
   const activeTopics = TOPIC_ORDER.filter(t => presentTopics.has(t));
 
-  // Running sum of item counts per topic (for Y layout)
-  const counts = activeTopics.map(t => itemsWithTopic.filter(d => d.mlTopic === t).length);
+  // Item counts and running sums per topic (for Y layout)
+  const counts = activeTopics.map(t => itemsWithTopic.filter(d => d.resolvedTopic === t).length);
   let sm = 0;
   const runsum: number[] = [];
   counts.forEach(c => { sm += c; runsum.push(sm); });
@@ -71,10 +53,8 @@ export function TimelineVis({ items, currentProjects, handleClick, width, contai
   const tTx = (py: number) =>
     fitMode ? `translate(0,${py}) scale(1,${correctionY}) translate(0,${-py})` : undefined;
 
-  const calcHighlight = (aproject: string) => {
-    if (currentProjects.indexOf(aproject) >= 0) return 'titleClass highlighted';
-    return 'titleClass normal';
-  };
+  const calcHighlight = (aproject: string) =>
+    currentProjects.indexOf(aproject) >= 0 ? 'titleClass highlighted' : 'titleClass normal';
 
   // Coloured background band per topic group
   const rects = activeTopics.map((t, i) => (
@@ -85,26 +65,27 @@ export function TimelineVis({ items, currentProjects, handleClick, width, contai
       width={width}
       height={height_scale(counts[i])}
       fill={TOPIC_COLOR[t] ?? '#888'}
-      fillOpacity={0.25}
+      fillOpacity={0.22}
     />
   ));
 
   const yearStart = Math.floor(x_extent[0] / 2) * 2;
   const years = d3.range(yearStart, currentYear + 4, 2);
   const legend = years.map((d, i) => (
-    <text key={`title${i}`} x={x_scale(d)} y={height - 5} transform={tTx(height - 5)} className="titleClass">{d}</text>
+    <text key={`year${i}`} x={x_scale(d)} y={height - 5} transform={tTx(height - 5)} className="titleClass">{d}</text>
   ));
 
-  const groupedList = _.groupBy(itemsWithTopic, d => d.mlTopic);
+  const groupedList = _.groupBy(itemsWithTopic, d => d.resolvedTopic);
 
   function layoutGroup(groupArray: any[], groupName: string): React.ReactNode[] {
     const baseIndex = activeTopics.indexOf(groupName);
     if (baseIndex < 0) return [];
     const baseCount = baseIndex === 0 ? 0 : runsum[baseIndex - 1];
     const sortedGroup = _.sortBy(groupArray, d => d.tags.year);
+    const color = TOPIC_COLOR[groupName] ?? '#888';
 
     return _.map(sortedGroup, (d, i) => {
-      const captionY = y_scale(baseCount + i) - 2;
+      const captionY   = y_scale(baseCount + i) - 2;
       const groupLabelY = y_scale(baseCount + sortedGroup.length / 2) + 5;
       return (
         <g key={`g${groupName}${i}`}>
@@ -122,7 +103,7 @@ export function TimelineVis({ items, currentProjects, handleClick, width, contai
             cx={x_scale(d.tags.year) - 2}
             cy={y_scale(baseCount + i) - 5}
             r={3}
-            fill={TOPIC_COLOR[groupName] ?? '#888'}
+            fill={color}
             fillOpacity={0.85}
           />
           <text
@@ -130,7 +111,7 @@ export function TimelineVis({ items, currentProjects, handleClick, width, contai
             y={groupLabelY}
             transform={tTx(groupLabelY)}
             className="titleClass"
-            fill={TOPIC_COLOR[groupName] ?? '#888'}
+            fill={color}
             fillOpacity={0.7}
           >{groupName}</text>
         </g>

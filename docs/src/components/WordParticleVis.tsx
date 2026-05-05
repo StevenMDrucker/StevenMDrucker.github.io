@@ -12,19 +12,14 @@
 
 import { useRef, useEffect, useMemo, useState, useCallback } from 'react';
 import wordDataRaw  from '../data/wordData.json';
-import topicDataRaw from '../data/topicData.json';
 import wordStatsRaw from '../data/wordStats.json';
-import { TOPIC_COLOR as TOPIC_COLOR_SHARED } from '../data/topicColors';
+import { TOPIC_COLOR, TOPIC_ORDER, resolveTopic } from '../data/topicColors';
 
 // ─── types ───────────────────────────────────────────────────────────────────
 interface WData {
   words: string[];
   freqs: number[];
   papers: Array<{ caption: string; year: number; wordcount: number; tw: [number, number][]; }>;
-}
-interface TData {
-  topics: string[];
-  papers: Record<string, { year: number; weights: Record<string, number>; }>;
 }
 interface WSData {
   stems: string[];
@@ -33,11 +28,7 @@ interface WSData {
 }
 
 const WD = wordDataRaw  as WData;
-const TD = topicDataRaw as TData;
 const WS = wordStatsRaw as unknown as WSData;
-
-// ─── topic colour map (re-exported from shared data file) ───────────────────
-const TOPIC_COLOR = TOPIC_COLOR_SHARED;
 
 // ─── particle ────────────────────────────────────────────────────────────────
 interface Particle {
@@ -122,14 +113,8 @@ export function WordParticleVis({
     let id = 0;
     WD.papers.forEach(paper => {
       if (!captionSet.has(paper.caption)) return;
-      const te = TD.papers[paper.caption];
-      const weights = te?.weights ?? {};
-      let primaryTopic = 'Visualization';
-      let maxW = 0;
-      Object.entries(weights).forEach(([t, w]) => {
-        if ((w as number) > maxW) { maxW = w as number; primaryTopic = t; }
-      });
-      const topicOrder = TD.topics.indexOf(primaryTopic);
+      const primaryTopic = resolveTopic(paper.caption);
+      const topicOrder   = TOPIC_ORDER.indexOf(primaryTopic);
       paper.tw.forEach(([widx, freq], rank) => {
         out.push({
           id: id++,
@@ -209,7 +194,7 @@ export function WordParticleVis({
       const yearSpacing  = clusterW + 4;
       const IW           = (yrRange + 1) * yearSpacing;
 
-      const activeTopicsTimeline = TD.topics.filter(t => byTopicYear.has(t));
+      const activeTopicsTimeline = TOPIC_ORDER.filter(t => byTopicYear.has(t));
       const sectionH = new Map<string, number>();
       activeTopicsTimeline.forEach(t => {
         const maxN  = Math.max(...byTopicYear.get(t)!.values());
@@ -228,7 +213,7 @@ export function WordParticleVis({
     // Height driven by number of topic×word rows; width by max particles in any row.
     if (layoutMode === 'unique') {
       const K   = TOP_UNIQUE;
-      const activeTopics_u = TD.topics.filter(t => particles.some(p => p.primaryTopic === t));
+      const activeTopics_u = TOPIC_ORDER.filter(t => particles.some(p => p.primaryTopic === t));
       const nT  = activeTopics_u.length;
       // Build per-topic stem lists
       const topicStemLists = new Map<string, number[]>();
@@ -395,7 +380,7 @@ export function WordParticleVis({
     // Topic groups are separated by UNIQUE_GAP vertical space.
     else if (mode === 'unique') {
       const K = TOP_UNIQUE;
-      const activeTopics_u = TD.topics.filter(t => particles.some(p => p.primaryTopic === t));
+      const activeTopics_u = TOPIC_ORDER.filter(t => particles.some(p => p.primaryTopic === t));
 
       const topicStemList = new Map<string, number[]>();
       activeTopics_u.forEach(t => {
@@ -496,7 +481,7 @@ export function WordParticleVis({
 
       // ── Unique: horizontal row bands + faint topic name watermark ───────────
       if (mode === 'unique') {
-        const activeTopics_u = TD.topics.filter(t => particles.some(q => q.primaryTopic === t));
+        const activeTopics_u = TOPIC_ORDER.filter(t => particles.some(q => q.primaryTopic === t));
         const K = TOP_UNIQUE;
         activeTopics_u.forEach((t, ti) => {
           const bandTop = PAD.t + ti * (K * UNIQUE_ROW_H + UNIQUE_GAP);
@@ -661,7 +646,7 @@ export function WordParticleVis({
     setPinnedTopic(null); setHighlightTopic(null);
   }, []);
 
-  const activeTopics = TD.topics.filter(t => particles.some(p => p.primaryTopic === t));
+  const activeTopics = TOPIC_ORDER.filter(t => particles.some(p => p.primaryTopic === t));
 
   const BTNS: { id: LayoutMode; label: string; icon: string }[] = [
     { id: 'timeline', label: 'Timeline', icon: '◷' },
@@ -880,7 +865,7 @@ function drawAxes(
   // unique mode: horizontal word labels on left, no bottom axis
   if (mode === 'unique') {
     const K = TOP_UNIQUE;
-    const activeTopics_u = TD.topics.filter(t => particles.some(p => p.primaryTopic === t));
+    const activeTopics_u = TOPIC_ORDER.filter(t => particles.some(p => p.primaryTopic === t));
     ctx.textAlign = 'right';
     ctx.fillStyle = 'rgba(210,210,210,0.92)';
     ctx.globalAlpha = 1;
