@@ -165,20 +165,28 @@ export function KeywordVis({
   ));
 
   // Topic labels (Y-axis)
-  const topicLabels = activeTopics.map((t, ti) => (
-    <text
-      key={`tl${ti}`}
-      x={MARGIN.x - 8}
-      y={yOf(ti)}
-      dy="0.35em"
-      textAnchor="end"
-      className={`keyword ${isHlTopic(t) ? 'highlighted' : 'normal'}`}
-      style={{ fill: TOPIC_COLOR[t] ?? '#aaa', fontWeight: isHlTopic(t) ? 700 : 400, fontSize: 11 }}
-      onMouseEnter={() => onEnterTopic(t)}
-      onMouseLeave={onLeaveTopic}
-      style={{ cursor: 'default' }}
-    >{t}</text>
-  ));
+  const topicLabels = activeTopics.map((t, ti) => {
+    const col = TOPIC_COLOR[t] ?? '#aaa';
+    const hl  = isHlTopic(t);
+    return (
+      <text
+        key={`tl${ti}`}
+        x={MARGIN.x - 8}
+        y={yOf(ti)}
+        dy="0.35em"
+        textAnchor="end"
+        style={{
+          fill:       col,
+          opacity:    hl ? 1 : 0.72,
+          fontWeight: hl ? 700 : 400,
+          fontSize:   11,
+          cursor:     'default',
+        }}
+        onMouseEnter={() => onEnterTopic(t)}
+        onMouseLeave={onLeaveTopic}
+      >{t}</text>
+    );
+  });
 
   // Horizontal grid lines
   const horLines = activeTopics.map((t, ti) => (
