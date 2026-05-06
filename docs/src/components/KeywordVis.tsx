@@ -173,9 +173,7 @@ export function KeywordVis({
       dy="0.35em"
       textAnchor="end"
       className={`keyword ${isHlTopic(t) ? 'highlighted' : 'normal'}`}
-      fill={TOPIC_COLOR[t] ?? '#aaa'}
-      fontWeight={isHlTopic(t) ? 700 : 400}
-      fontSize={11}
+      style={{ fill: TOPIC_COLOR[t] ?? '#aaa', fontWeight: isHlTopic(t) ? 700 : 400, fontSize: 11 }}
       onMouseEnter={() => onEnterTopic(t)}
       onMouseLeave={onLeaveTopic}
       style={{ cursor: 'default' }}
