@@ -1,7 +1,45 @@
-import { useState } from 'react';
-import * as D3 from 'd3';
+import { useState, useMemo } from 'react';
 import _ from 'lodash';
+import topicDataRaw from '../data/topicData.json';
+import { TOPIC_COLOR, TOPIC_ORDER, resolveTopic } from '../data/topicColors';
 
+// ─── types ───────────────────────────────────────────────────────────────────
+interface TData {
+  topics: string[];
+  papers: Record<string, { year: number; weights: Record<string, number> }>;
+}
+const TD = topicDataRaw as TData;
+
+// ─── aggregate old ML topic weights → new canonical topics ───────────────────
+// Merged topics (Photo & Image Tools + Video & Rich Media → Photo/Video Tools,
+// Computer Graphics + Immersive & AR/VR → Computer Graphics & AR/VR, etc.)
+// sum their constituent old-topic weights.
+const OLD_TO_NEW: Record<string, string> = {
+  'Hypertext & Links':        'Hypertext & Links',
+  'Computer Graphics':        'Computer Graphics & AR/VR',
+  '3D Navigation & Camera':   'Storytelling, Presentation & Cameras',
+  'Robotics & Sensing':       'Robotics & Sensing',
+  'Online Communities':       'Online Communities',
+  'Photo & Image Tools':      'Photo/Video Tools',
+  'Video & Rich Media':       'Photo/Video Tools',
+  'Web Search & Content':     'Web Search & Content',
+  'Visualization':            'Visualization',
+  'Visual Analytics':         'Visual Analytics',
+  'Data Storytelling':        'Storytelling, Presentation & Cameras',
+  'Human-in-the-Loop ML':    'UI/Visualization for ML',
+  'AI Assistance':            'AI Assistance',
+  'Notebooks & Code':         'Notebooks & Code',
+  'Immersive & AR/VR':        'Computer Graphics & AR/VR',
+  'Interaction Design':       'Interaction Design',
+};
+
+// ─── constants ───────────────────────────────────────────────────────────────
+const MAX_R  = 8;    // radius at 100 % topic weight (area ∝ weight via √)
+const MIN_W  = 0.04; // weights below this are not drawn
+const MARGIN = { x: 270, y: 170 } as const; // space for labels
+const Y_GAP  = 22;   // px between topic rows
+
+// ─── props ───────────────────────────────────────────────────────────────────
 interface KeywordVisProps {
   items: any[];
   currentProjects: string[];
@@ -11,130 +49,246 @@ interface KeywordVisProps {
   fitMode?: boolean;
 }
 
-export function KeywordVis({ items, currentProjects, highlight, handleClick, containerWidth = 800, fitMode = false }: KeywordVisProps) {
-  const [highlightProjects, setHighlightProjects] = useState<string[]>([]);
-  const [highlightSubjects, setHighlightSubjects] = useState<string[]>([]);
-  const [currentProject, setCurrentProject] = useState('');
-  const [currentSubject, setCurrentSubject] = useState('');
+export function KeywordVis({
+  items,
+  currentProjects,
+  highlight,
+  handleClick,
+  containerWidth = 800,
+  fitMode = false,
+}: KeywordVisProps) {
 
-  const keywords = _.orderBy(_.uniq(_.flatten(_.map(items, d => d.tags['subject']))));
-  const projects = _.map(items, d => d.caption);
-  const N = projects.length;
+  const [hovProject,  setHovProject]  = useState('');
+  const [hovTopic,    setHovTopic]    = useState('');
+  const [hlProjects,  setHlProjects]  = useState<string[]>([]);
+  const [hlTopics,    setHlTopics]    = useState<string[]>([]);
 
-  const marginx = 150;
-  const marginy = 170;
-  const yspacing = 18;
+  // ── sort papers: primary topic order → year within topic ──────────────────
+  const sortedItems = useMemo(() => [...items].sort((a, b) => {
+    const ta = TOPIC_ORDER.indexOf(resolveTopic(a.caption));
+    const tb = TOPIC_ORDER.indexOf(resolveTopic(b.caption));
+    if (ta !== tb) return ta - tb;
+    const ya = Number((a.tags.year?.[0] ?? a.tags.year) || 0);
+    const yb = Number((b.tags.year?.[0] ?? b.tags.year) || 0);
+    return ya - yb;
+  }), [items]);
 
-  // --- Dynamic x-spacing ---
-  // In fit mode: shrink column spacing so the SVG exactly fills containerWidth with no
-  //   horizontal scroll.  Circle radius scales with spacing; floor at 1 px so dots remain
-  //   visible.  No viewBox tricks – we just recompute the natural SVG width.
-  // In non-fit (scroll) mode: use the natural 16 px spacing.  If the total width exceeds
-  //   the container, the parent's vis-scroll class handles scrolling.
-  const naturalXSpacing = 16;
-  const xspacing = (fitMode && containerWidth > 0)
-    ? Math.max(4, (containerWidth - marginx - 20) / N)
-    : naturalXSpacing;
-  const circleRadius = fitMode ? Math.max(1, Math.min(2, xspacing / 4)) : 2;
-
-  const xmaxpos  = marginx + xspacing * N;
-  const ymaxpos  = marginy + yspacing * keywords.length;
-  const svgWidth  = Math.ceil(xmaxpos + 20);
-  const svgHeight = Math.ceil(ymaxpos + 10);
-
-  const y = D3.scaleLinear().domain([0, keywords.length]).range([marginy, ymaxpos]);
-  const x = D3.scaleLinear().domain([0, N]).range([marginx, xmaxpos]);
-
-  const calcHighlight = (aproject: string) => {
-    if (currentProjects.indexOf(aproject) >= 0 || highlightProjects.indexOf(aproject) >= 0) {
-      return 'highlighted';
+  // ── aggregate ML weights → new topic taxonomy, normalised per paper ────────
+  const paperWeights = useMemo(() => {
+    const map = new Map<string, Record<string, number>>();
+    for (const item of sortedItems) {
+      const raw = TD.papers[item.caption]?.weights ?? {};
+      const agg: Record<string, number> = {};
+      for (const [old, w] of Object.entries(raw)) {
+        const nt = OLD_TO_NEW[old];
+        if (nt) agg[nt] = (agg[nt] ?? 0) + (w as number);
+      }
+      const total = Object.values(agg).reduce((s, v) => s + v, 0) || 1;
+      for (const t of Object.keys(agg)) agg[t] /= total;
+      map.set(item.caption, agg);
     }
-    if (currentProject === aproject) return 'highlighted';
-    return 'normal';
-  };
+    return map;
+  }, [sortedItems]);
 
-  const calcHighlightSubject = (aSubject: string) => {
-    if (highlightSubjects.indexOf(aSubject) >= 0) return 'highlighted';
-    if (currentSubject === aSubject) return 'highlighted';
-    if (highlight.length > 1 && highlight[0] === 'subject' && highlight[1] === aSubject) return 'highlighted';
-    return 'normal';
-  };
+  // ── active topics (only those present in current items) ───────────────────
+  const activeTopics = useMemo(() => {
+    const present = new Set(sortedItems.map(d => resolveTopic(d.caption)));
+    return TOPIC_ORDER.filter(t => present.has(t));
+  }, [sortedItems]);
 
-  const doHighlightProjects = (aKey: string) => {
-    const toHighlight = _.filter(items, anItem => anItem.tags.subject.indexOf(aKey) >= 0);
-    setHighlightProjects(_.map(toHighlight, e => e.caption));
-    setCurrentSubject(aKey);
-  };
+  const N  = sortedItems.length;
+  const NT = activeTopics.length;
 
-  const clearHighlightProjects = () => {
-    setHighlightProjects([]);
-    setCurrentSubject('');
-  };
+  // ── x spacing ──────────────────────────────────────────────────────────────
+  const xNatural = 16;
+  const xspacing = (fitMode && containerWidth > 0)
+    ? Math.max(4, (containerWidth - MARGIN.x - 20) / N)
+    : xNatural;
 
-  const doHighlightSubjects = (aProject: string) => {
-    const theProject = _.filter(items, anItem => anItem.caption === aProject);
-    if (theProject.length > 0) setHighlightSubjects(theProject[0].tags.subject);
-    setCurrentProject(aProject);
-  };
+  const xOf  = (i: number)  => MARGIN.x + (i + 0.5) * xspacing;
+  const yOf  = (ti: number) => MARGIN.y + ti * Y_GAP;
 
-  const clearHighlightSubjects = () => {
-    setHighlightSubjects([]);
-    setCurrentProject('');
-  };
+  const svgW = Math.ceil(MARGIN.x + xspacing * N + 20);
+  const svgH = Math.ceil(MARGIN.y + Y_GAP * NT + 10);
 
-  const keywordlist = keywords.map((akey, i) => (
-    <g key={`k${i}`} transform={`translate(${marginx - 5},${y(i)})`}>
-      <text
-        dy="-.3em"
-        className={`keyword ${calcHighlightSubject(akey)}`}
-        onMouseEnter={() => doHighlightProjects(akey)}
-        onMouseLeave={() => clearHighlightProjects()}
-      >{akey}</text>
-    </g>
+  // ── highlight helpers ──────────────────────────────────────────────────────
+  const isHlProject = (cap: string) =>
+    currentProjects.includes(cap) || hlProjects.includes(cap) || hovProject === cap;
+  const isHlTopic = (t: string) =>
+    hlTopics.includes(t) || hovTopic === t ||
+    (highlight.length > 1 && highlight[0] === 'topic' && highlight[1] === t);
+
+  const onEnterTopic = (t: string) => {
+    setHlProjects(
+      sortedItems
+        .filter(d => (paperWeights.get(d.caption)?.[t] ?? 0) >= MIN_W)
+        .map(d => d.caption)
+    );
+    setHovTopic(t);
+  };
+  const onLeaveTopic = () => { setHlProjects([]); setHovTopic(''); };
+
+  const onEnterProject = (cap: string) => {
+    const wts = paperWeights.get(cap) ?? {};
+    setHlTopics(Object.entries(wts).filter(([, w]) => w >= MIN_W).map(([t]) => t));
+    setHovProject(cap);
+  };
+  const onLeaveProject = () => { setHlTopics([]); setHovProject(''); };
+
+  const hasBrush = hovProject !== '' || hovTopic !== '' || hlProjects.length > 0;
+
+  // ── topic group boundaries (X-axis dividers) ───────────────────────────────
+  // Find first paper index in each topic group for divider placement
+  const groupStarts = useMemo(() => {
+    const starts: number[] = [];
+    let lastTopic = '';
+    sortedItems.forEach((d, i) => {
+      const t = resolveTopic(d.caption);
+      if (t !== lastTopic) { starts.push(i); lastTopic = t; }
+    });
+    return starts;
+  }, [sortedItems]);
+
+  // ── SVG elements ───────────────────────────────────────────────────────────
+
+  // Horizontal row bands (faint tinted background per topic)
+  const rowBands = activeTopics.map((t, ti) => (
+    <rect
+      key={`band${ti}`}
+      x={MARGIN.x}
+      y={yOf(ti) - Y_GAP / 2}
+      width={xOf(N - 1) - MARGIN.x}
+      height={Y_GAP}
+      fill={TOPIC_COLOR[t] ?? '#888'}
+      fillOpacity={0.07}
+    />
   ));
 
-  const projectlist = projects.map((akey, i) => (
-    <g key={`p${i}`} transform={`translate(${x(i)},150)`}>
-      <text
-        onClick={() => handleClick(akey)}
-        dy=".3em"
-        transform="rotate(-90)"
-        className={`project ${calcHighlight(akey)}`}
-        onMouseEnter={() => doHighlightSubjects(akey)}
-        onMouseLeave={() => clearHighlightSubjects()}
-      >{akey}</text>
-    </g>
+  // Topic labels (Y-axis)
+  const topicLabels = activeTopics.map((t, ti) => (
+    <text
+      key={`tl${ti}`}
+      x={MARGIN.x - 8}
+      y={yOf(ti)}
+      dy="0.35em"
+      textAnchor="end"
+      className={`keyword ${isHlTopic(t) ? 'highlighted' : 'normal'}`}
+      fill={TOPIC_COLOR[t] ?? '#aaa'}
+      fontWeight={isHlTopic(t) ? 700 : 400}
+      fontSize={11}
+      onMouseEnter={() => onEnterTopic(t)}
+      onMouseLeave={onLeaveTopic}
+      style={{ cursor: 'default' }}
+    >{t}</text>
   ));
 
-  const vertlines = projects.map((akey, i) => (
-    <line key={`l${i}`} x1={x(i)} x2={x(i)} y1={marginy - 7} y2={y(keywords.length - 1) - 7} className={`vertline ${calcHighlight(akey)}`} />
+  // Horizontal grid lines
+  const horLines = activeTopics.map((t, ti) => (
+    <line
+      key={`hl${ti}`}
+      x1={MARGIN.x}
+      x2={xOf(N - 1)}
+      y1={yOf(ti)}
+      y2={yOf(ti)}
+      stroke={TOPIC_COLOR[t] ?? '#888'}
+      strokeOpacity={isHlTopic(t) ? 0.35 : 0.12}
+      strokeWidth={isHlTopic(t) ? 1 : 0.5}
+    />
   ));
 
-  const horlines = keywords.map((akey, i) => (
-    <line key={`hl${i}`} x1={marginx} x2={x(N - 1)} y1={y(i) - 7} y2={y(i) - 7} className={`horline ${calcHighlightSubject(akey)}`} />
+  // Vertical guide lines per paper
+  const vertLines = sortedItems.map((d, i) => (
+    <line
+      key={`vl${i}`}
+      x1={xOf(i)} x2={xOf(i)}
+      y1={MARGIN.y - 6} y2={yOf(NT - 1) + Y_GAP / 2}
+      stroke="#888"
+      strokeOpacity={isHlProject(d.caption) ? 0.40 : 0.08}
+      strokeWidth={isHlProject(d.caption) ? 1 : 0.5}
+    />
   ));
 
-  const circles = _.flatten(items.map((anItem, i) =>
-    anItem.tags.subject.map((sItem: string, j: number) => {
-      const vertPosition = y(keywords.indexOf(sItem)) - 7;
-      const horPosition  = x(i);
-      return <circle key={`c${i}d${j}`} cx={horPosition} cy={vertPosition} r={circleRadius} fill="red" />;
-    })
-  ));
+  // Topic-group dividers on X-axis (skip index 0)
+  const groupDividers = groupStarts.slice(1).map((gi, k) => {
+    const xMid = (xOf(gi - 1) + xOf(gi)) / 2;
+    return (
+      <line
+        key={`gd${k}`}
+        x1={xMid} x2={xMid}
+        y1={MARGIN.y - 6} y2={yOf(NT - 1) + Y_GAP / 2}
+        stroke="#aaa"
+        strokeOpacity={0.35}
+        strokeWidth={1}
+        strokeDasharray="3 3"
+      />
+    );
+  });
+
+  // Paper labels (rotated at top, colored by primary topic)
+  const paperLabels = sortedItems.map((d, i) => {
+    const pt = resolveTopic(d.caption);
+    const col = TOPIC_COLOR[pt] ?? '#aaa';
+    const isHL = isHlProject(d.caption);
+    return (
+      <g key={`pl${i}`} transform={`translate(${xOf(i)}, ${MARGIN.y - 8})`}>
+        <text
+          onClick={() => handleClick(d.caption)}
+          dy="0.3em"
+          transform="rotate(-90)"
+          textAnchor="start"
+          fontSize={10}
+          fill={isHL ? col : hasBrush ? '#555' : col}
+          fillOpacity={hasBrush ? (isHL ? 1 : 0.25) : 0.75}
+          fontWeight={isHL ? 600 : 400}
+          onMouseEnter={() => onEnterProject(d.caption)}
+          onMouseLeave={onLeaveProject}
+          style={{ cursor: 'pointer' }}
+        >{d.caption}</text>
+      </g>
+    );
+  });
+
+  // Marks: circle at each (paper, topic) cell, sized by weight
+  const marks = _.flatten(sortedItems.map((d, i) => {
+    const weights = paperWeights.get(d.caption) ?? {};
+    const isHL = isHlProject(d.caption);
+    return activeTopics.map((t, ti) => {
+      const w = weights[t] ?? 0;
+      if (w < MIN_W) return null;
+      const r = MAX_R * Math.sqrt(w);
+      const col = TOPIC_COLOR[t] ?? '#888';
+      const dimmed = hasBrush && !isHL && !isHlTopic(t);
+      return (
+        <circle
+          key={`m${i}t${ti}`}
+          cx={xOf(i)}
+          cy={yOf(ti)}
+          r={r}
+          fill={col}
+          fillOpacity={dimmed ? 0.10 : 0.80}
+          stroke={isHL || isHlTopic(t) ? col : 'none'}
+          strokeWidth={isHL || isHlTopic(t) ? 1 : 0}
+          strokeOpacity={0.9}
+        />
+      );
+    }).filter(Boolean);
+  }));
 
   return (
     <svg
       cursor="pointer"
-      width={svgWidth}
-      height={svgHeight}
+      width={svgW}
+      height={svgH}
       className="chart"
       style={{ display: 'block' }}
     >
-      {keywordlist}
-      {projectlist}
-      {vertlines}
-      {horlines}
-      {circles}
+      {rowBands}
+      {horLines}
+      {vertLines}
+      {groupDividers}
+      {topicLabels}
+      {paperLabels}
+      {marks}
     </svg>
   );
 }
