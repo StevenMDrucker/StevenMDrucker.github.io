@@ -7,6 +7,7 @@ import { KeywordVis } from './KeywordVis';
 import { TimelineVis } from './TimelineVis';
 import { StreamgraphVis } from './StreamgraphVis';
 import { WordParticleVis } from './WordParticleVis';
+import { resolveTopic } from '../data/topicColors';
 
 function useContainerWidth(ref: React.RefObject<HTMLDivElement | null>) {
   const [width, setWidth] = useState(0);
@@ -76,7 +77,12 @@ export function Research() {
       .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(data => {
         let uid = 0;
-        const withIds = _.map(data, d => { d.id = uid++; return d; });
+        const withIds = _.map(data, d => {
+          d.id = uid++;
+          // Inject computed canonical topic so it appears as a filter facet
+          d.tags.topic = [resolveTopic(d.caption)];
+          return d;
+        });
         const sorted = _.reverse(_.sortBy(withIds, a => a.tags['year']));
         globalDataRef.current = sorted;
         setDataLoaded(true);

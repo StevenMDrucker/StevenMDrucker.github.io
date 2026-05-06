@@ -556,31 +556,6 @@ export function WordParticleVis({
             ctx.stroke();
           }
         }
-        // Floating label near the cluster centroid
-        let sx = 0, sy = 0, cnt = 0;
-        for (let i = 0; i < N; i++) {
-          if (particles[i].caption === hovCap) { sx += p.cx[i]; sy += p.cy[i]; cnt++; }
-        }
-        if (cnt > 0) {
-          const labelX = Math.max(60, Math.min(CW - 60, sx / cnt));
-          const labelY = Math.max(30, (sy / cnt) - R_NORM * 4 - 8);
-          const text    = hovCap.length > 52 ? hovCap.slice(0, 49) + '…' : hovCap;
-          ctx.save();
-          ctx.font      = 'bold 11px system-ui,sans-serif';
-          ctx.textAlign = 'center';
-          const tw = ctx.measureText(text).width;
-          // Dark pill background
-          ctx.fillStyle   = 'rgba(18,18,22,0.88)';
-          ctx.globalAlpha = 1;
-          const rx = labelX - tw / 2 - 8, ry = labelY - 13, rw = tw + 16, rh = 18;
-          ctx.beginPath();
-          ctx.roundRect(rx, ry, rw, rh, 4);
-          ctx.fill();
-          // White text
-          ctx.fillStyle = '#eaeaea';
-          ctx.fillText(text, labelX, labelY);
-          ctx.restore();
-        }
       }
 
       drawAxes(ctx, mode, particles, metrics, CW, H, IW, IH);
@@ -792,7 +767,7 @@ export function WordParticleVis({
         <div
           style={{
             position: 'fixed',
-            left: tooltip.cx + 14, top: tooltip.cy - 16,
+            left: tooltip.cx + 28, top: tooltip.cy - 16,
             background: 'rgba(18,18,22,0.94)', color: '#eaeaea',
             fontSize: 11, padding: '7px 10px', borderRadius: 6,
             pointerEvents: handleClick ? 'auto' : 'none',
