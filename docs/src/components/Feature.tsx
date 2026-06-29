@@ -1,7 +1,17 @@
 import Slider from 'react-slick';
 import parse from 'html-react-parser';
+import { useRef } from 'react';
 
 const RC = 'https://stevenmdrucker.github.io/ResearchContent/';
+const RI = '/researchImages/';
+
+interface Section {
+  heading?: string;
+  text: string;
+  img?: string;
+  imgCaption?: string;
+  imgRight?: boolean;
+}
 
 interface Slide {
   title: string;
@@ -13,9 +23,71 @@ interface Slide {
   citation: string;
   pdf?: string;
   video?: string;
+  sections?: Section[];
 }
 
 const slides: Slide[] = [
+  {
+    title: 'PhotoDance: A 30-Year Itch, Finally Scratched',
+    year: 2026,
+    venue: 'Personal Research Project',
+    citations: 0,
+    img: RI + 'photodance_00.jpg',
+    citation: '<div class="csl-entry">Drucker, S. M. (2026). <i>PhotoDance: When a Microsoft Researcher Retires and Finally Scratches a 30-Year Itch</i>. Personal research project.</div>',
+    text: '',
+    video: 'https://youtu.be/2s15C1LMikg',
+    sections: [
+      {
+        heading: 'A Photographer and a Tool-Builder',
+        text: 'My wife, Lourdes, is the photographer. Over three decades she has assembled 225,000 photographs — a serious, intentional visual record of a life: our child growing up, decades of travel, family gatherings, and quiet moments in between. I am the HCI and visualization researcher. For thirty years at Microsoft Research, my job was to figure out how people make sense of large collections of things. When I retired, I finally had Lourdes\'s archive and the open-ended time to build the tool I had always promised.',
+        img: RI + 'photodance_00.jpg',
+        imgCaption: 'The Mosaic View: each image is composed of tiles drawn from the archive, matched by visual similarity. The entire collection becomes a single image you can zoom into infinitely.',
+        imgRight: false,
+      },
+      {
+        heading: 'The Galaxy View — 30 Years Rearranged in Real Time',
+        text: 'The Galaxy view displays the entire collection as a field of interactive points — at sufficient zoom, actual thumbnails appear. Switching axes reorganizes all 189,000 photos instantly: set the horizontal axis to Year for a massive timeline, switch to Location and points reorganize by geography, or switch to Camera Model to see how Lourdes\'s equipment evolved over the decades. Filter to a specific person via face recognition to isolate their entire life story.',
+        img: RI + 'photodance_01.jpg',
+        imgCaption: 'Strip View: each cell is a photo arranged by a chosen axis. Switching axes reorganizes the entire layout in real time.',
+        imgRight: true,
+      },
+      {
+        heading: 'Four Projects That Got Here First',
+        text: 'PhotoDance is the culmination of four ancestral projects: MediaFrame (2000s) — demonstrated at CES with Bill Gates and used as the browser for Gordon Bell\'s MyLifeBits project; TimeQuilt (2005) — published at SIGCHI, letting users browse archives by diving into representative cluster photos; LiveLabs Pivot (2009) — shipped at Microsoft LiveLabs, generalizing the ideas to any visual collection; and SandDance (2015) — shipped in Power BI and shown on stage with Satya Nadella at the 2017 CEO Summit. PhotoDance combines elements of all of them for a personal photo library.',
+        img: RI + 'photodance_02.jpg',
+        imgCaption: 'Galaxy view: 6,873 photos from 2014 arranged by month. Each column of thumbnails is a month\'s worth of photographs.',
+        imgRight: false,
+      },
+      {
+        heading: 'Multiple Layouts, Multiple Answers',
+        text: 'The same set of photographs arranged three different ways — by month, by month × camera model, and by geographic map — each answers a fundamentally different question about the collection\'s structure. This is the core SandDance insight applied to personal photography: the arrangement is the analysis.',
+        img: RI + 'photodance_03.jpg',
+        imgCaption: 'The same 6,873 photos arranged by camera model × year. Each row is a camera; each column a year, revealing how shooting habits evolved.',
+        imgRight: true,
+      },
+      {
+        heading: 'The AI Pipeline: Curating the "Incidental Life"',
+        text: 'Before either view can work, the photos need enrichment. A four-stage offline pipeline handles this: (1) Semantic Classification via CLIP — identifies non-memories like lens-cap fires, restaurant menus, and grocery items, either discarding or flagging them for private layers; (2) Quality Scoring — sharpness, brightness, and aesthetic scores for first-pass filtering; (3) Event Clustering — groups shots into distinct events using temporal gaps; (4) Identity Indexing — links faces across the entire 30-year archive. The pipeline also interpolates GPS from iPhone frames to adjacent DSLR frames, and identified 19,725 burst groups to collapse near-identical rapid-fire shots into single representative moments.',
+        img: RI + 'photodance_04.jpg',
+        imgCaption: 'Geographic map layout: 778 of 6,873 photos from 2014 carry GPS data, plotted on an interactive map.',
+        imgRight: false,
+      },
+      {
+        heading: 'Burst Comparison and the Rendering Challenge',
+        text: 'The burst comparison view shows a candidate frame alongside the current representative with synchronized zoom/pan and an optional red-highlight diff overlay that marks differing pixels. On the rendering side, the initial Canvas 2D implementation ran at ~20ms per frame. Moving to WebGL2 dropped that to 11ms — points became GPU primitives drawn in parallel. A sprite atlas loads actual thumbnails into GPU memory at zoom threshold, with an LRU cache managing memory dynamically.',
+        img: RI + 'photodance_05.jpg',
+        imgCaption: 'Burst comparison view: synchronized zoom/pan with optional pixel-diff overlay helps pick the sharpest frame from a burst.',
+        imgRight: true,
+      },
+      {
+        heading: 'Building This with an AI Collaborator',
+        text: 'I used Claude Code throughout the entire development of PhotoDance — not as an autocomplete tool, but as a genuine architectural collaborator. AI completely altered the cost of trying things. Complex tasks I would have deferred indefinitely — a WebGL2 GPU renderer, an LRU-evicting sprite atlas, iPad touch-gesture integration, a perceptual-hashing pipeline — became low-risk, fast-paced experiments. I held the design, UX judgment, and architectural guardrails. Claude held the execution: React state management, WebGL shader authorship, CSS layouts, and SQLite query optimization. The boundary between design and implementation became the interesting thing to negotiate, not a source of friction.',
+        img: RI + 'photodance_06.jpg',
+        imgCaption: 'At zoom threshold (18px screen diameter), each point loads and displays its actual photograph from the GPU sprite atlas.',
+        imgRight: false,
+      },
+    ],
+  },
   {
     title: 'SandDance',
     year: 2013,
@@ -131,6 +203,8 @@ const slides: Slide[] = [
 ];
 
 export function Feature() {
+  const sliderRef = useRef<Slider>(null);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -139,20 +213,27 @@ export function Feature() {
     slidesToShow: 1,
     slidesToScroll: 1,
     centerMode: false,
+    arrows: false,
   };
 
   return (
     <div className="feature-outer">
       <div style={{ width: '100%' }}>
-        <Slider {...settings}>
+        <Slider ref={sliderRef} {...settings}>
           {slides.map(slide => (
             <div key={slide.title}>
               <div className="feature-slide">
                 <div className="feature-header">
-                  <h2 className="feature-title">{slide.title}</h2>
+                  <div className="feature-title-row">
+                    <h2 className="feature-title">{slide.title}</h2>
+                    <div className="feature-nav-btns">
+                      <button className="feature-nav-btn" onClick={() => sliderRef.current?.slickPrev()} aria-label="Previous">&#8592;</button>
+                      <button className="feature-nav-btn" onClick={() => sliderRef.current?.slickNext()} aria-label="Next">&#8594;</button>
+                    </div>
+                  </div>
                   <div className="feature-meta">
-                    <span className="feature-venue">{slide.venue} {slide.year}</span>
-                    <span className="feature-citations">⭐ {slide.citations.toLocaleString()} citations</span>
+                    <span className="feature-venue">{slide.venue} · {slide.year}</span>
+                    {slide.citations > 0 && <span className="feature-citations">⭐ {slide.citations.toLocaleString()} citations</span>}
                     <div className="feature-links">
                       {slide.pdf && <a href={slide.pdf} target="_blank" rel="noreferrer" className="feature-link">PDF</a>}
                       {slide.video && <a href={slide.video} target="_blank" rel="noreferrer" className="feature-link">Video</a>}
@@ -160,10 +241,29 @@ export function Feature() {
                     <div className="feature-citation">{parse(slide.citation)}</div>
                   </div>
                 </div>
-                <div className="feature-body">
-                  <img className="feature-img" src={slide.img} alt={slide.title} />
-                  <p className="feature-text-body">{slide.text}</p>
-                </div>
+                {slide.sections ? (
+                  <div className="feature-sections">
+                    {slide.sections.map((sec, i) => (
+                      <div key={i} className={`feature-section ${sec.imgRight ? 'feature-section--img-right' : ''}`}>
+                        {sec.img && (
+                          <div className="feature-section-img-wrap">
+                            <img className="feature-img" src={sec.img} alt={sec.heading ?? ''} />
+                            {sec.imgCaption && <p className="feature-img-caption">{sec.imgCaption}</p>}
+                          </div>
+                        )}
+                        <div className="feature-section-text">
+                          {sec.heading && <h3 className="feature-section-heading">{sec.heading}</h3>}
+                          <p className="feature-text-body">{sec.text}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="feature-body">
+                    <img className="feature-img" src={slide.img} alt={slide.title} />
+                    <p className="feature-text-body">{slide.text}</p>
+                  </div>
+                )}
               </div>
             </div>
           ))}
