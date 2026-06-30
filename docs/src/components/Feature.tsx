@@ -26,8 +26,10 @@ interface Slide {
   sections?: Section[];
 }
 
-const slides: Slide[] = [
-  {
+// Set to true to include the PhotoDance slide in the carousel
+const SHOW_PHOTODANCE = false;
+
+const photodanceSlide: Slide = {
     title: 'PhotoDance: A 30-Year Itch, Finally Scratched',
     year: 2026,
     venue: 'Personal Research Project',
@@ -87,7 +89,10 @@ const slides: Slide[] = [
         imgRight: false,
       },
     ],
-  },
+};
+
+const slides: Slide[] = [
+  ...(SHOW_PHOTODANCE ? [photodanceSlide] : []),
   {
     title: 'SandDance',
     year: 2013,
