@@ -37,7 +37,7 @@ const photodanceSlide: Slide = {
     img: RI + 'photodance_00.jpg',
     citation: '<div class="csl-entry">Drucker, S. M. (2026). <i>PhotoDance: When a Microsoft Researcher Retires and Finally Scratches a 30-Year Itch</i>. Personal research project.</div>',
     text: '',
-    video: 'https://youtu.be/2s15C1LMikg',
+    video: 'https://youtu.be/Af9nWLuhhR8',
     sections: [
       {
         heading: 'A Photographer and a Tool-Builder',
