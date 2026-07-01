@@ -27,7 +27,7 @@ interface Slide {
 }
 
 // Set to true to include the PhotoDance slide in the carousel
-const SHOW_PHOTODANCE = false;
+const SHOW_PHOTODANCE = true;
 
 const photodanceSlide: Slide = {
     title: 'PhotoDance: A 30-Year Itch, Finally Scratched',
