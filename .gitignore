@@ -79,3 +79,6 @@ app
 #dist
 dist
 .parcel-cache
+
+# Claude Code / preview tool local config (machine-specific paths)
+.claude/
