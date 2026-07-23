@@ -73,7 +73,7 @@ export function Research() {
 
   // Fetch data once
   useEffect(() => {
-    fetch('https://stevenmdrucker.github.io/ResearchContent/researchData.json')
+    fetch('/ResearchContent/researchData.json')
       .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(data => {
         let uid = 0;

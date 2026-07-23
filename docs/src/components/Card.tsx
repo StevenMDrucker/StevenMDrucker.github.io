@@ -18,7 +18,7 @@ export function CardComponent({ theItem, mode, handleOver, handleOut, handleClic
         onMouseLeave={() => handleOut(val)}
         onClick={() => handleClick(val)}
       >
-        <img src={`https://stevenmdrucker.github.io/ResearchContent/${val.img}`} width="180" height="120" alt={val.caption} />
+        <img src={`/ResearchContent/${val.img}`} width="180" height="120" alt={val.caption} />
         {val.caption}
       </div>
     );
@@ -34,7 +34,7 @@ export function CardComponent({ theItem, mode, handleOver, handleOut, handleClic
         <div className="row">
           <div className="col-lg-2 col-sm-2 col-md-2">
             <div className="row">
-              <img className="detailsImage" src={`https://stevenmdrucker.github.io/ResearchContent/${val.img}`} width="180" height="120" alt={val.caption} />
+              <img className="detailsImage" src={`/ResearchContent/${val.img}`} width="180" height="120" alt={val.caption} />
             </div>
             <div style={{ display: 'flex', gap: '6px', marginTop: '6px' }}>
               {val.pdf && <a className="detail-btn btn-paper" href={val.pdf} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()}>Paper</a>}

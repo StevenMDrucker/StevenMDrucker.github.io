@@ -30,7 +30,7 @@ export function MyPopup({ item, onClose }: MyPopupProps) {
             <div className="modal-body">
               <div className="text-center">
                 <img
-                  src={`https://stevenmdrucker.github.io/ResearchContent/${item.img}`}
+                  src={`/ResearchContent/${item.img}`}
                   style={{ maxWidth: '100%', maxHeight: 300, objectFit: 'contain', borderRadius: 6 }}
                   alt={item.caption}
                 />

@@ -31,7 +31,7 @@ export function About() {
   const [activeTab, setActiveTab] = useState<BioTab>('Full');
 
   useEffect(() => {
-    fetch('https://stevenmdrucker.github.io/ResearchContent/Bio.md')
+    fetch('/ResearchContent/Bio.md')
       .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
       .then(text => setSections(parseBioSections(text)));
   }, []);

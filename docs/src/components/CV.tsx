@@ -6,7 +6,7 @@ export function CV() {
   const [info, setInfo] = useState<string>('');
 
   useEffect(() => {
-    fetch('https://stevenmdrucker.github.io/ResearchContent/CV.md')
+    fetch('/ResearchContent/CV.md')
       .then(response => {
         if (!response.ok) throw new Error('HTTP ' + response.status);
         return response.text();

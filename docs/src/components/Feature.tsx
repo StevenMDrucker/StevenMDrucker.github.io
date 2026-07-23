@@ -2,7 +2,7 @@ import Slider from 'react-slick';
 import parse from 'html-react-parser';
 import { useRef } from 'react';
 
-const RC = 'https://stevenmdrucker.github.io/ResearchContent/';
+const RC = '/ResearchContent/';
 const RI = '/researchImages/';
 
 interface Section {
