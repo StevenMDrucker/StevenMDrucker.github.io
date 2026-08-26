@@ -23,6 +23,7 @@ interface Slide {
   citation: string;
   pdf?: string;
   video?: string;
+  videos?: { label: string; url: string }[];
   sections?: Section[];
 }
 
@@ -37,7 +38,10 @@ const photodanceSlide: Slide = {
     img: RI + 'photodance_00.jpg',
     citation: '<div class="csl-entry">Drucker, S. M. (2026). <i>PhotoDance: When a Microsoft Researcher Retires and Finally Scratches a 30-Year Itch</i>. Personal research project.</div>',
     text: '',
-    video: 'https://youtu.be/Af9nWLuhhR8',
+    videos: [
+      { label: 'Video', url: 'https://youtu.be/Af9nWLuhhR8' },
+      { label: 'The Meaning Machine', url: 'https://youtu.be/6WD0onlrZOA' },
+    ],
     sections: [
       {
         heading: 'A Photographer and a Tool-Builder',
@@ -242,6 +246,7 @@ export function Feature() {
                     <div className="feature-links">
                       {slide.pdf && <a href={slide.pdf} target="_blank" rel="noreferrer" className="feature-link">PDF</a>}
                       {slide.video && <a href={slide.video} target="_blank" rel="noreferrer" className="feature-link">Video</a>}
+                      {slide.videos?.map(v => <a key={v.url} href={v.url} target="_blank" rel="noreferrer" className="feature-link">{v.label}</a>)}
                     </div>
                     <div className="feature-citation">{parse(slide.citation)}</div>
                   </div>
