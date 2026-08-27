@@ -40,7 +40,7 @@ const photodanceSlide: Slide = {
     text: '',
     videos: [
       { label: 'Video', url: 'https://youtu.be/Af9nWLuhhR8' },
-      { label: 'The Meaning Machine', url: 'https://youtu.be/6WD0onlrZOA' },
+      { label: 'The Meaning Machine', url: 'https://youtu.be/oyRprPP6dA8' },
     ],
     sections: [
       {
