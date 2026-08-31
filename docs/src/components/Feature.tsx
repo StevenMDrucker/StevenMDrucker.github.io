@@ -1,12 +1,15 @@
 import Slider from 'react-slick';
 import parse from 'html-react-parser';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const RC = '/ResearchContent/';
 const RI = '/researchImages/';
 
 interface Section {
   heading?: string;
+  stage?: string;        // pipeline-stage label shown before the heading (e.g. "Ingest")
+  stageColor?: string;   // colour of the stage label, matching the pipeline diagram
   text: string;
   img?: string;
   imgCaption?: string;
@@ -15,6 +18,7 @@ interface Section {
 
 interface Slide {
   title: string;
+  slug?: string;        // stable URL slug for deep-linking, e.g. /#/Featured/meaning-machine
   year: number;
   venue: string;
   citations: number;
@@ -32,6 +36,7 @@ const SHOW_PHOTODANCE = true;
 
 const photodanceSlide: Slide = {
     title: 'PhotoDance: A 30-Year Itch, Finally Scratched',
+    slug: 'photodance',
     year: 2026,
     venue: 'Personal Research Project',
     citations: 0,
@@ -95,8 +100,124 @@ const photodanceSlide: Slide = {
     ],
 };
 
+const meaningMachineSlide: Slide = {
+    title: 'PhotoDance · The Meaning Machine',
+    slug: 'meaning-machine',
+    year: 2026,
+    venue: 'Personal Research Project',
+    citations: 0,
+    img: RI + 'meaning_cover.jpg',
+    citation: '<div class="csl-entry">Drucker, S. M. (2026). <i>PhotoDance: The Meaning Machine — How a Photo Becomes Meaning</i>. Personal research project.</div>',
+    text: '',
+    videos: [
+      { label: 'Watch the film', url: 'https://youtu.be/oyRprPP6dA8' },
+    ],
+    sections: [
+      {
+        heading: 'A Photo Is Just a Grid of Numbers',
+        text: 'Open any photo on a computer and, underneath, it is nothing but three grids of numbers — a brightness for red, green, and blue at every pixel. Who is in the frame, where it was taken, whether it was worth keeping: none of that is written in those numbers. My last PhotoDance post showed what the finished tool does — thirty years of family photos turned into a space you can fly through. This one is about the harder half: how a pile of pixel grids becomes something you can actually understand and search. The trick is never a single clever model. It is a dozen small steps, each adding one layer of meaning, and a viewer built to use all of them at once.',
+        img: RI + 'meaning_01.jpg',
+        imgCaption: 'To a computer a photo is only three grids of numbers — one each for red, green, and blue. Everything that makes it a memory has to be worked out.',
+        imgRight: false,
+      },
+      {
+        heading: 'Laid Out by Time and Color',
+        text: 'Some structure comes for free. Every file carries an EXIF tag its camera wrote — the moment of capture, the make and model, sometimes GPS — and PhotoDance reads it before running anything expensive. Lay each photo along a timeline by its EXIF date, tint it by the dominant color of its own pixels, and thirty years sort themselves into the view here: every vertical band a slice of time, its color the mood of what happened then. No model has run yet, and yet meaning is already within reach — select a run of years, filter to just those photos, and browse them. The whole reveal comes from the tag alone.',
+        img: RI + 'meaning_02.jpg',
+        imgCaption: 'The strip chart: every photo placed on a timeline by its EXIF date and tinted by its own dominant color. Even here you can select, filter, and browse to read meaning from the tag alone.',
+        imgRight: true,
+      },
+      {
+        heading: 'The Whole Pipeline',
+        text: 'From there the real work is a sequence. Each photo passes through roughly a dozen stages, and the order matters — every stage leaves behind something the next one leans on. Duplicates go first, so nothing downstream is computed twice; quality scores come before faces, so a sharp frame can stand in for a blurry moment; captions build on the faces and places already found. What follows walks that chain, stage by stage. Each section is named and colored to match the map here.',
+        img: RI + 'meaning_03.jpg',
+        imgCaption: 'The enrichment pipeline — roughly a dozen stages, each leaving behind something the next one builds on.',
+        imgRight: false,
+      },
+      {
+        stage: 'Ingest',
+        stageColor: '#e06b52',
+        heading: 'A Very Big Shoebox',
+        text: 'Everything lands in one pile first — more than 227,000 files pulled from Amazon, Google, and Apple Photos and from the higher-end cameras cataloged in Lightroom. Crucially, they arrive already annotated: the cloud services had clustered faces and detected objects, and over the years we had starred favorites, named a handful of people, and built albums by hand. A naive importer would throw all of that away. PhotoDance treats it as evidence instead — a free first guess that every later stage can confirm, correct, or extend.',
+        img: RI + 'meaning_04.jpg',
+        imgCaption: 'One pile, filled from every source — each photo carrying whatever work had already been done to it.',
+        imgRight: true,
+      },
+      {
+        stage: 'Dedup',
+        stageColor: '#e0954e',
+        heading: 'Many of Those Files Are Copies',
+        text: 'A shoebox that size is mostly redundancy. Byte-identical copies are the easy case — hash them, keep one. The subtle case is the re-save: a JPEG exported from a HEIC has different bytes but the same picture, so PhotoDance compares perceptual fingerprints rather than raw data, folding the twins together while keeping genuine crops and edits. Rapid-fire bursts collapse to their sharpest frame. What began as a quarter-million files settles to about 160,000 distinct photographs.',
+        img: RI + 'meaning_05.jpg',
+        imgCaption: 'Exact duplicates, re-saves caught by a perceptual fingerprint, and bursts folded to their sharpest frame — the pile thins to what is actually distinct.',
+        imgRight: false,
+      },
+      {
+        stage: 'Quality',
+        stageColor: '#d9b64a',
+        heading: 'The Models It Computes',
+        text: 'Now the models start, and they disagree in useful ways. MUSIQ, NIMA, and MANIQA judge technical quality — focus, exposure, noise — while a LAION aesthetic predictor and ArtiMuse, an aesthetics-tuned vision model, judge taste. PhotoDance blends them, with a full-resolution sharpness measure, into one keeper score, tuned so its ranking matches the stars Lourdes actually gave photos over the years. Sort the library by that score and the taste is unmistakable: out of 160,000 photos, murals, cathedrals, crashing surf, and a lone tree in the snow rise to the top. These are the scores that later let one frame stand in for a whole moment.',
+        img: RI + 'meaning_06.jpg',
+        imgCaption: 'The library re-sorted by the NIMA aesthetic model, best first — the top of 166,075 photos, chosen by the model rather than by hand.',
+        imgRight: true,
+      },
+      {
+        stage: 'Faces',
+        stageColor: '#a9c24f',
+        heading: 'Who\'s in the Picture',
+        text: 'So much of a life is the people in it. A detector (RetinaFace) finds every face; an ArcFace model turns each one into a 512-number signature, and those signatures cluster into people — the same person recognized across thirty years and a change of haircut. Amazon\'s tags give some clusters names; PhotoDance fills in the rest with a deliberately cautious rule. When a photo holds exactly one face and exactly one known name, that pairing must be right, so the name is safe to attach — and from those certain anchors it spreads outward to the crowded group shots. Every propagated name is marked and reversible, so a good guess never hardens into a wrong fact.',
+        img: RI + 'meaning_07.jpg',
+        imgCaption: 'Faces clustered across the whole archive by their ArcFace signatures. A name that is certain in one photo anchors the rest.',
+        imgRight: false,
+      },
+      {
+        stage: 'Meaning',
+        stageColor: '#6cb95c',
+        heading: 'A Space of Meaning',
+        text: 'The richest layer is meaning itself. PhotoDance runs every photo through OpenCLIP — a ViT-H-14 model trained on two billion image-text pairs — which places it as a point in a 1,024-dimension space where nearby means visually and conceptually similar, with nobody having labeled a thing. Flatten that space to a map and its structure is striking: seascapes drift to one shore and landscapes to another, while cities, wildlife, flowers, art, and food each settle into a region of their own — content the model was never told to look for, sorting itself out. And because the same model can embed words into this same space, a typed phrase lands wherever its meaning already lives — which is what turns the map into something you can search.',
+        img: RI + 'meaning_08.jpg',
+        imgCaption: 'The meaning space flattened to a map: 92,315 photos arranged by their OpenCLIP embeddings, with content regions — seascapes, landscapes, wildlife, cities — emerging on their own.',
+        imgRight: true,
+      },
+      {
+        stage: 'Ground',
+        stageColor: '#46b0b8',
+        heading: 'Grounded in Real Places',
+        text: 'A caption is only useful if it is true. A vision-language model (InternVL2) writes a first description from the pixels alone — "two people smiling in front of a mosaic." A second, text-only pass then grounds it, swapping in the names the face stage resolved and the place the location stage found, so the generic line becomes "Lourdes and Steven at Park Güell in Barcelona." The names come from faces, the place from the EXIF tag, the scene from the caption model — one true sentence that exists only because every earlier stage ran first.',
+        img: RI + 'meaning_09.jpg',
+        imgCaption: 'The enriched caption: names, place, and location resolved and tied back to the photo they describe.',
+        imgRight: false,
+      },
+      {
+        stage: 'Events',
+        stageColor: '#6f7fd8',
+        heading: 'Folded Into Events',
+        text: 'Photos are not really remembered one at a time; they are remembered as occasions. PhotoDance reads the gaps between timestamps to fold a stream of shots into events, groups nearby events into outings and trips, and gives each a generated name from what is inside it — "Snowy Forest Fun," a birthday, a road trip. The result is a browsable journal laid over a true-time strip, far closer to how the collection lives in memory than any folder ever was.',
+        img: RI + 'meaning_10.jpg',
+        imgCaption: 'The events view: automatically named outings and trips, each with its dates, people, and count, over a true-time strip.',
+        imgRight: true,
+      },
+      {
+        stage: 'Propagate',
+        stageColor: '#5a8fd6',
+        heading: 'Borrowed Locations',
+        text: 'Grouping does more than tidy the timeline — it lets facts travel between photos. Half the collection never recorded where it was: a Nikon has no GPS, a phone does. But a Nikon frame shot minutes from a located phone photo was almost certainly in the same place, so PhotoDance lets the located photo lend its coordinates to its neighbors in time — never across owners, and always reversibly, keeping the original untouched. On this collection that inference put nearly nine thousand more photos on the map, and the same kind of borrowing carries names and scenes between neighbors too.',
+        img: RI + 'meaning_11.jpg',
+        imgCaption: 'GPS flows between neighbors in time: each dashed line carries an iPhone anchor\'s location up to the Nikon whale shots taken minutes away — 690 of 786 placed here from a handful of anchors, and 8,905 across the whole collection.',
+        imgRight: false,
+      },
+      {
+        heading: 'The Machine and the Map',
+        text: 'None of these stages is impressive on its own — a quality score, a face cluster, one caption. What makes them add up is that they all write into the same place, and the viewer is built to use them together. Ask one plain question — "sunsets over the water" — and the answer appears in every view at once: lit up across the timeline, gathered into a single glowing cluster on the meaning map, pinned to the coastlines where each was taken, and laid out as the photographs themselves. The same 373 pictures, selected once and seen four ways. That is the point of the whole machine — not to file a lifetime of photos away, but to turn the pile into a space you can understand at a glance and move through by asking. The pipeline builds that space; the interface is how you live in it.',
+        img: RI + 'meaning_12.jpg',
+        imgCaption: 'One question — "sunsets over the water" — answered in every view at once: as a timeline, as a region on the meaning map, as points on the world map, and as the photos themselves. Selected once, shown four ways.',
+        imgRight: true,
+      },
+    ],
+};
+
 const slides: Slide[] = [
-  ...(SHOW_PHOTODANCE ? [photodanceSlide] : []),
+  ...(SHOW_PHOTODANCE ? [photodanceSlide, meaningMachineSlide] : []),
   {
     title: 'SandDance',
     year: 2013,
@@ -211,8 +332,22 @@ const slides: Slide[] = [
   },
 ];
 
+const slugify = (t: string) =>
+  t.toLowerCase().replace(/[·:]/g, ' ').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+const slugOf = (s: Slide) => s.slug ?? slugify(s.title);
+
 export function Feature() {
   const sliderRef = useRef<Slider>(null);
+  const { story } = useParams();
+
+  // deep-link: /#/Featured/<slug> opens that story; unknown or absent falls back to the first
+  const startIndex = Math.max(0, slides.findIndex(s => slugOf(s) === story));
+
+  // fresh loads / deep-links should start at the top of the page
+  useEffect(() => { window.scrollTo({ top: 0 }); }, []);
+
+  // if the story in the URL changes while already mounted, move the slider to it
+  useEffect(() => { sliderRef.current?.slickGoTo(startIndex); }, [story]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const settings = {
     dots: true,
@@ -223,6 +358,14 @@ export function Feature() {
     slidesToScroll: 1,
     centerMode: false,
     arrows: false,
+    initialSlide: startIndex,
+    // the first two stories are long; jump back to the top when paging so you never land mid-page
+    beforeChange: () => window.scrollTo({ top: 0, behavior: 'auto' }),
+    // keep the address bar on the current story so the link is always shareable
+    afterChange: (index: number) => {
+      const s = slides[index];
+      if (s) window.history.replaceState(null, '', '#/Featured/' + slugOf(s));
+    },
   };
 
   return (
@@ -262,7 +405,16 @@ export function Feature() {
                           </div>
                         )}
                         <div className="feature-section-text">
-                          {sec.heading && <h3 className="feature-section-heading">{sec.heading}</h3>}
+                          {sec.heading && (
+                            <h3 className="feature-section-heading">
+                              {sec.stage ? (
+                                <>
+                                  <span style={{ color: sec.stageColor }}>{sec.stage}</span>
+                                  <span style={{ fontWeight: 400, textTransform: 'lowercase', opacity: 0.68, marginLeft: '0.45rem' }}>{sec.heading}</span>
+                                </>
+                              ) : sec.heading}
+                            </h3>
+                          )}
                           <p className="feature-text-body">{sec.text}</p>
                         </div>
                       </div>

@@ -16,6 +16,7 @@ function Root() {
         <Route path="/" element={<About />} />
         <Route path="/about" element={<About />} />
         <Route path="/Featured" element={<Feature />} />
+        <Route path="/Featured/:story" element={<Feature />} />
         <Route path="/Research" element={<Research />} />
         <Route path="/CV" element={<CV />} />
       </Routes>
