@@ -29,6 +29,7 @@ interface Slide {
   video?: string;
   videos?: { label: string; url: string }[];
   sections?: Section[];
+  refsHtml?: string;    // optional collapsible "References" block (HTML, parsed)
 }
 
 // Set to true to include the PhotoDance slide in the carousel
@@ -214,6 +215,29 @@ const meaningMachineSlide: Slide = {
         imgRight: true,
       },
     ],
+    refsHtml:
+      '<p class="refs-intro">Every model and method in the pipeline, in order. The composite &ldquo;our taste&rdquo; score is a PhotoDance construct fit to our own ratings, not a published model.</p>' +
+      '<h4>De-duplication</h4><ul>' +
+      '<li><b>Perceptual hashing (pHash)</b> &mdash; Zauner (2010), <i>Implementation and Benchmarking of Perceptual Image Hash Functions.</i> <a href="https://www.phash.org/" target="_blank" rel="noreferrer">phash.org</a></li></ul>' +
+      '<h4>Quality &amp; aesthetics</h4><ul>' +
+      '<li><b>MUSIQ</b> &mdash; Ke et al. (2021), ICCV. <a href="https://arxiv.org/abs/2108.05997" target="_blank" rel="noreferrer">arXiv:2108.05997</a></li>' +
+      '<li><b>NIMA</b> &mdash; Talebi &amp; Milanfar (2018), IEEE TIP. <a href="https://arxiv.org/abs/1709.05424" target="_blank" rel="noreferrer">arXiv:1709.05424</a></li>' +
+      '<li><b>MANIQA</b> &mdash; Yang et al. (2022), CVPR Workshops. <a href="https://arxiv.org/abs/2204.08958" target="_blank" rel="noreferrer">arXiv:2204.08958</a></li>' +
+      '<li><b>LAION aesthetic predictor</b> &mdash; Schuhmann (2022). <a href="https://github.com/christophschuhmann/improved-aesthetic-predictor" target="_blank" rel="noreferrer">github</a> &middot; data <a href="https://arxiv.org/abs/2210.08402" target="_blank" rel="noreferrer">arXiv:2210.08402</a></li>' +
+      '<li><b>ArtiMuse</b> &mdash; Cao et al. (2025), CVPR 2026. <a href="https://arxiv.org/abs/2507.14533" target="_blank" rel="noreferrer">arXiv:2507.14533</a></li></ul>' +
+      '<h4>Faces</h4><ul>' +
+      '<li><b>RetinaFace</b> &mdash; Deng et al. (2020), CVPR. <a href="https://arxiv.org/abs/1905.00641" target="_blank" rel="noreferrer">arXiv:1905.00641</a></li>' +
+      '<li><b>ArcFace</b> &mdash; Deng et al. (2019), CVPR. <a href="https://arxiv.org/abs/1801.07698" target="_blank" rel="noreferrer">arXiv:1801.07698</a> &middot; <a href="https://github.com/deepinsight/insightface" target="_blank" rel="noreferrer">InsightFace</a></li></ul>' +
+      '<h4>Meaning: embeddings &amp; search</h4><ul>' +
+      '<li><b>CLIP</b> &mdash; Radford et al. (2021), ICML. <a href="https://arxiv.org/abs/2103.00020" target="_blank" rel="noreferrer">arXiv:2103.00020</a></li>' +
+      '<li><b>OpenCLIP</b> (ViT-H-14, LAION-2B) &mdash; Ilharco et al. (2021); Cherti et al. (2023), CVPR. <a href="https://github.com/mlfoundations/open_clip" target="_blank" rel="noreferrer">github</a> &middot; <a href="https://arxiv.org/abs/2212.07143" target="_blank" rel="noreferrer">arXiv:2212.07143</a></li>' +
+      '<li><b>UMAP</b> &mdash; McInnes, Healy &amp; Melville (2018). <a href="https://arxiv.org/abs/1802.03426" target="_blank" rel="noreferrer">arXiv:1802.03426</a></li>' +
+      '<li><b>FAISS</b> &mdash; Johnson, Douze &amp; J&eacute;gou (2019), IEEE Big Data. <a href="https://arxiv.org/abs/1702.08734" target="_blank" rel="noreferrer">arXiv:1702.08734</a></li></ul>' +
+      '<h4>Captioning</h4><ul>' +
+      '<li><b>InternVL2</b> &mdash; Chen et al. (2024), CVPR. <a href="https://arxiv.org/abs/2312.14238" target="_blank" rel="noreferrer">arXiv:2312.14238</a> &middot; <a href="https://github.com/OpenGVLab/InternVL" target="_blank" rel="noreferrer">models</a></li></ul>' +
+      '<h4>Grounding &amp; the natural-language agent</h4><ul>' +
+      '<li><b>Qwen2.5</b> (7B / 14B / 32B, via Ollama) &mdash; Qwen Team (2024). <a href="https://arxiv.org/abs/2412.15115" target="_blank" rel="noreferrer">arXiv:2412.15115</a></li>' +
+      '<li><b>Claude</b> (Haiku, Sonnet) &mdash; Anthropic (2024), Claude 3 Model Card. <a href="https://www.anthropic.com/" target="_blank" rel="noreferrer">anthropic.com</a></li></ul>',
 };
 
 const slides: Slide[] = [
@@ -425,6 +449,12 @@ export function Feature() {
                     <img className="feature-img" src={slide.img} alt={slide.title} />
                     <p className="feature-text-body">{slide.text}</p>
                   </div>
+                )}
+                {slide.refsHtml && (
+                  <details className="feature-refs">
+                    <summary>References — models &amp; methods</summary>
+                    <div className="feature-refs-body">{parse(slide.refsHtml)}</div>
+                  </details>
                 )}
               </div>
             </div>

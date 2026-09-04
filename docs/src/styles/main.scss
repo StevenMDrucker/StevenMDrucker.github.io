@@ -639,6 +639,47 @@ a { color: $accent; }
   margin: 0 0 0.6rem;
 }
 
+// ── Collapsible references ───────────────────────────────
+.feature-refs {
+  margin-top: 2.75rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.16);
+  padding-top: 1.5rem;
+
+  summary {
+    cursor: pointer;
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: $accent;
+    &::-webkit-details-marker { display: none; }
+    &::before { content: '▸'; font-size: 0.8em; transition: transform 0.2s ease; }
+  }
+  &[open] summary::before { transform: rotate(90deg); }
+}
+.feature-refs-body {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: $text-muted;
+
+  .refs-intro { font-style: italic; margin: 0 0 0.75rem; }
+  h4 {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $accent;
+    opacity: 0.85;
+    margin: 1.1rem 0 0.35rem;
+  }
+  ul { margin: 0 0 0.4rem 1.1rem; padding: 0; }
+  li { margin: 0.28rem 0; }
+  a { color: $accent; text-decoration: none; border-bottom: 1px solid rgba(2,132,199,0.35); }
+  a:hover { border-bottom-color: currentColor; }
+}
+
 // Slick overrides
 .slick-prev, .slick-next {
   z-index: 10;
@@ -877,6 +918,9 @@ body.light-theme {
   .feature-text-body { color: #334155; }
   .feature-section-heading { color: #0284c7; }
   .feature-section + .feature-section { border-top-color: rgba(15, 23, 42, 0.1); }
+  .feature-refs { border-top-color: rgba(15, 23, 42, 0.1); }
+  .feature-refs summary, .feature-refs-body h4, .feature-refs-body a { color: #0284c7; }
+  .feature-refs-body { color: #475569; }
   .feature-nav-btn { border-color: rgba(2,132,199,0.35); background: rgba(2,132,199,0.1); color: #0284c7; &:hover { background: rgba(2,132,199,0.22); border-color: #0284c7; color: #fff; } }
   .feature-img-caption { color: #64748b; }
   .slick-dots li button:before { color: #475569; }
